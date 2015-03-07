@@ -1,0 +1,23 @@
+﻿@model WachtwoordVergeten
+@{
+    ViewBag.Title = Model.TekstPagina.Kop;
+} 
+<h1>@ViewBag.Title</h1>
+@Html.Raw(Model.TekstPagina.Tekst)
+ 
+@using (Html.BeginForm())
+{ 
+    @Html.ValidationSummary(false)
+    
+    @Html.AntiForgeryToken()
+    <div class="ColumnM">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Gebruikersnaam)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Gebruikersnaam)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Gebruikersnaam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Gebruikersnaam)</div>
+        </div> 
+    </div>
+    <p class="clear" />
+    <input type="submit" value="@Resources.NieuwWachtwoordOpvragen" tabindex="3"/>
+}

@@ -1,0 +1,269 @@
+﻿@model PreekZoeken
+@{
+    //ViewBag.Title = Resources.ZoekenKop;
+    ViewBag.Title = Model.Title;
+
+}
+<h1>@ViewBag.Title</h1>
+@section GoogleAnalyticsScripts{
+    @if (Model.PredikantId.HasValue)
+    {
+        <text>_gaq.push(['_setCustomVar',
+            1,                        // Slot 1-5.
+            'Predikant',              // Name of variable
+            '@Model.Predikant',       // Value
+            3                         // 1 = visitor 2 = session 3 = page
+            ]);</text>
+    }
+    @if (Model.BoekHoofdstukId.HasValue)
+    {
+        <text>_gaq.push(['_setCustomVar',
+            2,
+            'Bijbelboek',
+            '@Model.Boek',
+            3
+            ]);</text>
+    }
+}
+
+@using (Html.BeginForm("Index", "Zoeken", FormMethod.Get, new { name = "FormZoeken", id = "FormZoeken", onsubmit = "beforeSubmit();" }))
+{
+    @Html.HiddenFor(m => m.GebeurtenisId)
+    @Html.HiddenFor(m => m.SerieId)
+    @Html.HiddenFor(m => m.PredikantId)
+    @Html.HiddenFor(m => m.GemeenteId)
+    @Html.HiddenFor(m => m.BoekId)
+    @Html.HiddenFor(m => m.BoekHoofdstukId)
+    @Html.HiddenFor(m => m.SorteerVolgorde)
+    @Html.HiddenFor(m => m.Pagina)
+    @Html.HiddenFor(m => m.Geavanceerd)
+
+    <div class="PreekSoort">
+        @Html.CheckBoxFor(m => m.AudioPreken, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
+        @Html.LabelFor(m => m.AudioPreken)
+        @Html.CheckBoxFor(m => m.LeesPreken, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
+        @Html.LabelFor(m => m.LeesPreken)
+        @Html.CheckBoxFor(m => m.Lezingen, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
+        @Html.LabelFor(m => m.Lezingen)
+    </div>
+    <p class="clear"></p>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Zoekterm)</div>
+        <div class="value">@Html.TextBoxFor(m => m.Zoekterm)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Zoekterm)</div>
+    </div>
+    if (!Model.PredikantId.HasValue)
+    {
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Predikant)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Predikant, new { data_autocomplete_type = "Predikant" })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Predikant)</div>
+        </div>
+    }
+    if (!Model.BoekHoofdstukId.HasValue)
+    {
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.BoekHoofdstuk)</div>
+            <div class="value">@Html.TextBoxFor(m => m.BoekHoofdstuk, new { data_autocomplete_type = "BoekHoofdstuk" })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.BoekHoofdstuk)</div>
+        </div>
+    }
+    if (!Model.GebeurtenisId.HasValue)
+    {
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Gebeurtenis)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Gebeurtenis, new { data_autocomplete_type = "Gebeurtenis" })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Gebeurtenis)</div>
+        </div>
+    }
+    <div class="field geavanceerdField">
+        <div class="label">@Html.LabelFor(m => m.Hoofdstuk)</div>
+        <div class="value">@Html.EditorFor(m => m.Hoofdstuk)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Hoofdstuk)</div>
+    </div>
+    @*<div class="field geavanceerdField">
+            <div class="label">@Html.LabelFor(m => m.Vers)</div>
+            <div class="value">@Html.EditorFor(m => m.Vers)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Vers)</div>
+        </div>*@
+    if (!Model.LezingCategorieId.HasValue && Model.Lezingen)
+    {
+        <div class="field geavanceerdField">
+            <div class="label">@Html.LabelFor(m => m.LezingCategorie)</div>
+            <div class="value">@Html.EditorFor(m => m.LezingCategorie)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.LezingCategorie)</div>
+        </div>
+    }
+    if (!Model.GemeenteId.HasValue)
+    {
+        <div class="field geavanceerdField">
+            <div class="label">@Html.LabelFor(m => m.Gemeente)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Gemeente, new { data_autocomplete_type = "Gemeente" })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Gemeente)</div>
+        </div>
+    }
+    if (!Model.SerieId.HasValue)
+    {
+        <div class="field geavanceerdField">
+            <div class="label">@Html.LabelFor(m => m.Serie)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Serie, new { data_autocomplete_type = "Serie" })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Serie)</div>
+        </div>
+    }
+    <div class="field geavanceerdField">
+        <div class="label">@Html.LabelFor(m => m.SorteerOp)</div>
+        <div class="value">
+            @Html.DropDownListFor(model => model.SorteerOp,
+                new SelectList(new List<KeyValuePair<string, string>>() {
+                    new KeyValuePair<string,string>(SorteerOp.Datum.ToString(),Resources.Datum),
+                    new KeyValuePair<string,string>(SorteerOp.Boek.ToString(),Resources.Boek),
+                    new KeyValuePair<string,string>(SorteerOp.Predikant.ToString(),Resources.Predikant),
+                    new KeyValuePair<string,string>(SorteerOp.Gebeurtenis.ToString(),Resources.Gebeurtenis),
+                    new KeyValuePair<string,string>(SorteerOp.Gemeente.ToString(),Resources.Gemeente),
+                    new KeyValuePair<string,string>(SorteerOp.Hoofdstuk.ToString(),Resources.Hoofdstuk),
+                    new KeyValuePair<string,string>(SorteerOp.LezingCategorie.ToString(),Resources.LezingCategorie),
+                    new KeyValuePair<string,string>(SorteerOp.Serie.ToString(),Resources.Serie),
+                    new KeyValuePair<string,string>(SorteerOp.Vers.ToString(),Resources.Vers),
+                }, "Key", "Value", Model.SorteerOp.ToString())
+            )
+        </div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.SorteerOp)</div>
+    </div>
+
+    if (!Model.LeesPreken && !Model.AudioPreken && Model.Lezingen)
+    {
+        <p class="clear"></p>
+        <p>Binnen lezingen kennen wij de volgende categorieen:</p>
+        <ul class="LezingCategorieen">
+            @foreach (var lezingCategorie in Model.LezingCatorieen)
+            {
+                <li>
+                    @Html.ActionLink(lezingCategorie.Omschrijving, "Index", "Zoeken", new { LezingCategorieId = lezingCategorie.Id }, new { })
+
+                </li>
+            }
+        </ul>
+        <p class="clear"></p>
+    }
+
+    <p class="clear"></p>
+    <a href="@Url.Action("Index", "Zoeken")" onclick="beforeSubmit(); document.FormZoeken.submit(); return false;" class="IconKnop">
+        <div class="fa fa-search"></div>@Resources.Zoek
+    </a>
+    <input type="submit" class="Knop" value="@Resources.Zoek" style="position:absolute; top:-100px; left:-100px;" />
+    @Html.ActionLink(Resources.WisFilters, "Index", "Zoeken", new { }, new { Class = "Knop" })
+    @Html.ActionLink(Model.Geavanceerd ? Resources.Simpel : Resources.Geavanceerd, "Index", "Zoeken", new { Geavanceerd = !Model.Geavanceerd }, new { Class = "Knop", OnClick = "toggleGeavanceerd(); return false;", Id = "GeavanceerdKnop" })
+
+    string knoppenClass = string.IsNullOrEmpty(Request.QueryString["Pagina"]) ? "geavanceerdField" : string.Empty;
+    if (!Request.IsAuthenticated)
+    {
+        @Html.IconActionLink(Resources.ZoekOpdrachtBewaren, "Index", "Zoeken", new { }, new { @class = "IconKnop " + knoppenClass, onclick = "prekenweb.toonMijnReclame('ZoekOpdrachtBewaren'); return false;" }, "star-o")
+    }
+    else
+    {
+        <a href="@Url.Action("ZoekOpdrachtBewaren", "Zoeken", Request.QueryString.ToRouteValueDictionary())" class="IconKnop @knoppenClass" onclick="prekenweb.ZoekOpdrachtOpslaan(this); return false;"><div class="fa fa-star"></div>@Resources.ZoekOpdrachtBewaren</a>
+    }
+    if (!Request.IsAuthenticated)
+    {
+        @Html.IconActionLink("Rss feed", "Index", "Zoeken", new { }, new { @class = "IconKnop " + knoppenClass, onclick = "prekenweb.toonMijnReclame('RssFeed'); return false;" }, "rss")
+    }
+    else
+    {
+        <a href="#" class="IconKnop @knoppenClass" onclick="prekenweb.RssFeed(this); return false; return false;"><div class="fa fa-rss"></div>Rss feed</a>
+    }
+}
+<p class="clear"></p>
+<br />
+
+@Html.Partial("PartialZoekresultaten", Model.Zoekresultaat)
+
+@if (Model.Zoekresultaat != null && Model.Zoekresultaat.Items.Any())
+{
+    <p class="clear textaligncenter">@string.Format("{0} {1}", Model.AantalResultaten, Resources.Resultaten)</p>
+
+    if (Model.AantalResultaten > 50)
+    {
+        string queryStringStart = string.IsNullOrEmpty(Request.QueryString.ToString()) ? "?" : string.Format("?{0}&", Request.QueryString);
+        int aantalPaginas = (int)Math.Ceiling(Model.AantalResultaten / 50.0);
+        <div class="Paginering">
+            @for (int i = 1; i <= aantalPaginas; i++)
+            {
+                string active = (i == Model.Pagina) ? "Active" : "";
+                if (i < 5 || i > (aantalPaginas - 5) || (i > Model.Pagina - 3 && i < Model.Pagina + 3))
+                {
+                    if (string.IsNullOrEmpty(Request.QueryString["Pagina"]))
+                    {
+                        <a href="@string.Format("{0}Pagina={1}", queryStringStart, i)" class="Knop @active Nummer">
+                            @i
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@queryStringStart.Replace("Pagina=" + Model.Pagina, "Pagina=" + i.ToString())" class="Knop @active Nummer">
+                            @i
+                        </a>
+                    }
+                }
+            }
+        </div>
+    }
+}
+<div class="DatumTijd">@string.Format("Cached until {0:g}",DateTime.Now.AddHours(1))</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("input[data-autocomplete-type]").keypress(function () {
+                $(this).autocomplete({
+                    source: '@Url.Action("Autocomplete")?type=' + $(this).data('autocomplete-type'),
+                    minLength: 1,
+                    select: function (event, ui) {
+                        //console.log(ui.item ? "Selected: " + ui.item.value + " aka " + ui.item.id : "Nothing selected, input was " + this.value);
+                    }
+                });
+            });
+            applyGeavanceerd();
+        });
+
+        function beforeSubmit() {
+            $("#Pagina").val(1);
+        }
+        function toggleGeavanceerd(geavanceerdNu) {
+            if (geavanceerdNu == '' || geavanceerdNu == undefined) geavanceerdNu = $("#Geavanceerd").val();
+            if (geavanceerdNu == 'False') {
+                $("#Geavanceerd").val('True');
+                $("#GeavanceerdKnop").text("@Resources.Simpel");
+            }
+            else {;
+                $("#Geavanceerd").val('False');
+                $("#GeavanceerdKnop").text("@Resources.Geavanceerd");
+            }
+            applyGeavanceerd();
+        }
+        function applyGeavanceerd() {
+            if ($("#Geavanceerd").val() == 'False') {
+                $(".geavanceerdField").hide();
+            }
+            else {
+                $(".geavanceerdField").show();
+            }
+        }
+    </script>
+}
+<div class="modal fade" id="RssFeedModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">RSS Feed</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.RssFeedZoekIndexLinkAlert</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> @Resources.SluitDezePopup</button>
+                <a href="@Url.Action("ZoekOpdrachtBewaren", "Zoeken", Request.QueryString.ToRouteValueDictionary())" class="btn btn-success" onclick="prekenweb.ZoekOpdrachtOpslaanNaarFeed(this); return false;"><span class="glyphicon glyphicon-ok-sign"></span> Zoekopdracht bewaren + naar Feed</a>
+            </div>
+        </div>
+    </div>
+</div>

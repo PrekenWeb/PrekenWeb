@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="@ViewContext.RouteData.Values["culture"]">
+<head>
+    <title>@Resources.PrekenWeb - @ViewBag.Title</title>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link href="@Url.Content("~/Content/Images/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    @*
+        gebeurt als Http Header via de ApplicationController omwille van w3c validatie
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    *@
+
+    @if (string.IsNullOrEmpty(ViewBag.Description))
+    {
+        <meta name="description" content="@Resources.StandaardMetaDescription">
+    }
+    else
+    {
+        <meta name="description" content="@ViewBag.Description">
+    }
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/Images/apple-touch-icon-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/Images/apple-touch-icon-57x57-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/Images/apple-touch-icon-72x72-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/Images/apple-touch-icon-114x114-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/Images/apple-touch-icon-144x144-precomposed.png")">
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@string.Format("@PrekenWeb")">
+    <meta name="twitter:creator" content="@string.Format("@PrekenWeb")">
+    <meta name="twitter:title" content="@Resources.PrekenWeb - @ViewBag.Title">
+    @if (string.IsNullOrEmpty(ViewBag.Description))
+    {
+        <meta name="twitter:description" content="@Resources.StandaardMetaDescription">
+    }
+    else
+    {
+        <meta name="twitter:description" content="@ViewBag.Description">
+    }
+    <meta name="twitter:image" content="@Url.Content("~/Content/Images/Logo.png")">
+
+    @if (Request.ServerVariables.Get("HTTP_USER_AGENT") != null && !Request.ServerVariables.Get("HTTP_USER_AGENT").Contains("W3C")) // whatever
+    {
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-320x460.png")" media="(device-width: 320px)" rel="apple-touch-startup-image">
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-640x920.png")" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-768x1004.png")" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-748x1024.png")" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-1536x2008.png")" media="(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="@Url.Content("~/Content/Images/apple-touch-startup-image-1496x2048.png")" media="(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+        <meta property="og:title" content="@Resources.PrekenWeb - @ViewBag.Title" />
+        if (string.IsNullOrEmpty(ViewBag.Description))
+        {
+            <meta property="og:description" content="@Resources.StandaardMetaDescription" />
+        }
+        else
+        {
+            <meta property="og:description" content="@ViewBag.Description" />
+        }
+        <meta property="og:image" content="@Url.ContentAbsolute("~/Content/Images/Logo.png")" />
+        <meta property="og:url" content="@Context.Request.Url.AbsoluteUri" />
+        <meta property="og:site_name" content="@Resources.PrekenWeb" />
+        <meta property="fb:app_id" content="362897260486418" />
+        <meta name="application-name" content="@Resources.PrekenWeb" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-square70x70logo" content="~/Content/Images/tiny.png" />
+        <meta name="msapplication-square150x150logo" content="~/Content/Images/square.png" />
+        <meta name="msapplication-wide310x150logo" content="~/Content/Images/wide.png" />
+        <meta name="msapplication-square310x310logo" content="~/Content/Images/large.png" />
+    }
+
+    @*<meta name="google-site-verification" content="FAbMrk3nALg7eKf_E1KHEfDSEJB1WG-p1XuqIaZyn0c" />*@
+
+    @RenderSection("ogMetaTags", required: false)
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="@Url.Content("~/Content/ie7.css")">
+    <![endif]-->
+    @RenderSection("Styles", false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <div class="chromeframe">
+            <div class="inner">
+                <b>Let op!</b><br/>
+                Deze website is ontwikkeld en getest met veilige en geupdate internetbrowsers uit de afgelopen twee jaar.
+                Omdat u gebruik maakt van een <b>oude internet browser</b> werkt PrekenWeb bij u <u>mogelijk</u> niet goed.
+                Wij raden u aan om een <a href="http://www.alleinternetbrowsers.nl/" target="_blank">nieuwe(re) versie van uw internet browser</a> te installeren.
+                <a href="http://www.alleinternetbrowsers.nl/#waarom-kiezen-voor-updaten" target="_blank">Lees waarom</a>.
+            </div>
+        </div>
+    <![endif]-->
+    @*    <div class="beta">
+            <div class="betaInner">
+                <p>
+                    <img src="~/Content/Images/work-in-progress.png" />
+                    @Html.IconActionLink("Geef feedback", "Contact", "Prekenweb", new { beta = true }, new { Class = "IconKnop" }, "comment")
+                    U bevindt zich op het vernieuwde PrekenWeb.nl. Dit is een testomgeving en we zijn op zoek naar feedback voordat we deze nieuwe site in gebruik nemen. Wilt u ons helpen?
+                </p>
+            </div>
+        </div>*@
+
+    <div id="zoeker" role="search">
+        <div id="inputContainer">
+            <a id="submit" class="fa fa-search" href="@Url.Action("Index", "Zoeken", new { Area = "Website" })" onclick="javascript: window.location = '@Url.Action("Index", "Zoeken", new { Area = "Website" })?Zoekterm=' + document.getElementById('inputZoek').value; return false;"></a>
+            <input type="text" id="inputZoek" placeholder="@Resources.ZoekboxStandaardTekst" />
+        </div>
+        <div class="clearfix"></div>
+        <div id="driehoek"></div>
+        <div id="zoekresultatenContainer">
+        </div>
+    </div>
+
+    <div id="container">
+        <nav class="Topper" role="navigation">
+            @Html.Action("_Menu", "Prekenweb", new { Area = "Website" })
+        </nav>
+
+        <a href="~/" id="Logo">
+            <img src="~/Content/Images/Logo.png" id="LogoImage" alt="Logo @Resources.PrekenWeb" />
+        </a>
+        <section id="PageHeader">
+            @if (ViewContext.RouteData.DataTokens["area"] == "Mijn" && Request.IsAuthenticated)
+            {
+                <a href="~/Mijn">
+                    <img src="~/Content/Images/LogoKlein.png" id="LogoKleinImage" alt="Logo @Resources.PrekenWeb klein" />
+                </a>
+                @Resources.MijnPrekenweb
+            }
+            else
+            {
+                <a href="~/">
+                    <img src="~/Content/Images/LogoKlein.png" id="LogoKleinImage" alt="Logo @Resources.PrekenWeb klein" />
+                </a>
+                <text>@Resources.PrekenWeb <span class="displaynone">- @ViewBag.Title</span></text>
+            }
+        </section>
+        <div id="loading">
+            <img src="~/Content/Images/loading.gif" alt="LoadingGif" />
+            <br />
+            &nbsp;&nbsp;&nbsp;Loading...
+        </div>
+
+        <section id="pageContent" role="main">
+            @RenderBody()
+        </section>
+        <div class="clear"></div>
+        <footer id="footer" role="contentinfo">
+            @Html.Action("Footer", "Prekenweb", new { Area = "Website" })
+        </footer>
+    </div>
+    <!--[if !IE]><!-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="@Url.Content("~/")Scripts/jquery-2.1.3.min.js"><\/script>')</script>
+    <!--<![endif]-->
+    <!--[if IE]>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="@Url.Content("~/")Scripts/jquery-1.10.2.min.js"><\/script>')</script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+    @if (ViewContext.RouteData.DataTokens["area"] == "Mijn" && Request.IsAuthenticated)
+    {
+        <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript">
+            if (document.getElementsByName('LeesPreekTekst').length > 0) CKEDITOR.replace('LeesPreekTekst', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
+            if (document.getElementsByName('InboxItem.Inhoud').length > 0) CKEDITOR.replace('InboxItem.Inhoud', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
+            if (document.getElementsByName('InboxOpvolging.Tekst').length > 0) CKEDITOR.replace('InboxOpvolging.Tekst', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
+            if (document.getElementsByName('Teksten[0].Tekst_').length > 0) CKEDITOR.replace('Teksten[0].Tekst_', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
+            if (document.getElementsByName('Teksten[1].Tekst_').length > 0) CKEDITOR.replace('Teksten[1].Tekst_', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
+        </script>
+    }
+    <script type="text/javascript">
+
+        prekenweb.rootUrl = '@Url.Content("~")';
+        prekenweb.inMijn = @(Request.RawUrl.Contains("/Mijn").ToString().ToLower() );
+        prekenweb.authenticated = @(Request.IsAuthenticated.ToString().ToLower() );
+
+        @if (Request.RequestContext.RouteData.Values["culture"] != null)
+        {
+            @:prekenweb.taal = '@Request.RequestContext.RouteData.Values["culture"].ToString()';
+                    }
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-38278370-2']);
+        @RenderSection("GoogleAnalyticsScripts", false)
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+</html>

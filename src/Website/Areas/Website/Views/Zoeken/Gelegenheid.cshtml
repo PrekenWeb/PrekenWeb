@@ -1,0 +1,18 @@
+﻿@model ZoekenGebeurtenis
+@{ 
+    ViewBag.Title = Resources.ZoekenGebeurtenis;
+}
+<h1>@ViewBag.Title</h1>
+
+<ul class="StandaardLijst">
+    @foreach (Gebeurtenis gebeurtenis in Model.Gebeurtenissen)
+    {
+        <li><a href="@Url.Action("Index", "Zoeken", new { GebeurtenisId = gebeurtenis.Id })">
+            <div class="fa fa-arrow-right"></div>@gebeurtenis.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

@@ -1,0 +1,50 @@
+﻿@model GebruikerIndexViewModel
+@{ ViewBag.Title = Resources.Gebruikers; }
+
+<h1>@ViewBag.Title</h1>
+<div id="grid">
+    @using (Html.BeginForm("Index", "Gebruiker", FormMethod.Get, new { name = "FormGebruiker" }))
+    {
+        <div class="ColumnL">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.AlleenBeheerders)</div>
+                <div class="value">@Html.EditorFor(m => m.AlleenBeheerders)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.AlleenBeheerders)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Zoekterm)</div>
+                <div class="value">@Html.EditorFor(m => m.Zoekterm)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Zoekterm)</div>
+            </div>
+        </div>
+    }
+    <p class="clear"></p>
+    <a href="#" onclick="document.FormGebruiker.submit(); return false;" class="IconKnop">
+        <div class="fa fa-filter"></div>
+        Filter
+    </a>
+    <a href="@Url.Action("Maak")" class="IconKnop">
+        <div class="fa fa-file"></div>
+        @Resources.NieuweGebruiker
+    </a>
+    <p class="clear"></p><br/> 
+  @{
+        WebGrid wb = new WebGrid(Model.Gebruikers, new string[] { "Id", "LaatstIngelogd", "Rol" }, rowsPerPage: 30);
+        @wb.GetHtml(
+            columns:
+                wb.Columns(
+                    wb.Column(columnName: "Id"),
+                    wb.Column(columnName: "Naam", header: Resources.Naam),
+                    wb.Column(columnName: "Email", header: Resources.Email),
+                    wb.Column(columnName: "LaatstIngelogd", header: Resources.LaatstIngelogd),
+                    wb.Column("Rol", Resources.AantalRollen, format: (item) => { return Html.ActionLink(((List<PrekenWebUserRole>)item.Roles).Count().ToString(), "", new { }, new { @Class = "tooltip", Title = string.Join("<br/>", ((List<PrekenWebUserRole>)item.Roles).Select(r => r.RoleId)), onclick = "return false;" }); }),
+                    wb.Column("Mailings", Resources.AantalMailings, format: (item) => { return Html.ActionLink(((List<Mailing>)item.Mailings).Count().ToString(), "", new { }, new { @Class = "tooltip", Title = string.Join("<br/>", ((List<Mailing>)item.Mailings).Select(r => r.Omschrijving)), onclick = "return false;" }); }),
+                    wb.Column("Bewerk", " ", format: (item) => { return Html.ActionLink(Resources.Bewerk, "Bewerk", new { Id = item.Id }, new { }); }),
+                    wb.Column("Verwijder", " ", format: (item) => { return Html.ActionLink(Resources.Verwijder, "Verwijder", new { Id = item.Id }, new { OnClick = "return(confirm('Verwijderen, zeker weten?'))" }); })
+                )
+            );
+    }
+</div>
+<br />
+
+<br />

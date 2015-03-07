@@ -1,0 +1,34 @@
+﻿@model NieuwsbriefIndexViewModel
+@{ ViewBag.Title = Resources.NieuwsbriefInschrijvingen; }
+<h1>@ViewBag.Title</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <td>@Resources.Naam</td>
+            <td>@Resources.Email</td>
+            <td>@Resources.DatumTijd</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inschrijving in Model.NieuwsbriefInschrijvingen.OrderBy(x => x.Taal.Omschrijving))
+        {
+            <tr>
+                <td>@inschrijving.Naam</td>
+                <td>@inschrijving.Email</td>
+                <td>@inschrijving.Aangemeld</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<br />
+<img src="~/Content/Images/outlook.png" style="float: left; height: 30px; margin-right: 20px; margin-bottom: 0px;" />
+
+@foreach (var inschrijving in Model.NieuwsbriefInschrijvingen)
+{
+    <span>@inschrijving.Naam &#60;@inschrijving.Email&#62;&#59;</span>
+}
+

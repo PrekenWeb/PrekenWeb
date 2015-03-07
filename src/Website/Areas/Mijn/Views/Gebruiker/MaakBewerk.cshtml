@@ -1,0 +1,100 @@
+﻿@using Microsoft.Owin.Security
+@model GebruikerEditViewModel
+
+
+@Html.ValidationSummary(true)
+<div class="ColumnL">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebruiker.Naam)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebruiker.Naam)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebruiker.Naam)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebruiker.UserName)</div>
+        <div class="value">
+            @if (ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString() != "Maak")
+            {
+                @Html.TextBoxFor(m => m.Gebruiker.UserName, new { disabled = "disabled" })
+                @Html.HiddenFor(m => m.Gebruiker.UserName)
+            }
+            else
+            {
+                @Html.EditorFor(m => m.Gebruiker.UserName)
+            }
+        </div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebruiker.UserName)</div>
+    </div>
+
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebruiker.Email)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebruiker.Email)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebruiker.Email)</div>
+    </div>
+    @if (Model.Gebruiker.Id != 0)
+    {
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.WachtwoordAanpassen)</div>
+            <div class="value">@Html.CheckBoxFor(m => m.WachtwoordAanpassen, new { onchange = "wachtwoordAanpassen();" })</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.WachtwoordAanpassen)</div>
+        </div>
+        if (!string.IsNullOrEmpty(Model.Gebruiker.PasswordHash))
+        {
+            <div class="field wachtwoordAanpassen">
+                <div class="label">@Html.LabelFor(m => m.HuidigWachtwoord)</div>
+                <div class="value">@Html.EditorFor(m => m.HuidigWachtwoord)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.HuidigWachtwoord)</div>
+            </div>
+        }
+        <script type="text/javascript">
+            function wachtwoordAanpassen() {
+                if ($("#WachtwoordAanpassen").is(':checked')) { $('.wachtwoordAanpassen').show(); } else { $('.wachtwoordAanpassen').hide(); }
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                wachtwoordAanpassen();
+            });
+        </script>
+    }
+    <div class="field wachtwoordAanpassen">
+        <div class="label">@Html.LabelFor(m => m.Wachtwoord)</div>
+        <div class="value">@Html.EditorFor(m => m.Wachtwoord)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Wachtwoord)</div>
+    </div>
+    <div class="field wachtwoordAanpassen">
+        <div class="label">@Html.LabelFor(m => m.WachtwoordCheck)</div>
+        <div class="value">@Html.EditorFor(m => m.WachtwoordCheck)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.WachtwoordCheck)</div>
+    </div>
+    @if (User.IsInRole("Gebruikers"))
+    {
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Gebruiker.Roles)</div>
+            <div class="value">@Html.ListBoxFor(m => m.SelectedRoles, GebruikerEditViewModel.GetAllRoles(Model.SelectedRoles), new { multiple = "multiple" })</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Gebruiker.Roles)</div>
+        </div>
+    }
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.SelectedNieuwsbrieven)</div>
+        <div class="value">@Html.DropDownListFor(m => m.SelectedNieuwsbrieven, ComboboxDataSources.GetAllMailings(Model.Gebruiker.Mailings, (int)ViewBag.TaalId), new { multiple = "multiple" })</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.SelectedNieuwsbrieven)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.SelectedNieuwsbrieven)</div>
+    </div>
+    @foreach (var account in Model.Logins)
+    {
+        <div class="field">
+            <div class="label"><label>@account.LoginProvider</label></div>
+            <div class="value">@Html.ActionLink("Verbreek verbinding", "ExterneLoginVerwijderen", new { loginProvider = account.LoginProvider, providerKey = account.ProviderKey }) </div>
+        </div>
+    }
+    @{
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+        foreach (AuthenticationDescription p in loginProviders.Where(x => !Model.Logins.Any(y => y.LoginProvider == x.AuthenticationType)))
+        {
+            <div class="field">
+                <div class="label"><label>@p.Caption</label></div>
+                <div class="value">@Html.ActionLink("Verbinding maken", "ExterneLoginToevoegen", new { provider = p.AuthenticationType }) </div>
+            </div>
+        }
+    }
+</div>
+

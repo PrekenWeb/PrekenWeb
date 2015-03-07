@@ -1,0 +1,18 @@
+﻿@model BladerenGebeurtenis
+@{ 
+    ViewBag.Title = Resources.BladerenGebeurtenis;
+}
+<h2>@ViewBag.Title</h2>
+
+<ul class="StandaardLijst">
+    @foreach (Gebeurtenis gebeurtenis in Model.Gebeurtenissen)
+    {
+        <li><a href="@Url.Action("Index", "Bladeren", new { GebeurtenisId = gebeurtenis.Id })">
+            <div class="icon-arrow-right"></div>@gebeurtenis.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

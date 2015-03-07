@@ -1,0 +1,33 @@
+﻿@model HomeMijn
+<h1>@ViewBag.Title</h1>
+@{
+    ViewBag.Title = Resources.MijnPrekenweb;
+    <p>Hi @User.Identity.Name!</p>
+}
+@if (User.IsInRole("Inbox"))
+{ 
+    <div class="Inbox">
+        @{
+    WebGrid wb = new WebGrid(Model.Inbox, new string[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving", "Afgehandeld" }, rowsPerPage: 30);
+            @wb.GetHtml(
+            columns:
+                wb.Columns(
+                    wb.Column("Bewerk", Resources.Datum, format: (item) => { return string.Format("{0:dd-MM}", item.Aangemaakt); }),
+                    wb.Column(columnName: "InboxType.Omschrijving", header: Resources.Soort),
+                    wb.Column(columnName: "VanNaam", header: Resources.Afzender),
+                    wb.Column("Omschrijving", Resources.Onderwerp, format: (item) =>
+                    {
+                        return ((string)item.Omschrijving).Length < 30 ? item.Omschrijving : ((string)item.Omschrijving).Substring(0, 30) + "...";
+                    }),
+                    wb.Column("Omschrijving", Resources.Afgehandeld, format: (item) =>
+                    {
+                        return (bool)item.Afgehandeld ? Resources.Ja : Resources.Nee;
+                    }),
+                             wb.Column("Open", " ", format: (item) => { return Html.ActionLink("Open", "Tonen", "Inbox", new { Id = item.Id }, new { }); })
+                )
+            );
+        }
+
+    </div>
+
+}

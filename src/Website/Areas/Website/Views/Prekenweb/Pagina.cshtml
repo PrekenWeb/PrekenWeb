@@ -1,0 +1,24 @@
+﻿@model TekstPagina
+@{
+    ViewBag.Title = Model.Kop;
+}
+@section Styles {
+
+}
+<h1>@ViewBag.Title</h1>
+@if (Model.HuidigeTaalId != Model.PaginaTaalId)
+{
+    <div class="TaalMelding">
+        @switch (Model.HuidigeTaalId)
+        {
+            default:
+            case 1:
+                <span>Let op, deze pagina is niet in het Nederlandse, er is ook geen vertaling beschikbaar! <a href="http://translate.google.com/translate?js=n&sl=auto&tl=nl&u=@Request.Url">Probeer eventueel deze pagina te vertalen via Google Translate</a></span>
+                break;
+            case 2:
+                <span>This page is not available in English, there's no translation available, we're sorry. <a href="http://translate.google.com/translate?js=n&sl=auto&tl=en&u=@Request.Url">Try translating via google</a></span>
+                break;
+        }      
+    </div> 
+}
+@Html.Raw(Model.Tekst)

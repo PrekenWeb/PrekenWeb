@@ -1,0 +1,20 @@
+﻿@model TooltipBase<BoekHoofdstuk>
+@{ 
+    ViewBag.Title = Model.DataObject.Omschrijving; 
+}
+<div class="TooltipBody">
+    @if (Request.RequestContext.RouteData.Values["culture"].ToString() == "nl")
+    {
+        <span>@Resources.Boek: @Model.DataObject.Boek.Boeknaam<br />
+        </span>
+    }
+
+    <br />
+    @Html.IconActionLink(Resources.MeerUitDitBoek, "Index", "Zoeken", new { BoekHoofdstukId = Model.DataObject.Id }, new { Class = "Knop" }, "book")<br />
+    <br />
+    @if (Model.Preek != null)
+    { 
+        @Html.Partial("PreekLink", Model.Preek)
+    }
+</div>
+

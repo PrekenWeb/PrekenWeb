@@ -1,0 +1,9 @@
+﻿@model GemeenteEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnM">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gemeente.Omschrijving)</div>
+        <div class="value">@Html.EditorFor(m => m.Gemeente.Omschrijving)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gemeente.Omschrijving)</div>
+    </div>
+</div>

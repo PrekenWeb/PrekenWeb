@@ -1,0 +1,397 @@
+﻿@model PreekBladeren
+@{ 
+    //ViewBag.Title = Resources.BladerenKop; 
+    ViewBag.Title = Model.Title;
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Index", "Bladeren", FormMethod.Get, new { name = "FormBladeren", id = "FormBladeren", onsubmit = "beforeSubmit();" }))
+{
+    @Html.HiddenFor(m => m.GebeurtenisId)
+    @Html.HiddenFor(m => m.SerieId)
+    @Html.HiddenFor(m => m.PredikantId)
+    @Html.HiddenFor(m => m.SerieId)
+    @Html.HiddenFor(m => m.GemeenteId)
+    @Html.HiddenFor(m => m.BoekHoofdstukId)
+    @Html.HiddenFor(m => m.SorteerOp)
+    @Html.HiddenFor(m => m.SorteerVolgorde)
+    @Html.HiddenFor(m => m.Pagina)
+    if (!Model.PredikantId.HasValue)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Predikant)</div>
+    </div>
+    }
+    if (!Model.BoekHoofdstukId.HasValue)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Boek)</div>
+        <div class="value">@Html.EditorFor(m => m.Boek)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Boek)</div>
+    </div>
+    }
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Hoofdstuk)</div>
+        <div class="value">@Html.EditorFor(m => m.Hoofdstuk)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Hoofdstuk)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Vers)</div>
+        <div class="value">@Html.EditorFor(m => m.Vers)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Vers)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.PreekTypeId)</div>
+        <div class="value">@Html.EditorFor(m => m.PreekTypeId)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.PreekTypeId)</div>
+    </div>@*
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.TaalId)</div>
+        <div class="value">@Html.EditorFor(m => m.TaalId)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.TaalId)</div>
+    </div>*@
+    if (!Model.LezingCategorieId.HasValue && Model.PreekTypeId == (int)PreekTypeEnum.Lezing)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.LezingCategorie)</div>
+        <div class="value">@Html.EditorFor(m => m.LezingCategorie)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.LezingCategorie)</div>
+    </div>
+    }
+    if (!Model.GebeurtenisId.HasValue)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebeurtenis)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebeurtenis)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Gebeurtenis)</div>
+    </div>
+    }
+    if (!Model.GemeenteId.HasValue)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gemeente)</div>
+        <div class="value">@Html.EditorFor(m => m.Gemeente)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Gemeente)</div>
+    </div>
+    }
+    if (!Model.SerieId.HasValue)
+    { 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Serie)</div>
+        <div class="value">@Html.EditorFor(m => m.Serie)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Serie)</div>
+    </div>
+    }
+    <p class="clear"></p>
+    <a href="#" onclick="beforeSubmit(); document.FormBladeren.submit(); return false;" class="IconKnop">
+        <div class="icon-search"></div>@Resources.Zoek</a>
+    <input type="submit" class="Knop" value="@Resources.Zoek" style="display:none;" />
+    @Html.ActionLink(Resources.WisFilters, "Index", "Bladeren", new { }, new { Class = "Knop" })
+    <p class="clear"></p>
+}
+@if (Model.ZoekResultaatRegels != null && Model.ZoekResultaatRegels.Any())
+{ 
+    <table class="BladerenTabel">
+        <thead>
+            <tr>
+                @if (!Model.PredikantId.HasValue)
+                { 
+                    <td class="ResultaatColPredikant">
+                        <a href="~/" onclick="return sorteerOp('Predikant');">
+                            @Resources.Predikant
+                            @if (Model.SorteerOp == "Predikant")
+                            {
+                                if (Model.SorteerVolgorde == "DESC")
+                                {
+                                <div class="icon-caret-down"></div>
+                                }
+                                else
+                                {
+                                <div class="icon-caret-up"></div>
+                                }
+                            }</a></td>
+                }
+                <td class="ResultaatColBoek">
+                    <a href="~/" onclick="return sorteerOp('Boek');">
+                        @Resources.Boek
+                        @if (Model.SorteerOp == "Boek")
+                        {
+                            if (Model.SorteerVolgorde == "DESC")
+                            {
+                            <div class="icon-caret-down"></div>
+                            }
+                            else
+                            {
+                            <div class="icon-caret-up"></div>
+                            }
+                        }</a>
+                    <a href="~/" onclick="return sorteerOp('Hoofdstuk');">
+                        @Resources.Hoofdstuk
+                        @if (Model.SorteerOp == "Hoofdstuk")
+                        {
+                            if (Model.SorteerVolgorde == "DESC")
+                            {
+                            <div class="icon-caret-down"></div>
+                            }
+                            else
+                            {
+                            <div class="icon-caret-up"></div>
+                            }
+                        }</a>
+                    <a href="~/" onclick="return sorteerOp('Vers');">
+                        @Resources.Vers
+                        @if (Model.SorteerOp == "Vers")
+                        {
+                            if (Model.SorteerVolgorde == "DESC")
+                            {
+                            <div class="icon-caret-down"></div>
+                            }
+                            else
+                            {
+                            <div class="icon-caret-up"></div>
+                            }
+                        }</a>
+                </td>
+                @if (!Model.LezingCategorieId.HasValue && Model.PreekTypeId == (int)PreekTypeEnum.Lezing)
+                { 
+                    <td class="ResultaatColLezingCategorie">
+                        <a href="~/" onclick="return sorteerOp('LezingCategorie');">
+                            @Resources.LezingCategorie
+                            @if (Model.SorteerOp == "LezingCategorie")
+                            {
+                                if (Model.SorteerVolgorde == "DESC")
+                                {
+                                <div class="icon-caret-down"></div>
+                                }
+                                else
+                                {
+                                <div class="icon-caret-up"></div>
+                                }
+                            }</a></td>
+                }
+                @if (!Model.GebeurtenisId.HasValue)
+                { 
+                    <td class="ResultaatColGebeurtenis">
+                        <a href="~/" onclick="return sorteerOp('Gebeurtenis');">
+                            @Resources.Gebeurtenis
+                            @if (Model.SorteerOp == "Gebeurtenis")
+                            {
+                                if (Model.SorteerVolgorde == "DESC")
+                                {
+                                <div class="icon-caret-down"></div>
+                                }
+                                else
+                                {
+                                <div class="icon-caret-up"></div>
+                                }
+                            }</a></td>
+                }
+                @if (!Model.GemeenteId.HasValue)
+                { 
+                    <td class="ResultaatColGemeente">
+                        <a href="~/" onclick="return sorteerOp('Gemeente');">
+                            @Resources.Gemeente
+                            @if (Model.SorteerOp == "Gemeente")
+                            {
+                                if (Model.SorteerVolgorde == "DESC")
+                                {
+                                <div class="icon-caret-down"></div>
+                                }
+                                else
+                                {
+                                <div class="icon-caret-up"></div>
+                                }
+                            }</a></td>
+                }
+                @if (!Model.SerieId.HasValue)
+                { 
+                    <td class="ResultaatColGemeente VerbergMobiel">
+                        <a href="~/" onclick="return sorteerOp('Serie');">
+                            @Resources.Serie
+                            @if (Model.SorteerOp == "Serie")
+                            {
+                                if (Model.SorteerVolgorde == "DESC")
+                                {
+                                <div class="icon-caret-down"></div>
+                                }
+                                else
+                                {
+                                <div class="icon-caret-up"></div>
+                                }
+                            }</a></td>
+                }
+                <td class="ResultaatColSoort VerbergMobiel">
+                    @Resources.Soort
+                    @if (Model.SorteerOp == "Soort")
+                    {
+                        if (Model.SorteerVolgorde == "DESC")
+                        {
+                        <div class="icon-caret-down"></div>
+                        }
+                        else
+                        {
+                        <div class="icon-caret-up"></div>
+                        }
+                    }</td>
+                <td class="ResultaatColDatum">
+                    <a href="~/" onclick="return sorteerOp('Datum');">
+                        @Resources.Datum
+                        @if (Model.SorteerOp == "Datum")
+                        {
+                            if (Model.SorteerVolgorde == "DESC")
+                            {
+                            <div class="icon-caret-down"></div>
+                            }
+                            else
+                            {
+                            <div class="icon-caret-up"></div>
+                            }
+                        }</a></td>
+                <td class="ResultaatColLink"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ZoekResultaatRegel res in Model.ZoekResultaatRegels)
+            { 
+                <tr>
+                    @if (!Model.PredikantId.HasValue)
+                    { 
+                        <td class="ResultaatColPredikant">
+                            @Html.ActionLink(res.Predikant, "Index", "Bladeren", new { PredikantId = res.Preek.PredikantId }, new { data_linktype = "Predikant", data_relid = res.Preek.PredikantId })
+                        </td>
+                    }
+                    <td class="ResultaatColBoek">
+                        @Html.ActionLink(res.Boek, "Index", "Bladeren", new { BoekHoofdstukId = res.Preek.BoekhoofdstukId }, new { data_linktype = "Boek", data_relid = res.Preek.BoekhoofdstukId })
+                        @if (res.Preek.BoekHoofdstuk.Boek.ToonHoofdstukNummer)
+                        { 
+                            @Html.ActionLink(res.Hoofdstuk, "Index", "Bladeren", new { BoekHoofdstukId = res.Preek.BoekhoofdstukId, Hoofdstuk = res.Hoofdstuk }, new { })
+                            if (!string.IsNullOrEmpty(res.Vers))
+                            {
+                                <span>@string.Format(" : {0}", res.Vers)</span>
+                            }
+                        }
+                            else
+                            {
+                                <span>(@res.Preek.BoekHoofdstuk.Boek.Afkorting)</span>
+                            }
+                    </td>
+
+                    @if (!Model.GebeurtenisId.HasValue)
+                    { 
+
+                        <td class="ResultaatColGebeurtenis">
+                            @if (res.Preek.GebeurtenisId.HasValue)
+                            { 
+                                @Html.ActionLink(res.Gebeurtenis, "Index", "Bladeren", new { GebeurtenisId = res.Preek.GebeurtenisId }, new { data_linktype = "Gebeurtenis", data_relid = res.Preek.GebeurtenisId }) 
+                            }
+                        </td>
+                    }
+                    @if (!Model.LezingCategorieId.HasValue && Model.PreekTypeId == (int)PreekTypeEnum.Lezing)
+                    { 
+                        <td class="ResultaatColLezingCategorie">
+                            @if (res.Preek.LezingCategorieId.HasValue)
+                            { 
+                                @Html.ActionLink(res.LezingCategorie, "Index", "Bladeren", new { LezingCategorieId = res.Preek.LezingCategorieId }, new { data_linktype = "LezingCategorie", data_relid = res.Preek.LezingCategorieId }) 
+                            }
+                        </td>
+                    }
+                    @if (!Model.GemeenteId.HasValue)
+                    { 
+                        <td class="ResultaatColGemeente VerbergMobiel">
+                            @if (res.Preek.GemeenteId.HasValue)
+                            { 
+                                @Html.ActionLink(res.Gemeente, "Index", "Bladeren", new { GemeenteId = res.Preek.GemeenteId }, new { data_linktype = "Gemeente", data_relid = res.Preek.GemeenteId })
+                            }
+                        </td>
+                    }
+                    @if (!Model.SerieId.HasValue)
+                    { 
+                        <td class="ResultaatColSerie">
+                            @if (!string.IsNullOrEmpty(res.Serie))
+                            { 
+                                @Html.ActionLink(res.Serie, "Index", "Bladeren", new { SerieId = res.Preek.SerieId }, new { data_linktype = "Serie", data_relid = res.Preek.SerieId })
+                            }
+                        </td>
+                    }
+                    <td class="ResultaatColSoort VerbergMobiel">
+                        @res.Preek.PreekType.Omschrijving
+                    </td>
+                    <td class="ResultaatColDatum">
+                        @string.Format("{0}", res.Datum.Value.ToShortDateString())</td>
+                    <td class="ResultaatColLink">
+                        <a href="@Url.Action(res.UrlAction, res.UrlController, new { Id = res.Preek.Id })" data-linktype="Preek" data-relid="@res.Preek.Id">
+                            <div class="@res.UrlIcon"></div>
+                            @res.UrlTekst
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="padding-top: 20px;">
+        @if (Model.Pagina.HasValue && Model.Pagina.Value > 1)
+        {
+            <a href="?@Request.QueryString.ToString().Replace("Pagina=" + Request.QueryString["Pagina"], "Pagina=1")" class="IconKnop">
+                <div class="icon-fast-backward"></div>
+                Pagina 1</a>
+        }
+        @if (Model.ZoekResultaatRegels.Count == 50)
+        {
+            if (string.IsNullOrEmpty(Request.QueryString["Pagina"]))
+            { 
+            <a href="?@Request.QueryString&Pagina=2" class="IconKnop" style="float:right; margin-right:0px;">
+                <div class="icon-step-forward"></div>
+                Volgende pagina</a>
+            }
+            else
+            { 
+            <a href="?@Request.QueryString.ToString().Replace("Pagina=" + Request.QueryString["Pagina"], "Pagina=" + (int.Parse(Request.QueryString["Pagina"]) + 1).ToString())" class="IconKnop" style="float:right; margin-right:0px;">
+                <div class="icon-step-forward"></div>
+                Volgende pagina</a>
+            }
+        }
+        <div style="margin-top: 10px; margin-right: 20px; float: right;">Pagina @Model.Pagina</div>
+    </div>
+}
+else
+{
+    <text>
+    <br />
+    <span style="text-align: center; display: block; font-style: italic;">Nog geen zoekactie uitgevoerd of geen resultaten!</span>
+    </text>
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".BladerenTabel tr").not(':first').hover(
+              function () {
+                  $(this).addClass("hover");
+              },
+              function () {
+                  $(this).removeClass("hover");
+              }
+            );
+            $(".BladerenTabel tr").not(':first').click(function () {
+                window.location = $(".ResultaatColLink a", this).attr("href");
+            });
+
+        });
+
+        function sorteerOp(kolomnaam) {
+            $("#SorteerOp").val(kolomnaam);
+            if ($("#SorteerVolgorde").val() == "DESC") {
+                $("#SorteerVolgorde").val("ASC");
+            }
+            else {
+                $("#SorteerVolgorde").val("DESC");
+            }
+            $("#FormBladeren").submit();
+            return false;
+        }
+
+        function beforeSubmit() {
+            $("#Pagina").val(1);
+        }
+    </script>
+}

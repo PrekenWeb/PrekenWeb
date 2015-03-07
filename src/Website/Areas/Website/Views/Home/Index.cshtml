@@ -1,0 +1,246 @@
+﻿@model HomeIndex
+@{
+    ViewBag.Title = "Home";
+    ViewBag.WelomstTekstVerborgenClass = Model.WelkomstekstVerbergen ? "WelkomstTekstVerborgen" : "";
+
+}
+@section Styles {
+
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var buttons = {
+                previous: $('#spotLightItems .button-previous'),
+                next: $('#spotLightItems .button-next')
+            };
+            $obj = $('#spotLightItems').lofJSidernews({
+                interval: 4000,
+                easing: 'easeInOutQuad',
+                duration: 1200,
+                auto: true,
+                maxItemDisplay: 6,
+                startItem: 0,
+                navPosition: 'horizontal', // horizontal
+                navigatorHeight: null,
+                navigatorWidth: null,
+                mainWidth: 980,
+                buttons: buttons
+            });
+
+
+            $.ajax({
+                url: '@Url.Action("Twitter","Feed")',
+                data: {},
+                dataType: "json",
+                //callbackParameter: "jsoncallback",
+                timeout: 5000,
+                success: function (data) {
+                    $("#LoadingTwitter").remove();
+                    var str = '';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<div>' + replaceURLWithHTMLLinks(data[i].text) + '</div>';
+                    }
+                    //console.log(str);
+                    $("#Tweets").append(str);
+                    $("#Tweets").cycle({
+                        fx: 'fade',
+                        speed: 300
+                    });
+
+                },
+                error: function (XHR, textStatus, errorThrown) {
+                }
+            });
+
+            function replaceURLWithHTMLLinks(text) {
+                var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@@#\/%?=~_|!:,.;]*[-A-Z0-9+&@@#\/%=~_|])/ig;
+                return text.replace(exp, "<a href='$1'>$1</a>");
+            }
+        });
+
+    </script>
+}
+@if (Model.Taal == "nl" && false)
+{
+    <div class="VrijwilligersDag">
+        <h2>7 december 2013 - Nationale Vrijwilligersdag</h2>
+
+        <p>
+            Een groot aantal mensen zet zich belangeloos in voor onze website, door middel van het knippen van audiopreken, uittypen en corrigeren van leespreken, enz.
+        </p>
+
+        <p>
+            Als PrekenWeb-team willen we op deze manier eens extra onze dank uitspreken richting al deze vrijwilligers.
+        </p>
+
+        <p>
+            Jullie hulp wordt door ons bijzonder gewaardeerd!
+        </p>
+
+        <p>
+            Hopend op een blijvende samenwerking,
+        </p>
+        <p>Het PrekenWeb-team
+
+    </div>
+}
+@if (!Model.WelkomstekstVerbergen)
+{
+    <div class="Welkom @ViewBag.WelomstTekstVerborgenClass">
+        @Html.IconActionLink("", "WelkomstekstVerbergen", "Home", new { }, new { Class = "WelkomstTekstVerbergenLink", Title = Resources.WelkomstTekstVerbergen }, "times")
+        <h1>@Model.WelkomsTekst.Kop</h1>
+        <p class="clear"></p>
+        @Html.Raw(Model.WelkomsTekst.Tekst)
+    </div>
+}
+<div id="NieuwePrekenWrapper" class="@ViewBag.WelomstTekstVerborgenClass">
+    @Html.Partial("NieuwePreken", Model.NieuwePreken)
+</div>
+<p class="clear"></p>
+
+<div class="NieuwOpPrekenweb">
+    <h2>@Resources.NieuwOpPrekenweb</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>@Resources.Titel</td>
+                <td>@Resources.Datum</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var regel in Model.Teksten)
+            {
+                <tr>
+                    <td>@regel.Kop</td>
+                    <td>@string.Format("{0:dd-MM}", regel.Pagina.Bijgewerkt)</td>
+                    <td>
+                        <a href="@Url.Action("Pagina", "Prekenweb", new { pagina = regel.Pagina.Identifier })">
+                            <div class="fa fa-arrow-right"></div>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div id="spotLightItems" class="lof-slidecontent">
+    <div class="preload">
+        <div></div>
+    </div>
+    <div class="button-previous"></div>
+    <div class="button-next"></div>
+    <div class="main-slider-content">
+        <ul class="sliders-wrap-inner">
+            @foreach (var spotlightItem in Model.SpotlightItems)
+            {
+                <li>
+                    <div class="imageWrapper" style="background-image:url('@Url.Action("HomepageImage", new { Id = spotlightItem.AfbeeldingId })');height:290px; width:auto;">
+                        &nbsp;
+                        <img src="@Url.Action("HomepageImage", new { Id = spotlightItem.AfbeeldingId })" title="@spotlightItem.Titel" alt="@spotlightItem.Titel" class="displaynone" />
+                    </div>
+                    <div class="slider-description">
+                        <h2>@spotlightItem.Titel</h2>
+                        <p>
+                            @spotlightItem.Subtitel
+                            @{ string target = spotlightItem.NieuwVenster ? "target='black'" : ""; }
+                            <a href="@Url.Content(spotlightItem.Url)" @target>@spotlightItem.LinkTitel</a>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="navigator-content">
+        <div class="button-control"><span></span></div>
+        <div class="navigator-wrapper">
+            <ul class="navigator-wrap-inner">
+                @for (int i = 1; i < Model.SpotlightItems.Count + 1; i++)
+                {
+                    <li><span>@i</span></li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<p class="clear"></p>
+
+
+
+<div class="Nieuwsbrief">
+    <h2>@Resources.InschrijvenNieuwsbrief</h2>
+    @using (Html.BeginForm("InschrijvenNieuwsbrief", "Home", FormMethod.Post, new { Name = "InschrijvenNiewsbrief" }))
+    {
+        <div class="ColumnS">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.InschrijvenNieuwsbriefForm.Naam)</div>
+                <div class="value">@Html.EditorFor(m => m.InschrijvenNieuwsbriefForm.Naam)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.InschrijvenNieuwsbriefForm.Naam)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.InschrijvenNieuwsbriefForm.Naam)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.InschrijvenNieuwsbriefForm.Email)</div>
+                <div class="value">@Html.EditorFor(m => m.InschrijvenNieuwsbriefForm.Email)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.InschrijvenNieuwsbriefForm.Email)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.InschrijvenNieuwsbriefForm.Email)</div>
+            </div>
+            <a href="#" onclick="document.InschrijvenNiewsbrief.submit(); return false;" class="IconKnop">
+                <div class="fa fa-check"></div>@Resources.InschrijvenNieuwsbriefKnop
+            </a>
+        </div>
+    }
+    <p class="clear"></p>
+</div>
+@if (Model.Taal == "nl")
+{
+    <div class="Nieuwsbrief">
+        <h2>Twitter</h2>
+
+        <div id="Tweets">
+            <p id="LoadingTwitter">@Resources.TweetsWordenGeladen</p>
+        </div>
+        <a href="http://twitter.com/PrekenWeb" class="IconKnop">
+            <div class="fa fa-twitter"></div>
+            @Resources.VolgOnsOpTwitter
+        </a>
+        <p class="clear"></p>
+
+    </div>
+}
+@if (Model.WelkomstekstVerbergen)
+{
+    <div class="Welkom @ViewBag.WelomstTekstVerborgenClass">
+        <h2>@Model.WelkomsTekst.Kop</h2>
+        @Html.IconActionLink(Resources.WelkomstTekstTonen, "WelkomstekstVerbergen", "Home", new { }, new { Class = "WelkomstTekstWeerTonenLink" }, "search")
+    </div>
+}
+    @*@if (Model.Taal == "nl")
+        {
+            <div class="Boek">
+                <h2>Jona de profeet</h2>
+                <img src="http://bestellen.prekenweb.nl/img/thumb_1_jona.jpg.jpg" alt="boek1" />
+                <p>
+                    Jona is een bijbelboek voor ambtsdragers, maar het is ook een boek voor de gehele gemeente. Iedere Christen staat in het ambt van alle gelovigen.
+            <a href="http://bestellen.prekenweb.nl/?boekid=1">Meer info </a>
+                </p>
+            </div>
+            <div class="Boek">
+                <h2>Die dorst heeft, kome</h2>
+                <img src="http://bestellen.prekenweb.nl/img/thumb_2_Boekje%20ds%20Baan%20%28voorkant%29.jpg.jpg" alt="boek2" />
+                <p>
+                    Krachtig wordt in deze en andere Bijbelteksten de nodiging van het Evangelie aan zondaren naar voren gebracht.
+                <br />
+                    <a href="http://bestellen.prekenweb.nl/?boekid=2">Meer info </a>
+                </p>
+            </div>
+        }*@
+    <p class="clear"></p>
+
+

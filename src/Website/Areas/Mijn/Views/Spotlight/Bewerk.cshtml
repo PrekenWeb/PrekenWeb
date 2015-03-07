@@ -1,0 +1,19 @@
+﻿@model SpotlightEditViewModel
+@{ ViewBag.Title = string.Format("Bewerk Spotlight {0}", Model.Spotlight.Titel); }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Bewerk", "Spotlight", FormMethod.Post, new { name = "FormSpotlight" }))
+{
+    @Html.HiddenFor(m => m.Spotlight.Id)
+    @Html.HiddenFor(m => m.Spotlight.TaalId)
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormSpotlight.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Opslaan</a>
+ 
+    <p class="clear"></p>
+}

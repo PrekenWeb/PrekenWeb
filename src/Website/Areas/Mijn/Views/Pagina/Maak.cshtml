@@ -1,0 +1,23 @@
+﻿@model PaginaEditViewModel
+@{ ViewBag.Title = "Maak pagina"; }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Maak", "Pagina", FormMethod.Post, new { name = "FormPagina" }))
+{
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    
+
+
+    <div class="fa fa-lightbulb" style="margin-right:5px; font-size:22px;"></div>
+<b>Paginakop en paginatekst kunnen na het aanmaken van de pagina worden ingegeven, dit gaat per taal.</b>
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormPagina.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Aanmaken</a>
+ 
+    <p class="clear"></p>
+}

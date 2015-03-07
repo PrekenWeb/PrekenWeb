@@ -1,0 +1,22 @@
+﻿@model HomeImport
+@{
+    ViewBag.Title = "Import";
+}
+@section Styles {
+
+}
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm())
+{
+    <p style="color: red;">Niet gebruiken!!!!!</p>
+    <p>@Html.CheckBoxFor(m => m.ZekerWeten)
+        @Html.LabelFor(m => m.ZekerWeten)
+    </p>
+    <p>@Html.CheckBoxFor(m => m.Docs)
+        @Html.LabelFor(m => m.Docs)
+    </p>
+    <p>@Html.CheckBoxFor(m => m.Cats)
+        @Html.LabelFor(m => m.Cats)
+    </p>
+    <input type="submit" value="Importeer gegevens van oude website" />
+}

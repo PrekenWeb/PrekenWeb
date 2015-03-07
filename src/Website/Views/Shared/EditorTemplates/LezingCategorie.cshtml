@@ -1,0 +1,4 @@
+﻿@inherits WebViewPage<int?>
+@{ViewData.TemplateInfo.HtmlFieldPrefix = "";}
+
+@Html.DropDownList("LezingCategorieId", ComboboxDataSources.GetLezingCategorieValues(Model))

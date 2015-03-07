@@ -1,0 +1,17 @@
+﻿@model Nieuwsbrief
+@{
+    ViewBag.Title = Model.TekstPagina.Kop;
+}
+@section Styles {
+
+}
+<h1>@ViewBag.Title</h1>
+@Html.Raw(Model.TekstPagina.Tekst)
+
+<h2>Verzonden nieuwsbrieven</h2>
+<ul>
+    @foreach (var nieuwsbrief in Model.Nieuwsbrieven)
+    {
+        <li><a href="@nieuwsbrief.ArchiveUrl">@nieuwsbrief.Titel (verzonden op @string.Format("{0:dd-MM-yyyy}", nieuwsbrief.Datum))</a></li>
+    }
+</ul>

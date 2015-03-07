@@ -1,0 +1,34 @@
+﻿@model Preek
+@{ ViewBag.Title = Resources.UploadEenNieuwePreek; }
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Maak", "Preek", FormMethod.Post, new { name = "FormPreek", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.TaalId)
+    @Html.HiddenFor(m => m.AangemaaktDoor)
+    @Html.Partial("MaakBewerk", Model)
+
+    <p class="clear"></p>
+    <div class="FormKnoppen">
+        <a href="@Url.Action("Index", "Home")" class="IconKnop">
+            <div class="fa fa-arrow-left"></div>
+            @Resources.Terug
+        </a>
+        <a href="#" onclick="$('.tabs').hide(); $('.FormKnoppen').hide(); $('.validation-summary-errors').hide(); $('.Loading').show(); document.FormPreek.submit(); return false;" class="IconKnop">
+            <div class="fa fa-file"></div>
+            @Resources.Aanmaken
+        </a>
+        <a href="http://youtu.be/FpGCy-Inf-Y" class="IconKnop" target="_blank">
+            <div class="fa fa-youtube-play"></div>
+            @Resources.Instructievideo
+        </a>
+    </div>
+    <p class="clear"></p>
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            prekenweb.automatischeTekstenChanged();
+        });
+     </script>
+}

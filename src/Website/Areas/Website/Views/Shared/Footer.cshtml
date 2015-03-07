@@ -1,0 +1,78 @@
+﻿<div class="closeDialog" onclick="$('.navMenu').dialog('close');">
+    <div class="fa fa-remove"></div>
+</div>
+<div class="col">
+    <h4>@Resources.PrekenWeb</h4>
+    <ul>
+        <li>
+            <a href="@Url.Action("Contact", "Prekenweb", new { Area = "Website" })">
+                <div class="fa fa-envelope"></div>
+                @Resources.MenuContact</a></li>
+        <li>
+            <a href="@Url.Action("hulp", "pagina", new { Area = "Website" })">
+                <div class="fa fa-medkit"></div>
+                @Resources.MenuHulp</a></li>
+        @*<li>
+            <a href="@Url.Action("Index", "Home", new { Area = "Mijn" })">
+                <div class="fa fa-wrench"></div>
+                @Resources.MenuBeheer</a></li>*@
+        <li>
+            <a href="@Url.Action("links", "pagina", new { Area = "Website" })">
+                <div class="fa fa-link"></div>
+                @Resources.MenuLinks</a></li>
+    </ul>
+</div>
+<div class="col">
+    <h4>Social Media</h4>
+    <ul>
+        <li>
+            <a href="http://twitter.com/@Resources.TwitterLink">
+                <div class="fa fa-twitter"></div>
+                Twitter</a></li>
+        <li>
+            <a href="http://www.facebook.com/@Resources.FacebookLink">
+                <div class="fa fa-facebook"></div>
+                Facebook</a></li>
+        <li>
+            <a href="https://plus.google.com/117055773975645368518?rel=author">
+                <div class="fa fa-google-plus"></div>
+                Google+
+            </a></li>
+
+
+    </ul>
+</div>
+@if (Request.RequestContext.RouteData.Values["culture"] == null || Request.RequestContext.RouteData.Values["culture"].ToString() == "nl")
+{ 
+    <div class="col">
+        <h4>@Resources.MenuBoeken</h4>
+        <ul>
+            <li>
+                <a href="http://bestellen.prekenweb.nl/?boekid=1">
+                    <div class="fa fa-book"></div>
+                    Jona de profeet</a></li>
+            <li>
+                <a href="http://bestellen.prekenweb.nl/?boekid=2">
+                    <div class="fa fa-book"></div>
+                    Die dorst heeft, kome</a></li>
+        </ul>
+    </div>
+}
+<div class="col laatsteCol">
+    <h4>@Resources.Bijdragen</h4>
+    <ul>
+        <li>
+            <a href="@Url.Action("PreekToevoegen", "Prekenweb", new { Area = "Website" })">
+                <div class="fa fa-cloud-upload"></div>
+                @Resources.PreekToevoegen</a></li>
+        <li>
+            <a href="@Url.Action("financiele-bijdrage", "pagina", new { Area = "Website" })">
+                <div class="fa fa-credit-card"></div>
+                @Resources.FinancieleBijdrage</a></li>
+        <li>
+            <a href="@Url.Action("Contact", "Prekenweb", new { Area = "Website" })">
+                <div class="fa fa-comment"></div>
+                @Resources.ReactieGeven</a></li>
+    </ul>
+</div>
+<p class="clear"></p>

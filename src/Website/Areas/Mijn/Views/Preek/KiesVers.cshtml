@@ -1,0 +1,56 @@
+﻿@model KiesVers
+@{
+    ViewBag.Title = Resources.Kies;
+    //Layout = "~/Areas/Website/Views/Shared/_Popup.cshtml";
+}
+<div id="ZoekVersContainer">
+    <script type="text/javascript">
+        function KiesVers(id, omschrijving) {
+            var label = document.getElementById("@string.Format("{0}_display", Model.Veldnaam)");
+            var input = document.getElementById("@string.Format("{0}", Model.Veldnaam)");
+            label.innerHTML = omschrijving;
+            input.value = id;
+            $('.prekenwebPopup').dialog('destroy').remove();
+            prekenweb.updateAutomatischeBijbeltekst();
+        }
+    </script>
+    <h1>@ViewBag.Title</h1>
+    @using (Ajax.BeginForm("KiesVers", "Preek", new AjaxOptions { UpdateTargetId = "ZoekVersContainer" }, new { name = "FormZoekPreek" }))
+    {
+        @Html.HiddenFor(x => x.Veldnaam)
+        <div class="ColumnM">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Boek)</div>
+                <div class="value">@Html.EditorFor(m => m.Boek, new { data_autocomplete_type = "Boek" })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Boek)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Boek)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Hoofdstuk)</div>
+                <div class="value">@Html.EditorFor(m => m.Hoofdstuk)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Hoofdstuk)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Hoofdstuk)</div>
+            </div>
+        </div>
+        <p class="clear"></p>
+        <input type="submit" class="Knop" value="@Resources.Zoek" />
+        <p class="clear"></p>
+
+    }
+    <div id="grid">
+        @{
+            WebGrid wb = new WebGrid(Model.Teksten, new string[] { "BoekHoofdstuk.Omschrijving", "Id", "Hoofdstuk", "Vers" }, rowsPerPage: 200);
+            @wb.GetHtml(
+            columns:
+                wb.Columns(
+                    //wb.Column(columnName: "Id"),
+                    wb.Column(columnName: "BoekHoofdstuk.Omschrijving", header: Resources.Boek),
+                    wb.Column(columnName: "Hoofdstuk", header: Resources.Hoofdstuk),
+                    wb.Column(columnName: "Vers", header: Resources.Vers),
+                    wb.Column(columnName: "Tekst", header: Resources.Tekst, format: (item) => { return item.Tekst == null ? "" : ((string)item.Tekst).Length > 100 ? ((string)item.Tekst).Substring(0, 100) + "..." : item.Tekst; }),
+                    wb.Column("Kies", " ", format: (item) => { return Html.ActionLink(Resources.Kies, "Kies", new { Id = item.Id }, new { OnClick = "KiesVers(" + item.Id + ",'" + item.Omschrijving + "'); return false;" }); })
+                )
+            );
+        }
+    </div>
+</div> 

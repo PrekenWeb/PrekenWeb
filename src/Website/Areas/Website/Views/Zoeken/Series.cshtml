@@ -1,0 +1,19 @@
+﻿@model ZoekenSerie
+@{ 
+    ViewBag.Title = Resources.ZoekenSerie;
+    string lastFirstLetter = string.Empty;
+}
+<h1>@ViewBag.Title</h1>
+
+<ul class="StandaardLijst">
+    @foreach (Serie Serie in Model.Series)
+    {
+         <li><a href="@Url.Action("Index", "Zoeken", new { SerieId = Serie.Id })">
+            <div class="fa fa-arrow-right"></div>@Serie.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

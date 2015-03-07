@@ -1,0 +1,489 @@
+﻿/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    /* Styles */
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+
+    /* Styles */
+
+}
+
+/* Smartphones (portret) ----------- */
+@media only screen and (max-width : 320px) {
+
+    /* Styles */
+
+}
+
+/* iPads (portret en landschap) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+}
+
+/* iPads (landschap) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+    /* Styles */
+
+}
+
+/* iPads (portret) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+}
+
+/* Smalle schermen (< 800px breed)----------- */
+@media only screen and (max-width : 750px) {
+
+    body .ZoekResultaat {
+        margin-top: 7px;
+        background-color: white;
+    }
+
+        body .ZoekResultaat .simpel {
+            background-color: #c6cddc;
+            padding: 0px;
+        }
+
+            body .ZoekResultaat .simpel .ZoekResultaatPredikant {
+                float: none;
+                width: auto;
+                padding-left: 5px;
+            }
+
+            body .ZoekResultaat .simpel .ZoekResultaatBoek {
+                float: none;
+                width: auto;
+                padding-left: 5px;
+            }
+
+            body .ZoekResultaat .simpel .ZoekResultaatLezingOmschrijving {
+                float: none;
+                width: auto;
+                padding-left: 5px;
+            }
+
+            body .ZoekResultaat .simpel .ZoekResultaatDatum {
+                float: left;
+                width: auto;
+                text-align: left;
+                padding-left: 5px;
+            }
+
+            body .ZoekResultaat .simpel .ZoekResultaatCookie {
+                /*display: none;*/
+                margin-right: 4px;
+                margin-top: -23px;
+            }
+
+            body .ZoekResultaat .simpel .ZoekResultaatLink {
+                float: none;
+                width: auto;
+                text-align: center;
+                background-color: #c6cddc;
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+
+            body .ZoekResultaat .simpel .clear {
+                display: none;
+            }
+
+        body .ZoekResultaat .geavanceerd {
+            /*display: none;*/
+            background-color: transparent;
+            color: black;
+        }
+
+            body .ZoekResultaat .geavanceerd a {
+                color: black;
+            }
+
+            body .ZoekResultaat .geavanceerd .fa {
+                display: none;
+            }
+
+    body #zoeker, #WebsiteMenu {
+        display: none !important;
+    }
+
+    #container {
+        opacity: 1 !important;
+    }
+
+    .VerbergTelefoon {
+        display: none !important;
+    }
+
+    body .Topper .hoofdmenuCol li {
+        float: left;
+        width: auto;
+    }
+
+        body .Topper .hoofdmenuCol li a {
+            position: relative;
+        }
+
+    body .Topper .TelfoonMenu {
+        display: block;
+    }
+
+    .Topper #taalkeuze {
+        display: none;
+    }
+
+    .Topper #MijnPrekenweb {
+        display: none;
+    }
+
+    body #footer .col {
+        float: none;
+        width: auto;
+        text-align: center;
+    }
+
+        body #footer .col a > div {
+            float: none;
+        }
+
+    body .UMoetInloggenUL li {
+        float: none;
+        margin-bottom: 10px;
+    }
+
+        body .UMoetInloggenUL li a {
+            width: auto;
+            display: block;
+            float: none;
+        }
+}
+/* Smalle schermen (< 800px breed)----------- */
+@media only screen and (max-width : 800px) {
+    body #pageContent {
+        margin-left: 20px;
+        padding-top: 0px;
+    }
+
+    /*body #zoeker {
+        display: none;
+    }*/
+    body #zoeker #inputContainer {
+        margin-left: 440px;
+        margin-right: 8px;
+    }
+
+    body #zoeker #driehoek {
+        margin-left: 450px;
+    }
+
+    .Topper {
+        margin-left: 0px;
+        border-radius: 0px 0px 0px 0px;
+        margin-right: 0px;
+    }
+
+    body #PageHeader {
+        padding-top: 10px;
+        padding-bottom: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: auto;
+        text-align: center;
+        width: auto;
+    }
+
+    body #Logo {
+        display: none;
+    }
+
+    body #LogoKleinImage {
+        display: inline;
+        margin-top: -0px;
+        margin-bottom: 10px;
+    }
+
+    #PageHeader {
+        padding-left: 0px;
+        font-size: 35px;
+    }
+
+    footer {
+        padding-left: 0px;
+    }
+
+    .navMenuDialog {
+        width: 80% !important;
+    }
+
+    body .BijbelTekst .value {
+        -moz-column-count: 1;
+        -webkit-column-count: 11;
+        column-count: 1;
+        -moz-columns: auto;
+        -webkit-columns: auto;
+        columns: auto;
+    }
+
+    body .ColumnLeft {
+        float: none;
+        margin-right: 0px;
+        position: relative;
+    }
+
+    body .ColumnRight {
+        margin-left: 0px;
+        min-height: 320px;
+    }
+
+    body .lof-slidecontent {
+        margin-left: 0px;
+    }
+
+    body .Welkom, .Welkom.WelkomstTekstVerborgen {
+        height: auto;
+        float: none;
+        width: auto;
+    }
+
+
+    body #NieuwePrekenWrapper .Zoeken {
+        float: none;
+        width: auto;
+        border-radius: 2px 2px 2px 0px;
+        border-top-width: 1px;
+        border-left: 1px solid #1274ba;
+        border-right-width: 1px;
+        border-bottom-width: 0px;
+        height: auto;
+        margin-bottom: 0px;
+    }
+
+        body #NieuwePrekenWrapper .Zoeken h3 {
+            clear: both;
+        }
+
+    body #NieuwePrekenWrapper .NieuwePreken {
+        height: auto;
+        border-radius: 2px 0px 0px 2px;
+        border-right: 1px solid #1274ba;
+        border-bottom-width: 1px;
+        border-left-width: 1px;
+        border-top-width: 0px;
+        padding: 0px 20px 20px 20px;
+    }
+
+    /*body #NieuwePrekenWrapper .NieuwePreken h3 {
+            display: none;
+        }*/
+
+    body .VerderBladerenContainer {
+    }
+
+        body .VerderBladerenContainer h2 {
+            float: none;
+            margin-top: 10px;
+        }
+
+        body .VerderBladerenContainer .VerderBladeren li a {
+        }
+
+    body .NieuwOpPrekenweb {
+        width: auto;
+        float: none;
+        height: auto;
+        margin-right: 0px;
+    }
+
+    .VerbergMobiel {
+        display: none;
+    }
+
+    body .Nieuwsbrief {
+        width: auto;
+        float: none;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        height: auto;
+    }
+
+    body .Boek {
+        width: auto;
+        float: none;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    body #Tweets {
+        height: auto;
+        overflow: auto;
+        width: auto;
+    }
+}
+
+@media only screen and (min-width : 1024px) {
+    body .ZoekResultaat .simpel .ZoekResultaatGebeurtenis {
+        display: block;
+    }
+
+    body .ZoekResultaat .geavanceerd .ZoekResultaatGebeurtenis {
+        display: none;
+    }
+}
+/*  extra groot ----------- */
+@media only screen and (min-width : 1290px) {
+    body {
+        background-image: url(images/background-2.png);
+        background-repeat: repeat;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+
+        body #container {
+            width: 70%;
+            max-width: 1400px;
+        }
+
+        body #zoeker {
+            width: 70%;
+            margin-left: 15%;
+        }
+
+    .chromeframe {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    .beta {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    body #zoeker #inputContainer {
+        /*padding: 0px 25px 0px 0px;*/
+        /*margin-left: 210px;*/
+    }
+
+    body #zoeker #inputZoek {
+        /*width: -webkit-calc(70%-280px);
+            width: -moz-calc(70%-280px);
+            width: calc(70%-280px);*/
+    }
+
+    body #zoeker #submit {
+        /*margin-left: calc(70% - 60px);*/
+    }
+
+    body #zoeker #zoekresultatenContainer {
+        width: 100%;
+    }
+
+    footer {
+        padding-left: 190px;
+    }
+
+    .navMenuDialog {
+        width: 700px !important;
+    }
+
+    body .BijbelTekst .value.tweeKolommen {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+
+    body .BijbelTekst .value.drieKolommen {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+    }
+
+    .columns {
+        -webkit-column-count: 2; /* Saf3, Chrome*/
+        -webkit-column-gap: 4%; /* Saf3, Chrome*/
+        -moz-column-count: 2; /* FF3.5+ */
+        -moz-column-gap: 4%; /* FF3.5+ */
+        column-count: 2; /* Opera 11+*/
+        -ms-column-gap: 4%;
+        -o-column-gap: 4%;
+        column-gap: 4%; /* Opera 11+*/
+    }
+
+
+    /*body .Welkom {
+        height: auto;
+        float: none;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        width: auto;
+        padding: 20px 20px 20px 20px;
+    }*/
+}
+/*  extra extra groot ----------- */
+@media only screen and (min-width : 1700px) {
+
+    body #pageContent #NieuwePrekenWrapper .NieuwePreken {
+        height: 320px;
+        float: none;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        margin-left: 260px;
+    }
+
+    body #pageContent .WelkomstTekstVerborgen .NieuwePreken {
+        margin-left: 0px !important;
+    }
+
+
+    body .WelkomstTekstWeerTonenLink, .WelkomstTekstVerbergenLink {
+        text-align: left;
+    }
+
+    body .Welkom {
+        width: 200px;
+        float: left;
+        height: 320px;
+        overflow: auto;
+    }
+
+        body .Welkom h2 {
+            float: none;
+        }
+
+    body .VerderBladerenContainer {
+        margin-left: 262px;
+        height: 90px;
+        overflow: hidden;
+    }
+
+    body .ZoekResultaat .simpel .ZoekResultaatSerie {
+        display: block;
+    }
+
+    body .ZoekResultaat .geavanceerd .ZoekResultaatSerie {
+        display: none;
+    }
+
+    .columns {
+        -webkit-column-count: 3; /* Saf3, Chrome*/
+        -webkit-column-gap: 4%; /* Saf3, Chrome*/
+        -moz-column-count: 3; /* FF3.5+ */
+        -moz-column-gap: 4%; /* FF3.5+ */
+        column-count: 3; /* Opera 11+*/
+        column-gap: 4%; /* Opera 11+*/
+    }
+}
+/* superduper grote schermen ----------- */
+@media only screen and (min-width : 1824px) {
+
+    /* Styles */
+
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+
+    /* Styles */
+
+}

@@ -1,0 +1,24 @@
+﻿@model GebruikerEditViewModel
+@{ ViewBag.Title = string.Format("{0}: {2}", Resources.MijnGegevens, Resources.Van.ToLower(), Model.Gebruiker.Naam); }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Bewerk", "Gebruiker", FormMethod.Post, new { name = "FormGebruiker" }))
+{
+    @Html.HiddenFor(m => m.Gebruiker.Id)
+    @Html.HiddenFor(m => m.Gebruiker.LaatstIngelogd)
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    if (User.IsInRole("Gebruikers"))
+    {
+        <a href="@Url.Action("Index")" class="IconKnop">
+            <div class="fa fa-arrow-left"></div>
+            @Resources.Terug
+        </a>
+    }
+    <a href="#" onclick="document.FormGebruiker.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Opslaan
+    </a>
+
+    <p class="clear"></p>
+}

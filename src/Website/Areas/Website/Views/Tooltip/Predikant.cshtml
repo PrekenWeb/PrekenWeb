@@ -1,0 +1,28 @@
+﻿@model TooltipBase<Predikant>
+@{ 
+    ViewBag.Title = Model.DataObject.Achternaam; 
+}
+<div class="TooltipBody">
+    @if (!string.IsNullOrEmpty(Model.DataObject.Gemeente))
+    {  
+        <span>@Resources.Gemeente: @Model.DataObject.Gemeente<br />
+        </span>
+    }
+    @if (!string.IsNullOrEmpty(Model.DataObject.LevensPeriode))
+    {  
+        <span>@Resources.Levensperiode: @Model.DataObject.LevensPeriode<br />
+        </span>
+    }
+    @if (!string.IsNullOrEmpty(Model.DataObject.Opmerking))
+    {  
+        <span>@Resources.Opmerking: @Html.Raw(Model.DataObject.Opmerking)<br />
+        </span>
+    }
+    @Html.IconActionLink(Resources.MeerVanDezePredikant, "Index", "Zoeken", new { PredikantId = Model.DataObject.Id }, new { Class = "Knop" }, "user")<br />
+    <br />
+    @if (Model.Preek != null)
+    { 
+        @Html.Partial("PreekLink", Model.Preek)
+    }
+</div>
+

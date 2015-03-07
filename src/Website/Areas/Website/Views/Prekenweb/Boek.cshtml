@@ -1,0 +1,185 @@
+﻿@model BoekViewModel
+@{
+    ViewBag.Title = Model.TekstPagina.Kop;
+}
+<h1>@ViewBag.Title</h1>
+<div style="min-width:800px;">
+    @Html.Raw(Model.TekstPagina.Tekst)
+
+    @if (Model.Verzonden)
+    {
+        <div class="Goedmelding">In bestelling is succesvol verzonden, wij nemen zo spoedig mogelijk contact met u op!</div>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+        
+            @Html.HiddenFor(m => m.Prijs)
+
+            <div class="ColumnL">
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Aanhef)</div>
+                    <div class="value">@Html.EnumDropDownListFor(m => m.Aanhef)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Aanhef)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Aanhef)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Naam)</div>
+                    <div class="value">@Html.EditorFor(m => m.Naam)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Naam)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Naam)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Email)</div>
+                    <div class="value">@Html.EditorFor(m => m.Email)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Email)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Email)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Straat)</div>
+                    <div class="value">@Html.EditorFor(m => m.Straat)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Straat)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Straat)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Huisnummer)</div>
+                    <div class="value">@Html.EditorFor(m => m.Huisnummer)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Huisnummer)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Huisnummer)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Postcode)</div>
+                    <div class="value">@Html.EditorFor(m => m.Postcode)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Postcode)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Postcode)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Woonplaats)</div>
+                    <div class="value">@Html.EditorFor(m => m.Woonplaats)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Woonplaats)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Woonplaats)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.BoekId)</div>
+                    <div class="value">@Html.DropDownListFor(m => m.BoekId, Model.Boeken, new { onchange = "change_total(this);" })</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.BoekId)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.BoekId)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.VerzendMethode)</div>
+                    <div class="value">@Html.EnumDropDownListFor(m => m.VerzendMethode, new { onchange = "change_total(this);" })</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.VerzendMethode)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.VerzendMethode)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Aantal)</div>
+                    <div class="value">
+                        @Html.TextBoxFor(m => m.Aantal, new { onchange = "change_total(this);", @style = "width:30px; float:left; margin-right:20px;" })
+                        <div id="kostenplaatje">asdasd</div>
+                    </div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Aantal)</div>
+
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Aantal)</div>
+                </div>
+                <div class="field" id="OphaalLocatieContainer">
+                    <div class="label">@Html.LabelFor(m => m.OphaalLocatie)</div>
+                    <div class="value">@Html.DropDownListFor(m => m.OphaalLocatie, Model.OphaalLocaties)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.OphaalLocatie)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.OphaalLocatie)</div>
+                </div>
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Tekst)</div>
+                    <div class="value" style="clear:left;">@Html.TextAreaFor(m => m.Tekst, new { style = "width:400px;" })</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.Tekst)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.Tekst)</div>
+                </div>
+                <div class="field">
+                    <div class="label"></div>
+                    <div class="value">@Html.Captcha("Refresh", "Type bovenstaande afbeelding over", 4, null)</div>
+                    <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
+                </div>
+                <p class="clear"></p>
+                <a href="#" onclick="document.forms[0].submit(); return false;" class="IconKnop">
+                    <div class="fa fa-truck"></div>
+                    Bestel
+                </a>
+
+            </div>
+        }
+    }
+</div>
+<script type="text/javascript">
+
+    var boekprijs = 0;
+    var totaal = 0;
+    var verzendkosten = new Array();
+
+
+    // functie voor het maken veranderen van 6.3 naar 6.30, maar ook 6.2899999999 naar 6.29
+    function formatAsMoney(mnt) {
+        mnt -= 0;
+        mnt = (Math.round(mnt * 100)) / 100;
+        mnt = (mnt == Math.floor(mnt)) ? mnt + ',00' : ((mnt * 10 == Math.floor(mnt * 10)) ? mnt + '0' : mnt);
+        mnt = '' + mnt;
+        return mnt.replace(".", ",");
+    }
+
+    // dynamisch het kosten tabelletje samenstellen
+    function change_total() {
+        switch (document.getElementById("BoekId").value) {
+            case "1":
+                var boekprijs = 9.95;
+                verzendkosten[1] = 2.05;
+                verzendkosten[2] = 2.6;
+                verzendkosten[3] = 3.15;
+                verzendkosten[4] = 0;
+                break;
+            case "2":
+                var boekprijs = 14.9;
+                verzendkosten[1] = 2.1;
+                verzendkosten[2] = 2.2;
+                verzendkosten[3] = 2.3;
+                verzendkosten[4] = 2.4;
+                break;
+            default:
+                return;
+
+        }
+        totaal = boekprijs;
+
+        // textblok vinden waar tekst in moet
+        var kostenplaatje = document.getElementById("kostenplaatje");
+
+        // sender.value = ingevoerde tekst in het aantal veld.
+        var aantal = parseInt(document.getElementById("Aantal").value);
+
+        totaal = aantal * totaal;
+        document.getElementById("Prijs").value = totaal;
+
+        if (aantal < 5) {
+            if (aantal == 0) {
+                document.getElementById("Aantal").value = 1;
+                change_total();
+                return;
+            }
+            if (document.getElementById("VerzendMethode").value == "0") {
+                document.getElementById("OphaalLocatieContainer").style.display = 'block';
+                kostenplaatje.innerHTML = '<table><tr><td>' + aantal + ' boek(en) &agrave; &euro; ' + formatAsMoney(boekprijs) + '</td><td><B>= &euro; ' + formatAsMoney(totaal) + '</B></td></tr><tr><td>Verzendkosten</td><td><B>= &euro; ' + formatAsMoney(verzendkosten[aantal]) + '</B></td></tr><tr><td>Totaal</td><td><B>= &euro; ' + formatAsMoney(totaal + verzendkosten[aantal]) + '</B></tr></table>';
+            }
+            else {
+                document.getElementById("OphaalLocatieContainer").style.display = 'none';
+                kostenplaatje.innerHTML = '<table><tr><td>' + aantal + ' boek(en) &agrave; &euro; ' + formatAsMoney(boekprijs) + '</td><td><B>= &euro; ' + formatAsMoney(totaal) + '</B></td></tr><tr><td>Verzendkosten</td><td><B>= &euro; 0,00</B></td></tr><tr><td>Totaal</td><td><B>= &euro; ' + formatAsMoney(totaal) + '</B></tr></table>';
+            }
+        }
+        else {
+            kostenplaatje.innerHTML = '<table><tr><td>' + aantal + ' boek(en) &agrave; &euro; ' + formatAsMoney(boekprijs) + '</td><td><B>= &euro; ' + formatAsMoney(totaal) + '</B></td></tr><tr><td>Verzendkosten</td><td><B>= &euro; 0,00</B></td></tr><tr><td>Totaal</td><td><B>= &euro; ' + formatAsMoney(totaal) + '</B></tr></table>';
+        }
+    }
+
+    if (document.getElementById("Aantal").value == "" || document.getElementById("Aantal").value == 0) {
+        document.getElementById("Aantal").value = 1;
+    }
+    change_total();
+</script>

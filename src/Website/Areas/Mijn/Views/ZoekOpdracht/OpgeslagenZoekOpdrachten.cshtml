@@ -1,0 +1,31 @@
+﻿@model OpgeslagenZoekOpdrachten
+@{ ViewBag.Title = "Opgeslagen zoekopdrachten"; }
+
+<h1>@ViewBag.Title</h1>
+@if (Model.ZoekOpdrachten.Any())
+{
+    <div id="grid">
+        @{
+    WebGrid wb = new WebGrid(Model.ZoekOpdrachten, new string[] { "Identifier", "Id" }, rowsPerPage: 30);
+    @wb.GetHtml(
+            columns:
+                wb.Columns(
+        //wb.Column(columnName: "Id"),
+                    wb.Column(columnName: "Omschrijving"),
+                    wb.Column("RssFeed", " ", format: (item) =>
+                    {
+                        return Html.IconActionLink("Rss feed", "RssFeed", "Home", new { area="Website", id = item.PubliekeSleutel }, new { },"rss");
+                    }),
+                    wb.Column("Open", " ", format: (item) =>
+                    {
+                        return Html.ActionLink("Open", "RedirectToZoekOpdracht", new { id = item.Id }, new { });
+                    })
+                )
+            );
+        }
+    </div>
+}
+else
+{
+    <p>U heeft nog geen zoekopdrachten opgeslagen.</p>
+}

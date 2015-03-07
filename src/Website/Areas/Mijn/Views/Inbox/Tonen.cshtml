@@ -1,0 +1,136 @@
+﻿@model InboxEditViewModel
+@{ ViewBag.Title = string.Format("{0}", Model.InboxItem.Omschrijving); }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Tonen", "Inbox", FormMethod.Post, new { name = "FormInboxItem" }))
+{
+    @Html.HiddenFor(m => m.InboxItem.Id)
+    @Html.HiddenFor(m => m.InboxItem.InboxTypeId)
+    @Html.ValidationSummary(true)
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.Omschrijving)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.Omschrijving)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.Omschrijving)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.Omschrijving)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.GebruikerId)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.GebruikerId)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.GebruikerId)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.GebruikerId)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.Afgehandeld)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.Afgehandeld)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.Afgehandeld)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.Afgehandeld)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.Aangemaakt)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.Aangemaakt)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.Aangemaakt)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.Aangemaakt)</div>
+        </div>
+    </div>
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.VanNaam)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.VanNaam)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.VanNaam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.VanNaam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.VanEmail)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.VanEmail)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.VanEmail)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.VanEmail)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.AanNaam)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.AanNaam)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.AanNaam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.AanNaam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.AanEmail)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.AanEmail)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.AanEmail)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.AanEmail)</div>
+        </div>
+        @if (Model.InboxItem.PreekId.HasValue)
+        { 
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.InboxItem.PreekId)</div>
+                <div class="value">@Html.HiddenFor(m => m.InboxItem.PreekId)</div>
+                <div class="value">@Html.ActionLink("Gerelateerde preek", "Open", "Preek", new { Area = "Website", Id = Model.InboxItem.PreekId }, new { })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.PreekId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.PreekId)</div>
+            </div>
+        }
+    </div>
+    <p class="clear"></p>
+    <div class="ColumnMax">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxItem.Inhoud)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxItem.Inhoud)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxItem.Inhoud)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxItem.Inhoud)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <h2>Opvolging</h2>
+    <p class="clear"></p>
+        foreach (var opvolging in Model.InboxItem.InboxOpvolgings)
+        {
+    <div class="InboxOpvolging" style="border: 1px solid gray; padding: 20px; border-radius: 3px; background-color: white; margin-bottom: 20px;">
+        <div class="ColumnL">
+            <div class="field">
+                <div class="label">Aangemaakt</div>
+                <div class="value">@string.Format("{0}", opvolging.Aangemaakt)</div>
+            </div>
+            <div class="field">
+                <div class="label">Mail verstuurd</div>
+                <div class="value">
+                    @if (opvolging.VerstuurAlsMail)
+                    {
+                        if (opvolging.Verstuurd.HasValue)
+                        {
+                        <text>@string.Format("Verstuurd op {0}", opvolging.Verstuurd.Value)</text>
+                        }
+                        else
+                        { 
+                        <text>Nog niet verstuurd: binnen 5 minuten!</text>
+                        }
+                    }
+                    else
+                    {
+                        <text>geen mail versturen...</text>
+                    }
+                </div>
+            </div>
+        </div>
+        <p class="clear"></p>
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label"><hr /></div>
+                <div class="value">@Html.Raw(opvolging.Tekst)</div>
+            </div>
+        </div>
+         <p class="clear"></p>
+   </div>
+    <p class="clear"></p>
+        }
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormInboxItem.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Opslaan</a>
+    <a href="@Url.Action("OpvolgingToevoegen", new { inboxId = Model.InboxItem.Id })" class="IconKnop">
+        <div class="fa fa-arrow-down"></div>
+        Opvolgen</a>
+ 
+    <p class="clear"></p>
+}

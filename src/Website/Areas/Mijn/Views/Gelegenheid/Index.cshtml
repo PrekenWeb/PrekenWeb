@@ -1,0 +1,22 @@
+﻿@model GebeurtenisIndexViewModel
+@{ ViewBag.Title = Resources.Gebeurtenissen; }
+
+<h1>@ViewBag.Title</h1>
+<div id="grid">
+    @{
+        WebGrid wb = new WebGrid(Model.Gebeurteniss, new string[] { "Omschrijving" ,"Taal.Omschrijving" }, rowsPerPage: 30);
+        @wb.GetHtml(
+            columns:
+                wb.Columns(
+                wb.Column(columnName: "Omschrijving", header: Resources.Omschrijving),
+                wb.Column(columnName: "Sortering", header: Resources.Sortering),
+                    wb.Column("Bewerk", " ", format: (item) => { return Html.ActionLink(Resources.Bewerk, "Bewerk", new { Id = item.Id }, new { }); }),
+                             wb.Column("Verwijder", " ", format: (item) => { return Html.ActionLink(Resources.Verwijder, "Verwijder", new { Id = item.Id }, new { OnClick = "return(confirm('Verwijderen, zeker weten?'))" }); })
+                )
+            );
+    }
+</div>  
+ <a href="@Url.Action("Maak")" class="IconKnop">
+    <div class="fa fa-file"></div>
+    @Resources.NieuweGebeurtenis</a><br />
+<br />

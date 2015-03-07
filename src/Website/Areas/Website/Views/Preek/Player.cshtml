@@ -1,0 +1,30 @@
+﻿@model PreekOpen
+<div class="player">
+    <div class="Titel">@Resources.PlayerKop</div>
+    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+    <div id="jp_container_1">
+        <div class="jp-gui">
+            <ul>
+                <li class="jp-play jp-button"><a href="#" class="jp-play fa fa-play" tabindex="1" title="play"></a></li>
+                <li class="jp-pause jp-button"><a href="#" class="jp-pause fa fa-pause"  tabindex="1" title="pause"></a></li>
+                <li class="jp-stop jp-button"><a href="#" class="jp-stop fafa-stop"  tabindex="1" title="stop"></a></li>
+@*                <li class="jp-button"><a href="@Url.Action("Download", new { Id = Model.Preek.Id })" class="fa fa-download-alt" title="Download deze preek"></a></li>*@
+                <li class="jp-mute jp-button"><a href="#" class="jp-mute fa fa-volume-off" tabindex="1" title="mute"></a></li>
+                <li class="jp-unmute jp-button"><a href="#" class="jp-unmute fa fa-volume-down" tabindex="1" title="unmute"></a></li>
+                <li class="jp-volume-max jp-button"><a href="#" class="jp-volume-max fa fa-volume-up" tabindex="1" title="max volume"></a></li>
+                <li class="">
+                    <div class="jp-volume-slider"></div>
+                </li>
+            </ul>
+            <p class="clear"></p>
+            <div class="jp-current-time">00:00</div>
+            <div class="jp-duration">@string.Format("{0:mm\\:ss}",Model.Preek.Duur)</div>
+            <div class="jp-progress-slider"></div>
+            <p class="clear"></p>
+        </div>
+        <div class="jp-no-solution">
+            <span>Update Required</span>
+            To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+        </div>
+    </div>
+</div>

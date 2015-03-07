@@ -1,0 +1,38 @@
+﻿@model AfbeeldingEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnM">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Afbeelding.Omschrijving) </div>
+        <div class="value">@Html.EditorFor(m => m.Afbeelding.Omschrijving)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Afbeelding.Omschrijving)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Bestand)</div>
+        <div class="value">
+            @*            <span style="overflow: hidden; width: 140px; display: block;">
+                @Model.Afbeelding.Bestandsnaam 
+            </span>*@
+            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">Kies @{ if (!string.IsNullOrEmpty(Model.Afbeelding.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
+            </a>
+            <div style='height: 0px; width: 0px; overflow: hidden;'>
+                <input name="Bestand" id="Bestand" type="file" />
+            </div>
+        </div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Bestand)</div>
+    </div>
+
+</div>
+@if (!string.IsNullOrEmpty(Model.Afbeelding.Bestandsnaam))
+{ 
+    <div class="ColumnM">
+        <div class="field">
+            <div class="label">Voorbeeld</div>
+            <div class="value">
+                <a href="@Url.Content(string.Format("{0}{1}", ViewBag.AfbeeldingenFolder, Model.Afbeelding.Bestandsnaam))">
+                    <img src="@Url.Content(string.Format("{0}Thumbnail_{1}.jpg", ViewBag.AfbeeldingenFolder, Model.Afbeelding.Id))" /></a>
+
+            </div>
+
+        </div>
+    </div>
+}

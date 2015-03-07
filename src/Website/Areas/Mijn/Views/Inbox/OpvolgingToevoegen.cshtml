@@ -1,0 +1,88 @@
+﻿@model InboxOpvolgingToevoegenViewModel
+@{ ViewBag.Title = "Opvolging toevoegen"; }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("OpvolgingToevoegen", "Inbox", FormMethod.Post, new { name = "FormOpvolgingToevoegen" }))
+{ 
+    @Html.HiddenFor(m => m.InboxOpvolging.Aangemaakt) 
+    @Html.HiddenFor(m => m.InboxOpvolging.InboxId) 
+    @Html.ValidationSummary(true)
+    <div style="border: 1px solid gray; padding: 20px; border-radius: 3px; background-color: white; margin-bottom: 20px;">
+        <div class="ColumnL">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Inbox.Aangemaakt)</div>
+                <div class="value">@Html.DisplayFor(m => m.Inbox.Aangemaakt)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Inbox.Aangemaakt)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Inbox.Aangemaakt)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Inbox.VanNaam)</div>
+                <div class="value">@Html.DisplayFor(m => m.Inbox.VanNaam)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Inbox.VanNaam)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Inbox.VanNaam)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Inbox.VanEmail)</div>
+                <div class="value">@Html.DisplayFor(m => m.Inbox.VanEmail)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Inbox.VanEmail)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Inbox.VanEmail)</div>
+            </div>
+        </div>
+        <p class="clear"></p>
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Inbox.Inhoud)</div>
+                <div class="value">@Html.DisplayFor(m => m.Inbox.Inhoud)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Inbox.Inhoud)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Inbox.Inhoud)</div>
+            </div>
+        </div>
+        <p class="clear"></p>
+    </div>
+    <b>Opvolging:</b>
+    <p class="clear"></p>
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxOpvolging.GebruikerId)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxOpvolging.GebruikerId)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxOpvolging.GebruikerId)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxOpvolging.GebruikerId)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.DirectAfhandelen)</div>
+            <div class="value">@Html.EditorFor(m => m.DirectAfhandelen)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.DirectAfhandelen)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.DirectAfhandelen)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxOpvolging.VerstuurAlsMail)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxOpvolging.VerstuurAlsMail)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxOpvolging.VerstuurAlsMail)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxOpvolging.VerstuurAlsMail)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxOpvolging.Onderwerp)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxOpvolging.Onderwerp)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxOpvolging.Onderwerp)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxOpvolging.Onderwerp)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <div class="ColumnMax">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.InboxOpvolging.Tekst)</div>
+            <div class="value">@Html.EditorFor(m => m.InboxOpvolging.Tekst)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.InboxOpvolging.Tekst)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.InboxOpvolging.Tekst)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <a href="@Url.Action("Tonen", new { Id = Model.Inbox.Id })" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormOpvolgingToevoegen.submit(); return false;" class="IconKnop">
+        <div class="fa fa-reply"></div>
+        Toevoegen</a>
+ 
+    <p class="clear"></p>
+}

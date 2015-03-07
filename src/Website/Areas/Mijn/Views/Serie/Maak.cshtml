@@ -1,0 +1,18 @@
+﻿@model SerieEditViewModel
+@{ ViewBag.Title = "Maak serie"; }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Maak", "Serie", FormMethod.Post, new { name = "FormSerie" }))
+{
+    @Html.HiddenFor(m => m.Serie.TaalId)
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormSerie.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Aanmaken</a>
+ 
+    <p class="clear"></p>
+}

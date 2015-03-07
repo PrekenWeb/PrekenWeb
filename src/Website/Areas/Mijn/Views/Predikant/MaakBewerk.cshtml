@@ -1,0 +1,42 @@
+﻿@model PredikantEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnM">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Titels)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Titels)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Titels)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Voorletters)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Voorletters)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Voorletters)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Tussenvoegsels)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Tussenvoegsels)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Tussenvoegsels)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Achternaam)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Achternaam)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Achternaam)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Gemeente)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Gemeente)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Gemeente)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.LevensPeriode)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.LevensPeriode)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.LevensPeriode)</div>
+    </div>
+</div>
+<p class="clear"></p>
+<div class="ColumnMax">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.Opmerking)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.Opmerking)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.Opmerking)</div>
+    </div>
+</div>

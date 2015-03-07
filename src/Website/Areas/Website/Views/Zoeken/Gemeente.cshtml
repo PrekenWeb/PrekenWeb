@@ -1,0 +1,19 @@
+﻿@model ZoekenGemeente
+@{ 
+    ViewBag.Title = Resources.ZoekenGemeente;
+    string lastFirstLetter = string.Empty;
+}
+<h1>@ViewBag.Title</h1>
+
+<ul class="StandaardLijst">
+    @foreach (Gemeente Gemeente in Model.Gemeentes)
+    {
+        <li><a href="@Url.Action("Index", "Zoeken", new { GemeenteId = Gemeente.Id })">
+            <div class="fa fa-arrow-right"></div>@Gemeente.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

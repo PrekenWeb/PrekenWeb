@@ -1,0 +1,19 @@
+﻿@model BladerenSerie
+@{ 
+    ViewBag.Title = Resources.BladerenSerie;
+    string lastFirstLetter = string.Empty;
+}
+<h2>@ViewBag.Title</h2>
+
+<ul class="StandaardLijst">
+    @foreach (Serie Serie in Model.Series)
+    {
+         <li><a href="@Url.Action("Index", "Bladeren", new { SerieId = Serie.Id })">
+            <div class="icon-arrow-right"></div>@Serie.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

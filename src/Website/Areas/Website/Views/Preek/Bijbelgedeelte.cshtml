@@ -1,0 +1,20 @@
+﻿@model BijbelGedeelteViewModel 
+<article class="Bijbelgedeelte">
+    @foreach (var boek in Model.Teksten.GroupBy(t => t.BoekHoofdstukId))
+    { 
+        <div class="BoekInhoud">
+            @foreach (var hoofdstuk in boek.GroupBy(x => x.Hoofdstuk))
+            {
+                <div class="Hoofdstuk">@boek.First().BoekHoofdstuk.Omschrijving @hoofdstuk.Key</div>
+              string className = hoofdstuk.Count() > 10 ? "columns" : "";  
+                <div class="@className">
+                    @foreach (var tekst in hoofdstuk)
+                    { 
+                        <div class="VersNummer">@tekst.Vers</div>
+                        <div class="Tekst">@tekst.Tekst </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</article>

@@ -1,0 +1,328 @@
+﻿@model Preek
+@Html.ValidationSummary(false)
+<div class="Loading"><i class="fa fa-spinner fa-spin fa-large"></i>@Resources.UploadenOpslaan</div>
+
+<div class="tabs">
+    <ul>
+        <li><a href="#algemeen">
+            <div class="fa fa-info-circle"></div>@Resources.Algemeen</a></li>
+        <li><a href="#stamgegevens">
+            <div class="fa fa-table"></div>@Resources.Stamgegevens</a></li>
+        <li><a href="#gedeelte">
+            <div class="fa fa-book"></div>@Resources.Bijbelgedeelte</a></li>
+        <li><a href="#punten">
+            <div class="fa fa-list-ol"></div>@Resources.ThemaEnPunten</a></li>
+        <li class="alleenBijLeespreek"><a href="#leespreekTab">
+            <div class="fa fa-font"></div>@Resources.LeesPreek</a></li>
+    </ul>
+    <div id="algemeen">
+        <div class="ColumnL">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.PreekTypeId)</div>
+                <div class="value">@Html.EditorFor(m => m.PreekTypeId)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.PreekTypeId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.PreekTypeId)</div>
+            </div>
+
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.DatumPreek)</div>
+                <div class="value">@Html.EditorFor(m => m.DatumPreek)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.DatumPreek)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.DatumPreek)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.AangemaaktDoor)</div>
+                <div class="value">@Html.DisplayFor(m => m.Gebruiker_AangemaaktDoor)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.AangemaaktDoor)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.AangemaaktDoor)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.DatumAangemaakt)</div>
+                <div class="value">@Html.EditorFor(m => m.DatumAangemaakt)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.DatumAangemaakt)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.DatumAangemaakt)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.AangepastDoor)</div>
+                <div class="value">@Html.DisplayFor(m => m.Gebruiker_AangepastDoor)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.AangepastDoor)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.AangepastDoor)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.DatumBijgewerkt)</div>
+                <div class="value">@Html.EditorFor(m => m.DatumBijgewerkt)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.DatumBijgewerkt)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.DatumBijgewerkt)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Gepubliceerd)</div>
+                <div class="value">@Html.EditorFor(m => m.Gepubliceerd)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Gepubliceerd)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Gepubliceerd)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(x => x.Bestandsnaam)</div>
+                <div class="value">
+                    <span style="overflow: hidden; display: block;">
+                        <a href="@Url.Content(string.Format("~/Content/Preken/{0}", Model.Bestandsnaam))">@Model.Bestandsnaam</a>
+                    </span>
+                    @*            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">Kies @{ if (!string.IsNullOrEmpty(Model.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
+            </a>*@
+                    <input name="Bestand" id="Bestand" type="file" style="border: 0px; background-color: transparent;" />
+                </div> 
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="stamgegevens">
+        <div class="ColumnL">
+
+            <div class="field LezingCategorieEditor">
+                <div class="label">@Html.LabelFor(m => m.LezingCategorieId)</div>
+                <div class="value">@Html.EditorFor(m => m.LezingCategorieId)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.LezingCategorieId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.LezingCategorieId)</div>
+            </div>
+            <div class="field LezingCategorieEditor">
+                <div class="label">@Html.LabelFor(m => m.LezingOmschrijving)</div>
+                <div class="value">@Html.EditorFor(m => m.LezingOmschrijving)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.LezingOmschrijving)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.LezingOmschrijving)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.GemeenteId)</div>
+                <div class="value">@Html.EditorFor(m => m.GemeenteId, new { TaalId = Model.TaalId })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.GemeenteId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.GemeenteId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.PredikantId)</div>
+                <div class="value">@Html.EditorFor(m => m.PredikantId, new { TaalId = Model.TaalId })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.PredikantId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.PredikantId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.SerieId)</div>
+                <div class="value">@Html.EditorFor(m => m.SerieId, new { TaalId = Model.TaalId })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.SerieId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.SerieId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.GebeurtenisId)</div>
+                <div class="value">@Html.EditorFor(m => m.GebeurtenisId, new { TaalId = Model.TaalId })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.GebeurtenisId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.GebeurtenisId)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="gedeelte">
+        <div class="ColumnL">
+
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.BoekhoofdstukId)</div>
+                <div class="value">@Html.EditorFor(m => m.BoekhoofdstukId, new { TaalId = Model.TaalId })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.BoekhoofdstukId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.BoekhoofdstukId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Hoofdstuk)</div>
+                <div class="value">@Html.EditorFor(m => m.Hoofdstuk)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Hoofdstuk)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Hoofdstuk)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="ColumnMax">
+            @if (!string.IsNullOrEmpty(Model.VanVers))
+            { 
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.VanVers)</div>
+                    <div class="value">@Html.DisplayFor(m => m.VanVers)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.VanVers)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.VanVers)</div>
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.TotVers))
+            { 
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.TotVers)</div>
+                    <div class="value">@Html.DisplayFor(m => m.TotVers)</div>
+                    <div class="tooltip">@Html.ToolTipFor(m => m.TotVers)</div>
+                    <div class="validator">@Html.ValidationMessageFor(m => m.TotVers)</div>
+                </div>
+            }
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.VersVanId)</div>
+                <div class="value">@Html.EditorFor(m => m.VersVanId, new { onchange = "prekenweb.updateAutomatischeBijbeltekst", VersOmschrijving = !Model.VersVanId.HasValue || Model.BoekHoofdstukTekst_VersVanId == null ? "" : Model.BoekHoofdstukTekst_VersVanId.Omschrijving })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.VersVanId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.VersVanId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.VersTotId)</div>
+                <div class="value">@Html.EditorFor(m => m.VersTotId, new { onchange = "prekenweb.updateAutomatischeBijbeltekst", VersOmschrijving = !Model.VersTotId.HasValue || Model.BoekHoofdstukTekst_VersTotId == null ? "" : Model.BoekHoofdstukTekst_VersTotId.Omschrijving })</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.VersTotId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.VersTotId)</div>
+            </div>
+            @*<div class="field">
+                <div class="label">@Html.LabelFor(m => m.GedeelteVanVersId)</div>
+                <div class="value">@Html.EditorFor(m => m.GedeelteVanVersId)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.GedeelteVanVersId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.GedeelteVanVersId)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.GedeelteTotVersId)</div>
+                <div class="value">@Html.EditorFor(m => m.GedeelteTotVersId)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.GedeelteTotVersId)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.GedeelteTotVersId)</div>
+            </div>*@
+        </div>
+        <div class="clear"></div>
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.VersOmschrijving)</div>
+                <div class="value">@Html.EditorFor(m => m.VersOmschrijving)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.VersOmschrijving)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.VersOmschrijving)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.AutomatischeTeksten)</div>
+                <div class="value">
+                    @Html.RadioButtonFor(m => m.AutomatischeTeksten, true, new { style = "width:20px;min-width:20px;", onclick = "automatischeTekstenChanged();", id = "AutomatischeTekstenTrue" })
+                    <span>@Resources.Automatisch</span><br />
+                    @Html.RadioButtonFor(m => m.AutomatischeTeksten, false, new { style = "width:20px;min-width:20px;", onclick = "automatischeTekstenChanged();", id = "AutomatischeTekstenFalse" })
+                    <span>@Resources.Handmatig</span>
+                </div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.AutomatischeTeksten)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.AutomatischeTeksten)</div>
+            </div>
+            <div class="field" id="HandmatigeBijbeltekst">
+                <div class="tooltip">@Html.ToolTipFor(m => m.BijbeltekstOmschrijving)</div>
+                <div class="label">@Html.LabelFor(m => m.BijbeltekstOmschrijving)</div>
+                <div class="value">@Html.EditorFor(m => m.BijbeltekstOmschrijving)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.BijbeltekstOmschrijving)</div>
+            </div>
+            <div class="field" id="AutomatischeBijbeltekst">
+                @*<div class="tooltip">@Html.ToolTipFor(m => m.BijbeltekstOmschrijving)</div>*@
+                <div class="label">@Html.LabelFor(m => m.BijbeltekstOmschrijving)</div>
+                <div class="value">
+                    @Html.Action("Bijbelgedeelte", "Preek", new { area = "Website", versVanId = Model.VersVanId, versTotid = Model.VersTotId })
+                </div>
+                @*<div class="validator">@Html.ValidationMessageFor(m => m.BijbeltekstOmschrijving)</div>*@
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="punten">
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.ThemaOmschrijving)</div>
+                <div class="value">@Html.EditorFor(m => m.ThemaOmschrijving)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.ThemaOmschrijving)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.ThemaOmschrijving)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Punt1)</div>
+                <div class="value">@Html.EditorFor(m => m.Punt1)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Punt1)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Punt1)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Punt2)</div>
+                <div class="value">@Html.EditorFor(m => m.Punt2)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Punt2)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Punt2)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Punt3)</div>
+                <div class="value">@Html.EditorFor(m => m.Punt3)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Punt3)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Punt3)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Punt4)</div>
+                <div class="value">@Html.EditorFor(m => m.Punt4)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Punt4)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Punt4)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Punt5)</div>
+                <div class="value">@Html.EditorFor(m => m.Punt5)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Punt5)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Punt5)</div>
+            </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Informatie)</div>
+                <div class="value">@Html.EditorFor(m => m.Informatie)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Informatie)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Informatie)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="leespreekTab" class="alleenBijLeespreek">
+        <div class="ColumnL">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.AankondigingenBord)</div>
+                <div class="clear"></div>
+                <div class="value">
+                    <table>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort1)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving1)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort2)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving2)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort3)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving3)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort4)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving4)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort5)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving5)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort6)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving6)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(m => m.LezenZingenSoort7)</td>
+                            <td>:</td>
+                            <td>@Html.EditorFor(m => m.LezenZingenOmschrijving7)</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.AankondigingenBord)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.AankondigingenBord)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.LeesPreekTekst)</div>
+                <div class="value">@Html.EditorFor(m => m.LeesPreekTekst)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.LeesPreekTekst)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.LeesPreekTekst)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

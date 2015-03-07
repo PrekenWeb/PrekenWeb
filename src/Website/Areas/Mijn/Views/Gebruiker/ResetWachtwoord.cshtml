@@ -1,0 +1,34 @@
+﻿@model ResetWachtwoordViewModel
+@{
+    ViewBag.Title = Model.TekstPagina.Kop;
+}
+<h1>@ViewBag.Title</h1>
+@Html.Raw(Model.TekstPagina.Tekst)
+@using (Html.BeginForm("ResetWachtwoord", "Gebruiker", FormMethod.Post, new { name = "ResetWachtwoord" }))
+{
+    @Html.HiddenFor(m => m.Code);
+    @Html.AntiForgeryToken()
+    <div class="ColumnM">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Gebruikersnaam)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Gebruikersnaam, new { tabindex = 1 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Gebruikersnaam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Gebruikersnaam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Wachtwoord)</div>
+            <div class="value">@Html.PasswordFor(m => m.Wachtwoord, new { tabindex = 2 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Wachtwoord)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Wachtwoord)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.WachtwoordCheck)</div>
+            <div class="value">@Html.PasswordFor(m => m.WachtwoordCheck, new { tabindex = 3 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.WachtwoordCheck)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.WachtwoordCheck)</div>
+        </div>
+    </div>
+    <input type="submit" value="@Resources.LogIn" tabindex="3" style="position:absolute; top:-100px; left:-100px;" /><!--Handle Enter key-->
+    <p class="clear" />
+    @Html.IconActionLink(Resources.WachtwoordOpnieuwInstellen, "ResetWachtwoord", "Gebruiker", new { }, new { @class = "IconKnop", onclick = "document.ResetWachtwoord.submit(); return false;" }, "ok-sign")
+} 

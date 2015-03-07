@@ -1,0 +1,18 @@
+﻿@model GebeurtenisEditViewModel
+@{ ViewBag.Title = "Maak Gebeurtenis"; }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Maak", "Gelegenheid", FormMethod.Post, new { name = "FormGebeurtenis" }))
+{
+    @Html.Partial("MaakBewerk", Model)
+     @Html.HiddenFor(m => m.Gebeurtenis.TaalId)
+   <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormGebeurtenis.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Aanmaken</a>
+ 
+    <p class="clear"></p>
+}

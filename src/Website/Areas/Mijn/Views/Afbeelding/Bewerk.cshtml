@@ -1,0 +1,21 @@
+﻿@model AfbeeldingEditViewModel
+@{ ViewBag.Title = string.Format("Bewerk afbeelding {0}", Model.Afbeelding.Omschrijving); }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Bewerk", "Afbeelding", FormMethod.Post, new { name = "FormAfbeelding", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Afbeelding.Id)
+    @Html.HiddenFor(m => m.Afbeelding.Bestandsnaam)
+    @Html.HiddenFor(m => m.Afbeelding.ContentType)
+
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormAfbeelding.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Opslaan</a>
+ 
+    <p class="clear"></p>
+}

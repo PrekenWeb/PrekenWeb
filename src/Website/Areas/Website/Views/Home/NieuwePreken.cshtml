@@ -1,0 +1,107 @@
+﻿@using System.Globalization
+@using System.Xml
+@model NieuwePreken
+<div class="Zoeken">
+    <h2>Filter</h2>
+    <div class="SoortSelectieContainer">
+        <div class="SoortSelectie">
+            <ul>
+                <li>
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Preken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = !Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.AudioPreken))
+                </li>
+                <li>
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Leespreken, "NieuwePreken", new NieuwePreken() { LeesPreken = !Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.LeesPreken))
+                </li>
+                <li>
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Lezingen, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Lezingen))
+                </li>
+            </ul>
+            <p class="clear"></p>
+        </div>
+    </div>
+</div>
+<div class="NieuwePreken">
+    @{ string kop = NieuwePreken.GetKopLabel(Model.LeesPreken, Model.AudioPreken, Model.Lezingen);   }
+    <h2>@Html.ActionLink(kop, "Index", "Zoeken", new { Laatste = true }, new { })  </h2>
+    <table>
+
+        <tbody>
+            @foreach (ZoekresultaatItem regel in Model.Preken.OrderByDescending(p => p.Preek.DatumAangemaakt))
+            {
+                <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>   }>
+                    <td class="VerbergMobiel IconColumn">
+                        @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+                        {
+                            <meta itemprop="inAlbum" content="@regel.Predikant" />
+                            <meta itemprop="url" content="@Url.ContentAbsolute(Url.Action("Open", "Preek", new { Id = regel.Preek.Id }))" />
+
+                            if (regel.Preek.Duur.HasValue)
+                            {
+                                <meta itemprop="duration" content="@XmlConvert.ToString(regel.Preek.Duur.Value)" />
+                            }
+                        }
+                        <div class="@regel.UrlIcon tooltip" title="@regel.Preektype"></div>
+                    </td>
+                    <td @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemprop="name" </text>   }>
+                        @Html.ActionLink(regel.Boek, "Index", "Zoeken", new { BoekHoofdstukId = regel.Preek.BoekhoofdstukId }, new { data_linktype = "BoekHoofdstuk", data_relid = regel.Preek.BoekhoofdstukId, data_preek_id = regel.Preek.Id })
+                        @if (regel.ToonBoekAfkorting)
+                        {
+                            @Html.ActionLink(regel.Hoofdstuk, "Index", "Zoeken", new { BoekHoofdstukId = regel.Preek.BoekhoofdstukId, Hoofdstuk = regel.Hoofdstuk, data_preek_id = regel.Preek.Id }, new { })
+                            if (!string.IsNullOrEmpty(regel.Vers))
+                            {
+                                <span>@string.Format(" : {0}", regel.Vers)</span>
+                            }
+                            else if (!string.IsNullOrEmpty(regel.Preek.VanVers))
+                            {
+                                <span>@string.Format(" : {0}", regel.Preek.VanVers)</span>
+                            }
+                        }
+                        else if (regel.Preek.BoekHoofdstuk != null && regel.Preek.BoekHoofdstuk.Boek != null)
+                        {
+                            <span>(@regel.Preek.BoekHoofdstuk.Boek.Afkorting)</span>
+                            if (!string.IsNullOrEmpty(regel.Vers))
+                            {
+                                <span>@string.Format(" : {0}", regel.Vers)</span>
+                            }
+                        }
+                    </td>
+                    @{
+                        string datum = string.Format("{0:d}", regel.Datum.Value);
+                        datum = datum.Replace(regel.Datum.Value.Year.ToString(CultureInfo.CurrentUICulture), "");
+                        datum = datum.Substring(0, datum.Length - 1);
+
+                    }
+                    @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+                    {
+                        <td itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">@Html.ActionLink(regel.Predikant, "Index", "Zoeken", new { PredikantId = regel.Preek.PredikantId }, new { data_linktype = "Predikant", data_relid = regel.Preek.PredikantId, data_preek_id = regel.Preek.Id })</span></td>
+                        <td class="VerbergMobiel ResultaatColDatum" itemprop="datePublished" content="@string.Format("{0:yyyy-MM-dd}", regel.Preek.DatumAangemaakt)">@datum</td>
+                    }
+                    else
+                    {
+                        <td>@Html.ActionLink(regel.Predikant, "Index", "Zoeken", new { PredikantId = regel.Preek.PredikantId }, new { data_linktype = "Predikant", data_relid = regel.Preek.PredikantId, data_preek_id = regel.Preek.Id })</td>
+                        <td class="VerbergMobiel ResultaatColDatum">@datum</td>
+                    }
+                    <td class="ResultaatColCookie VerbergMobiel">
+                        @if (regel.Cookie != null && Request.IsAuthenticated)
+                        {
+                            <span title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, regel.Cookie.DateTime)" class="tooltip">
+                                <div class="fa fa-check"></div>
+                            </span>
+                        }
+                    </td>
+
+                    <td class="LastLinkColumn">
+                        <a href="@Url.Action(regel.UrlAction, regel.UrlController, new { Id = regel.Preek.Id })">
+                            @regel.UrlTekst
+                            <div class="fa fa-arrow-right"></div>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.IconActionLink(string.Format("{0} 50 {1}", Resources.Laatste, kop.ToLower()), "Index", "Zoeken", new { laatste = true }, new { Class = "IconKnop" }, "rss")
+    @Html.IconActionLink(Resources.Zoeken, "Index", "Zoeken", new { }, new { Class = "IconKnop" }, "search")
+    <p class="clear"></p>
+</div>

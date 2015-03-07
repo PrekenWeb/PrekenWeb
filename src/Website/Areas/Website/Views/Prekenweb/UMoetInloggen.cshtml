@@ -1,0 +1,47 @@
+﻿@model UMoetInloggen
+@{
+    ViewBag.Title = Resources.UMoetInloggen;
+}
+@section Styles {
+
+}
+<h1>@ViewBag.Title</h1>
+<p>@Resources.UMoetInloggenToelichting</p>
+@switch (Model.InlogReden)
+{
+    case InlogReden.Aantekeningen:
+        <p><span class="fa fa-pencil"></span> @Resources.InlogRedenAantekeningen</p>
+        break;
+    case InlogReden.Bladwijzer:
+        <p><span class="fa fa-bookmark"></span> @Resources.InlogRedenBladwijzer</p>
+        break;
+    case InlogReden.PreekVerderAfluisteren:
+    <p><span class="fa fa-play"></span> @Resources.InlogRedenPreekVerderAfluisteren</p>
+        break;
+    case InlogReden.ZoekOpdrachtBewaren:
+    <p><span class="fa fa-save"></span> @Resources.InlogRedenZoekOpdrachtBewaren</p>
+        break;
+    case InlogReden.RssFeed:
+    <p><span class="fa fa-rss"></span> @Resources.InlogRedenRssFeed</p>
+        break;
+}
+<ul class="UMoetInloggenUL">
+    <li>
+        <a href="@Url.Action("Inloggen", "Gebruiker", new { area="Mijn", returnUrl = Model.ReturnURL })">
+            <span class="fa fa-lock"></span>
+            @Resources.NuInloggen
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("Pagina", "Prekenweb", new { area = "Website", pagina = "Wat-is-mijn-PrekenWeb" })">
+            <span class="fa fa-question-circle"></span>
+            @Resources.WatIsMijnPW
+        </a>
+    </li>
+    <li>
+        <a href="#" onclick="$('.prekenwebPopup').dialog('close'); $('#InloggenMarkering').hide(); return false;">
+            <span class="fa fa-mail-reply"></span>
+            @Resources.SluitDezePopup
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,4 @@
+﻿@inherits WebViewPage<int?>
+@{ViewData.TemplateInfo.HtmlFieldPrefix = ViewData.TemplateInfo.HtmlFieldPrefix.Replace(".AfbeeldingId","");}
+
+@Html.DropDownList("AfbeeldingId", ComboboxDataSources.GetAfbeeldingValues(Model))

@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Prekenweb.Website.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PrekenFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/Content/Preken/</Value>
+    </Setting>
+    <Setting Name="AfbeeldingenFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/Content/Images/Uploads/</Value>
+    </Setting>
+    <Setting Name="SMTPServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="MailChimpAPIKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">***</Value>
+    </Setting>
+    <Setting Name="FacebookAppId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">***</Value>
+    </Setting>
+    <Setting Name="FacebookAppSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">***</Value>
+    </Setting>
+    <Setting Name="TwitterCustomerKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">***</Value>
+    </Setting>
+    <Setting Name="TwitterCustomerSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">***</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

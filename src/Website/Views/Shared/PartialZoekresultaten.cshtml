@@ -1,0 +1,237 @@
+﻿@using System.Xml
+@model Zoekresultaat
+
+@if (Model != null && Model.Items.Any())
+{
+    foreach (ZoekresultaatItem item in Model.Items)
+    {
+        <article class="ZoekResultaat" onclick="window.location = '@Url.Action(item.UrlAction, item.UrlController, new { Id = item.Preek.Id, area="Website" })';" @if (item.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>                     }>
+            @if (item.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+            {
+                <meta itemprop="url" content="@Url.ContentAbsolute(Url.Action("Open", "Preek", new { Id = item.Preek.Id }))" />
+                <meta itemprop="inAlbum" content="@item.Predikant" />
+
+                if (item.Preek.Duur.HasValue)
+                {
+                    <meta itemprop="duration" content="@XmlConvert.ToString(item.Preek.Duur.Value)" />
+                }
+            }
+            <div class="simpel">
+                <div class="Bladwijzer">
+                    @{
+            string cssClass = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? "fa-bookmark" : "fa-bookmark-o";
+            string tooltip = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? string.Format(Resources.BladwijzerGeplaatstOp, item.Cookie.BladwijzerGelegdOp) : Resources.BladwijzerPlaatsen;
+
+            <a href="#" data-active="@(item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue)" data-preekid="@item.Preek.Id" onclick="return prekenweb.bladwijzerClick(this,event)">
+                <span class="fa @cssClass tooltip" title="@tooltip" onmouseover="prekenweb.bladWijzerMouseOver" onmouseout="prekenweb.bladWijzerMouseOut"></span>
+            </a>
+                    }
+                </div>
+                @if (item.Cookie != null && item.Cookie.DateTime.HasValue)
+                {
+                    <div class="DatumBezocht tooltip" title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, item.Cookie.DateTime)">
+                        <span class="fa fa-history"></span>
+                        @item.Cookie.DateTime.Value.ToShortDateString()
+                    </div>
+                }
+                @*<div class="ZoekResultaatCookie">
+                        @if (item.Cookie != null)
+                        {
+                            <span title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, item.Cookie.DateTime)" class="tooltip">
+                                <span class="fa fa-check"></span>
+                            </span>
+                        }
+                    </div>*@
+                <div class="ZoekResultaatIcon VerbergMobiel">
+                    <span title="@item.Preektype" class="tooltip">
+                        <span class="@item.UrlIcon"></span>
+                    </span>
+                </div>
+                <div class="ZoekResultaatDatum tooltip" title="@string.Format(Resources.DatumPreekAangemaaktTooltip, item.Datum)" itemprop="datePublished" content="@string.Format("{0:g}", item.Preek.DatumAangemaakt)">
+                    @string.Format("{0:d}", item.Datum)
+                </div>
+                @if (!Model.ZoekOpdracht.PredikantId.HasValue)
+                {
+                    <div class="ZoekResultaatPredikant" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name">@Html.HiglightedActionLink(item.Predikant, "Index", "Zoeken", new { PredikantId = item.Preek.PredikantId, area = "Website" }, new { data_linktype = "Predikant", data_relid = item.Preek.PredikantId, data_preek_id = item.Preek.Id }, Model.ZoekOpdracht.Zoekterm)</span>
+                    </div>
+                }
+                @if (Model.Items.Any(zr => zr.Preek.BoekhoofdstukId.HasValue))
+                {
+                    <div class="ZoekResultaatBoek" itemprop="name">
+                        @Html.HiglightedActionLink(item.Boek, "Index", "Zoeken", new { BoekHoofdstukId = item.Preek.BoekhoofdstukId, area = "Website" }, new { data_linktype = "BoekHoofdstuk", data_relid = item.Preek.BoekhoofdstukId, data_preek_id = item.Preek.Id }, Model.ZoekOpdracht.Zoekterm)
+                        @if (item.ToonBoekAfkorting)
+                        {
+                            @Html.ActionLink(item.Hoofdstuk, "Index", "Zoeken", new { BoekHoofdstukId = item.Preek.BoekhoofdstukId, Hoofdstuk = item.Hoofdstuk, area="Website" }, new { })
+                            if (!string.IsNullOrEmpty(item.Vers))
+                            {
+                                <span>@string.Format(" : {0}", item.Vers)</span>
+                            }
+                            else if (!string.IsNullOrEmpty(item.Preek.VanVers))
+                            {
+                                <span>@string.Format(" : {0}", item.Preek.VanVers)</span>
+                            }
+                        }
+                        else if (item.Preek.BoekHoofdstuk != null && item.Preek.BoekHoofdstuk.Boek != null)
+                        {
+                            <span>(@item.Preek.BoekHoofdstuk.Boek.Afkorting)</span>
+                            if (!string.IsNullOrEmpty(item.Vers))
+                            {
+                                <span>@string.Format(" : {0}", item.Vers)</span>
+                            }
+                        }
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(item.Preek.LezingOmschrijving))
+                {
+                    <div class="ZoekResultaatLezingOmschrijving" itemprop="name">
+                        @*<span title="@Resources.Gebeurtenis" class="tooltip">
+                                <span class="fa fa-calendar"></span>
+                            </span>*@
+                        @Html.HighLight(item.Preek.LezingOmschrijving, Model.ZoekOpdracht.Zoekterm)
+                    </div>
+                }
+                @if (item.Preek.GebeurtenisId.HasValue)
+                {
+                    <div class="ZoekResultaatGebeurtenis VerbergMobiel">
+                        <span title="@Resources.Gebeurtenis" class="tooltip">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                        @Html.ActionLink(item.Gebeurtenis, "Index", "Zoeken", new { GebeurtenisId = item.Preek.GebeurtenisId, area = "Website" }, new { data_linktype = "Gebeurtenis", data_relid = item.Preek.GebeurtenisId, data_preek_id = item.Preek.Id })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(item.Serie))
+                {
+                    <div class="ZoekResultaatSerie VerbergMobiel">
+                        <span title="@Resources.Serie" class="tooltip">
+                            <span class="fa fa-list-ol"></span>
+                        </span>
+                        @Html.ActionLink(item.Serie, "Index", "Zoeken", new { SerieId = item.Preek.SerieId, area = "Website" }, new { data_linktype = "Serie", data_relid = item.Preek.SerieId, data_preek_id = item.Preek.Id })
+                    </div>
+                }
+                <p class="clear"></p>
+            </div>
+            <div class="geavanceerd">
+                <div class="ZoekResultaatLink">
+                    <a href="@Url.Action(item.UrlAction, item.UrlController, new { Id = item.Preek.Id, area = "Website" })" title="@item.Preek.GetPreekTitel()">
+                        @item.UrlTekst
+                        <span class="fa fa-arrow-right"></span>
+                    </a>
+                </div>
+                @if (item.Preek.LezingCategorieId.HasValue)
+                {
+                    <div class="ZoekResultaatLezingCategorie">
+                        <span title="@Resources.LezingCategorie" class="tooltip">
+                            <span class="fa fa-volume-up"></span>
+                        </span>
+                        @Html.ActionLink(item.LezingCategorie, "Index", "Zoeken", new { LezingCategorieId = item.Preek.LezingCategorieId, area = "Website" }, new { })
+                    </div>
+                }
+                @if (item.Preek.GebeurtenisId.HasValue)
+                {
+                    <div class="ZoekResultaatGebeurtenis">
+                        <span title="@Resources.Gebeurtenis" class="tooltip">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                        @Html.ActionLink(item.Gebeurtenis, "Index", "Zoeken", new { GebeurtenisId = item.Preek.GebeurtenisId, area = "Website" }, new { data_linktype = "Gebeurtenis", data_relid = item.Preek.GebeurtenisId, data_preek_id = item.Preek.Id })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(item.Serie))
+                {
+                    <div class="ZoekResultaatSerie">
+                        <span title="@Resources.Serie" class="tooltip">
+                            <span class="fa fa-list-ol"></span>
+                        </span>
+                        @Html.ActionLink(item.Serie, "Index", "Zoeken", new { SerieId = item.Preek.SerieId, area = "Website" }, new { data_linktype = "Serie", data_relid = item.Preek.SerieId, data_preek_id = item.Preek.Id })
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(item.Preek.ThemaOmschrijving))
+                {
+                    <div class="ZoekResultaatThema VerbergMobiel">
+                        <span title="@Resources.Thema" class="tooltip">
+                            <span class="fa fa-quote-left"></span>
+                        </span>
+                        @Html.HighLight(string.Format("{0}", item.Preek.ThemaOmschrijving).Trim(), Model.ZoekOpdracht.Zoekterm)
+                    </div>
+                }
+                <p class="GeavanceerdClearer"></p>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.ZoekOpdracht.Zoekterm))
+            {
+                <div class="zoekresultaat">
+                    @if (string.Format("{0}", item.Preek.BijbeltekstOmschrijving).IndexOf(Model.ZoekOpdracht.Zoekterm, 0, StringComparison.CurrentCultureIgnoreCase) != -1)
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.BijbeltekstOmschrijving" class="tooltip">
+                                <span class="fa fa-align-left"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.GetShortBijbelTekst(Model.ZoekOpdracht.Zoekterm), Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Punt1).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.Punt1" class="tooltip">
+                                <span class="fa fa-reorder"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Punt1, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Punt2).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.Punt2" class="tooltip">
+                                <span class="fa fa-reorder"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Punt2, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Punt3).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.Punt3" class="tooltip">
+                                <span class="fa fa-reorder"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Punt3, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Punt4).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.Punt4" class="tooltip">
+                                <span class="fa fa-reorder"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Punt4, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Punt5).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.Punt5" class="tooltip">
+                                <span class="fa fa-reorder"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Punt5, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                    @if (string.Format("{0}", item.Preek.Informatie).Contains(Model.ZoekOpdracht.Zoekterm))
+                    {
+                        <div class="ZoekResultaatBijbeltekst">
+                            <span title="@Resources.OverigeInformatie" class="tooltip">
+                                <span class="fa fa-info-sign"></span>
+                            </span>
+                            @Html.HighLight(item.Preek.Informatie, Model.ZoekOpdracht.Zoekterm)
+                        </div>
+                    }
+                </div>
+            }
+        </article>
+    }
+
+}
+else
+{
+    <text>
+        <br />
+        <span class="GeenZoekresultaten">@Resources.GeenResultaten</span>
+    </text>
+} 

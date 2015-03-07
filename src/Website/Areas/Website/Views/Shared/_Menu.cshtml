@@ -1,0 +1,129 @@
+﻿<div class="TelfoonMenu">
+    <select onchange="window.location=this.value;">
+        <option>@Resources.Navigatie</option>
+        <optgroup label="PrekenWeb">
+            <option value="@Url.Action("Index", "Home", new { Area = "Website" })">@Resources.MenuHome</option>
+            <option value="@Url.Action("Contact", "PrekenWeb", new { Area = "Website" })">@Resources.MenuContact</option>
+            <option value="@Url.Action("Index", "Zoeken", new { Laatste = true, Area = "Website" })">@Resources.Zoeken</option>
+            <option value="@Url.Action("Index", "Zoeken", new { Laatste = true, Area = "Website", AudioPreken = true, LeesPreken = true, Lezingen = true })">@Resources.NieuwePreken</option>
+        </optgroup>
+        <optgroup label="@Resources.PreekType">
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Area = "Website" })">@Resources.Preken</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Area = "Website" })">@Resources.Leespreken</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Area = "Website" })">@Resources.Lezingen</option>
+        </optgroup>
+        <optgroup label="@Resources.Bladeren">
+            <option value="@Url.Action("Boek", "Zoeken", new { Area = "Website" })">@Resources.BijbelBoeken</option>
+            <option value="@Url.Action("Predikant", "Zoeken", new { Area = "Website" })">@Resources.Predikanten</option>
+            <option value="@Url.Action("Gelegenheid", "Zoeken", new { Area = "Website" })">@Resources.Gebeurtenissen</option>
+            <option value="@Url.Action("Series", "Zoeken", new { Area = "Website" })">@Resources.Series</option>
+        </optgroup>
+        <optgroup label="@Resources.MijnPrekenweb">
+            @if (Request.IsAuthenticated)
+            {
+                <option value="@Url.Action("MijnGegevens", "Gebruiker", new { Area = "Mijn" })">@Resources.MijnGegevens</option>
+                <option value="@Url.Action("DoorMijBeluisterd", "Bladwijzer", new { Area = "Mijn" })">@Resources.DoorMijBeluisterd</option>
+                <option value="@Url.Action("MetBladwijzer", "Bladwijzer", new { Area = "Mijn" })">@Resources.MetBladwijzer</option>
+                <option value="@Url.Action("Uitloggen", "Gebruiker", new { Area = "Mijn" })">@Resources.Uitloggen</option>
+                @Html.SecuredActionLinkOption(Resources.PreekMaken, "Maak", "Preek", new { Area = "Mijn" }, new { }, "PreekToevoegen")
+                @Html.SecuredActionLinkOption(Resources.Gebruikers, "Index", "Gebruiker", new { Area = "Mijn" }, new { }, "Gebruikers")
+                @Html.SecuredActionLinkOption(Resources.Paginas, "Index", "Pagina", new { Area = "Mijn" }, new { }, "Pagina")
+                @Html.SecuredActionLinkOption(Resources.Bestandsbeheer, "Bestandsbeheer", "Home", new { Area = "Mijn" }, new { }, "Bestandsbeheer,BestandsbeheerPrekenWeb")
+                @Html.SecuredActionLinkOption("Inbox", "Index", "Home", new { Area = "Mijn" }, new { }, "Inbox")
+                @Html.SecuredActionLinkOption(Resources.Stamgegevens, "Stamgegevens", "Home", new { Area = "Mijn" }, new { }, "Stamgegevens")
+                @Html.SecuredActionLinkOption(Resources.Afbeeldingen, "Index", "Afbeelding", new { Area = "Mijn" }, new { }, "Spotlight")
+                @Html.SecuredActionLinkOption(Resources.SpotlightItems, "Index", "Spotlight", new { Area = "Mijn" }, new { }, "Spotlight")
+                @Html.SecuredActionLinkOption(Resources.OngepubliceerdePreken, "NogTePubliceren", "Preek", new { Area = "Mijn" }, new { }, "PreekToevoegen,PreekFiatteren")
+            }
+            else
+            {
+                <option value="@Url.Action("Inloggen", "Gebruiker", new { Area = "Mijn" })">@Resources.Inloggen</option>
+                <option value="@Url.Action("Registreer", "Gebruiker", new { Area = "Mijn" })">@Resources.Registreren</option>
+            }
+        </optgroup>
+        @if (ViewBag.Taalkeuze != null && (bool)ViewBag.Taalkeuze)
+        {
+            <optgroup label="@Resources.Taal">
+                <option value="@Url.Action("WisselTaal", "Prekenweb", new { Area = "Website", taal = "en", returnUrl = Request.RawUrl })">@Resources.Engels</option>
+                <option value="@Url.Action("WisselTaal", "Prekenweb", new { Area = "Website", taal = "nl", returnUrl = Request.RawUrl })">@Resources.Nederlands</option>
+            </optgroup>
+        }
+    </select>
+</div>
+<div id="WebsiteMenu">
+
+    <div id="PrekenwebTabMijn">
+        @{
+            string linkText = Request.IsAuthenticated ? User.Identity.Name : Resources.MijnPrekenweb;
+        }
+        @Html.IconActionLink(linkText, "Index", "Home", new { area = "Mijn" }, new { onclick = "prekenweb.prekenWebMenu(); return false;" }, "chevron-down")
+        <div id="InloggenMarkering">
+            <span class="fa fa-mail-forward"></span>
+        </div>
+    </div>
+
+    @if ((ViewBag.Taalkeuze != null && (bool)ViewBag.Taalkeuze) && !Request.RawUrl.Contains("/Mijn"))
+    {
+        <ul id="taalkeuze">
+            <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "en", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselEN"><span>Change to English</span></a></li>
+            <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "nl", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselNL"><span>Wissel naar Nederlands</span></a></li>
+        </ul>
+    }
+
+    <ul class="hoofdmenuCol VerbergTelefoon hoofdmenuColLarge MijnMenu">
+        @if (Request.IsAuthenticated)
+        {
+            <li>@Html.IconActionLink(Resources.Terug, "Index", "Home", new { area = "Website" }, new { }, "mail-reply")</li>
+            <li>@Html.IconActionLink(Resources.MijnGegevens, "MijnGegevens", "Gebruiker", new { area = "Mijn" }, new { }, "tag")</li>
+            <li>@Html.IconActionLink(Resources.Uitloggen, "Uitloggen", "Gebruiker", new { area = "Mijn" }, new { }, "lock")</li>
+            @Html.SecuredActionLinkLI(Resources.Bestandsbeheer, "Bestandsbeheer", "Home", new { Area = "Mijn" }, new { }, "Bestandsbeheer,BestandsbeheerPrekenWeb", "folder-open")
+        }
+        else
+        {
+            <li>@Html.IconActionLink(Resources.Inloggen, "Inloggen", "Gebruiker", new { area = "Mijn" }, new { }, "key")</li>
+            <li>@Html.IconActionLink(Resources.Registreren, "Registreer", "Gebruiker", new { area = "Mijn" }, new { }, "edit")</li>
+            <li>@Html.IconActionLink(Resources.WachtwoordVergeten, "WachtwoordVergeten", "Gebruiker", new { area = "Mijn" }, new { }, "unlock")</li>
+        }
+    </ul>
+    <ul class="hoofdmenuCol VerbergTelefoon DefaultMenu">
+        <li>@Html.ActionLink(Resources.MenuHome, "Index", "Home", new { Area = "Website" }, new { })</li>
+        <li>@Html.ActionLink(Resources.MenuContact, "Contact", "PrekenWeb", new { Area = "Website" }, new { })</li>
+        <li>@Html.ActionLink(Resources.Zoeken, "Index", "Zoeken", new { Area = "Website" }, new { Id = "ZoekenLink" })</li>
+        <li>@Html.ActionLink(Resources.NieuwePreken, "Index", "Zoeken", new { Laatste = true, Area = "Website", AudioPreken = true, LeesPreken = true, Lezingen = true }, new { })</li>
+    </ul>
+    <ul class="hoofdmenuCol VerbergTelefoon DefaultMenu">
+        <li>@Html.IconActionLink(Resources.Preken, "Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Area = "Website" }, new { }, "music") </li>
+        <li>@Html.IconActionLink(Resources.Leespreken, "Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Area = "Website" }, new { }, "font") </li>
+        <li>@Html.IconActionLink(Resources.Lezingen, "Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Area = "Website" }, new { }, "volume-up") </li>
+    </ul>
+    <ul class="hoofdmenuCol hoofdmenuColSmall VerbergTelefoon DefaultMenu">
+        <li>@Html.ActionLink(Resources.BijbelBoeken, "Boek", "Zoeken", new { Area = "Website" }, new { }) </li>
+        <li>@Html.ActionLink(Resources.Predikanten, "Predikant", "Zoeken", new { Area = "Website" }, new { }) </li>
+        <li>@Html.ActionLink(Resources.Gebeurtenissen, "Gelegenheid", "Zoeken", new { Area = "Website" }, new { }) </li>
+        <li>@Html.ActionLink(Resources.Series, "Series", "Zoeken", new { Area = "Website" }, new { }) </li>
+    </ul>
+    @*<ul class="hoofdmenuCol hoofdmenuColSmall VerbergTelefoon MijnMenu ExtraTerugKnopCol" >
+            <li>@Html.IconActionLink(Resources.Terug, "Index", "Home", new { Area = "Website" }, new { onclick = "prekenweb.prekenWebMenu(false); return false;" }, "arrow-circle-left") </li>
+        </ul>*@
+    <ul class="hoofdmenuCol VerbergTelefoon hoofdmenuColLarge MijnMenu">
+        @Html.SecuredActionLinkLI(Resources.OngepubliceerdePreken, "NogTePubliceren", "Preek", new { Area = "Mijn" }, new { }, "PreekToevoegen,PreekFiatteren", "clock-o")
+        @if (Request.IsAuthenticated)
+        {
+            <li>@Html.IconActionLink(Resources.DoorMijBeluisterd, "DoorMijBeluisterd", "Bladwijzer", new { area = "Mijn" }, new { }, "history")</li>
+            <li>@Html.IconActionLink(Resources.MetBladwijzer, "MetBladwijzer", "Bladwijzer", new { area = "Mijn" }, new { }, "bookmark")</li>
+            <li>@Html.IconActionLink(Resources.OpgeslagenZoekOpdrachten, "OpgeslagenZoekOpdrachten", "ZoekOpdracht", new { area = "Mijn" }, new { }, "star-o")</li>
+        }
+    </ul>
+    <ul class="hoofdmenuCol VerbergTelefoon MijnMenu">
+        @Html.SecuredActionLinkLI(Resources.PreekMaken, "Maak", "Preek", new { Area = "Mijn" }, new { }, "PreekToevoegen", "plus")
+       @Html.SecuredActionLinkLI(Resources.Gebruikers, "Index", "Gebruiker", new { Area = "Mijn" }, new { }, "Gebruikers", "group")
+        @Html.SecuredActionLinkLI(Resources.Paginas, "Index", "Pagina", new { Area = "Mijn" }, new { }, "Pagina", "font")
+        @Html.SecuredActionLinkLI("Inbox", "Index", "Home", new { Area = "Mijn" }, new { }, "Inbox", "envelope")
+    </ul>
+    <ul class="hoofdmenuCol VerbergTelefoon MijnMenu">
+        @Html.SecuredActionLinkLI(Resources.Stamgegevens, "Stamgegevens", "Home", new { Area = "Mijn" }, new { }, "Stamgegevens", "align-justify")
+        @Html.SecuredActionLinkLI(Resources.Afbeeldingen, "Index", "Afbeelding", new { Area = "Mijn" }, new { }, "Spotlight", "picture-o")
+        @Html.SecuredActionLinkLI(Resources.SpotlightItems, "Index", "Spotlight", new { Area = "Mijn" }, new { }, "Spotlight", "exclamation")
+    </ul>
+    <div class="clear"></div>
+</div>

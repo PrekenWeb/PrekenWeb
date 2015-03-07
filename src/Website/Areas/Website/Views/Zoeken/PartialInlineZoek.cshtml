@@ -1,0 +1,14 @@
+﻿@model PreekZoeken
+@{ 
+    //ViewBag.Title = Resources.ZoekenKop; 
+    ViewBag.Title = Model.Title;
+}
+<div class="InlineZoekContainer">
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("PartialZoekresultaten", Model.Zoekresultaat)
+    <p class="clear"></p>
+    <div class="floatright">
+        @Html.IconActionLink(Resources.VerderZoeken, "Index", "Zoeken", new { Zoekterm = Model.Zoekterm }, new { Class = "IconKnop" }, "arrow-right")
+    </div>
+    <p class="clear"></p><br />
+</div>

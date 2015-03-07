@@ -1,0 +1,55 @@
+﻿@model RegistreerViewModel
+@{     
+    ViewBag.Title = Model.TekstPagina.Kop;
+}
+<h1>@ViewBag.Title</h1>
+@Html.Raw(Model.TekstPagina.Tekst)
+@using (Html.BeginForm("Registreer", "Gebruiker", FormMethod.Post, new { name = "FormGebruiker" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Naam)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Naam, new { tabindex = 1 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Naam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Naam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Gebruikersnaam)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Gebruikersnaam, new { tabindex = 2, onblur = " if (this.value.indexOf('@') > -1) { Email.value = this.value; } " })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Gebruikersnaam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Gebruikersnaam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Email)</div>
+            <div class="value">@Html.TextBoxFor(m => m.Email, new { tabindex = 3 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Email)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Email)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Wachtwoord)</div>
+            <div class="value">@Html.PasswordFor(m => m.Wachtwoord, new { tabindex = 4 })</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Wachtwoord)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Wachtwoord)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <div class="ColumnMax">
+        <div class="field">
+            <div class="label"> </div>
+            <div class="value">@Html.Captcha("Refresh", Resources.CaptchaOvertypen, 5, null)</div>
+            <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug
+    </a>
+    <a href="#" onclick="document.FormGebruiker.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Aanmaken
+    </a>
+
+    <p class="clear"></p>
+}

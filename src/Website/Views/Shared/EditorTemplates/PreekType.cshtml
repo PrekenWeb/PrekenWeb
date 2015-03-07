@@ -1,0 +1,6 @@
+﻿@inherits WebViewPage<int?>
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "";
+ }
+
+@Html.DropDownList("PreekTypeId", ComboboxDataSources.GetPreektypeValues(Model), new { onChange = "prekenweb.changePreekType(this.value);", })

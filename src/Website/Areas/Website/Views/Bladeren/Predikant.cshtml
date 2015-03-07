@@ -1,0 +1,25 @@
+﻿@model BladerenPredikant
+@{ 
+    ViewBag.Title = Resources.BladerenPredikant;
+    string lastFirstLetter = string.Empty;
+}
+<h2>@ViewBag.Title</h2>
+
+<ul class="StandaardLijst">
+    @foreach (Predikant predikant in Model.Predikanten)
+    {
+        if (lastFirstLetter != predikant.Achternaam.Substring(0, 1).ToUpper())
+        { 
+            <li><h3 style="padding-top:20px;">@predikant.Achternaam.Substring(0, 1).ToUpper()</h3></li>
+        }
+        <li><a href="@Url.Action("Index", "Bladeren", new { PredikantId = predikant.Id })">
+            <div class="icon-arrow-right"></div>@predikant.VolledigeNaam</a></li>
+        
+        lastFirstLetter = predikant.Achternaam.Substring(0, 1).ToUpper();
+    }
+</ul>
+
+
+@section scripts{
+
+}

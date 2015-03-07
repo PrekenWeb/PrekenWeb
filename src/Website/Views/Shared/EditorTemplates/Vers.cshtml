@@ -1,0 +1,26 @@
+﻿@inherits WebViewPage<int?>
+@{
+    string fieldname = ViewData.TemplateInfo.GetFullHtmlFieldId("") + "_display";
+}
+@Html.HiddenFor(m => m)
+<script type="text/javascript">
+    function @string.Format("kiesKlik{0}(sender)", fieldname) {
+
+        var boekAddon = "&Boek=" + document.getElementById('BoekhoofdstukId').options[document.getElementById('BoekhoofdstukId').selectedIndex].innerHTML;
+        var hoofdstukAddon = "&Hoofdstuk=" + document.getElementById('Hoofdstuk').value;
+        var url = '@Url.Action("KiesVers","Preek", new { veldnaam = ViewData.TemplateInfo.GetFullHtmlFieldId("") })' + boekAddon + hoofdstukAddon;
+        prekenweb.toonVerskiezer(url);
+     
+        document.getElementById('AutomatischeTekstenTrue').checked = true;
+        document.getElementById('AutomatischeTekstenFalse').checked = false; 
+        prekenweb.automatischeTekstenChanged();
+    }
+    function @string.Format("wisKlik{0}(sender)", fieldname) {
+        document.getElementById('@ViewData.TemplateInfo.GetFullHtmlFieldId("")').value = '';
+        document.getElementById('@fieldname').innerHTML = '';
+        prekenweb.updateAutomatischeBijbeltekst();
+    }
+</script>
+<span id="@fieldname" style="float:left; padding-right:10px;  ">@ViewData["VersOmschrijving"]</span>
+<input type="button" onclick="@string.Format("kiesKlik{0}(this);", fieldname)" value="@Resources.Kies" style="width:70px; min-width:70px; float:left; ">
+<input type="button" onclick="@string.Format("wisKlik{0}(this);", fieldname)" value="@Resources.Wis" style="width:50px;  min-width:50px; float:left; ">

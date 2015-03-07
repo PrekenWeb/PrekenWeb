@@ -1,0 +1,12 @@
+﻿@using System.Text.RegularExpressions
+@model string
+@{
+    string bijbeltekstOmschrijving = Model;
+    //bijbeltekstOmschrijving = bijbeltekstOmschrijving.Replace("\n", "<br/>");
+    bijbeltekstOmschrijving = string.Format("<p>{0}</p>", Regex.Replace(bijbeltekstOmschrijving, @"\[(\d+)\]", "</p><p><span class='versnummer'>$1</span>"));
+    bijbeltekstOmschrijving = bijbeltekstOmschrijving.Replace("<p></p>", "");
+    bijbeltekstOmschrijving = Regex.Replace(bijbeltekstOmschrijving, @"[ ]{2,}", " ");
+    bijbeltekstOmschrijving = bijbeltekstOmschrijving.Replace("\t", "");
+    bijbeltekstOmschrijving = bijbeltekstOmschrijving.Trim();
+    ViewContext.Writer.Write(bijbeltekstOmschrijving);
+}

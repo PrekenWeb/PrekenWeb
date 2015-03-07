@@ -1,0 +1,77 @@
+﻿using Prekenweb.Models;
+using Prekenweb.Models.Identity;
+using Prekenweb.Website.Areas.Mijn.Models;
+using Prekenweb.Website.Controllers;
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
+
+namespace Prekenweb.Website.Areas.Mijn.Controllers
+{
+    [Authorize(Roles = "Stamgegevens")]
+    public class GelegenheidController : ApplicationController
+    {
+        private readonly IPrekenwebContext<Gebruiker> _context;
+
+        public GelegenheidController(IPrekenwebContext<Gebruiker> context)
+        {
+            _context = context;
+        } 
+
+        public ActionResult Index()
+        {
+            return View(new GebeurtenisIndexViewModel
+            {
+                Gebeurteniss = _context.Gebeurtenis.Where(g => g.TaalId == TaalId).OrderBy(g => g.Sortering).ThenBy(g => g.Omschrijving).ToList()
+            });
+        }
+
+        public ActionResult Verwijder(int id)
+        {
+            var gebeurtenis = _context.Gebeurtenis.Single(g => g.Id == id);
+            _context.Gebeurtenis.Remove(gebeurtenis);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Bewerk(int id)
+        {
+            var gebeurtenis = _context.Gebeurtenis.Single(g => g.Id == id);
+            return View(new GebeurtenisEditViewModel
+            {
+                Gebeurtenis = gebeurtenis
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Bewerk(GebeurtenisEditViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View(viewModel);
+
+            _context.Entry(viewModel.Gebeurtenis).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return View(viewModel);
+        }
+
+        public ActionResult Maak()
+        {
+            return View(new GebeurtenisEditViewModel
+            {
+                Gebeurtenis = new Gebeurtenis { TaalId = TaalId }
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Maak(GebeurtenisEditViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View(viewModel);
+
+            _context.Gebeurtenis.Add(viewModel.Gebeurtenis);
+            _context.SaveChanges();
+
+            return RedirectToAction("Bewerk", new { viewModel.Gebeurtenis.Id });
+        }
+    }
+}

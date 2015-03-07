@@ -1,0 +1,18 @@
+﻿@model PredikantEditViewModel
+@{ ViewBag.Title = "Maak predikant"; }
+
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Maak", "Predikant", FormMethod.Post, new { name = "FormPredikant" }))
+{
+    @Html.Partial("MaakBewerk", Model)
+    @Html.HiddenFor(m => m.Predikant.TaalId)
+    <p class="clear"></p>
+    <a href="@Url.Action("Index")" class="IconKnop">
+        <div class="fa fa-arrow-left"></div>
+        @Resources.Terug</a>
+    <a href="#" onclick="document.FormPredikant.submit(); return false;" class="IconKnop">
+        <div class="fa fa-save"></div>
+        @Resources.Aanmaken</a>
+ 
+    <p class="clear"></p>
+}

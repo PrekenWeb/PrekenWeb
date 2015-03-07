@@ -1,0 +1,53 @@
+﻿@model VerbeteringDoorgeven
+@{
+    ViewBag.Title = Model.TekstPagina.Kop;
+}
+@section Styles {
+
+}
+<h2>@ViewBag.Title</h2>
+@Html.Raw(Model.TekstPagina.Tekst)
+
+@if (Model.Verzonden)
+{
+    <p>In inzending is succesvol verzonden, wij nemen zo spoedig mogelijk contact met u op!</p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Naam)</div>
+            <div class="value">@Html.EditorFor(m => m.Naam)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Naam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Naam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Email)</div>
+            <div class="value">@Html.EditorFor(m => m.Email)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Email)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Email)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Onderwerp)</div>
+            <div class="value">@Html.EditorFor(m => m.Onderwerp)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Onderwerp)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Onderwerp)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <div class="ColumnMax">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Tekst)</div>
+            <div class="value">@Html.EditorFor(m => m.Tekst)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Tekst)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Tekst)</div>
+        </div>
+    </div>
+    <p class="clear"></p>
+    <a href="#" onclick="document.forms[0].submit(); return false;" class="IconKnop">
+        <div class="icon-thumbs-up"></div>
+        @Resources.Verstuur</a>
+    }
+}

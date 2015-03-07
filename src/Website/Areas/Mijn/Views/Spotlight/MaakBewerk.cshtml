@@ -1,0 +1,46 @@
+﻿@model SpotlightEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnL">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.Titel)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.Titel)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.Titel)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.Titel)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.Subtitel)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.Subtitel)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.Subtitel)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.Subtitel)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.LinkTitel)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.LinkTitel)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.LinkTitel)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.LinkTitel)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.Url)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.Url)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.Url)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.Url)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.NieuwVenster)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.NieuwVenster)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.NieuwVenster)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.NieuwVenster)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.AfbeeldingId)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.AfbeeldingId)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.AfbeeldingId)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.AfbeeldingId)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Spotlight.Sortering)</div>
+        <div class="value">@Html.EditorFor(m => m.Spotlight.Sortering)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Spotlight.Sortering)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Spotlight.Sortering)</div>
+    </div> 
+</div>

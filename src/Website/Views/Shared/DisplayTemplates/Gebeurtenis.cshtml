@@ -1,0 +1,5 @@
+﻿@inherits WebViewPage<Gebeurtenis>
+@if (Model != null)
+{ 
+    @Html.ActionLink(Model.Omschrijving, "Index", "Zoeken", new { GebeurtenisId = Model.Id }, new { })
+}

@@ -1,0 +1,236 @@
+﻿using AutoMapper;
+using Prekenweb.Models;
+using Prekenweb.Models.Identity;
+using Prekenweb.Models.Repository;
+using Prekenweb.Models.Services;
+using Prekenweb.Website.Controllers;
+using Prekenweb.Website.Lib;
+using Prekenweb.Website.ViewModels;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI;
+
+namespace Prekenweb.Website.Areas.Website.Controllers
+{
+    [OutputCache(Duration = 3600, VaryByParam = "*", VaryByCustom = "userName", Location = OutputCacheLocation.Server)] // 1 uur
+    public class ZoekenController : ApplicationController
+    {
+        private readonly IPrekenwebContext<Gebruiker> _context;
+        private readonly IZoekenRepository _zoekenRepository;
+        private readonly IGebruikerRepository _gebruikerRepository;
+        private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenwebCookie _prekenwebCookie;
+
+        public ZoekenController(IPrekenwebContext<Gebruiker> context,
+                                IPrekenwebCookie cookie,
+                                IZoekenRepository zoekenRepository,
+                                IGebruikerRepository gebruikerRepository,
+                                IHuidigeGebruiker huidigeGebruiker)
+        {
+            _context = context;
+            _zoekenRepository = zoekenRepository;
+            _gebruikerRepository = gebruikerRepository;
+            _huidigeGebruiker = huidigeGebruiker;
+            _prekenwebCookie = cookie;
+            ViewBag.Taalkeuze = true;
+        }
+
+        public async Task<ActionResult> Index(PreekZoeken viewModel)
+        {
+            Session["ZoekParameters"] = Request.QueryString;
+
+            UpdatePrekenwebCookie(viewModel);
+
+            viewModel = await GetPreekZoekenViewModel(viewModel, 50);
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> ZoekOpdrachtBewaren(PreekZoeken viewModel)
+        {
+            viewModel.AudioPreken = _prekenwebCookie.FilterPreken;
+            viewModel.LeesPreken = _prekenwebCookie.FilterLeesPreken;
+            viewModel.Lezingen = _prekenwebCookie.FilterLezingen;
+
+            viewModel = await GetPreekZoekenViewModel(viewModel, 50);
+            Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
+            var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
+            zoekOpdracht.TaalId = TaalId;
+            zoekOpdracht.GebruikerId = _huidigeGebruiker.Id;
+
+            _context.ZoekOpdrachten.Add(zoekOpdracht);
+            await _context.SaveChangesAsync();
+
+            if (Request.IsAjaxRequest())
+            {
+                return Json(zoekOpdracht.PubliekeSleutel, JsonRequestBehavior.AllowGet);
+            }
+
+            return RedirectToAction("Index", viewModel);
+        }
+
+        public async Task<ActionResult> PartialInlineZoek(PreekZoeken viewModel)
+        {
+            UpdatePrekenwebCookie(viewModel);
+            viewModel = await GetPreekZoekenViewModel(viewModel, 6);
+
+            return PartialView("PartialInlineZoek", viewModel);
+        }
+
+        private async Task<PreekZoeken> GetPreekZoekenViewModel(PreekZoeken viewModel, int pagesize)
+        {
+            ViewBag.Taalkeuze = !(viewModel.PredikantId.HasValue || viewModel.GebeurtenisId.HasValue || viewModel.BoekId.HasValue || viewModel.BoekHoofdstukId.HasValue || viewModel.SerieId.HasValue || viewModel.GemeenteId.HasValue || viewModel.LezingCategorieId.HasValue);
+
+            viewModel.TaalId = TaalId;
+            if (viewModel.Pagina == null) viewModel.Pagina = 1;
+
+            // Tekst velden vullen als er een ID mee komt
+            RouteValueDictionary redirectRouteValues;
+            viewModel.VulTekstVeldenOpBasisVanIDs(_context, out redirectRouteValues);
+            if (redirectRouteValues != null) Response.RedirectToRoutePermanent("MultiCultiRouteIncorrectDomain", redirectRouteValues);
+
+            // ViewModel values kopieren naar instantie van ZoekOpdracht 
+            Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
+            var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
+            zoekOpdracht.GebruikerId = _huidigeGebruiker.Id;
+
+            var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);
+            viewModel.Zoekresultaat = await zoekService.ZoekOpdrachtUitvoeren(zoekOpdracht, (viewModel.Pagina.Value * pagesize) - pagesize, pagesize, true);
+
+            // Waardes uit de uitgevoerde zoekopdracht weer terugkopieren naar het viewmodel
+            Mapper.CreateMap<ZoekOpdracht, PreekZoeken>();
+            Mapper.Map(zoekOpdracht, viewModel);
+
+            viewModel.AantalResultaten = viewModel.Zoekresultaat.AantalResultaten;
+            viewModel.LezingCatorieen = (!viewModel.LeesPreken && !viewModel.AudioPreken && viewModel.Lezingen) ? await _context.LezingCategories.ToListAsync() : null;
+
+            return viewModel;
+        }
+
+        private void UpdatePrekenwebCookie(PreekZoeken viewModel)
+        {
+            if (Request.QueryString["AudioPreken"] == null) viewModel.AudioPreken = _prekenwebCookie.FilterPreken;
+            else if (_prekenwebCookie != null && _prekenwebCookie.FilterPreken != viewModel.AudioPreken) _prekenwebCookie.FilterPreken = viewModel.AudioPreken;
+
+            if (Request.QueryString["LeesPreken"] == null) viewModel.LeesPreken = _prekenwebCookie.FilterLeesPreken;
+            else if (_prekenwebCookie != null && _prekenwebCookie.FilterLeesPreken != viewModel.LeesPreken) _prekenwebCookie.FilterLeesPreken = viewModel.LeesPreken;
+
+            if (Request.QueryString["Lezingen"] == null) viewModel.Lezingen = _prekenwebCookie.FilterLezingen;
+            else if (_prekenwebCookie != null && _prekenwebCookie.FilterLezingen != viewModel.Lezingen) _prekenwebCookie.FilterLezingen = viewModel.Lezingen;
+        }
+
+        public ActionResult Boek()
+        {
+            return View(new ZoekenBoek
+            {
+                Hoofdstukken = _context
+                    .BoekHoofdstuks
+                    .Include(x => x.Boek)
+                    .Where(b => b.Boek.TaalId == TaalId)
+                    .ToList()
+            });
+        }
+
+        public ActionResult Predikant()
+        {
+            return View(new ZoekenPredikant
+            {
+                Predikanten = _context
+                    .Predikants.OrderBy(p => p.Achternaam)
+                    .Where(p => p.TaalId == TaalId)
+                    .ToList()
+            });
+        }
+
+        public ActionResult Gelegenheid()
+        {
+            return View(new ZoekenGebeurtenis
+            {
+                Gebeurtenissen = _context
+                        .Gebeurtenis
+                        .OrderBy(g => g.Sortering)
+                        .ThenBy(g => g.Omschrijving)
+                        .Where(g => g.TaalId == TaalId)
+                        .ToList()
+            });
+        }
+
+        public ActionResult Series()
+        {
+            return View(new ZoekenSerie
+            {
+                Series = _context.Series.OrderBy(s => s.Omschrijving).Where(s => s.TaalId == TaalId).ToList()
+            });
+        }
+
+        public ActionResult Gemeente()
+        {
+            return View(new ZoekenGemeente
+            {
+                Gemeentes = _context
+                    .Gemeentes
+                    .OrderBy(s => s.Omschrijving)
+                    .Where(g => g.Preeks.Any(p => p.TaalId == TaalId))
+                    .ToList()
+            });
+        }
+
+        public JsonResult Autocomplete(string type, string term)
+        {
+            switch (type)
+            {
+                case "Predikant":
+                    return Json(_context.Predikants
+                    .Where(p => p.TaalId == TaalId && (((p.Titels ?? "") + " " + (p.Voorletters ?? "")).Trim() + " " + ((p.Tussenvoegsels ?? "") + " " + (p.Achternaam ?? "")).Trim()).Contains(term))
+                    .Take(10)
+                    .ToList()
+                    .Select(p => new { p.Id, value = p.VolledigeNaam })
+                    .OrderBy(p => p.value)
+                    .ToArray(), JsonRequestBehavior.AllowGet);
+
+                case "BoekHoofdstuk":
+                    return Json(_context.BoekHoofdstuks.Include(x => x.Boek)
+                   .Where(b => b.Omschrijving.Contains(term) && b.Boek.TaalId == TaalId)
+                   .Take(10)
+                   .ToList()
+                   .Select(b => new { b.Id, value = b.Omschrijving })
+                   .OrderBy(p => p.value)
+                   .ToArray(), JsonRequestBehavior.AllowGet);
+
+                case "Gebeurtenis":
+                    return Json(_context.Gebeurtenis
+                   .Where(g => g.Omschrijving.Contains(term) && g.TaalId == TaalId)
+                   .Take(10)
+                   .ToList()
+                   .Select(g => new { g.Id, value = g.Omschrijving })
+                   .OrderBy(p => p.value)
+                   .ToArray(), JsonRequestBehavior.AllowGet);
+
+                case "Gemeente":
+                    return Json(_context.Gemeentes
+                   .Where(g => g.Omschrijving.Contains(term))
+                   .Take(10)
+                   .ToList()
+                   .Select(g => new { g.Id, value = g.Omschrijving })
+                   .OrderBy(p => p.value)
+                   .ToArray(), JsonRequestBehavior.AllowGet);
+
+                case "Serie":
+                    return Json(_context.Series
+                   .Where(s => s.Omschrijving.Contains(term) && s.TaalId == TaalId)
+                   .Take(10)
+                   .ToList()
+                   .Select(s => new { s.Id, value = s.Omschrijving })
+                   .OrderBy(p => p.value)
+                   .ToArray(), JsonRequestBehavior.AllowGet);
+
+                default:
+                    return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+    }
+}

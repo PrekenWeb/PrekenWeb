@@ -1,0 +1,19 @@
+﻿@model BladerenGemeente
+@{ 
+    ViewBag.Title = Resources.BladerenGemeente;
+    string lastFirstLetter = string.Empty;
+}
+<h2>@ViewBag.Title</h2>
+
+<ul class="StandaardLijst">
+    @foreach (Gemeente Gemeente in Model.Gemeentes)
+    {
+        <li><a href="@Url.Action("Index", "Bladeren", new { GemeenteId = Gemeente.Id })">
+            <div class="icon-arrow-right"></div>@Gemeente.Omschrijving</a></li>
+    }
+</ul>
+
+
+@section scripts{
+
+}

@@ -1,0 +1,14 @@
+﻿@model TooltipBase<Gebeurtenis>
+@{ 
+    ViewBag.Title = Model.DataObject.Omschrijving; 
+}
+<div class="TooltipBody">
+    <br />
+    @Html.IconActionLink(Resources.MeerPrekenGelegenheid, "Index", "Zoeken", new { GebeurtenisId = Model.DataObject.Id }, new { Class = "Knop" }, "calendar")<br />
+    <br />
+    @if (Model.Preek != null)
+    { 
+        @Html.Partial("PreekLink", Model.Preek)
+    }
+</div>
+

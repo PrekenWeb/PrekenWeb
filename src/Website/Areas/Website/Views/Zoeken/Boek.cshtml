@@ -1,0 +1,24 @@
+﻿@model ZoekenBoek
+@{ 
+    ViewBag.Title = Resources.ZoekenBoek;
+    List<Boek> boeken = Model.Hoofdstukken.Select(h => h.Boek).Distinct().ToList();
+}
+<h1>@ViewBag.Title</h1>
+
+@foreach (Boek boek in boeken.OrderBy(b => b.OudId))
+{
+    <div class="BoekContainer">
+        <h1>@Html.ActionLink(Html.Resource(boek.Boeknaam).ToString(), "Index", new { BoekId = boek.Id, Geavanceerd = true, SorteerVolgorde = "DESC", SorteerOp="Boek" }, new { Class="asd" })</h1>
+        <ul>
+            @foreach (BoekHoofdstuk hoofdstuk in Model.Hoofdstukken.Where(h => h.BoekId == boek.Id).OrderByDescending(h => h.Sortering))
+            {
+                <li><a href="@Url.Action("Index", "Zoeken", new { BoekHoofdstukId = hoofdstuk.Id })">
+                    <div class="fa fa-arrow-right"></div>@hoofdstuk.Omschrijving</a></li>
+            }
+        </ul>
+    </div>
+}
+
+@section scripts{
+
+}

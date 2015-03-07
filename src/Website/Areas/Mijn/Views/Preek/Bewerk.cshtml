@@ -1,0 +1,41 @@
+﻿@model Preek
+@{ ViewBag.Title = Resources.BewerkPreek; }
+<h1>@ViewBag.Title</h1>
+@using (Html.BeginForm("Bewerk", "Preek", FormMethod.Post, new { name = "FormPreek", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.AantalKeerGedownload)
+    @Html.HiddenFor(m => m.Bestandsnaam)
+    @Html.HiddenFor(m => m.Bestandsgrootte)
+    @Html.HiddenFor(m => m.Duur)
+    @Html.HiddenFor(m => m.OudId)
+    @Html.HiddenFor(m => m.TaalId)
+    @Html.HiddenFor(m => m.VanVers)
+    @Html.HiddenFor(m => m.TotVers)
+    @Html.HiddenFor(m => m.AangepastDoor)
+    @Html.HiddenFor(m => m.AangemaaktDoor)
+    @Html.Partial("MaakBewerk", Model)
+    <p class="clear"></p>
+    <div class="FormKnoppen">
+        <a href="@Url.Action("Index", "Home")" class="IconKnop">
+            <div class="fa fa-arrow-left"></div>
+            @Resources.Terug
+        </a>
+        <a href="#" onclick="$('.tabs').hide(); $('.FormKnoppen').hide(); $('.validation-summary-errors').hide(); $('.Loading').show(); document.FormPreek.submit(); return false;" class="IconKnop">
+            <div class="fa fa-save"></div>
+            @Resources.Opslaan
+        </a>
+        <a href="@Url.Action("Verwijder", "Preek", new { id = Model.Id })" class="IconKnop" onclick="return confirm('Zeker weten dat u deze preek wilt verwijderen?')">
+            <div class="fa fa-trash"></div>
+            @Resources.Verwijder
+        </a>
+    </div>
+    <p class="clear"></p>
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            prekenweb.automatischeTekstenChanged();
+        });
+    </script>
+}

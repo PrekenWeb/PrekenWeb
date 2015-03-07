@@ -1,0 +1,46 @@
+﻿@model PaginaEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnL">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.Gepubliceerd)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.Gepubliceerd)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.Gepubliceerd)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.Gepubliceerd)</div>
+    </div> 
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.Identifier)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.Identifier)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.Identifier)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.Identifier)</div>
+    </div>  
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.Aangemaakt)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.Aangemaakt)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.Aangemaakt)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.Aangemaakt)</div>
+    </div>  
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.Bijgewerkt)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.Bijgewerkt)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.Bijgewerkt)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.Bijgewerkt)</div>
+    </div>  
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.AangemaaktDoor)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.AangemaaktDoor)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.AangemaaktDoor)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.AangemaaktDoor)</div>
+    </div>  
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.BijgewerktDoor)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.BijgewerktDoor)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.BijgewerktDoor)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.BijgewerktDoor)</div>
+    </div>  
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Pagina.TonenOpHomepage)</div>
+        <div class="value">@Html.EditorFor(m => m.Pagina.TonenOpHomepage)</div>
+        <div class="tooltip">@Html.ToolTipFor(m => m.Pagina.TonenOpHomepage)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Pagina.TonenOpHomepage)</div>
+    </div>  
+</div> 

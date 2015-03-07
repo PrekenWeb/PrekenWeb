@@ -1,0 +1,19 @@
+﻿@model GebeurtenisEditViewModel
+@Html.ValidationSummary(true)
+<div class="ColumnM">
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebeurtenis.Omschrijving)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebeurtenis.Omschrijving)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebeurtenis.Omschrijving)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebeurtenis.Sortering)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebeurtenis.Sortering)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebeurtenis.Sortering)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Gebeurtenis.TaalId)</div>
+        <div class="value">@Html.EditorFor(m => m.Gebeurtenis.TaalId)</div>
+        <div class="validator">@Html.ValidationMessageFor(m => m.Gebeurtenis.TaalId)</div>
+    </div>
+</div>

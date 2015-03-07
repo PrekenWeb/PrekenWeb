@@ -1,0 +1,7 @@
+﻿@inherits WebViewPage<int?>
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "";
+    int? taalId = (string.IsNullOrEmpty(string.Format("{0}", ViewData["TaalId"]))) ? (int?)null : int.Parse(ViewData["TaalId"].ToString());
+}
+
+@Html.DropDownList("PredikantId", ComboboxDataSources.GetPredikantValues(Model, taalId))

@@ -1,0 +1,67 @@
+﻿@model GegevensAanvullen
+@{ 
+    ViewBag.Title = Resources.GegevensAanvullen;
+    //Layout = "~/Areas/Website/Views/Shared/_Popup.cshtml";
+}
+<h1>@ViewBag.Title</h1>
+
+@if (Model.Verzonden)
+{
+    @Html.Raw(Model.TekstPaginaCompleet.Tekst)
+}
+else
+{
+    @Html.Raw(Model.TekstPagina.Tekst)
+
+    using (Html.BeginForm())
+    {
+    @Html.HiddenFor(m => m.PreekId)
+    <div class="ColumnL">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Naam)</div>
+            <div class="value">@Html.EditorFor(m => m.Naam)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Naam)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Naam)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Email)</div>
+            <div class="value">@Html.EditorFor(m => m.Email)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Email)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Email)</div>
+        </div>
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Onderwerp)</div>
+            <div class="value">@Html.EditorFor(m => m.Onderwerp)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Onderwerp)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Onderwerp)</div>
+        </div>
+        @if (Model.Preek.BoekHoofdstuk != null && Model.Preek.Predikant != null)
+        { 
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Preek)</div>
+                <div class="value">@Model.Preek.GetPreekTitel()</div>
+                <div class="tooltip"></div>
+                <div class="validator"></div>
+            </div>
+        }
+    </div>
+    <p class="clear"></p>
+    <div class="ColumnMax">
+        <div class="field">
+            <div class="label">@Html.LabelFor(m => m.Aanvulling)</div>
+            <div class="value">@Html.EditorFor(m => m.Aanvulling)</div>
+            <div class="tooltip">@Html.ToolTipFor(m => m.Aanvulling)</div>
+            <div class="validator">@Html.ValidationMessageFor(m => m.Aanvulling)</div>
+        </div>
+         <div class="field">
+            <div class="label"> </div>
+            <div class="value">@Html.Captcha("Refresh", Resources.CaptchaOvertypen, 4, null)</div>
+            <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
+        </div>
+   </div>
+    <p class="clear"></p>
+    <a href="#" onclick="document.forms[0].submit(); return false;" class="IconKnop">
+        <div class="fa fa-edit"></div>
+        @Resources.Verstuur</a>
+    }
+}

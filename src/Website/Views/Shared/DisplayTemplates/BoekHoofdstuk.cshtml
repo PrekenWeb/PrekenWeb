@@ -1,0 +1,5 @@
+﻿@inherits WebViewPage<BoekHoofdstuk>
+@if (Model != null)
+{ 
+    @Html.ActionLink(Model.Omschrijving, "Index", "Zoeken", new { BoekHoofdstukId = Model.Id }, new { })
+}
