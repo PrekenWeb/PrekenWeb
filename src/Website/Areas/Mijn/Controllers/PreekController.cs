@@ -1,4 +1,5 @@
-﻿using Prekenweb.Models;
+﻿using Hangfire;
+using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
@@ -11,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Properties;
+using Prekenweb.Website.Hangfire;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -68,6 +70,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             ClearOutputCaches();
             _context.SaveChanges();
+
+            BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(preek.Id));
 
             if (ModelState.IsValid) return RedirectToAction("NogTePubliceren", new { fromPreekId = preek.Id });
 
@@ -170,7 +174,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 preek.AangemaaktDoor = _huidigeGebruiker.Id;
 
                 ClearOutputCaches();
-                _context.SaveChanges();
+                _context.SaveChanges(); 
+
+                BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(preek.Id));
 
                 if (ModelState.IsValid) return RedirectToAction("NogTePubliceren", new { fromPreekId = preek.Id });
                 

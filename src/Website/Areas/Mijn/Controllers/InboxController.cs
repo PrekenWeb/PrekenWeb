@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Hangfire;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using PrekenWeb.Security;
@@ -10,6 +11,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib;
+using Prekenweb.Website.Hangfire;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -52,7 +54,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         vernietigen. Het is in dat geval ook niet toegestaan om de gegevens te gebruiken,
         te kopiëren of te verstrekken aan derden.</i></font></p> 
         </div>
-        "; 
+        ";
 
         public ActionResult Index()
         {
@@ -113,6 +115,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     _context.InboxOpvolgings.Add(viewModel.InboxOpvolging);
                     if (viewModel.DirectAfhandelen) inboxItem.Afgehandeld = true;
                     _context.SaveChanges();
+
+                    BackgroundJob.Enqueue<AchtergrondTaken>(x => x.InboxOpvolgingTaak(viewModel.InboxOpvolging.Id));
                 }
                 catch (DbEntityValidationException ex)
                 {

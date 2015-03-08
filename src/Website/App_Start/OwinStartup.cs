@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -14,6 +16,7 @@ using Prekenweb.Models.Identity;
 using PrekenWeb.Security;
 using Prekenweb.Website;
 using Prekenweb.Website.Properties;
+using Prekenweb.Website.Hangfire;
 
 [assembly: OwinStartup(typeof(OwinStartup))]
 
@@ -24,7 +27,7 @@ namespace Prekenweb.Website
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
-            app.CreatePerOwinContext(PrekenwebContext.Create); // done via Ninject
+            app.CreatePerOwinContext(PrekenwebContext.Create);  
             app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -59,8 +62,15 @@ namespace Prekenweb.Website
                 AppSecret = Settings.Default.FacebookAppSecret
             };
             facebookOptions.Scope.Add("email");
-            app.UseFacebookAuthentication(facebookOptions); 
+            app.UseFacebookAuthentication(facebookOptions);
 
+            app.UseHangfire(config =>
+            {
+                config.UseSqlServerStorage("hangfire-sqlserver");
+                config.UseServer();
+                config.UseAuthorizationFilters();
+            });
+            AchtergrondTaken.RegistreerTaken();
         }
 
         private Task OnAuthenticated(TwitterAuthenticatedContext context)

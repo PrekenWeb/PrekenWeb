@@ -25,15 +25,6 @@ namespace Prekenweb.Website.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("~/Content/Preken/")]
-        public string PrekenFolder {
-            get {
-                return ((string)(this["PrekenFolder"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("~/Content/Images/Uploads/")]
         public string AfbeeldingenFolder {
             get {
@@ -92,6 +83,15 @@ namespace Prekenweb.Website.Properties {
         public string TwitterCustomerSecret {
             get {
                 return ((string)(this["TwitterCustomerSecret"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("~/Content/Preken/")]
+        public string PrekenFolder {
+            get {
+                return ((string)(this["PrekenFolder"]));
             }
         }
     }
