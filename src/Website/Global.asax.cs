@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -12,6 +13,8 @@ namespace Prekenweb.Website
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
+            
             AreaRegistration.RegisterAllAreas();
 
             ViewEngines.Engines.Clear();
@@ -23,6 +26,7 @@ namespace Prekenweb.Website
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             HangfireBootstrapper.Instance.Start();
+
         }
 
         protected void Application_End(object sender, EventArgs e)

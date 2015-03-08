@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Web.Hosting;
 using Hangfire;
+using log4net;
 using NAudio.FileFormats.Mp3;
 using NAudio.Wave;
 using Prekenweb.Models;
@@ -15,6 +16,8 @@ namespace Prekenweb.Website.Hangfire
 {
     public class AchtergrondTaken
     {
+        private readonly  ILog _logger =  LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static void RegistreerTaken()
         {
             RecurringJob.AddOrUpdate<AchtergrondTaken>("InboxSamenvattingTaak", x => x.InboxSamenvattingTaak(), Cron.Daily(1, 0));
@@ -24,11 +27,15 @@ namespace Prekenweb.Website.Hangfire
         public void AnalyseerAudioTaak(int id)
         {
             using (var context = new PrekenwebContext())
-            {
+            { 
                 var preek = context.Preeks.Single(x => x.Id == id);
                 
                 var filename = HostingEnvironment.MapPath(Path.Combine(Settings.Default.PrekenFolder, preek.Bestandsnaam));
-                if (!File.Exists(filename) || Path.GetExtension(filename) != ".mp3") return;
+                if (!File.Exists(filename) || Path.GetExtension(filename) != ".mp3")
+                {
+                    _logger.Warn("Verwerking preek overgeslagen: geen (MP3) bestand gevonden");
+                    return;
+                }
 
                 using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
                 {
@@ -67,8 +74,9 @@ namespace Prekenweb.Website.Hangfire
                         smtpClient.Send(message);
                     }
                 }
-                catch //(Exception ex)
+                catch (Exception ex)
                 {
+                    _logger.Warn("Versturen inbox opvolgings mail mislukt", ex);
                     opvolging.Verstuurd = null;
                     context.SaveChanges();
                     throw;

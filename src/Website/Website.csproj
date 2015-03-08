@@ -94,6 +94,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\IZ.WebFileManager.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MailChimp, Version=1.1.69.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MailChimp.NET.1.1.69.0\lib\net35\MailChimp.dll</HintPath>
