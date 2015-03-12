@@ -1,0 +1,59 @@
+INFO  2015-03-08 17:27:59,935   953ms SqlServerStorage       ateAndExecuteVoid2 - Start installing Hangfire SQL objects...
+INFO  2015-03-08 17:28:00,068  1086ms SqlServerStorage       Log                - Hangfire SQL objects installed.
+INFO  2015-03-08 17:28:00,091  1109ms BackgroundJobServer    Log                - Starting Hangfire Server...
+INFO  2015-03-08 17:28:00,099  1117ms BackgroundJobServer    Log                - Using job storage: 'SQL Server: .\sqlexpress@PrekenwebProductie'.
+INFO  2015-03-08 17:28:00,100  1118ms BackgroundJobServer    Log                - Using the following options for SQL Server job storage:
+INFO  2015-03-08 17:28:00,100  1118ms BackgroundJobServer    Log                -     Queue poll interval: 00:00:15.
+INFO  2015-03-08 17:28:00,101  1119ms BackgroundJobServer    Log                -     Invisibility timeout: 00:30:00.
+INFO  2015-03-08 17:28:00,102  1120ms BackgroundJobServer    Log                - Using the following options for Hangfire Server:
+INFO  2015-03-08 17:28:00,102  1120ms BackgroundJobServer    Log                -     Worker count: 20.
+INFO  2015-03-08 17:28:00,103  1121ms BackgroundJobServer    Log                -     Listening queues: 'default'.
+INFO  2015-03-08 17:28:00,103  1121ms BackgroundJobServer    Log                -     Shutdown timeout: 00:00:15.
+INFO  2015-03-08 17:28:00,103  1121ms BackgroundJobServer    Log                -     Schedule polling interval: 00:00:15.
+INFO  2015-03-08 17:28:00,104  1122ms ServerComponentWrapper Log                - Server component 'Server Bootstrapper' started.
+INFO  2015-03-08 17:28:00,414  1432ms SqlServerStorage       Log                - Start installing Hangfire SQL objects...
+INFO  2015-03-08 17:28:00,441  1459ms SqlServerStorage       Log                - Hangfire SQL objects installed.
+INFO  2015-03-08 17:28:00,455  1473ms BackgroundJobServer    Log                - Starting Hangfire Server...
+INFO  2015-03-08 17:28:00,456  1474ms BackgroundJobServer    Log                - Using job storage: 'SQL Server: .\sqlexpress@PrekenwebProductie'.
+INFO  2015-03-08 17:28:00,457  1475ms BackgroundJobServer    Log                - Using the following options for SQL Server job storage:
+INFO  2015-03-08 17:28:00,457  1475ms BackgroundJobServer    Log                -     Queue poll interval: 00:00:15.
+INFO  2015-03-08 17:28:00,457  1475ms BackgroundJobServer    Log                -     Invisibility timeout: 00:30:00.
+INFO  2015-03-08 17:28:00,457  1475ms BackgroundJobServer    Log                - Using the following options for Hangfire Server:
+INFO  2015-03-08 17:28:00,458  1476ms BackgroundJobServer    Log                -     Worker count: 20.
+INFO  2015-03-08 17:28:00,458  1476ms BackgroundJobServer    Log                -     Listening queues: 'default'.
+INFO  2015-03-08 17:28:00,458  1476ms BackgroundJobServer    Log                -     Shutdown timeout: 00:00:15.
+INFO  2015-03-08 17:28:00,458  1476ms BackgroundJobServer    Log                -     Schedule polling interval: 00:00:15.
+INFO  2015-03-08 17:28:00,460  1478ms ServerComponentWrapper Log                - Server component 'Server Bootstrapper' started.
+INFO  2015-03-08 17:28:00,889  1907ms ServerBootstrapper     Log                - Starting server components...
+INFO  2015-03-08 17:28:00,892  1910ms ServerComponentWrapper Log                - Server component 'Worker Manager' started.
+INFO  2015-03-08 17:28:00,892  1910ms ServerComponentWrapper Log                - Server component 'Server Heartbeat' started.
+INFO  2015-03-08 17:28:00,892  1910ms ServerComponentWrapper Log                - Server component 'Schedule Poller' started.
+INFO  2015-03-08 17:28:00,893  1911ms ServerComponentWrapper Log                - Server component 'Server Watchdog' started.
+INFO  2015-03-08 17:28:00,894  1912ms ServerComponentWrapper Log                - Server component 'Recurring Job Scheduler' started.
+INFO  2015-03-08 17:28:00,894  1912ms ServerComponentWrapper Log                - Server component 'SQL Records Expiration Manager' started.
+INFO  2015-03-08 17:29:17,242 78259ms ServerBootstrapper     Log                - Stopping server components...
+INFO  2015-03-08 17:29:17,242 78259ms ServerComponentWrapper Log                - Server component 'Server Watchdog' stopped.
+INFO  2015-03-08 17:29:17,242 78259ms ServerComponentWrapper Log                - Server component 'SQL Records Expiration Manager' stopped.
+INFO  2015-03-08 17:29:17,242 78259ms ServerComponentWrapper Log                - Server component 'Server Heartbeat' stopped.
+INFO  2015-03-08 17:29:17,242 78259ms ServerComponentWrapper Log                - Server component 'Schedule Poller' stopped.
+INFO  2015-03-08 17:29:17,257 78275ms ServerComponentWrapper Log                - Server component 'Recurring Job Scheduler' stopped.
+INFO  2015-03-08 17:29:17,289 78306ms ServerComponentWrapper Log                - Server component 'Worker Manager' stopped.
+INFO  2015-03-08 17:29:17,492 78509ms ServerComponentWrapper Log                - Server component 'Server Bootstrapper' stopped.
+INFO  2015-03-08 17:29:17,522 78540ms BackgroundJobServer    Log                - Hangfire Server stopped.
+INFO  2015-03-08 17:29:17,543 78561ms ServerBootstrapper     Log                - Starting server components...
+INFO  2015-03-08 17:29:17,544 78562ms ServerComponentWrapper Log                - Server component 'Server Heartbeat' started.
+INFO  2015-03-08 17:29:17,544 78562ms ServerComponentWrapper Log                - Server component 'Worker Manager' started.
+INFO  2015-03-08 17:29:17,544 78562ms ServerComponentWrapper Log                - Server component 'Schedule Poller' started.
+INFO  2015-03-08 17:29:17,545 78563ms ServerComponentWrapper Log                - Server component 'Server Watchdog' started.
+INFO  2015-03-08 17:29:17,546 78564ms ServerComponentWrapper Log                - Server component 'SQL Records Expiration Manager' started.
+INFO  2015-03-08 17:29:17,546 78564ms ServerComponentWrapper Log                - Server component 'Recurring Job Scheduler' started.
+INFO  2015-03-08 17:29:17,546 78564ms ServerBootstrapper     Log                - Stopping server components...
+INFO  2015-03-08 17:29:17,547 78565ms ServerComponentWrapper Log                - Server component 'Recurring Job Scheduler' stopped.
+INFO  2015-03-08 17:29:17,550 78568ms ServerComponentWrapper Log                - Server component 'Schedule Poller' stopped.
+INFO  2015-03-08 17:29:17,551 78569ms ServerComponentWrapper Log                - Server component 'Server Heartbeat' stopped.
+INFO  2015-03-08 17:29:17,551 78569ms ServerComponentWrapper Log                - Server component 'Server Watchdog' stopped.
+INFO  2015-03-08 17:29:17,555 78572ms ServerComponentWrapper Log                - Server component 'SQL Records Expiration Manager' stopped.
+INFO  2015-03-08 17:29:17,588 78606ms ServerComponentWrapper Log                - Server component 'Worker Manager' stopped.
+INFO  2015-03-08 17:29:17,592 78610ms ServerComponentWrapper Log                - Server component 'Server Bootstrapper' stopped.
+INFO  2015-03-08 17:29:17,593 78611ms BackgroundJobServer    Log                - Hangfire Server stopped.
+INFO  2015-03-08 17:29:17,653 78671ms BackgroundJobServer    Log                - Hangfire Server stopped.
