@@ -1,3 +1,4 @@
+using System.Data.SqlClient;
 using System.Web.Hosting;
 using Hangfire;
 using Hangfire.SqlServer;
@@ -47,8 +48,16 @@ namespace Prekenweb.Website.Hangfire
                 _started = true;
 
                 HostingEnvironment.RegisterObject(this);
-
-                JobStorage.Current = new SqlServerStorage("hangfire-sqlserver");
+                try
+                {
+                    JobStorage.Current = new SqlServerStorage("hangfire-sqlserver");
+                }
+                catch (SqlException ex)
+                {
+                    // probably wrong db-connection or non-existing db, let DbContext handle this
+                    _started = false;
+                    return;
+                }
 
                 _backgroundJobServer = new BackgroundJobServer();
                 _backgroundJobServer.Start();

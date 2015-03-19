@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.SqlServer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -27,7 +29,7 @@ namespace Prekenweb.Website
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
-            app.CreatePerOwinContext(PrekenwebContext.Create);  
+            app.CreatePerOwinContext(PrekenwebContext.Create);
             app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -43,14 +45,14 @@ namespace Prekenweb.Website
                 }
             });
 
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie); 
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             var twitterOptions = new TwitterAuthenticationOptions
             {
                 ConsumerKey = Settings.Default.TwitterCustomerKey,
                 ConsumerSecret = Settings.Default.TwitterCustomerSecret,
                 Provider = new TwitterAuthenticationProvider()
-                {  
+                {
                     OnAuthenticated = OnAuthenticated
                 }
             };
@@ -64,13 +66,20 @@ namespace Prekenweb.Website
             facebookOptions.Scope.Add("email");
             app.UseFacebookAuthentication(facebookOptions);
 
-            app.UseHangfire(config =>
+            try
             {
-                config.UseSqlServerStorage("hangfire-sqlserver");
-                config.UseServer();
-                config.UseAuthorizationFilters();
-            });
-            AchtergrondTaken.RegistreerTaken();
+                app.UseHangfire(config =>
+                {
+                    config.UseSqlServerStorage("hangfire-sqlserver");
+                    config.UseServer();
+                    config.UseAuthorizationFilters(new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() });
+                });
+                AchtergrondTaken.RegistreerTaken();
+            }
+            catch (SqlException ex)
+            {
+                // probably wrong db-connection or non-existing db, let DbContext handle this 
+            }
         }
 
         private Task OnAuthenticated(TwitterAuthenticatedContext context)
@@ -79,5 +88,5 @@ namespace Prekenweb.Website
             context.Identity.AddClaim(new Claim("urn:tokens:twitter:accesstokensecret", context.AccessTokenSecret));
             return null;
         }
-    } 
+    }
 }
