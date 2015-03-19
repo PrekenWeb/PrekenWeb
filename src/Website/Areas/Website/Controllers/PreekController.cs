@@ -39,7 +39,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _cache = cache;
             _huidigeGebruiker = huidigeGebruiker;
         }
-
+         
         public ActionResult Open(int id)
         {
             var viewModel = new PreekOpen();

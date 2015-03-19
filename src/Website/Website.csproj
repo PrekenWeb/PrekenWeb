@@ -368,7 +368,6 @@
     <Compile Include="Website\MailTemplating\MailTemplating.cs" />
     <Compile Include="Website\Cache\PrekenwebHttpCache.cs" />
     <Compile Include="Website\HuidigeGebruiker.cs" />
-    <Compile Include="Website\PrekenwebCookie.cs" />
     <Compile Include="Website\StringWriterWithEncoding.cs" />
     <Compile Include="Content\PrekenwebDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -591,6 +590,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1105,7 +1105,6 @@
   <ItemGroup>
     <Folder Include="App_GlobalResources\" />
     <Folder Include="Areas\Mijn\Views\Shared\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

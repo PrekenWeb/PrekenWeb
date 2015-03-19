@@ -18,8 +18,7 @@ namespace Website.UnitTests.Controllers
         private IMailingRepository _mailingRepository;
         private ITekstRepository _tekstRepository;
         private IPrekenRepository _prekenRepository;
-        private ISpotlightRepository _spotlightRepository;
-        private IPrekenwebCookie _cookie;
+        private ISpotlightRepository _spotlightRepository; 
         private IPrekenwebCache _cache;
 
         private HomeController _homeController;
@@ -32,21 +31,14 @@ namespace Website.UnitTests.Controllers
             _prekenRepository = new PrekenRepository(Context);
             _tekstRepository = new TekstRepository(Context); 
 
-            _cache = new TestPrekenwebCache();
-
-            var cookieMock = new Mock<IPrekenwebCookie>(MockBehavior.Strict);
-            cookieMock.SetupProperty(cookie => cookie.FilterLeesPreken, true);
-            cookieMock.SetupProperty(cookie => cookie.FilterLezingen, true);
-            cookieMock.SetupProperty(cookie => cookie.FilterPreken, true);
-            cookieMock.SetupProperty(cookie => cookie.WelkomstekstVerbergen, false);
-            _cookie = cookieMock.Object; 
+            _cache = new TestPrekenwebCache(); 
         }
 
         [TestMethod]
         public async Task Index_Action_Returns_Preken()
         {
             // Arrange            
-            _homeController = GetController(false, new HomeController(_mailingRepository, _tekstRepository, _prekenRepository, _spotlightRepository, _cookie, _cache, UserManager, HuidigeGebruiker));
+            _homeController = GetController(false, new HomeController(_mailingRepository, _tekstRepository, _prekenRepository, _spotlightRepository, _cache, UserManager, HuidigeGebruiker));
 
             // Act
             var result = (ViewResult)await _homeController.Index() ;

@@ -23,7 +23,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         private readonly IPrekenRepository _prekenRepository;
         private readonly ISpotlightRepository _spotlightRepository;
 
-        private readonly IPrekenwebCookie _prekenwebCookie;
         private readonly IPrekenwebCache _cache;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
@@ -32,7 +31,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                               ITekstRepository tekstRepository,
                               IPrekenRepository prekenRepository,
                               ISpotlightRepository spotlightRepository,
-                              IPrekenwebCookie cookie,
                               IPrekenwebCache cache,
                               IPrekenWebUserManager prekenWebUserManager,
                               IHuidigeGebruiker huidigeGebruiker)
@@ -41,7 +39,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _tekstRepository = tekstRepository;
             _prekenRepository = prekenRepository;
             _spotlightRepository = spotlightRepository;
-            _prekenwebCookie = cookie;
             _cache = cache;
             _prekenWebUserManager = prekenWebUserManager;
             _huidigeGebruiker = huidigeGebruiker;
@@ -49,6 +46,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
+        [OutputCache(Duration = 1800, VaryByCustom="user")] // 30 minuten
         public async Task<ActionResult> Index()
         {
             return View(await GetHomeIndexViewModel());
@@ -56,26 +54,15 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         private async Task<HomeIndex> GetHomeIndexViewModel()
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }, TransactionScopeAsyncFlowOption.Enabled))
+            var viewModel = new HomeIndex
             {
-                var viewModel = new HomeIndex
-                {
-                    NieuwePreken = await GetNieuwPreken(new NieuwePreken(_prekenwebCookie.FilterLeesPreken, _prekenwebCookie.FilterPreken, _prekenwebCookie.FilterLezingen)),
-                    Teksten = _cache.GetCached("HomePageTeksten", TaalId, User.Identity.Name, () => _tekstRepository.GetHomepageTeksten(TaalId)),
-                    SpotlightItems = _cache.GetCached("SpotlightItems", TaalId, User.Identity.Name, () => _spotlightRepository.GetSpotlightItemsForHomepage(TaalId)),
-                    WelkomsTekst = _cache.GetCached("WelkomsTekst", TaalId, User.Identity.Name, () => _tekstRepository.GetTekstPagina("home-welkom", TaalId)),
-                    WelkomstekstVerbergen = _prekenwebCookie.WelkomstekstVerbergen,
-                    Taal = Taal
-                };
-                transactionScope.Complete();
-                return viewModel;
-            }
-        }
-
-        public ActionResult WelkomstekstVerbergen()
-        {
-            _prekenwebCookie.WelkomstekstVerbergen = !_prekenwebCookie.WelkomstekstVerbergen;
-            return RedirectToAction("Index");
+                NieuwePreken = await GetNieuwPreken(new NieuwePreken()),
+                Teksten = _cache.GetCached("HomePageTeksten", TaalId, User.Identity.Name, () => _tekstRepository.GetHomepageTeksten(TaalId)),
+                SpotlightItems = _cache.GetCached("SpotlightItems", TaalId, User.Identity.Name, () => _spotlightRepository.GetSpotlightItemsForHomepage(TaalId)),
+                WelkomsTekst = _cache.GetCached("WelkomsTekst", TaalId, User.Identity.Name, () => _tekstRepository.GetTekstPagina("home-welkom", TaalId)),
+                Taal = Taal
+            };
+            return viewModel;
         }
 
         private async Task<NieuwePreken> GetNieuwPreken(NieuwePreken nieuwePreken)
@@ -91,7 +78,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return nieuwePreken;
         }
 
-        [OutputCache(Duration = 1209600, VaryByParam = "Id", VaryByCustom = "userName", Location = OutputCacheLocation.ServerAndClient)] // 14 dagen
+        [OutputCache(Duration = 1209600, VaryByParam = "Id", Location = OutputCacheLocation.ServerAndClient)] // 14 dagen
         public ActionResult HomepageImage(int id)
         {
             var afbeelding = _spotlightRepository.GetAfbeelding(id);
@@ -185,10 +172,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public async Task<ActionResult> NieuwePreken(NieuwePreken nieuwePreken)
         {
-            _prekenwebCookie.FilterLeesPreken = nieuwePreken.LeesPreken;
-            _prekenwebCookie.FilterLezingen = nieuwePreken.Lezingen;
-            _prekenwebCookie.FilterPreken = nieuwePreken.AudioPreken;
-
             return PartialView(await GetNieuwPreken(nieuwePreken));
         }
 

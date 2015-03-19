@@ -12,8 +12,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
-        public LegacyRoutingController(IPrekenwebContext<Gebruiker> context,
-                                       IPrekenwebCookie cookie)
+        public LegacyRoutingController(IPrekenwebContext<Gebruiker> context)
         {
             _context = context;
         } 

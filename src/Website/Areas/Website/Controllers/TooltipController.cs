@@ -12,8 +12,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
-        public TooltipController(IPrekenwebContext<Gebruiker> context,
-                                 IPrekenwebCookie cookie)
+        public TooltipController(IPrekenwebContext<Gebruiker> context)
         {
             _context = context;
         } 

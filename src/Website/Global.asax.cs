@@ -34,14 +34,21 @@ namespace Prekenweb.Website
             HangfireBootstrapper.Instance.Stop();
         }
 
-        public override string GetVaryByCustomString(HttpContext context, string arg)
+        public override string GetVaryByCustomString(HttpContext context, string custom)
         {
-            switch (arg)
+            if (custom == "user")
             {
-                case "userName":
+                if (context.User.Identity.IsAuthenticated)
+                {
                     return context.User.Identity.Name;
+                }
+                else
+                {
+                    return "";
+                }
             }
-            return string.Empty;
+
+            return base.GetVaryByCustomString(context, custom);
         }
     }
 }

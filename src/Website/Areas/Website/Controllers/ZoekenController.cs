@@ -14,18 +14,16 @@ using System.Web.Routing;
 using System.Web.UI;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
-{
-    [OutputCache(Duration = 3600, VaryByParam = "*", VaryByCustom = "userName", Location = OutputCacheLocation.Server)] // 1 uur
+{ 
+   [OutputCache(Duration = 3600, VaryByParam = "*", VaryByCustom="user")] // 1 uur
     public class ZoekenController : ApplicationController
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IZoekenRepository _zoekenRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
-        private readonly IHuidigeGebruiker _huidigeGebruiker;
-        private readonly IPrekenwebCookie _prekenwebCookie;
+        private readonly IHuidigeGebruiker _huidigeGebruiker; 
 
-        public ZoekenController(IPrekenwebContext<Gebruiker> context,
-                                IPrekenwebCookie cookie,
+        public ZoekenController(IPrekenwebContext<Gebruiker> context, 
                                 IZoekenRepository zoekenRepository,
                                 IGebruikerRepository gebruikerRepository,
                                 IHuidigeGebruiker huidigeGebruiker)
@@ -33,16 +31,13 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _context = context;
             _zoekenRepository = zoekenRepository;
             _gebruikerRepository = gebruikerRepository;
-            _huidigeGebruiker = huidigeGebruiker;
-            _prekenwebCookie = cookie;
+            _huidigeGebruiker = huidigeGebruiker; 
             ViewBag.Taalkeuze = true;
         }
 
         public async Task<ActionResult> Index(PreekZoeken viewModel)
         {
-            Session["ZoekParameters"] = Request.QueryString;
-
-            UpdatePrekenwebCookie(viewModel);
+            Session["ZoekParameters"] = Request.QueryString; 
 
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
 
@@ -51,10 +46,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         [Authorize]
         public async Task<ActionResult> ZoekOpdrachtBewaren(PreekZoeken viewModel)
-        {
-            viewModel.AudioPreken = _prekenwebCookie.FilterPreken;
-            viewModel.LeesPreken = _prekenwebCookie.FilterLeesPreken;
-            viewModel.Lezingen = _prekenwebCookie.FilterLezingen;
+        { 
 
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
@@ -74,8 +66,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         }
 
         public async Task<ActionResult> PartialInlineZoek(PreekZoeken viewModel)
-        {
-            UpdatePrekenwebCookie(viewModel);
+        { 
             viewModel = await GetPreekZoekenViewModel(viewModel, 6);
 
             return PartialView("PartialInlineZoek", viewModel);
@@ -87,6 +78,14 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             viewModel.TaalId = TaalId;
             if (viewModel.Pagina == null) viewModel.Pagina = 1;
+
+            if (!viewModel.LeesPreken && !viewModel.AudioPreken && !viewModel.Lezingen)
+            {
+                // geen een preektype kiezen is allemaal krijgen! 
+                viewModel.LeesPreken = true;
+                viewModel.AudioPreken = true;
+                viewModel.Lezingen = true;
+            }
 
             // Tekst velden vullen als er een ID mee komt
             RouteValueDictionary redirectRouteValues;
@@ -109,19 +108,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             viewModel.LezingCatorieen = (!viewModel.LeesPreken && !viewModel.AudioPreken && viewModel.Lezingen) ? await _context.LezingCategories.ToListAsync() : null;
 
             return viewModel;
-        }
-
-        private void UpdatePrekenwebCookie(PreekZoeken viewModel)
-        {
-            if (Request.QueryString["AudioPreken"] == null) viewModel.AudioPreken = _prekenwebCookie.FilterPreken;
-            else if (_prekenwebCookie != null && _prekenwebCookie.FilterPreken != viewModel.AudioPreken) _prekenwebCookie.FilterPreken = viewModel.AudioPreken;
-
-            if (Request.QueryString["LeesPreken"] == null) viewModel.LeesPreken = _prekenwebCookie.FilterLeesPreken;
-            else if (_prekenwebCookie != null && _prekenwebCookie.FilterLeesPreken != viewModel.LeesPreken) _prekenwebCookie.FilterLeesPreken = viewModel.LeesPreken;
-
-            if (Request.QueryString["Lezingen"] == null) viewModel.Lezingen = _prekenwebCookie.FilterLezingen;
-            else if (_prekenwebCookie != null && _prekenwebCookie.FilterLezingen != viewModel.Lezingen) _prekenwebCookie.FilterLezingen = viewModel.Lezingen;
-        }
+        } 
 
         public ActionResult Boek()
         {

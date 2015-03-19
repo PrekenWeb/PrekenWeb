@@ -13,8 +13,7 @@ namespace Prekenweb.Website.ViewModels
         public IList<Spotlight> SpotlightItems { get; set; }
         public TekstPagina WelkomsTekst { get; set; }
         public string Taal { get; set; }
-        public NieuwePreken NieuwePreken { get; set; }
-        public bool WelkomstekstVerbergen { get; set; }
+        public NieuwePreken NieuwePreken { get; set; } 
     }
 
     public class NieuwePreken
