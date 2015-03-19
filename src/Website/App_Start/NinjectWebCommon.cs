@@ -30,8 +30,7 @@ namespace Prekenweb.Website
         private static void RegisterServices(IKernel kernel)
         { 
             kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>().InRequestScope();
-            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>();
-            kernel.Bind<IPrekenwebCookie>().To<PrekenwebCookie>();
+            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>(); 
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();
             kernel.Bind<IMailingRepository>().To<MailingRepository>();
             kernel.Bind<ITekstRepository>().To<TekstRepository>();

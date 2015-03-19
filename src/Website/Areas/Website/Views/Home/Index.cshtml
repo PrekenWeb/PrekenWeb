@@ -1,7 +1,6 @@
 ﻿@model HomeIndex
 @{
     ViewBag.Title = "Home";
-    ViewBag.WelomstTekstVerborgenClass = Model.WelkomstekstVerbergen ? "WelkomstTekstVerborgen" : "";
 
 }
 @section Styles {
@@ -85,16 +84,13 @@
 
     </div>
 }
-@if (!Model.WelkomstekstVerbergen)
-{
-    <div class="Welkom @ViewBag.WelomstTekstVerborgenClass">
-        @Html.IconActionLink("", "WelkomstekstVerbergen", "Home", new { }, new { Class = "WelkomstTekstVerbergenLink", Title = Resources.WelkomstTekstVerbergen }, "times")
-        <h1>@Model.WelkomsTekst.Kop</h1>
-        <p class="clear"></p>
-        @Html.Raw(Model.WelkomsTekst.Tekst)
-    </div>
-}
-<div id="NieuwePrekenWrapper" class="@ViewBag.WelomstTekstVerborgenClass">
+
+<div class="Welkom">
+    <h1>@Model.WelkomsTekst.Kop</h1>
+    <p class="clear"></p>
+    @Html.Raw(Model.WelkomsTekst.Tekst)
+</div>
+<div id="NieuwePrekenWrapper">
     @Html.Partial("NieuwePreken", Model.NieuwePreken)
 </div>
 <p class="clear"></p>
@@ -214,33 +210,6 @@
 
     </div>
 }
-@if (Model.WelkomstekstVerbergen)
-{
-    <div class="Welkom @ViewBag.WelomstTekstVerborgenClass">
-        <h2>@Model.WelkomsTekst.Kop</h2>
-        @Html.IconActionLink(Resources.WelkomstTekstTonen, "WelkomstekstVerbergen", "Home", new { }, new { Class = "WelkomstTekstWeerTonenLink" }, "search")
-    </div>
-}
-    @*@if (Model.Taal == "nl")
-        {
-            <div class="Boek">
-                <h2>Jona de profeet</h2>
-                <img src="http://bestellen.prekenweb.nl/img/thumb_1_jona.jpg.jpg" alt="boek1" />
-                <p>
-                    Jona is een bijbelboek voor ambtsdragers, maar het is ook een boek voor de gehele gemeente. Iedere Christen staat in het ambt van alle gelovigen.
-            <a href="http://bestellen.prekenweb.nl/?boekid=1">Meer info </a>
-                </p>
-            </div>
-            <div class="Boek">
-                <h2>Die dorst heeft, kome</h2>
-                <img src="http://bestellen.prekenweb.nl/img/thumb_2_Boekje%20ds%20Baan%20%28voorkant%29.jpg.jpg" alt="boek2" />
-                <p>
-                    Krachtig wordt in deze en andere Bijbelteksten de nodiging van het Evangelie aan zondaren naar voren gebracht.
-                <br />
-                    <a href="http://bestellen.prekenweb.nl/?boekid=2">Meer info </a>
-                </p>
-            </div>
-        }*@
-    <p class="clear"></p>
+<p class="clear"></p>
 
 
