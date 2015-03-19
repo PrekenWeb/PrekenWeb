@@ -1002,4 +1002,7 @@
   <data name="ReadingSermon" xml:space="preserve">
     <value>Reading sermon</value>
   </data>
+  <data name="Github" xml:space="preserve">
+    <value>Developers</value>
+  </data>
 </root>

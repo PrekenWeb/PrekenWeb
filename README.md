@@ -2,7 +2,7 @@
 Deze repository bevat de broncode van prekenweb.nl en sermonweb.nl. 
 
 #Bijdrage leveren
-We staan open voor bijdrages, voel vrij om code aan te bieden, een issue aan te maken of in contact met ons te komen over een goed idee! We rekenen er wel op dat mensen die een bijdrage willen leveren voldoende kennis hebben van de hieronder genoemde technieken.
+We staan open voor bijdrages, voel vrij om code aan te bieden, een issue aan te maken of in contact met ons te komen over een goed idee! Het is verstandig om, voordat je ergens aan begint, even met ons af te stemmen of we open staan voor het specifieke idee. Daarnaast rekenen we er wel op dat mensen die een bijdrage willen leveren voldoende kennis hebben van de hieronder genoemde technieken.
 
 #Contact
 Voor vragen/ideeen, neem contact op met [Kees Schollaart](https://github.com/keesschollaart81) (techniek) of mail voor algemene zaken naar [info@prekenweb.nl](mailto:info@prekenweb.nl)

@@ -1048,9 +1048,9 @@
     <Content Include="Scripts\lofslider.js" />
     <TypeScriptCompile Include="Scripts\main.ts" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
+    <None Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
