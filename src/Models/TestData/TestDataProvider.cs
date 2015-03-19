@@ -178,6 +178,8 @@ namespace Prekenweb.Models.TestData
 
             var afbeelding = context.Afbeeldings.Add(new Afbeelding { Bestandsnaam = "", ContentType = "", Omschrijving = "Testafbeelding" });
             var spotlight = context.Spotlights.Add(new Spotlight { Afbeelding = afbeelding, NieuwVenster = false, Taal = taalNederlands, Subtitel = "Subtitel", Sortering = 1, LinkTitel = "LinkTitel", Titel = "Titel", Url = "http://www.prekenweb.nl" });
+            var nieuwsbriefNL = context.Mailings.Add(new Mailing { Omschrijving = "Nieuwsbrief", Taal = taalNederlands, MailChimpId = ""});
+      
         }
 
         public static Gebruiker TestGebruiker1 = new Gebruiker
@@ -186,7 +188,8 @@ namespace Prekenweb.Models.TestData
             Naam = "Testgebruiker 1",
             Email = "test1@prekenweb.nl",
             UserName = "test1@prekenweb.nl",
-            LockoutEnabled = false
+            LockoutEnabled = false,
+            // Wachtwoord = prekenweb 
         };
 
         public static Gebruiker TestGebruiker2 = new Gebruiker
