@@ -77,12 +77,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.TaalKeuze = false;
 
             return View(viewModel);
-        }
-
-        public ActionResult Open2(int id)
-        {
-            return Open(id);
-        }
+        } 
 
         private PreekCookie EnsureCookie(int preekId, out DateTime? laatsteBezoek)
         {

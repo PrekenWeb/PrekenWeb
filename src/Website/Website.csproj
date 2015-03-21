@@ -674,7 +674,6 @@
     <Content Include="Areas\Website\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Website\Views\Home\Index.cshtml" />
     <Content Include="Areas\Website\Views\Prekenweb\Import.cshtml" />
-    <Content Include="Areas\Website\Views\Preek\Open2.cshtml" />
     <Content Include="Areas\Website\Views\Zoeken\Index.cshtml" />
     <Content Include="Areas\Website\Views\Zoeken\Boek.cshtml" />
     <Content Include="Areas\Website\Views\Zoeken\Predikant.cshtml" />
