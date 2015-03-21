@@ -79,11 +79,6 @@ var Prekenweb;
         //        }
         //    });
         //}
-        //public prekenwebPopupWindow(url, width, height) {
-        //    if (typeof (width) === 'undefined') width = 750;
-        //    if (typeof (height) === 'undefined') height = 450;
-        //    window.open(url, "Print", "height=" + height + ",width=" + width + ",scrollbars=yes,status=no,titlebar=no,toolbar=no");
-        //}
         // jquery.ajax.unobtrusive werkt nog niet met jQuery 2.0, daarom zelf even een functionaliteit gemaakt :)
         Prekenweb.prototype.unobtrusiveAjaxReplacement = function () {
             $(document).on('click', "a[data-ajax='true']", function (e) {

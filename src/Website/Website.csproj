@@ -626,7 +626,6 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Areas\Website\Views\Prekenweb\PreekToevoegen.cshtml" />
     <Content Include="Areas\Website\Views\Preek\GegevensAanvullen.cshtml" />
-    <Content Include="Areas\Website\Views\Shared\_Popup.cshtml" />
     <Content Include="Content\site.less" />
     <Content Include="Areas\Mijn\Views\Inbox\Tonen.cshtml" />
     <Content Include="Areas\Mijn\Views\Inbox\Index.cshtml" />
