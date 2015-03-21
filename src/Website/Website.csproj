@@ -616,7 +616,6 @@
     </Resource>
     <Content Include="Scripts\ckeditor_config.js" />
     <Content Include="Content\ckeditor_styles.css" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Content\Preken\Web.config" />
     <Content Include="Content\Preken\Gebruikers\Web.config" />
     <Content Include="Scripts\jquery.cycle.js" />
