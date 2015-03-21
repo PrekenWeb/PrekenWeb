@@ -29,6 +29,9 @@ namespace Prekenweb.Models.Migrations
             context.SaveChanges();
             // reset all passwords to 'prekenweb'
             context.Database.ExecuteSqlCommand("UPDATE Gebruiker SET PasswordHash = 'AFO33v1wphsnVS+Kl0sGgmQT2dppYQj2USf4ybiBC8KpXmN1O5o8U29I1bcz/G0IgA==', SecurityStamp='3bc2837e-840d-4844-a245-4e07fbeca00a'");
+            context.Database.ExecuteSqlCommand("insert into AspNetUserRoles select 1, id,1 from AspNetRoles");
+            //
+        
         }
     }
 }
