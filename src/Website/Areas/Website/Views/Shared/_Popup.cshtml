@@ -34,17 +34,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
-    @if (ViewContext.RouteData.DataTokens["area"] == "Mijn" && Request.IsAuthenticated)
-    {
-        <script src="~/Scripts/ckeditor/ckeditor.js"></script>
-        <script type="text/javascript">
-            if (document.getElementsByName('LeesPreekTekst').length > 0) CKEDITOR.replace('LeesPreekTekst', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
-            if (document.getElementsByName('InboxItem.Inhoud').length > 0) CKEDITOR.replace('InboxItem.Inhoud', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
-            if (document.getElementsByName('InboxOpvolging.Tekst').length > 0) CKEDITOR.replace('InboxOpvolging.Tekst', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
-            if (document.getElementsByName('Teksten[0].Tekst_').length > 0) CKEDITOR.replace('Teksten[0].Tekst_', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
-            if (document.getElementsByName('Teksten[1].Tekst_').length > 0) CKEDITOR.replace('Teksten[1].Tekst_', { language: '@Request.RequestContext.RouteData.Values["culture"].ToString()' });
-        </script>
-    }
     <script type="text/javascript">
 
         prekenweb.rootUrl = '@Url.Content("~")';
@@ -52,7 +41,7 @@
         @if (Request.RequestContext.RouteData.Values["culture"] != null)
         {
             @:prekenweb.taal = '@Request.RequestContext.RouteData.Values["culture"].ToString()';
-                }
+                                }
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-38278370-2']);
@@ -65,5 +54,12 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     </script>
+
+    @if ((string)ViewContext.RouteData.DataTokens["area"] == "Mijn" && Request.IsAuthenticated)
+    {
+        @Html.Action("_CKEditor", "Prekenweb", new { Area = "Website" })
+    }
+
+
 </body>
 </html>

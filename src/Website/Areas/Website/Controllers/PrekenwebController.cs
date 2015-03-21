@@ -33,6 +33,11 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return PartialView();
         }
 
+        public ActionResult _CKEditor()
+        {
+            return PartialView();
+        }
+
         public ActionResult _Menu()
         {
             return PartialView();
