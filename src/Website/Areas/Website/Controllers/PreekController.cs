@@ -84,28 +84,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return Open(id);
         }
 
-        public ActionResult LeespreekAfdrukken(int id)
-        {
-            var viewModel = new PreekLezen();
-            viewModel.Preek = _context
-                .Preeks
-                .Include(x => x.PreekType)
-                .Include(x => x.Predikant)
-                .Include(x => x.Serie)
-                .Include(x => x.Gebeurtenis)
-                .Include(x => x.Gemeente)
-                .Include(x => x.PreekLezenEnZingens)
-                .Include(x => x.BoekHoofdstuk)
-                .Include(x => x.BoekHoofdstuk.Boek)
-                .SingleOrDefault(p => p.Id == id && p.Gepubliceerd);
-
-            if (viewModel.Preek == null) return HttpNotFound("Preek bestaat niet (meer)");
-            if (viewModel.Preek.TaalId != TaalId) return HttpNotFound("Deze preek bestaat, maar niet in deze taal");
-            if (string.IsNullOrWhiteSpace(viewModel.Preek.LeesPreekTekst) || viewModel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) return HttpNotFound("Voor deze preek is geen afdrukweergave");
-            viewModel.Titel = viewModel.Preek.GetPreekTitel();
-            return View(viewModel);
-        }
-
         private PreekCookie EnsureCookie(int preekId, out DateTime? laatsteBezoek)
         {
             laatsteBezoek = new DateTime?();

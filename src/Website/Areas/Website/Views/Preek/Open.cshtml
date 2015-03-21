@@ -342,13 +342,7 @@
 
         <ul id="DownloadLinks">
             @if (!string.IsNullOrWhiteSpace(Model.Preek.LeesPreekTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
-            {
-                @*<li>
-                        <a href="@Url.Action("LeespreekAfdrukken", new { id = Model.Preek.Id })" class="" onclick="prekenwebPopupWindow(this.href, 990, 700); return false;">
-                            <div class="fa fa-print"></div>
-                            @Resources.Afdrukweergave
-                        </a>
-                    </li>*@
+            { 
                 <li>
                     <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, format = "EPUB" })" class="" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                         <div class="fa fa-save"></div>

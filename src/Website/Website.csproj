@@ -583,7 +583,6 @@
     <Content Include="Content\PrekenwebDataSet.xsc">
       <DependentUpon>PrekenwebDataSet.xsd</DependentUpon>
     </Content>
-    <Content Include="Areas\Website\Views\Preek\LeespreekAfdrukken.cshtml" />
     <Content Include="Areas\Website\Views\Preek\Open.cshtml" />
     <Content Include="Areas\Mijn\Views\Gebruiker\Registreer.cshtml" />
     <Content Include="Areas\Mijn\Views\Home\Stamgegevens.cshtml" />
