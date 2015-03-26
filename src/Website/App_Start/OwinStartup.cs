@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -49,8 +50,8 @@ namespace Prekenweb.Website
 
             var twitterOptions = new TwitterAuthenticationOptions
             {
-                ConsumerKey = Settings.Default.TwitterCustomerKey,
-                ConsumerSecret = Settings.Default.TwitterCustomerSecret,
+                ConsumerKey = ConfigurationManager.AppSettings["TwitterCustomerKey"],
+                ConsumerSecret = ConfigurationManager.AppSettings["TwitterCustomerSecret"],
                 Provider = new TwitterAuthenticationProvider()
                 {
                     OnAuthenticated = OnAuthenticated
@@ -60,8 +61,8 @@ namespace Prekenweb.Website
 
             var facebookOptions = new FacebookAuthenticationOptions
             {
-                AppId = Settings.Default.FacebookAppId,
-                AppSecret = Settings.Default.FacebookAppSecret
+                AppId = ConfigurationManager.AppSettings["FacebookAppId"],
+                AppSecret = ConfigurationManager.AppSettings["FacebookAppSecret"]
             };
             facebookOptions.Scope.Add("email");
             app.UseFacebookAuthentication(facebookOptions);

@@ -1,4 +1,5 @@
-﻿using MailChimp;
+﻿using System.Configuration;
+using MailChimp;
 using MailChimp.Campaigns;
 using MailChimp.Errors;
 using MailChimp.Helper;
@@ -88,7 +89,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public static void UnSubscribe(string email, string naam, string listId)
         {
-            var mc = new MailChimpManager(Settings.Default.MailChimpAPIKey);
+            var mc = new MailChimpManager(ConfigurationManager.AppSettings["MailChimpAPIKey"]);
             mc.Unsubscribe(listId, new EmailParameter { Email = email }, false, false, false);
         }
 
@@ -101,7 +102,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         { 
             var naamMergeVar = new NaamMergeVar {NAAM = naam}; 
 
-            var mc = new MailChimpManager(Settings.Default.MailChimpAPIKey);
+            var mc = new MailChimpManager(ConfigurationManager.AppSettings["MailChimpAPIKey)"]);
             try
             {
                 mc.Subscribe(listId,
@@ -119,7 +120,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public static List<MailChimpNieuwsbrief> GetSendCampains(string listId)
         {
-            var mc = new MailChimpManager(Settings.Default.MailChimpAPIKey);
+            var mc = new MailChimpManager(ConfigurationManager.AppSettings["MailChimpAPIKey"]);
 
             var campaigns = mc.GetCampaigns(new CampaignFilter { ListId = listId }, limit: 4);
             return campaigns.Data.Select(x => new MailChimpNieuwsbrief

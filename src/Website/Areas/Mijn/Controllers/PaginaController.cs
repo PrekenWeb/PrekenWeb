@@ -1,4 +1,5 @@
-﻿using Prekenweb.Models;
+﻿using System.Configuration;
+using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
@@ -153,7 +154,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [HttpPost]
         public ActionResult UploadImage(HttpPostedFileBase upload, string ckEditorFuncNum, string ckEditor, string langCode)
         {
-            var relativePath = string.Format(@"{0}\UserUpload_{1}", Settings.Default.AfbeeldingenFolder, upload.FileName);
+            var relativePath = string.Format(@"{0}\UserUpload_{1}", ConfigurationManager.AppSettings["AfbeeldingenFolder"], upload.FileName);
             var savedFileLocation = Server.MapPath(relativePath);
             upload.SaveAs(savedFileLocation);
 

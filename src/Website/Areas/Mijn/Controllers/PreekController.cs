@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using System.Configuration;
+using Hangfire;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Website.Areas.Mijn.Models;
@@ -83,7 +84,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var nieuweBestandsnaam = oudeBestandsnaam;
             if (uploadedPreek == null || uploadedPreek.ContentLength <= 0) return nieuweBestandsnaam;
 
-            var rootFolder = Settings.Default.PrekenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["PrekenFolder"];
 
             nieuweBestandsnaam =
                 string.Format(
@@ -255,7 +256,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var preek = _context.Preeks.Single(p => p.Id == id);
             try
             {
-                string filename = Server.MapPath(string.Format("{0}{1}", Settings.Default.PrekenFolder, preek.Bestandsnaam));
+                string filename = Server.MapPath(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam));
                 if (!string.IsNullOrEmpty(preek.Bestandsnaam) && System.IO.File.Exists(filename))
                     System.IO.File.Delete(filename);
             }

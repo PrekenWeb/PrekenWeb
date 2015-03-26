@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
 using CaptchaMvc.Attributes;
@@ -580,7 +581,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
                 if (accessTokenClaim != null && accessTokenSecretClaim != null)
                 {
-                    var service = new TwitterService(Settings.Default.TwitterCustomerKey, Settings.Default.TwitterCustomerSecret);
+                    var service = new TwitterService(ConfigurationManager.AppSettings["TwitterCustomerKey"], ConfigurationManager.AppSettings["TwitterCustomerSecret"]);
                     service.AuthenticateWith(accessTokenClaim.Value, accessTokenSecretClaim.Value);
                     var twitterUserProfile = service.GetUserProfile(new GetUserProfileOptions());
                     return View("ExterneLoginBevestiging", new ExterneLoginBevestigingViewModel { /*Email = twitterUserProfile.ScreenName,*/ Naam = twitterUserProfile.Name, ReturnUrl = returnUrl });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -26,11 +27,13 @@ namespace Prekenweb.Website.Hangfire
         [AutomaticRetry(Attempts = 3, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
         public void AnalyseerAudioTaak(int id)
         {
+            if (bool.Parse(ConfigurationManager.AppSettings["TestEnvironement"])) return;
+            
             using (var context = new PrekenwebContext())
             { 
                 var preek = context.Preeks.Single(x => x.Id == id);
                 
-                var filename = HostingEnvironment.MapPath(Path.Combine(Settings.Default.PrekenFolder, preek.Bestandsnaam));
+                var filename = HostingEnvironment.MapPath(Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam));
                 if (!File.Exists(filename) || Path.GetExtension(filename) != ".mp3")
                 {
                     _logger.Warn("Verwerking preek overgeslagen: geen (MP3) bestand gevonden");
@@ -49,6 +52,8 @@ namespace Prekenweb.Website.Hangfire
         [AutomaticRetry(Attempts = 3, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
         public void InboxOpvolgingTaak(int inboxOpvolgingId)
         {
+            if (bool.Parse(ConfigurationManager.AppSettings["TestEnvironement"])) return;
+
             using (var context = new PrekenwebContext())
             {
                 var opvolging = context.InboxOpvolgings.Single(x => x.Id == inboxOpvolgingId);
@@ -58,7 +63,7 @@ namespace Prekenweb.Website.Hangfire
 
                 try
                 {
-                    using (var smtpClient = new SmtpClient(Settings.Default.SMTPServer))
+                    using (var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SMTPServer"]))
                     {
                         smtpClient.UseDefaultCredentials = true;
 
@@ -87,6 +92,8 @@ namespace Prekenweb.Website.Hangfire
         [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
         public void InboxSamenvattingTaak()
         {
+            if (bool.Parse(ConfigurationManager.AppSettings["TestEnvironement"])) return;
+
             using (var context = new PrekenwebContext())
             {
                 var samenvattingVanaf = DateTime.Now.AddDays(-1);
@@ -139,7 +146,7 @@ namespace Prekenweb.Website.Hangfire
                     sb.Append("</td></tr></table>");
 
 
-                    using (var smtpClient = new SmtpClient(Settings.Default.SMTPServer))
+                    using (var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SMTPServer"]))
                     {
                         smtpClient.UseDefaultCredentials = true;
 

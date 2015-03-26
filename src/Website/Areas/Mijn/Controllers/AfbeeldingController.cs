@@ -1,4 +1,5 @@
-﻿using Prekenweb.Models;
+﻿using System.Configuration;
+using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
@@ -36,7 +37,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public ActionResult Verwijder(int id)
         {
             Afbeelding afbeelding = _context.Afbeeldings.Single(a => a.Id == id);
-            var rootFolder = Settings.Default.AfbeeldingenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
 
             var origineleLocatie = Server.MapPath(string.Format("{0}{1}", rootFolder, afbeelding.Bestandsnaam));
             var thumbnailLocatie = Server.MapPath(string.Format("{0}Thumbnail_{1}.jpg", rootFolder, afbeelding.Id));
@@ -56,7 +57,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public ActionResult Bewerk(int id)
         {
             Afbeelding afbeelding = _context.Afbeeldings.Single(a => a.Id == id);
-            ViewBag.AfbeeldingenFolder = Settings.Default.AfbeeldingenFolder;
+            ViewBag.AfbeeldingenFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
             return View(new AfbeeldingEditViewModel
             {
                 Afbeelding = afbeelding
@@ -66,7 +67,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [HttpPost]
         public ActionResult Bewerk(AfbeeldingEditViewModel viewModel)
         {
-            ViewBag.AfbeeldingenFolder = Settings.Default.AfbeeldingenFolder;
+            ViewBag.AfbeeldingenFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
           
             if (!ModelState.IsValid) return View(viewModel);
 
@@ -134,7 +135,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public ActionResult Maak()
         {
-            ViewBag.AfbeeldingenFolder = Settings.Default.AfbeeldingenFolder;
+            ViewBag.AfbeeldingenFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
             return View(new AfbeeldingEditViewModel
             {
                 Afbeelding = new Afbeelding()
@@ -146,7 +147,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             if (viewModel.Bestand == null || !(viewModel.Bestand.ContentLength > 0)) ModelState.AddModelError("Bestand", "Geen bestand gekozen");
 
-            ViewBag.AfbeeldingenFolder = Settings.Default.AfbeeldingenFolder;
+            ViewBag.AfbeeldingenFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
 
             if (!ModelState.IsValid || viewModel.Bestand == null) return View(viewModel);
             
@@ -194,7 +195,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public void MaakThumbnailImage(Image origineel, int afbeeldingId)
         {
-            var rootFolder = Settings.Default.AfbeeldingenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
             var thumbnailBestandsnaam = Server.MapPath(string.Format(@"{0}\Thumbnail_{1}.jpg", rootFolder, afbeeldingId));
 
             using (var newImage = new Bitmap(100, 100))
@@ -214,7 +215,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public void MaakHomepageImage(Image origineel, int afbeeldingId)
         {
-            var rootFolder = Settings.Default.AfbeeldingenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
             var thumbnailBestandsnaam = Server.MapPath(string.Format(@"{0}\Homepage_{1}.jpg", rootFolder, afbeeldingId));
             double height = 340.0;
             double width = origineel.Width;
@@ -247,7 +248,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             if (uploadedAfbeelding == null || uploadedAfbeelding.ContentLength <= 0) return string.Empty;
             
-            var rootFolder = Settings.Default.AfbeeldingenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
 
             var nieuweBestandsnaam =
                 string.Format(

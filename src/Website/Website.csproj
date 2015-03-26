@@ -558,6 +558,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Website\Views\Shared\_CKEditor.cshtml" />
+    <Content Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -659,12 +660,15 @@
     <Content Include="Scripts\_references.js" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Areas\Website\Views\Shared\_Layout.cshtml" />
@@ -700,9 +704,6 @@
     </Content>
     <Content Include="Views\Shared\EditorTemplates\Vers.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Gebruiker.cshtml" />
-    <None Include="Web.ReleaseTest.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\custom\custom.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using Prekenweb.Attributes;
 using Prekenweb.Models.Repository;
 using Prekenweb.Website.Controllers;
@@ -41,8 +42,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         {
             //TODO: Replace with TwitterService NuGet Package implementation
 
-            var key = Settings.Default.TwitterCustomerKey;
-            var secret = Settings.Default.TwitterCustomerSecret;
+            var key = ConfigurationManager.AppSettings["TwitterCustomerKey"];
+            var secret = ConfigurationManager.AppSettings["TwitterCustomerSecret"];
 
             var server = HttpContext.Server;
             var bearerToken = server.UrlEncode(key) + ":" + server.UrlEncode(secret);
