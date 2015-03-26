@@ -47,7 +47,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
-        [OutputCache(Duration = 1800, VaryByCustom="user", VaryByParam = "")] // 30 minuten
+        [OutputCache(Duration = 1800, VaryByCustom="user", VaryByParam = "", Location = OutputCacheLocation.Server)] // 30 minuten
         public async Task<ActionResult> Index()
         {
             return View(await GetHomeIndexViewModel());

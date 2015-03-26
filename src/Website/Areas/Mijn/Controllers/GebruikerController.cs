@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
 using CaptchaMvc.Attributes;
+using Hangfire.Dashboard;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -102,7 +103,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public ActionResult Uitloggen()
         {
             AuthenticationManager.SignOut();
-            return Redirect("~/");
+            return View();
         }
 
         [System.Web.Mvc.AllowAnonymous]

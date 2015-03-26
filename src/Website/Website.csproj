@@ -558,7 +558,9 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Website\Views\Shared\_CKEditor.cshtml" />
-    <Content Include="PrivateSettings.config" />
+    <None Include="PrivateSettings.config" />
+    <Content Include="Areas\Mijn\Views\Gebruiker\Uitloggen.cshtml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

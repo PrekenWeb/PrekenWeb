@@ -14,7 +14,7 @@ namespace Prekenweb.Website
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
-            
+
             AreaRegistration.RegisterAllAreas();
 
             ViewEngines.Engines.Clear();
@@ -49,6 +49,17 @@ namespace Prekenweb.Website
             }
 
             return null; //base.GetVaryByCustomString(context, custom);
+        }
+
+        public void Application_Error(Object sender, EventArgs e)
+        {
+            //Do not OutputCache pages with an exception
+            Response.Cache.AddValidationCallback(DontCacheCurrentResponse, null);
+        }
+
+        private void DontCacheCurrentResponse(HttpContext context, Object data, ref HttpValidationStatus status)
+        {
+            status = HttpValidationStatus.IgnoreThisRequest;
         }
     }
 }
