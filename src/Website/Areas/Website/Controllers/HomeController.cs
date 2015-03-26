@@ -1,4 +1,5 @@
-﻿using Prekenweb.Models;
+﻿using System.Configuration;
+using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
 using PrekenWeb.Security;
@@ -46,7 +47,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
-        [OutputCache(Duration = 1800, VaryByCustom="user")] // 30 minuten
+        [OutputCache(Duration = 1800, VaryByCustom="user", VaryByParam = "")] // 30 minuten
         public async Task<ActionResult> Index()
         {
             return View(await GetHomeIndexViewModel());
@@ -82,7 +83,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         public ActionResult HomepageImage(int id)
         {
             var afbeelding = _spotlightRepository.GetAfbeelding(id);
-            var rootFolder = Settings.Default.AfbeeldingenFolder;
+            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
             var filename = Server.MapPath(string.Format(@"{0}\Homepage_{1}.jpg", rootFolder, afbeelding.Id));
             try
             {

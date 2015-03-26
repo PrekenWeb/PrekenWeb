@@ -48,7 +48,7 @@ namespace Prekenweb.Website
                 }
             }
 
-            return base.GetVaryByCustomString(context, custom);
+            return null; //base.GetVaryByCustomString(context, custom);
         }
     }
 }
