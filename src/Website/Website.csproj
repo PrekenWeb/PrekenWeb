@@ -658,10 +658,10 @@
     <Content Include="Scripts\lofslider.js" />
     <TypeScriptCompile Include="Scripts\main.ts" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Web.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
