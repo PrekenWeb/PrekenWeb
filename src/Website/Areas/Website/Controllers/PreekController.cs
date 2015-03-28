@@ -363,13 +363,16 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return viewer.LocalReport.Render(format, null, out mimeType, out encoding, out extension, out streamIds, out warnings);
         }
 
-        public ActionResult GegevensAanvullen(int preekId)
+        public async Task<ActionResult> GegevensAanvullen(int preekId)
         {
+            var preek = await _context.Preeks.SingleOrDefaultAsync(p => p.Id == preekId);
+            if (preek == null) return HttpNotFound();
+
             return View(new GegevensAanvullen
             {
                 TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalId),
                 PreekId = preekId,
-                Preek = _context.Preeks.Single(p => p.Id == preekId),
+                Preek = preek,
                 Verzonden = false
             });
         }

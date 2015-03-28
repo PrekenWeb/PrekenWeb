@@ -63,6 +63,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         public ActionResult WisselTaal(string taal, string returnUrl)
         {
             var rootFolder = Url.Content("~/");
+            if (string.IsNullOrWhiteSpace(returnUrl)) returnUrl = "/";
+
             var applicationUrl = (returnUrl.Substring(0, rootFolder.Length) == rootFolder) ? returnUrl.Substring(rootFolder.Length) : returnUrl;
             if (Enum.GetNames(typeof(Culture)).Any(culture => applicationUrl.StartsWith(culture)))
             {
