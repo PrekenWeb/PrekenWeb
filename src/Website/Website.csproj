@@ -29,6 +29,7 @@
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
+    <OnBeforePackageUsingManifest>AddCustomSkipRules</OnBeforePackageUsingManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -790,4 +791,15 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="AddCustomSkipRules">
+    <ItemGroup>
+      <MsDeploySkipRules Include="SkipDeleteAppData">
+        <SkipAction>Delete</SkipAction>
+        <ObjectName>filePath</ObjectName>
+        <AbsolutePath>$(_Escaped_PackageTempDir)\\PrivateSettings.config</AbsolutePath>
+        <XPath>
+        </XPath>
+      </MsDeploySkipRules>
+    </ItemGroup>
+  </Target>
 </Project>
