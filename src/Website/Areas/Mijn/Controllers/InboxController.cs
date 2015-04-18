@@ -10,8 +10,8 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
-using Prekenweb.Website.Lib;
-using Prekenweb.Website.Hangfire;
+using Prekenweb.Website.Lib.Hangfire;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -86,7 +86,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ActionResult> OpvolgingToevoegen(int inboxId)
         {
             var inboxItem = _context.Inboxes.Single(i => i.Id == inboxId);
-            var gebruikerId = _huidigeGebruiker.Id;
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
             var gebruiker = await _prekenWebUserManager.FindByIdAsync(gebruikerId);
             return View(new InboxOpvolgingToevoegenViewModel
             {

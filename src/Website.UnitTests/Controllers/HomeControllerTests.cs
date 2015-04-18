@@ -2,12 +2,10 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Prekenweb.Models.Repository;
 using Prekenweb.Website;
 using Prekenweb.Website.Areas.Website.Controllers;
-using Prekenweb.Website.Cache;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.ViewModels;
 
 namespace Website.UnitTests.Controllers
@@ -18,8 +16,8 @@ namespace Website.UnitTests.Controllers
         private IMailingRepository _mailingRepository;
         private ITekstRepository _tekstRepository;
         private IPrekenRepository _prekenRepository;
-        private ISpotlightRepository _spotlightRepository; 
-        private IPrekenwebCache _cache;
+        private ISpotlightRepository _spotlightRepository;
+        private IPrekenwebCache _cache; 
 
         private HomeController _homeController;
 

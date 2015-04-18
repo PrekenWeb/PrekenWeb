@@ -1,10 +1,12 @@
-﻿using Prekenweb.Models.Repository;
+﻿using System.Threading.Tasks;
+using Prekenweb.Models.Repository;
+using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Models.Services;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -12,19 +14,22 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
     {
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
         public BladwijzerController(IGebruikerRepository gebruikerRepository,
-            IHuidigeGebruiker huidigeGebruiker)
+            IHuidigeGebruiker huidigeGebruiker,
+            IPrekenWebUserManager prekenWebUserManager)
         {
             _gebruikerRepository = gebruikerRepository;
             _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
         }
 
         [Authorize]
-        public ActionResult DoorMijBeluisterd()
-        {
+        public async Task<ActionResult> DoorMijBeluisterd()
+        { 
             var resultaten = _gebruikerRepository
-                .GetBeluisterdePreken(_huidigeGebruiker.Id, TaalId)
+                .GetBeluisterdePreken(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalId)
                 .Select(p => new ZoekresultaatItem
                 {
                     Preek = p.Preek,
@@ -42,10 +47,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         [Authorize]
-        public ActionResult MetBladwijzer()
+        public async Task<ActionResult> MetBladwijzer()
         {
             var resultaten =  _gebruikerRepository
-                .GetPrekenMetBladwijzer(_huidigeGebruiker.Id, TaalId)
+                .GetPrekenMetBladwijzer(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalId)
                 .Select(p => new ZoekresultaatItem
                 {
                     Preek = p.Preek,

@@ -5,8 +5,10 @@ using Microsoft.Reporting.WebForms;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
+using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Cache;
+using Prekenweb.Website.Lib.Identity;
 using Prekenweb.Website.ViewModels;
 using SharpEpub;
 using System;
@@ -28,19 +30,22 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         private readonly ITekstRepository _tekstRepository;
         private readonly IPrekenwebCache _cache;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
         public PreekController(IPrekenwebContext<Gebruiker> context,
                                ITekstRepository tekstRepository,
                                IPrekenwebCache cache,
-                               IHuidigeGebruiker huidigeGebruiker)
+                               IHuidigeGebruiker huidigeGebruiker,
+                               IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _tekstRepository = tekstRepository;
             _cache = cache;
             _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
         }
-         
-        public ActionResult Open(int id)
+
+        public async Task<ActionResult> Open(int id)
         {
             var viewModel = new PreekOpen();
 
@@ -71,21 +76,22 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             viewModel.Titel = viewModel.Preek.GetPreekTitel();
 
             DateTime? laatsteBezoek;
-            viewModel.Cookie = EnsureCookie(id, out laatsteBezoek);
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            viewModel.Cookie =   EnsureCookie(id, gebruikerId, out laatsteBezoek);
             viewModel.LaatsteBezoek = laatsteBezoek;
 
             ViewBag.TaalKeuze = false;
 
             return View(viewModel);
-        } 
+        }
 
-        private PreekCookie EnsureCookie(int preekId, out DateTime? laatsteBezoek)
+        private PreekCookie EnsureCookie(int preekId, int gebruikerId, out DateTime? laatsteBezoek)
         {
             laatsteBezoek = new DateTime?();
 
             if (!Request.IsAuthenticated) return new PreekCookie();
 
-            var preekCookie = _context.PreekCookies.SingleOrDefault(pc => pc.PreekId == preekId && pc.GebruikerId == _huidigeGebruiker.Id);
+            var preekCookie = _context.PreekCookies.SingleOrDefault(pc => pc.PreekId == preekId && pc.GebruikerId == gebruikerId);
             if (preekCookie == null)
             {
                 preekCookie = new PreekCookie
@@ -93,7 +99,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     DateTime = DateTime.Now,
                     Opmerking = string.Empty,
                     PreekId = preekId,
-                    GebruikerId = _huidigeGebruiker.Id
+                    GebruikerId = gebruikerId
                 };
                 _context.PreekCookies.Add(preekCookie);
                 _context.SaveChanges();
@@ -158,7 +164,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             //Hook: Verbreek verbinding, sommige request duren in potentie erg lang vanwege de ResumingFilePathResult results, DB connectie is vanaf nu niet meer nodig
             //_context.Database.Connection.Close();
-            _context.Dispose(); 
+            _context.Dispose();
 
             if (preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek && (string.IsNullOrEmpty(preek.Bestandsnaam) || format == "EPUB"))
             {
@@ -194,12 +200,13 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public async Task<ActionResult> LegBladwijzer(int preekId)
         {
-            var preekCookie = await _context.PreekCookies.SingleOrDefaultAsync(x => x.PreekId == preekId && x.GebruikerId == _huidigeGebruiker.Id);
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            var preekCookie = await _context.PreekCookies.SingleOrDefaultAsync(x => x.PreekId == preekId && x.GebruikerId == gebruikerId);
             if (preekCookie == null)
             {
                 preekCookie = new PreekCookie
                 {
-                    GebruikerId = _huidigeGebruiker.Id,
+                    GebruikerId = gebruikerId,
                     PreekId = preekId
                 };
                 _context.PreekCookies.Add(preekCookie);
@@ -216,7 +223,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public async Task<ActionResult> VerwijderBladwijzer(int preekId)
         {
-            var preekCookie = await _context.PreekCookies.SingleOrDefaultAsync(x => x.PreekId == preekId && x.GebruikerId == _huidigeGebruiker.Id);
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+
+            var preekCookie = await _context.PreekCookies.SingleOrDefaultAsync(x => x.PreekId == preekId && x.GebruikerId == gebruikerId);
             if (preekCookie == null) return null;
 
             preekCookie.BladwijzerGelegdOp = null;
@@ -436,10 +445,10 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         }
 
         [Authorize]
-        public ActionResult UpdateTimePlayed(double timePlayed, int cookieId)
+        public async Task<object> UpdateTimePlayed(double timePlayed, int cookieId)
         {
             var cookie = _context.PreekCookies.SingleOrDefault(x => x.Id == cookieId);
-            if (cookie == null || cookie.GebruikerId != _huidigeGebruiker.Id)
+            if (cookie == null || cookie.GebruikerId != await _huidigeGebruiker.GetId(_prekenWebUserManager, User))
             {
                 throw new HttpException("This file or cookie does not exist!");
             }

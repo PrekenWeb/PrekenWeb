@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Services;
-using Prekenweb.Models.ViewModels;
 
 namespace Prekenweb.Models.Repository
 {

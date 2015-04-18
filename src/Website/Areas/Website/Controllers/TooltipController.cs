@@ -1,7 +1,6 @@
 ﻿using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib;
 using Prekenweb.Website.ViewModels;
 using System.Linq;
 using System.Web.Mvc;

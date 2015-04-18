@@ -4,15 +4,14 @@ using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Transactions;
 using System.Web.Mvc;
 using System.Web.UI;
-using Prekenweb.Website.Properties;
+using Prekenweb.Website.Lib.Cache;
+using Prekenweb.Website.Lib.Identity;
 using Prekenweb.Website.ViewModels;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
@@ -26,7 +25,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         private readonly IPrekenwebCache _cache;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
-        private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IHuidigeGebruiker _huidigeGebruiker; 
 
         public HomeController(IMailingRepository mailingRepository,
                               ITekstRepository tekstRepository,
@@ -47,11 +46,13 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
+        [AddTokenCookie]
         [OutputCache(Duration = 1800, VaryByCustom="user", VaryByParam = "", Location = OutputCacheLocation.Server)] // 30 minuten
         public async Task<ActionResult> Index()
-        {
+        { 
             return View(await GetHomeIndexViewModel());
         }
+
 
         private async Task<HomeIndex> GetHomeIndexViewModel()
         {
@@ -75,7 +76,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             var cacheKey = string.Format("{0}.{1}", string.Join(".", preekTypIds), "NieuwePreken");
 
-            nieuwePreken.Preken = await _cache.GetCached(cacheKey, TaalId, User.Identity.Name, async () => await _prekenRepository.GetNieuwePreken(preekTypIds, TaalId, _huidigeGebruiker.Id));
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+
+            nieuwePreken.Preken = await _cache.GetCached(cacheKey, TaalId, User.Identity.Name, async () => await _prekenRepository.GetNieuwePreken(preekTypIds, TaalId, gebruikerId));
             return nieuwePreken;
         }
 

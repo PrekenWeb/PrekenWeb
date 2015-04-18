@@ -1,4 +1,5 @@
-﻿@model HomeIndex
+﻿@using Prekenweb.Website.Lib.HtmlHelpers
+@model HomeIndex
 @{
     ViewBag.Title = "Home";
 
@@ -8,7 +9,7 @@
 }
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             var buttons = {
                 previous: $('#spotLightItems .button-previous'),
                 next: $('#spotLightItems .button-next')
@@ -29,12 +30,12 @@
 
 
             $.ajax({
-                url: '@Url.Action("Twitter","Feed")',
+                url: '@Url.Action("Twitter", "Feed")',
                 data: {},
                 dataType: "json",
                 //callbackParameter: "jsoncallback",
                 timeout: 5000,
-                success: function (data) {
+                success: function(data) {
                     $("#LoadingTwitter").remove();
                     var str = '';
                     for (var i = 0; i < data.length; i++) {
@@ -48,13 +49,28 @@
                     });
 
                 },
-                error: function (XHR, textStatus, errorThrown) {
+                error: function(XHR, textStatus, errorThrown) {
                 }
             });
 
             function replaceURLWithHTMLLinks(text) {
                 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@@#\/%?=~_|!:,.;]*[-A-Z0-9+&@@#\/%=~_|])/ig;
                 return text.replace(exp, "<a href='$1'>$1</a>");
+            }
+
+            if ($.cookie('Token')) {
+                $.ajax({
+                    type: 'GET',
+                    url: prekenweb.apiRootUrl + 'api/Preek/GetAllPreken',
+                    headers: { "Authorization": "Bearer " + $.cookie('Token') },
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(XHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
             }
         });
 

@@ -1,11 +1,13 @@
-﻿using Prekenweb.Models.Identity;
+﻿using System.Threading.Tasks;
+using Prekenweb.Models.Identity;
+using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Models;
 using System.Web.Routing;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -13,29 +15,34 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
         public ZoekOpdrachtController(IPrekenwebContext<Gebruiker> context,
-            IHuidigeGebruiker huidigeGebruiker)
+            IHuidigeGebruiker huidigeGebruiker,
+            IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
         }
 
         [Authorize]
-        public ActionResult OpgeslagenZoekOpdrachten()
+        public async Task<ActionResult> OpgeslagenZoekOpdrachten()
         {
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
             var viewModel = new OpgeslagenZoekOpdrachten
             {
-                ZoekOpdrachten = _context.ZoekOpdrachten.Where(x => x.GebruikerId == _huidigeGebruiker.Id).OrderByDescending(x => x.Id)
+                ZoekOpdrachten = _context.ZoekOpdrachten.Where(x => x.GebruikerId == gebruikerId).OrderByDescending(x => x.Id)
             };
 
             return View(viewModel);
         }
 
         [Authorize]
-        public ActionResult RedirectToZoekOpdracht(int id)
+        public async Task<RedirectToRouteResult> RedirectToZoekOpdracht(int id)
         {
-            var opdracht = _context.ZoekOpdrachten.Single(x => x.Id == id && x.GebruikerId == _huidigeGebruiker.Id);
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            var opdracht = _context.ZoekOpdrachten.Single(x => x.Id == id && x.GebruikerId == gebruikerId);
             var route = new RouteValueDictionary(opdracht);
             route.Add("Area", "Website");
             route.Remove("Gebruiker");

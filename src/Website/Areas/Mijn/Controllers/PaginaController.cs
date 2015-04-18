@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
+using System.Threading.Tasks;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
+using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
 using System;
@@ -9,8 +11,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Prekenweb.Website.Lib;
-using Prekenweb.Website.Properties;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -19,12 +20,15 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
         public PaginaController(IPrekenwebContext<Gebruiker> context,
-                                IHuidigeGebruiker huidigeGebruiker)
+                                IHuidigeGebruiker huidigeGebruiker,
+                                IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
         }
 
         public ActionResult Index()
@@ -45,12 +49,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Bewerk(int id)
+        public async Task<ViewResult> Bewerk(int id)
         {
             var pagina = _context.Paginas.Single(p => p.Id == id);
 
             pagina.Bijgewerkt = DateTime.Now;
-            pagina.BijgewerktDoor = _huidigeGebruiker.Id;
+            pagina.BijgewerktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             return View(new PaginaEditViewModel
             {
@@ -120,7 +124,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Maak()
+        public async Task<ViewResult> Maak()
         {
             return View(new PaginaEditViewModel
             {
@@ -129,8 +133,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     Gepubliceerd = true,
                     Bijgewerkt = DateTime.Now,
                     Aangemaakt = DateTime.Now,
-                    BijgewerktDoor = _huidigeGebruiker.Id,
-                    AangemaaktDoor = _huidigeGebruiker.Id,
+                    BijgewerktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User),
+                    AangemaaktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User),
                     TonenOpHomepage = false
                 }
             });

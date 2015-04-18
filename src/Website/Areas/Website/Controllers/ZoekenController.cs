@@ -3,15 +3,15 @@ using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
 using Prekenweb.Models.Services;
+using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Identity;
 using Prekenweb.Website.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.UI;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 { 
@@ -21,17 +21,20 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IZoekenRepository _zoekenRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
-        private readonly IHuidigeGebruiker _huidigeGebruiker; 
+        private readonly IHuidigeGebruiker _huidigeGebruiker;
+       private readonly IPrekenWebUserManager _prekenWebUserManager;
 
-        public ZoekenController(IPrekenwebContext<Gebruiker> context, 
+       public ZoekenController(IPrekenwebContext<Gebruiker> context, 
                                 IZoekenRepository zoekenRepository,
                                 IGebruikerRepository gebruikerRepository,
-                                IHuidigeGebruiker huidigeGebruiker)
+                                IHuidigeGebruiker huidigeGebruiker,
+                                IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _zoekenRepository = zoekenRepository;
             _gebruikerRepository = gebruikerRepository;
-            _huidigeGebruiker = huidigeGebruiker; 
+            _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
             ViewBag.Taalkeuze = true;
         }
 
@@ -52,7 +55,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
             var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
             zoekOpdracht.TaalId = TaalId;
-            zoekOpdracht.GebruikerId = _huidigeGebruiker.Id;
+            zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             _context.ZoekOpdrachten.Add(zoekOpdracht);
             await _context.SaveChangesAsync();
@@ -95,7 +98,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             // ViewModel values kopieren naar instantie van ZoekOpdracht 
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
             var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
-            zoekOpdracht.GebruikerId = _huidigeGebruiker.Id;
+            zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);
             viewModel.Zoekresultaat = await zoekService.ZoekOpdrachtUitvoeren(zoekOpdracht, (viewModel.Pagina.Value * pagesize) - pagesize, pagesize, true);

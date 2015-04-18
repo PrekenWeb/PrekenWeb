@@ -1,4 +1,5 @@
-﻿@model PreekOpen
+﻿@using Prekenweb.Website.Lib.HtmlHelpers
+@model PreekOpen
 @{
     ViewBag.Title = Model.Titel;
     string predikant = Model.Preek.PredikantId.HasValue ? Model.Preek.Predikant.VolledigeNaam : string.Empty;

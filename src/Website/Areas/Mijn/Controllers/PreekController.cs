@@ -1,7 +1,9 @@
 ﻿using System.Configuration;
+using System.Threading.Tasks;
 using Hangfire;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
+using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
 using System;
@@ -11,9 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Prekenweb.Website.Lib;
-using Prekenweb.Website.Properties;
-using Prekenweb.Website.Hangfire;
+using Prekenweb.Website.Lib.Hangfire;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -22,21 +23,24 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
         public PreekController(IPrekenwebContext<Gebruiker> context,
-            IHuidigeGebruiker huidigeGebruiker)
+            IHuidigeGebruiker huidigeGebruiker,
+            IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _huidigeGebruiker = huidigeGebruiker;
+            _prekenWebUserManager = prekenWebUserManager;
         }
 
         #region Bewerk
         [Authorize(Roles = "PreekToevoegen")]
-        public ActionResult Bewerk(int id)
+        public async Task<ViewResult> Bewerk(int id)
         {
             var preek = _context.Preeks.Single(p => p.Id == id);
 
-            if (!User.IsInRole("PrekenVanAnderenBewerken") && preek.AangemaaktDoor != _huidigeGebruiker.Id) throw new UnauthorizedAccessException("Cannot edit someone else's sermon");
+            if (!User.IsInRole("PrekenVanAnderenBewerken") && preek.AangemaaktDoor != await _huidigeGebruiker.GetId(_prekenWebUserManager, User)) throw new UnauthorizedAccessException("Cannot edit someone else's sermon");
 
             //preek.Gepubliceerd = User.IsInRole("PreekFiatteren");
             preek.DatumBijgewerkt = DateTime.Now;
@@ -45,7 +49,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         [HttpPost, Authorize(Roles = "PreekToevoegen"), ValidateInput(false)]
-        public ActionResult Bewerk(Preek viewModel, HttpPostedFileBase bestand)
+        public async Task<ActionResult> Bewerk(Preek viewModel, HttpPostedFileBase bestand)
         {
             if (viewModel.Gepubliceerd && !User.IsInRole("PreekFiatteren")) ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
 
@@ -67,7 +71,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 return View(viewModel);
             }
             preek.DatumBijgewerkt = DateTime.Now;
-            preek.AangepastDoor = _huidigeGebruiker.Id;
+            preek.AangepastDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             ClearOutputCaches();
             _context.SaveChanges();
@@ -149,7 +153,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         [Authorize(Roles = "PreekToevoegen"), HttpPost, ValidateInput(false)]
-        public ActionResult Maak(Preek viewModel, HttpPostedFileBase bestand)
+        public async Task<ActionResult> Maak(Preek viewModel, HttpPostedFileBase bestand)
         {
             if (viewModel.Gepubliceerd && !User.IsInRole("PreekFiatteren")) ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
 
@@ -172,7 +176,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     return View(viewModel);
                 }
                 preek.DatumBijgewerkt = DateTime.Now;
-                preek.AangemaaktDoor = _huidigeGebruiker.Id;
+                preek.AangemaaktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
                 ClearOutputCaches();
                 _context.SaveChanges(); 
@@ -207,9 +211,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         #endregion
 
         [Authorize(Roles = "PreekFiatteren,PreekToevoegen")]
-        public ActionResult NogTePubliceren(int? fromPreekId)
+        public async Task<ViewResult> NogTePubliceren(int? fromPreekId)
         {
-            var gebruikerId = _huidigeGebruiker.Id;
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             if (User.IsInRole("PrekenVanAnderenBewerken"))
             {

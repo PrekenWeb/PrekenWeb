@@ -1,12 +1,16 @@
+using System.Configuration;
 using System.Web;
+using System.Web.Mvc;
 using Ninject;
 using Ninject.Web.Common;
+using Ninject.Web.Mvc.FilterBindingSyntax;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
 using PrekenWeb.Security;
-using Prekenweb.Website.Lib;
 using Microsoft.AspNet.Identity.Owin;
+using Prekenweb.Website.Lib.Cache;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website
 {
@@ -30,7 +34,20 @@ namespace Prekenweb.Website
         private static void RegisterServices(IKernel kernel)
         { 
             kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>().InRequestScope();
-            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>(); 
+            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>();
+
+            kernel
+                .BindFilter<AddTokenCookieFilter>(FilterScope.Controller, 0)
+                .WhenControllerHas<AddTokenCookieAttribute>()
+                .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
+                .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]);
+
+            kernel
+                .BindFilter<AddTokenCookieFilter>(FilterScope.Action, 0)
+                .WhenActionMethodHas<AddTokenCookieAttribute>()
+                .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
+                .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]); 
+
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();
             kernel.Bind<IMailingRepository>().To<MailingRepository>();
             kernel.Bind<ITekstRepository>().To<TekstRepository>();

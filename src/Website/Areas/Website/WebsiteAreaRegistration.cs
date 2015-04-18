@@ -83,9 +83,9 @@ namespace Prekenweb.Website.Areas.Website
     {
         protected override IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            if (requestContext.HttpContext.Request.Url.Host.EndsWith("localhost")) requestContext.HttpContext.Response.Redirect( requestContext.HttpContext.Request.Url.ToString() + "/nl/" , true);
             if (requestContext.HttpContext.Request.Url.Host.EndsWith("prekenweb.nl")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/nl/", requestContext.HttpContext.Request.Url.Host), true);
-            if (requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/en/", requestContext.HttpContext.Request.Url.Host), true);
+            else if (requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/en/", requestContext.HttpContext.Request.Url.Host), true);
+            else requestContext.HttpContext.Response.Redirect(requestContext.HttpContext.Request.Url + "/nl/", true);
             return base.GetHttpHandler(requestContext);
         }
     }
@@ -111,7 +111,7 @@ namespace Prekenweb.Website.Areas.Website
             var ci = new CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = ci;
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
-            if (!requestContext.HttpContext.Request.Url.Host.EndsWith("localhost"))
+            if (requestContext.HttpContext.Request.Url.Host.EndsWith("prekenweb.nl") || requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org"))
             {
                 switch (culture)
                 {
@@ -157,7 +157,7 @@ namespace Prekenweb.Website.Areas.Website
             // Return true is the list of allowed values contains 
             // this value.
             //return _values.Contains(value);
-            if (httpContext.Request.Url.Host.EndsWith("localhost")) return _values.Contains(value);
+            if (!httpContext.Request.Url.Host.EndsWith("prekenweb.nl") || !httpContext.Request.Url.Host.EndsWith("sermonweb.org")) return _values.Contains(value);
 
             switch (value)
             {

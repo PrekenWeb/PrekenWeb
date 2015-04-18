@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using Prekenweb.Models.Identity;
-using Prekenweb.Models.ViewModels;
 
 namespace Prekenweb.Models.Repository
 {

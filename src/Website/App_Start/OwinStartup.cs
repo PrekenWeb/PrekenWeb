@@ -18,20 +18,19 @@ using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using PrekenWeb.Security;
 using Prekenweb.Website;
-using Prekenweb.Website.Properties;
-using Prekenweb.Website.Hangfire;
+using Prekenweb.Website.Lib.Hangfire;
 
 [assembly: OwinStartup(typeof(OwinStartup))]
 
 namespace Prekenweb.Website
 {
     public class OwinStartup
-    {
+    { 
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
             app.CreatePerOwinContext(PrekenwebContext.Create);
-            app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
+            app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create); 
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -77,11 +76,11 @@ namespace Prekenweb.Website
                 });
                 AchtergrondTaken.RegistreerTaken();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 // probably wrong db-connection or non-existing db, let DbContext handle this 
             }
-        }
+        } 
 
         private Task OnAuthenticated(TwitterAuthenticatedContext context)
         {

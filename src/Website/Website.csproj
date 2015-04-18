@@ -253,6 +253,9 @@
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Thinktecture.IdentityModel.Client.Net45">
+      <HintPath>..\packages\Thinktecture.IdentityModel.Client.4.0.1\lib\net45\Thinktecture.IdentityModel.Client.Net45.dll</HintPath>
+    </Reference>
     <Reference Include="TweetSharp">
       <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\TweetSharp.dll</HintPath>
       <Private>True</Private>
@@ -311,6 +314,8 @@
     <Compile Include="Areas\Mijn\Models\Registreer.cs" />
     <Compile Include="Areas\Mijn\Models\AccountLogin.cs" />
     <Compile Include="Areas\Mijn\Models\WachtwoordVergeten.cs" />
+    <Compile Include="Lib\Identity\AddTokenCookieFilter.cs" />
+    <Compile Include="Lib\Identity\AsyncHelper.cs" />
     <Compile Include="Areas\Website\Controllers\FeedController.cs" />
     <Compile Include="Areas\Website\Controllers\MailChimpController.cs" />
     <Compile Include="Areas\Website\Controllers\TooltipController.cs" />
@@ -335,13 +340,13 @@
     <Compile Include="Areas\Website\Models\HomeIndex.cs" />
     <Compile Include="Areas\Website\Models\PreekBladeren.cs" />
     <Compile Include="Areas\Website\Models\VerbeteringDoorgeven.cs" />
-    <Compile Include="Website\Cache\IPrekenwebCache.cs" />
-    <Compile Include="Website\Cache\TestPrekenwebCache.cs" />
-    <Compile Include="Website\ComboboxDataSources.cs" />
-    <Compile Include="Website\Hangfire\AchtergrondTaken.cs" />
-    <Compile Include="Website\Hangfire\ApplicationPreload.cs" />
-    <Compile Include="Website\Hangfire\HangfireBootstrapper.cs" />
-    <Compile Include="Website\HtmlHelpers\ToRouteValueDictionary.cs" />
+    <Compile Include="Lib\Cache\IPrekenwebCache.cs" />
+    <Compile Include="Lib\Cache\TestPrekenwebCache.cs" />
+    <Compile Include="Lib\ComboboxDataSources.cs" />
+    <Compile Include="Lib\Hangfire\AchtergrondTaken.cs" />
+    <Compile Include="Lib\Hangfire\ApplicationPreload.cs" />
+    <Compile Include="Lib\Hangfire\HangfireBootstrapper.cs" />
+    <Compile Include="Lib\HtmlHelpers\ToRouteValueDictionary.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\Website\Controllers\HomeController.cs" />
     <Compile Include="Areas\Website\WebsiteAreaRegistration.cs" />
@@ -352,23 +357,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Website\GlobalSuppressions.cs" />
-    <Compile Include="Website\ActionResults\CheckedFileStreamResult.cs" />
-    <Compile Include="Website\HtmlHelpers\HiglightedActionLink.cs" />
-    <Compile Include="Website\HtmlHelpers\IconActionLink.cs" />
-    <Compile Include="Website\HtmlHelpers\CheckedActionLink.cs" />
-    <Compile Include="Website\HtmlHelpers\ContentAbsolute.cs" />
-    <Compile Include="Website\HtmlHelpers\SecuredActionLink.cs" />
-    <Compile Include="Website\HtmlHelpers\GetBaseUrl.cs" />
-    <Compile Include="Website\HtmlHelpers\TooltipFor.cs" />
-    <Compile Include="Website\HtmlHelpers\Resource.cs" />
-    <Compile Include="Website\HtmlHelpers\HighLight.cs" />
-    <Compile Include="Website\ActionResults\RssActionResult.cs" />
-    <Compile Include="Website\Identity\ChallengeResult.cs" />
-    <Compile Include="Website\MailTemplating\MailTemplating.cs" />
-    <Compile Include="Website\Cache\PrekenwebHttpCache.cs" />
-    <Compile Include="Website\HuidigeGebruiker.cs" />
-    <Compile Include="Website\StringWriterWithEncoding.cs" />
+    <Compile Include="Lib\GlobalSuppressions.cs" />
+    <Compile Include="Lib\ActionResults\CheckedFileStreamResult.cs" />
+    <Compile Include="Lib\HtmlHelpers\HiglightedActionLink.cs" />
+    <Compile Include="Lib\HtmlHelpers\IconActionLink.cs" />
+    <Compile Include="Lib\HtmlHelpers\CheckedActionLink.cs" />
+    <Compile Include="Lib\HtmlHelpers\ContentAbsolute.cs" />
+    <Compile Include="Lib\HtmlHelpers\SecuredActionLink.cs" />
+    <Compile Include="Lib\HtmlHelpers\GetBaseUrl.cs" />
+    <Compile Include="Lib\HtmlHelpers\TooltipFor.cs" />
+    <Compile Include="Lib\HtmlHelpers\Resource.cs" />
+    <Compile Include="Lib\HtmlHelpers\HighLight.cs" />
+    <Compile Include="Lib\ActionResults\RssActionResult.cs" />
+    <Compile Include="Lib\Identity\ChallengeResult.cs" />
+    <Compile Include="Lib\MailTemplating\MailTemplating.cs" />
+    <Compile Include="Lib\Cache\PrekenwebHttpCache.cs" />
+    <Compile Include="Lib\Identity\HuidigeGebruiker.cs" />
+    <Compile Include="Lib\StringWriterWithEncoding.cs" />
     <Compile Include="Content\PrekenwebDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -387,7 +392,7 @@
     <Compile Include="Areas\Mijn\FileManager.aspx.designer.cs">
       <DependentUpon>FileManager.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Website\ThrottleAttribute.cs" />
+    <Compile Include="Lib\ThrottleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Ionic.Zip.Reduced.dll" />
@@ -719,7 +724,9 @@
     <Folder Include="Areas\Mijn\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

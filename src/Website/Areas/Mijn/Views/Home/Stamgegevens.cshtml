@@ -1,4 +1,5 @@
-﻿<h1>@Resources.Stamgegevens</h1>
+﻿@using Prekenweb.Website.Lib.HtmlHelpers
+<h1>@Resources.Stamgegevens</h1>
 <ul>
     @Html.SecuredActionLinkLI(Resources.Predikanten, "Index", "Predikant", new { Area = "Mijn" }, new { }, "Stamgegevens", "user")
     @Html.SecuredActionLinkLI(Resources.Gemeentes, "Index", "Gemeente", new { Area = "Mijn" }, new { }, "Stamgegevens", "group")

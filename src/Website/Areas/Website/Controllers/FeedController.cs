@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using Prekenweb.Attributes;
 using Prekenweb.Models.Repository;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.HtmlHelpers;
 using Prekenweb.Website.Lib;
 using System;
 using System.Linq;
@@ -17,7 +16,7 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Xml;
 using Prekenweb.Models.Services;
-using Prekenweb.Website.Properties;
+using Prekenweb.Website.Lib.HtmlHelpers;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {

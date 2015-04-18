@@ -7,7 +7,6 @@ using Prekenweb.Models.Repository;
 using MailChimp.Lists;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Properties;
 using Prekenweb.Website.ViewModels;
 using System;
 using System.Collections.Generic;

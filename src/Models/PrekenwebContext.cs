@@ -1,16 +1,12 @@
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Migrations;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Data.Entity.ModelConfiguration;
 
 namespace Prekenweb.Models
 {

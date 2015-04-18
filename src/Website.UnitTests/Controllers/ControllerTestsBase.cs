@@ -1,4 +1,5 @@
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Moq;
@@ -7,7 +8,7 @@ using Prekenweb.Models.Identity;
 using Prekenweb.Models.TestData;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Identity;
 
 namespace Website.UnitTests.Controllers
 {
@@ -42,7 +43,7 @@ namespace Website.UnitTests.Controllers
         private void SetupHuidigeGebruiker()
         {
             var huidigeGebruikerMock = new Mock<IHuidigeGebruiker>();
-            huidigeGebruikerMock.SetupGet(x => x.Id).Returns(TestDataProvider.TestGebruiker1.Id);
+            huidigeGebruikerMock.Setup(x => x.GetId(It.IsAny<IPrekenWebUserManager>(), It.IsAny<IPrincipal>())).Returns(Task.FromResult( TestDataProvider.TestGebruiker1.Id));
             HuidigeGebruiker = huidigeGebruikerMock.Object;
         }
 
@@ -59,7 +60,7 @@ namespace Website.UnitTests.Controllers
             }
             else
             {
-                controllerContextMock.SetupGet(p => p.HttpContext.User.Identity.Name).Returns((string) null);
+                controllerContextMock.SetupGet(p => p.HttpContext.User.Identity.Name).Returns((string)null);
                 controllerContextMock.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(false);
                 httpContextMock.Setup(context => context.User).Returns(new GenericPrincipal(new GenericIdentity(string.Empty), new string[0]));
             }

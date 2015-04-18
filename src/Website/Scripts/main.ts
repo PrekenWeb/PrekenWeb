@@ -13,6 +13,7 @@ module Prekenweb {
 
         private zoekerTimeout: number;
         public rootUrl: string;
+        public apiRootUrl: string;
         public taal: string = "";
         public inMijn: boolean = false;
         public authenticated: boolean = false;

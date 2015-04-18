@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using Prekenweb.Models;
 using Prekenweb.Models.Repository;
 
 namespace WebAPI.Controllers
@@ -14,16 +8,21 @@ namespace WebAPI.Controllers
     {
         private readonly IPreekRepository _preekRepository;
 
-        public PreekController (IPreekRepository preekRepository)
+        public PreekController()
+        { 
+        }
+
+        public PreekController(IPreekRepository preekRepository)
         {
             _preekRepository = preekRepository;
         }
-
-        //[AllowAnonymous]
-        [Authorize]
-        public async Task<IEnumerable<Preek>> GetAllPreken()
+         
+        [Authorize] 
+        public async Task<string> GetAllPreken()
         {
-            return await _preekRepository.GetAllePreken(1);
-        } 
+            return User.Identity.Name;
+           // return await Task.FromResult(new List<Preek> { new Preek { BijbeltekstOmschrijving = "asd" } });
+            //return await _preekRepository.GetAllePreken(1);
+        }
     }
 }

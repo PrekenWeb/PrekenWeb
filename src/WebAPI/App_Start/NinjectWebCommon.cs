@@ -1,7 +1,4 @@
-using System;
-using System.Web;
 using Ninject;
-using Ninject.Web.Common;
 using Prekenweb.Models;
 using Prekenweb.Models.Repository;
 

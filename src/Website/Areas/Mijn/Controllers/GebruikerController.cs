@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
 using CaptchaMvc.Attributes;
-using Hangfire.Dashboard;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -25,8 +24,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib;
-using Prekenweb.Website.Properties;
-using Prekenweb.Website.Identity;
+using Prekenweb.Website.Lib.Identity;
+using Prekenweb.Website.Lib.MailTemplating;
 using TweetSharp;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
@@ -185,9 +184,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return Json(Resources.Resources.GebruikersnaamNietBeschikbaar, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult MijnGegevens()
+        public async Task<ActionResult> MijnGegevens()
         {
-            return RedirectToAction("Bewerk", new { Id = _huidigeGebruiker.Id });
+            return RedirectToAction("Bewerk", new { Id = await _huidigeGebruiker.GetId(_prekenWebUserManager, User) });
         }
         #endregion
 
@@ -255,7 +254,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ActionResult> Bewerk(int id)
         {
             // jezelf aanpassen of de rol hebben om anderen aan te passen
-            if (id != _huidigeGebruiker.Id && !User.IsInRole("Gebruikers")) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
+            if (id != await _huidigeGebruiker.GetId(_prekenWebUserManager, User) && !User.IsInRole("Gebruikers")) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
 
             var gebruiker = await _prekenWebUserManager.FindByIdAsync(id);
 
@@ -273,7 +272,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ActionResult> Bewerk(GebruikerEditViewModel viewModel)
         {
             // jezelf aanpassen of de rol hebben om anderen aan te passen
-            if (viewModel.Gebruiker.Id != _huidigeGebruiker.Id && !User.IsInRole("Gebruikers")) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
+            if (viewModel.Gebruiker.Id != await _huidigeGebruiker.GetId(_prekenWebUserManager, User) && !User.IsInRole("Gebruikers")) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
 
             viewModel.Logins = await _prekenWebUserManager.GetLoginsAsync(viewModel.Gebruiker.Id);
 
@@ -458,7 +457,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var passwordResetToken = await _prekenWebUserManager.GeneratePasswordResetTokenAsync(gebruiker.Id);
             var callbackUrl = Url.Action("ResetWachtwoord", "Gebruiker", new { userId = gebruiker.Id, code = passwordResetToken }, Request.Url.Scheme);
 
-            var mailTemplating = MailTemplating.MailTemplating.GetMailTemplating(_gebruikerRepository, _prekenWebUserManager);
+            var mailTemplating = MailTemplating.GetMailTemplating(_gebruikerRepository, _prekenWebUserManager);
             var mailbody = await mailTemplating.GetWachtwoordVergetenMailBody(gebruiker.Id, Resources.Resources.WachtwoordVergetenEmailOnderwerp, callbackUrl);
             await _prekenWebUserManager.SendEmailAsync(gebruiker.Id, Resources.Resources.WachtwoordVergetenEmailOnderwerp, mailbody);
             return RedirectToAction("WachtwoordVergetenBevestiging");
@@ -518,16 +517,17 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         #region External Logins
         public async Task<ActionResult> ExterneLoginVerwijderen(string loginProvider, string providerKey)
         {
-            IdentityResult result = await _prekenWebUserManager.RemoveLoginAsync(_huidigeGebruiker.Id, new UserLoginInfo(loginProvider, providerKey));
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            IdentityResult result = await _prekenWebUserManager.RemoveLoginAsync(gebruikerId, new UserLoginInfo(loginProvider, providerKey));
 
             // hook, is vooralsnog niet anders :(
-            await _prekenwebContext.Database.ExecuteSqlCommandAsync("delete from AspNetUserLogins where UserId = {0} or Gebruiker_Id = {0}", _huidigeGebruiker.Id);
+            await _prekenwebContext.Database.ExecuteSqlCommandAsync("delete from AspNetUserLogins where UserId = {0} or Gebruiker_Id = {0}", gebruikerId);
 
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First());
             }
-            return RedirectToAction("Bewerk", new { Id = _huidigeGebruiker.Id });
+            return RedirectToAction("Bewerk", new { Id = gebruikerId });
         }
 
         [System.Web.Mvc.HttpPost]
@@ -655,7 +655,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExterneLoginBevestiging(ExterneLoginBevestigingViewModel model)
         {
-            if (User.Identity.IsAuthenticated) return RedirectToAction("Bewerk", new { Id = _huidigeGebruiker.Id });
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Bewerk", new { Id = await _huidigeGebruiker.GetId(_prekenWebUserManager, User) });
             if (await _prekenWebUserManager.FindByEmailAsync(model.Email) != null) ModelState.AddModelError("Email", string.Format(Resources.Resources.EmailNietBeschikbaar, Url.Action("WachtwoordVergeten", new { gebruikersnaam = model.Email })));
             if (await _prekenWebUserManager.FindByNameAsync(model.Naam) != null) ModelState.AddModelError("Naam", Resources.Resources.GebruikersnaamNietBeschikbaar);
 
@@ -667,23 +667,24 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return await CreateExternalLogin(externLoginInfo, model.Naam, model.Email, model.ReturnUrl);
         }
 
-        public ActionResult ExterneLoginToevoegen(string provider)
+        public async Task<ActionResult> ExterneLoginToevoegen(string provider)
         {
-            return new ChallengeResult(provider, Url.Action("ExterneLoginToevoegenCallBack", "Gebruiker"), _huidigeGebruiker.Id);
+            return new ChallengeResult(provider, Url.Action("ExterneLoginToevoegenCallBack", "Gebruiker"), await _huidigeGebruiker.GetId(_prekenWebUserManager, User));
         }
 
         public async Task<ActionResult> ExterneLoginToevoegenCallBack()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync("XsrfId", string.Format("{0}", _huidigeGebruiker.Id));
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync("XsrfId", string.Format("{0}", gebruikerId));
             if (loginInfo == null)
             {
-                return RedirectToAction("Bewerk", new { Id = _huidigeGebruiker.Id });
+                return RedirectToAction("Bewerk", new { Id = gebruikerId });
             }
-            var identityAddLoginResult = await _prekenWebUserManager.AddLoginAsync(_huidigeGebruiker.Id, loginInfo.Login);
+            var identityAddLoginResult = await _prekenWebUserManager.AddLoginAsync(gebruikerId, loginInfo.Login);
 
             if (!identityAddLoginResult.Succeeded) throw new Exception(identityAddLoginResult.Errors.First());
 
-            return RedirectToAction("Bewerk", new { Id = _huidigeGebruiker.Id });
+            return RedirectToAction("Bewerk", new { Id = gebruikerId });
         }
         #endregion
     }
