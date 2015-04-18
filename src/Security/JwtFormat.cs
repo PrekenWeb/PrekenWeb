@@ -26,7 +26,7 @@ namespace PrekenWeb.Security
             if (string.IsNullOrWhiteSpace(audienceId)) throw new InvalidOperationException(string.Format("AuthenticationTicket.Properties does not include {0}", AudienceIdPropertyKey));
 
             string audienceSecret = data.Properties.Dictionary.ContainsKey(AudienceSecretPropertyKey) ? data.Properties.Dictionary[AudienceSecretPropertyKey] : null;
-            if (string.IsNullOrWhiteSpace(audienceId)) throw new InvalidOperationException(string.Format("AuthenticationTicket.Properties does not include {0}", AudienceSecretPropertyKey));
+            if (string.IsNullOrWhiteSpace(audienceSecret)) throw new InvalidOperationException(string.Format("AuthenticationTicket.Properties does not include {0}", AudienceSecretPropertyKey));
 
             var keyByteArray = TextEncodings.Base64Url.Decode(audienceSecret);
             var signingKey = new HmacSigningCredentials(keyByteArray);
