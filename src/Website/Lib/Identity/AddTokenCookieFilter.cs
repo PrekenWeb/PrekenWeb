@@ -35,7 +35,11 @@ namespace Prekenweb.Website.Lib.Identity
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            InjectTokenCookie(filterContext.HttpContext.Response, filterContext.HttpContext.User);
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                InjectTokenCookie(filterContext.HttpContext.Response, filterContext.HttpContext.User);
+            }
+
             base.OnActionExecuted(filterContext);
         }
 
