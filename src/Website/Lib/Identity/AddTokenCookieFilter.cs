@@ -39,6 +39,10 @@ namespace Prekenweb.Website.Lib.Identity
             {
                 InjectTokenCookie(filterContext.HttpContext.Response, filterContext.HttpContext.User);
             }
+            else
+            {
+                filterContext.HttpContext.Response.Cookies.Remove("Token");
+            }
 
             base.OnActionExecuted(filterContext);
         }

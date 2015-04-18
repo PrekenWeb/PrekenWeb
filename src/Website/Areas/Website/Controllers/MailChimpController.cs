@@ -99,9 +99,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         public static void Subscribe(string email, string naam, string listId)
         { 
-            var naamMergeVar = new NaamMergeVar {NAAM = naam}; 
+            var naamMergeVar = new NaamMergeVar {NAAM = naam};
 
-            var mc = new MailChimpManager(ConfigurationManager.AppSettings["MailChimpAPIKey)"]);
+            var mc = new MailChimpManager(ConfigurationManager.AppSettings["MailChimpAPIKey"]);
             try
             {
                 mc.Subscribe(listId,

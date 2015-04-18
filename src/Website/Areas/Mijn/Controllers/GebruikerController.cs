@@ -102,6 +102,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public ActionResult Uitloggen()
         {
             AuthenticationManager.SignOut();
+
+            HttpContext.Response.Cookies.Remove("Token");
             return View();
         }
 
