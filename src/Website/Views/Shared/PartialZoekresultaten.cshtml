@@ -6,7 +6,7 @@
 {
     foreach (ZoekresultaatItem item in Model.Items)
     {
-        <article class="ZoekResultaat" onclick="window.location = '@Url.Action(item.UrlAction, item.UrlController, new { Id = item.Preek.Id, area="Website" })';" @if (item.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>                     }>
+        <article class="ZoekResultaat" onclick="window.location = '@Url.Action(item.UrlAction, item.UrlController, new { Id = item.Preek.Id, area="Website" })';" @if (item.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>                      }>
             @if (item.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
             {
                 <meta itemprop="url" content="@Url.ContentAbsolute(Url.Action("Open", "Preek", new { Id = item.Preek.Id }))" />
@@ -20,29 +20,22 @@
             <div class="simpel">
                 <div class="Bladwijzer">
                     @{
-            string cssClass = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? "fa-bookmark" : "fa-bookmark-o";
-            string tooltip = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? string.Format(Resources.BladwijzerGeplaatstOp, item.Cookie.BladwijzerGelegdOp) : Resources.BladwijzerPlaatsen;
+                        //string cssClass = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? "fa-bookmark" : "fa-bookmark-o";
+                        //string tooltip = (item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue) ? string.Format(Resources.BladwijzerGeplaatstOp, item.Cookie.BladwijzerGelegdOp) : Resources.BladwijzerPlaatsen;
 
-            <a href="#" data-active="@(item.Cookie != null && item.Cookie.BladwijzerGelegdOp.HasValue)" data-preekid="@item.Preek.Id" onclick="return prekenweb.bladwijzerClick(this,event)">
-                <span class="fa @cssClass tooltip" title="@tooltip" onmouseover="prekenweb.bladWijzerMouseOver" onmouseout="prekenweb.bladWijzerMouseOut"></span>
-            </a>
+                        <a href="#" class="preek-bladwijzer preek-bladwijzer-@item.Preek.Id" data-preekid="@item.Preek.Id" onclick="return prekenweb.bladwijzerClick(this,event)">
+                            <span class="fa fa-bookmark-o tooltip" title="@Resources.BladwijzerPlaatsen" onmouseover="prekenweb.bladWijzerMouseOver" onmouseout="prekenweb.bladWijzerMouseOut"></span>
+                        </a>
                     }
                 </div>
-                @if (item.Cookie != null && item.Cookie.DateTime.HasValue)
-                {
-                    <div class="DatumBezocht tooltip" title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, item.Cookie.DateTime)">
-                        <span class="fa fa-history"></span>
-                        @item.Cookie.DateTime.Value.ToShortDateString()
-                    </div>
-                }
-                @*<div class="ZoekResultaatCookie">
-                        @if (item.Cookie != null)
-                        {
-                            <span title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, item.Cookie.DateTime)" class="tooltip">
-                                <span class="fa fa-check"></span>
-                            </span>
-                        }
-                    </div>*@
+
+                @*<span title="@Resources.LaatsteBezoek" class="tooltip preek-bezocht-check preek-bezocht-check-@regel.Preek.Id">
+                    <div class=" fa fa-check"></div>
+                </span>*@
+                <div class="DatumBezocht tooltip preek-bezocht-check preek-bezocht-check-@item.Preek.Id" title="@Resources.LaatsteBezoek">
+                    <span class="fa fa-history"></span>
+                    <span class="datum-bezocht"></span>
+                </div> 
                 <div class="ZoekResultaatIcon VerbergMobiel">
                     <span title="@item.Preektype" class="tooltip">
                         <span class="@item.UrlIcon"></span>
@@ -63,7 +56,7 @@
                         @Html.HiglightedActionLink(item.Boek, "Index", "Zoeken", new { BoekHoofdstukId = item.Preek.BoekhoofdstukId, area = "Website" }, new { data_linktype = "BoekHoofdstuk", data_relid = item.Preek.BoekhoofdstukId, data_preek_id = item.Preek.Id }, Model.ZoekOpdracht.Zoekterm)
                         @if (item.ToonBoekAfkorting)
                         {
-                            @Html.ActionLink(item.Hoofdstuk, "Index", "Zoeken", new { BoekHoofdstukId = item.Preek.BoekhoofdstukId, Hoofdstuk = item.Hoofdstuk, area="Website" }, new { })
+                            @Html.ActionLink(item.Hoofdstuk, "Index", "Zoeken", new { BoekHoofdstukId = item.Preek.BoekhoofdstukId, Hoofdstuk = item.Hoofdstuk, area = "Website" }, new { })
                             if (!string.IsNullOrEmpty(item.Vers))
                             {
                                 <span>@string.Format(" : {0}", item.Vers)</span>

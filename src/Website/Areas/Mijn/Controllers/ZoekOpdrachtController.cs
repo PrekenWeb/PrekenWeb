@@ -7,7 +7,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Models;
 using System.Web.Routing;
-using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {

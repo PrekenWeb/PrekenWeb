@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Prekenweb.Models.Identity;
 using System;
 
@@ -13,7 +14,10 @@ namespace Prekenweb.Models
         public TimeSpan? AfgespeeldTot { get; set; }  
         public int GebruikerId { get; set; }  
 
-        public virtual Gebruiker Gebruiker { get; set; } 
+        [JsonIgnore]
+        public virtual Gebruiker Gebruiker { get; set; }
+       
+        [JsonIgnore]
         public virtual Preek Preek { get; set; }  
     }
 

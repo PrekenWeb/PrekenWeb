@@ -24,7 +24,7 @@ namespace Prekenweb.Models.Repository
         {
             return (await Context
                 .Preeks
-                .Include(x => x.PreekCookies)
+                //.Include(x => x.PreekCookies)
                 .Include(x => x.Predikant)
                 .Include(x => x.Gemeente)
                 .Include(x => x.BoekHoofdstuk)
@@ -40,7 +40,7 @@ namespace Prekenweb.Models.Repository
                 {
                     Preek = p,
                     ResultaatReden = ResultaatReden.Nieuw,
-                    Cookie = p.PreekCookies.FirstOrDefault(pc => pc.GebruikerId == gebruikerId)
+                    //Cookie = p.PreekCookies.FirstOrDefault(pc => pc.GebruikerId == gebruikerId)
                 })
                 .ToList();
         }

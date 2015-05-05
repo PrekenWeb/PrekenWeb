@@ -46,8 +46,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
-        [AddTokenCookie]
-        [OutputCache(Duration = 1800, VaryByCustom="user", VaryByParam = "", Location = OutputCacheLocation.Server)] // 30 minuten
+        [OutputCache(Duration = 1800, VaryByParam = "*", Order=0)] // 30 minuten
+        [AddTokenCookie(Order=1)]
         public async Task<ActionResult> Index()
         { 
             return View(await GetHomeIndexViewModel());

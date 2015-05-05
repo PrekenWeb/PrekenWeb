@@ -6,7 +6,6 @@ using CaptchaMvc.Attributes;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Prekenweb.Attributes;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;

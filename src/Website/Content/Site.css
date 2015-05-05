@@ -897,13 +897,6 @@ html {
   font-size: 40px;
   color: #1274ba;
 }
-.VrijwilligersDag {
-  background-color: #dbe1ed;
-  border-radius: 2px;
-  border: 1px solid #1274ba;
-  padding: 20px 20px 10px 20px;
-  margin-bottom: 20px;
-}
 .Welkom {
   height: auto;
   float: none;
@@ -1093,6 +1086,12 @@ html {
 #NieuwePrekenWrapper .NieuwePreken table td a {
   color: black;
   text-decoration: none;
+}
+#NieuwePrekenWrapper .NieuwePreken table td .preek-bezocht-check {
+  display: none;
+}
+.preek-bezocht-check {
+  display: none;
 }
 .NieuwOpPrekenweb {
   background-color: #dbe1ed;

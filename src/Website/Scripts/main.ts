@@ -2,6 +2,7 @@
 /// <reference path="typings/modernizr/modernizr.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/custom/custom.d.ts" />
+/// <reference path="typings/jquery.cookie/jquery.cookie.d.ts" />
 /// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" /> 
 
 module Prekenweb {
@@ -86,19 +87,21 @@ module Prekenweb {
 
         // jquery.ajax.unobtrusive werkt nog niet met jQuery 2.0, daarom zelf even een functionaliteit gemaakt :)
         public unobtrusiveAjaxReplacement() {
-            $(document).on('click', "a[data-ajax='true']", function (e) {
-                var url = $(this).attr("href");
-                var target = $(this).data("ajaxUpdate");
-                $.ajax({
-                    url: url,
-                    success: function (data) {
-                        $(target).html(data);
-                        this.standaardTooltip();
-                        this.dataRelatedTooltips();
-                    }
-                });
-                e.preventDefault();
-            });
+            // 05-05-2015 uitgezet, zorge voor een dubbele http request op homepage
+
+            //$(document).on('click', "a[data-ajax='true']", function (e) {
+            //    var url = $(this).attr("href");
+            //    var target = $(this).data("ajaxUpdate");
+            //    $.ajax({
+            //        url: url,
+            //        success: function (data) {
+            //            $(target).html(data);
+            //            this.standaardTooltip();
+            //            this.dataRelatedTooltips();
+            //        }
+            //    });
+            //    e.preventDefault();
+            //});
         }
 
         //
@@ -311,11 +314,11 @@ module Prekenweb {
             $.ajax({
                 url: pw.rootUrl + pw.taal + '/Preek/Bijbelgedeelte',
                 data: { versVanId: versVanId, versTotId: versTotId },
-                success: function(data) {
+                success: function (data) {
                     $("#AutomatischeBijbeltekst .value").html(data);
 
                 },
-                error: function(data) {
+                error: function (data) {
                     $("#AutomatischeBijbeltekst .value").html("fout!?");
                 }
             });
@@ -377,7 +380,7 @@ module Prekenweb {
 
 
                 }
-            }); 
+            });
         }
         public toonVerskiezer(url: string) {
             //window.open(, "Print", "height=600,width=600,scrollbars=yes,status=no,titlebar=no,toolbar=no");
@@ -389,7 +392,7 @@ module Prekenweb {
                 width: width,
                 height: height,
                 //position: [100, 100],
-                open: function () { 
+                open: function () {
                     $('.ui-widget-overlay').bind('click', function () {
                         $('.prekenwebPopup').dialog('destroy').remove();
                     });
@@ -402,7 +405,7 @@ module Prekenweb {
                 success: data => {
                     $(".prekenwebPopup").html(data);
                 },
-                error : () => {
+                error: () => {
                     $('.prekenwebPopup').dialog('destroy').remove();
                 }
             });
@@ -495,14 +498,14 @@ module Prekenweb {
                 error: function () {
                     alert('Kon zoekopdracht helaas niet opslaan...');
                 }
-            }); 
+            });
         }
         public RssFeed(sender: HTMLAnchorElement) {
             var pw = this;
             $("#RssFeedModal").modal();
- 
+
         }
-        public ZoekOpdrachtOpslaanNaarFeed(sender: HTMLAnchorElement) {
+        public zoekOpdrachtOpslaanNaarFeed = (sender: HTMLAnchorElement) => {
             var pw = this;
             sender.innerHTML = "Zoek opdracht opslaan...";
             $.ajax({
@@ -514,9 +517,45 @@ module Prekenweb {
                 error: function () {
                     alert('Kon zoekopdracht helaas niet opslaan...');
                 }
-            }); 
-
+            });
         } 
+
+        public preekBezochtChecksTonen = (preekIds: string) => {
+            if (!$.cookie('Token')) return;
+
+            $.ajax({
+                type: 'GET',
+                url: prekenweb.apiRootUrl + 'api/Gebruiker/GeopendePreken',
+                data: { preekIds: preekIds },
+                headers: { "Authorization": "Bearer " + $.cookie('Token') },
+                //dataType: 'json',
+                contentType: 'application/json',
+                success: preekCookies => {
+                    for (var i = 0; i < preekCookies.length; i++) {
+                        var el = $(".preek-bezocht-check-" + preekCookies[i].PreekId);
+                        el.show();
+                        el.attr("title", el.attr("title") + " " + new Date(preekCookies[i].DateTime).toLocaleDateString());
+                        $(".datum-bezocht", el).text(new Date(preekCookies[i].DateTime).toLocaleDateString());
+
+                        var el2 = $(".preek-bladwijzer-" + preekCookies[i].PreekId);
+                        $("span", el2).removeClass("fa-bookmark");
+                        $("span", el2).removeClass("fa-bookmark-o");
+                        if (preekCookies[i].BladwijzerGelegdOp == null) {
+                            $("span", el2).addClass("fa-bookmark-o");
+                            el2.data("active", "False");
+                        } else {
+                            $("span", el2).addClass("fa-bookmark");
+                            el2.data("active", "True");
+
+                        }
+
+                    }
+                },
+                error: (XHR, textStatus, errorThrown) => {
+                    console.log(textStatus);
+                }
+            });
+        }
     }
 }
 

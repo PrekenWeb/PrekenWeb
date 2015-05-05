@@ -212,11 +212,11 @@
 <div class="DatumTijd">@string.Format("Cached until {0:g}",DateTime.Now.AddHours(1))</div>
 @section scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $("input[data-autocomplete-type]").keypress(function () {
-                $(this).autocomplete({
-                    source: '@Url.Action("Autocomplete")?type=' + $(this).data('autocomplete-type'),
+        $("input[data-autocomplete-type]").keypress(function () {
+            $(this).autocomplete({
+                source: '@Url.Action("Autocomplete")?type=' + $(this).data('autocomplete-type'),
                     minLength: 1,
                     select: function (event, ui) {
                         //console.log(ui.item ? "Selected: " + ui.item.value + " aka " + ui.item.id : "Nothing selected, input was " + this.value);
@@ -224,7 +224,9 @@
                 });
             });
             applyGeavanceerd();
-        });
+
+            prekenweb.preekBezochtChecksTonen([@string.Join(",", Model.Zoekresultaat.Items.Select(x => x.Preek.Id.ToString()))]);
+    });
 
         function beforeSubmit() {
             $("#Pagina").val(1);
@@ -234,21 +236,21 @@
             if (geavanceerdNu == 'False') {
                 $("#Geavanceerd").val('True');
                 $("#GeavanceerdKnop").text("@Resources.Simpel");
-            }
-            else {;
-                $("#Geavanceerd").val('False');
-                $("#GeavanceerdKnop").text("@Resources.Geavanceerd");
-            }
-            applyGeavanceerd();
         }
-        function applyGeavanceerd() {
-            if ($("#Geavanceerd").val() == 'False') {
-                $(".geavanceerdField").hide();
-            }
-            else {
-                $(".geavanceerdField").show();
-            }
+        else {;
+            $("#Geavanceerd").val('False');
+            $("#GeavanceerdKnop").text("@Resources.Geavanceerd");
         }
+        applyGeavanceerd();
+    }
+    function applyGeavanceerd() {
+        if ($("#Geavanceerd").val() == 'False') {
+            $(".geavanceerdField").hide();
+        }
+        else {
+            $(".geavanceerdField").show();
+        }
+    }
     </script>
 }
 <div class="modal fade" id="RssFeedModal">
@@ -263,7 +265,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> @Resources.SluitDezePopup</button>
-                <a href="@Url.Action("ZoekOpdrachtBewaren", "Zoeken", Request.QueryString.ToRouteValueDictionary())" class="btn btn-success" onclick="prekenweb.ZoekOpdrachtOpslaanNaarFeed(this); return false;"><span class="glyphicon glyphicon-ok-sign"></span> Zoekopdracht bewaren + naar Feed</a>
+                <a href="@Url.Action("ZoekOpdrachtBewaren", "Zoeken", Request.QueryString.ToRouteValueDictionary())" class="btn btn-success" onclick="prekenweb.zoekOpdrachtOpslaanNaarFeed(this); return false;"><span class="glyphicon glyphicon-ok-sign"></span> Zoekopdracht bewaren + naar Feed</a>
             </div>
         </div>
     </div>

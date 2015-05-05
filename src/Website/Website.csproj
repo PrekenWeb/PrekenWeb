@@ -315,6 +315,7 @@
     <Compile Include="Areas\Mijn\Models\Registreer.cs" />
     <Compile Include="Areas\Mijn\Models\AccountLogin.cs" />
     <Compile Include="Areas\Mijn\Models\WachtwoordVergeten.cs" />
+    <Compile Include="Lib\TrackSearchAttribute.cs" />
     <Compile Include="Lib\Identity\AddTokenCookieFilter.cs" />
     <Compile Include="Lib\Identity\AsyncHelper.cs" />
     <Compile Include="Areas\Website\Controllers\FeedController.cs" />
@@ -373,7 +374,6 @@
     <Compile Include="Lib\Identity\ChallengeResult.cs" />
     <Compile Include="Lib\MailTemplating\MailTemplating.cs" />
     <Compile Include="Lib\Cache\PrekenwebHttpCache.cs" />
-    <Compile Include="Lib\Identity\HuidigeGebruiker.cs" />
     <Compile Include="Lib\StringWriterWithEncoding.cs" />
     <Compile Include="Content\PrekenwebDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1063,6 +1063,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Gebruiker.cshtml" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\custom\custom.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.cookie\jquery.cookie.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />

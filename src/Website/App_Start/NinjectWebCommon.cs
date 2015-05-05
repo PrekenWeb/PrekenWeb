@@ -34,13 +34,13 @@ namespace Prekenweb.Website
         private static void RegisterServices(IKernel kernel)
         { 
             kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>().InRequestScope();
-            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>();
+            kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>().InRequestScope();
 
-            kernel
-                .BindFilter<AddTokenCookieFilter>(FilterScope.Controller, 0)
-                .WhenControllerHas<AddTokenCookieAttribute>()
-                .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
-                .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]);
+            //kernel
+            //    .BindFilter<AddTokenCookieFilter>(FilterScope.Controller, 0)
+            //    .WhenControllerHas<AddTokenCookieAttribute>()
+            //    .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
+            //    .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]);
 
             kernel
                 .BindFilter<AddTokenCookieFilter>(FilterScope.Action, 0)

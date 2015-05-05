@@ -11,7 +11,6 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib.Hangfire;
-using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {

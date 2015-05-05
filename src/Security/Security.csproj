@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailIdentityMessageService.cs" />
+    <Compile Include="HuidigeGebruiker.cs" />
     <Compile Include="IPrekenWebUserManager.cs" />
     <Compile Include="JwtFormat.cs" />
     <Compile Include="ManageMessageId.cs" />

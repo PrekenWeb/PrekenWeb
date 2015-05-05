@@ -6,7 +6,6 @@ using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
 using Prekenweb.Models.Services;
-using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -34,7 +33,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 {
                     Preek = p.Preek,
                     ResultaatReden = ResultaatReden.Beluisterd,
-                    Cookie = p
+                    //Cookie = p
                 }); 
 
             return View(new DoorMijBeluisterd
@@ -55,7 +54,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 {
                     Preek = p.Preek,
                     ResultaatReden = ResultaatReden.MetBladwijzer,
-                    Cookie = p
+                    //Cookie = p
                 }); 
 
             return View(new MetBladwijzer

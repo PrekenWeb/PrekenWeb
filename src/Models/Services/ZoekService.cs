@@ -27,9 +27,6 @@ namespace Prekenweb.Models.Services
         /// <returns></returns>
         public async Task<Zoekresultaat> ZoekOpdrachtUitvoeren(ZoekOpdracht zoekOpdracht, int skip = 0, int take = int.MaxValue, bool tekstVeldenVullen = false)
         {
-            var localZoekOpdracht = zoekOpdracht;
-            var preekCookies = zoekOpdracht.GebruikerId != default(int) ? await _gebruikerRepository.GetCookiesVoorGebruiker(localZoekOpdracht.GebruikerId) : new List<PreekCookie>();
-
             if (tekstVeldenVullen)
                 zoekOpdracht = await TekstVeldenVullen(zoekOpdracht);
 
@@ -54,8 +51,7 @@ namespace Prekenweb.Models.Services
                 Select(p => new ZoekresultaatItem
                 {
                     Preek = p,
-                    ResultaatReden = ResultaatReden.Predikant,
-                    Cookie = preekCookies.FirstOrDefault(pc => pc.PreekId == p.Id)
+                    ResultaatReden = ResultaatReden.Predikant
                 });
 
             return zoekResultaat;

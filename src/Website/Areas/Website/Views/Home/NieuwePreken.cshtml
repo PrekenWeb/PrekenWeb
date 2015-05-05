@@ -29,7 +29,7 @@
         <tbody>
             @foreach (ZoekresultaatItem regel in Model.Preken.OrderByDescending(p => p.Preek.DatumAangemaakt))
             {
-                <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>   }>
+                <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>       }>
                     <td class="VerbergMobiel IconColumn">
                         @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
                         {
@@ -43,7 +43,7 @@
                         }
                         <div class="@regel.UrlIcon tooltip" title="@regel.Preektype"></div>
                     </td>
-                    <td @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemprop="name" </text>   }>
+                    <td @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemprop="name" </text>       }>
                         @Html.ActionLink(regel.Boek, "Index", "Zoeken", new { BoekHoofdstukId = regel.Preek.BoekhoofdstukId }, new { data_linktype = "BoekHoofdstuk", data_relid = regel.Preek.BoekhoofdstukId, data_preek_id = regel.Preek.Id })
                         @if (regel.ToonBoekAfkorting)
                         {
@@ -83,12 +83,10 @@
                         <td class="VerbergMobiel ResultaatColDatum">@datum</td>
                     }
                     <td class="ResultaatColCookie VerbergMobiel">
-                        @if (regel.Cookie != null && Request.IsAuthenticated)
-                        {
-                            <span title="@string.Format("{0} {1:g}", Resources.LaatsteBezoek, regel.Cookie.DateTime)" class="tooltip">
-                                <div class="fa fa-check"></div>
-                            </span>
-                        }
+
+                        <span title="@Resources.LaatsteBezoek" class="tooltip preek-bezocht-check preek-bezocht-check-@regel.Preek.Id">
+                            <div class=" fa fa-check"></div>
+                        </span>
                     </td>
 
                     <td class="LastLinkColumn">
@@ -106,3 +104,9 @@
     @Html.IconActionLink(Resources.Zoeken, "Index", "Zoeken", new { }, new { Class = "IconKnop" }, "search")
     <p class="clear"></p>
 </div>
+
+<script type="text/javascript">
+    if (typeof prekenweb != 'undefined') {
+        prekenweb.preekBezochtChecksTonen([@string.Join(",", Model.Preken.Select(x => x.Preek.Id.ToString()))]);
+    }
+</script>

@@ -24,6 +24,7 @@ namespace Prekenweb.Website.Lib.Identity
         private readonly string _audienceSecret;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
+        private const string CookieKey = "Token";
 
         public AddTokenCookieFilter(string audienceId, string audienceSecret, IPrekenWebUserManager prekenWebUserManager, IHuidigeGebruiker huidigeGebruiker)
         {
@@ -37,11 +38,15 @@ namespace Prekenweb.Website.Lib.Identity
         {
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
-                InjectTokenCookie(filterContext.HttpContext.Response, filterContext.HttpContext.User);
+                if (filterContext.HttpContext.Request.Cookies[CookieKey] == null) // cookie expired?
+                {
+                    InjectTokenCookie(filterContext.HttpContext.Response, filterContext.HttpContext.User);
+                }
             }
             else
             {
-                filterContext.HttpContext.Response.Cookies.Remove("Token");
+                // unauthenticated, be sure no cookie is added
+                filterContext.HttpContext.Response.Cookies.Remove(CookieKey);
             }
 
             base.OnActionExecuted(filterContext);
@@ -55,7 +60,10 @@ namespace Prekenweb.Website.Lib.Identity
 
             var token = GetToken(ticket);
 
-            httpResponseBase.Cookies.Set(new HttpCookie("Token", token));
+            var cookie = new HttpCookie(CookieKey, token);
+            if (ticket.Properties.ExpiresUtc != null)
+                cookie.Expires = DateTime.Now.AddMinutes(5);
+            httpResponseBase.Cookies.Set(cookie);
         }
 
         private string GetToken(AuthenticationTicket ticket)
@@ -76,7 +84,7 @@ namespace Prekenweb.Website.Lib.Identity
 
             var currentUtc = new Microsoft.Owin.Infrastructure.SystemClock().UtcNow;
             ticket.Properties.IssuedUtc = currentUtc;
-            ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromHours(1));
+            ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(8));
             return ticket;
         }
 

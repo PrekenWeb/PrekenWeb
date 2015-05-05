@@ -2,35 +2,31 @@
 @model HomeIndex
 @{
     ViewBag.Title = "Home";
-
-}
-@section Styles {
-
 }
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function() {
-            var buttons = {
-                previous: $('#spotLightItems .button-previous'),
-                next: $('#spotLightItems .button-next')
-            };
-            $obj = $('#spotLightItems').lofJSidernews({
-                interval: 4000,
-                easing: 'easeInOutQuad',
-                duration: 1200,
-                auto: true,
-                maxItemDisplay: 6,
-                startItem: 0,
-                navPosition: 'horizontal', // horizontal
-                navigatorHeight: null,
-                navigatorWidth: null,
-                mainWidth: 980,
-                buttons: buttons
-            });
+    $(document).ready(function() {
+        var buttons = {
+            previous: $('#spotLightItems .button-previous'),
+            next: $('#spotLightItems .button-next')
+        };
+        $obj = $('#spotLightItems').lofJSidernews({
+            interval: 4000,
+            easing: 'easeInOutQuad',
+            duration: 1200,
+            auto: true,
+            maxItemDisplay: 6,
+            startItem: 0,
+            navPosition: 'horizontal', // horizontal
+            navigatorHeight: null,
+            navigatorWidth: null,
+            mainWidth: 980,
+            buttons: buttons
+        });
 
 
-            $.ajax({
-                url: '@Url.Action("Twitter", "Feed")',
+        $.ajax({
+            url: '@Url.Action("Twitter", "Feed")',
                 data: {},
                 dataType: "json",
                 //callbackParameter: "jsoncallback",
@@ -56,50 +52,13 @@
             function replaceURLWithHTMLLinks(text) {
                 var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@@#\/%?=~_|!:,.;]*[-A-Z0-9+&@@#\/%=~_|])/ig;
                 return text.replace(exp, "<a href='$1'>$1</a>");
-            }
+            } 
 
-            if ($.cookie('Token')) {
-                $.ajax({
-                    type: 'GET',
-                    url: prekenweb.apiRootUrl + 'api/Preek/GetAllPreken',
-                    headers: { "Authorization": "Bearer " + $.cookie('Token') },
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                    },
-                    error: function(XHR, textStatus, errorThrown) {
-                        console.log(textStatus);
-                    }
-                });
-            }
+            prekenweb.preekBezochtChecksTonen([@string.Join(",", Model.NieuwePreken.Preken.Select(x => x.Preek.Id.ToString()))]);
         });
 
     </script>
-}
-@if (Model.Taal == "nl" && false)
-{
-    <div class="VrijwilligersDag">
-        <h2>7 december 2013 - Nationale Vrijwilligersdag</h2>
-
-        <p>
-            Een groot aantal mensen zet zich belangeloos in voor onze website, door middel van het knippen van audiopreken, uittypen en corrigeren van leespreken, enz.
-        </p>
-
-        <p>
-            Als PrekenWeb-team willen we op deze manier eens extra onze dank uitspreken richting al deze vrijwilligers.
-        </p>
-
-        <p>
-            Jullie hulp wordt door ons bijzonder gewaardeerd!
-        </p>
-
-        <p>
-            Hopend op een blijvende samenwerking,
-        </p>
-        <p>Het PrekenWeb-team
-
-    </div>
-}
+} 
 
 <div class="Welkom">
     <h1>@Model.WelkomsTekst.Kop</h1>

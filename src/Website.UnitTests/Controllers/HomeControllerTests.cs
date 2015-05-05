@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Prekenweb.Models.Repository;
-using Prekenweb.Website;
 using Prekenweb.Website.Areas.Website.Controllers;
 using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.ViewModels;

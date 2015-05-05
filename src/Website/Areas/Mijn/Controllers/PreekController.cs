@@ -14,7 +14,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib.Hangfire;
-using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {

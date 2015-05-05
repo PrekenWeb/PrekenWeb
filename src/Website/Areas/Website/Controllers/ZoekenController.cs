@@ -5,6 +5,7 @@ using Prekenweb.Models.Repository;
 using Prekenweb.Models.Services;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
+using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Identity;
 using Prekenweb.Website.ViewModels;
 using System.Data.Entity;
@@ -14,21 +15,20 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
-{ 
-   [OutputCache(Duration = 3600, VaryByParam = "*", VaryByCustom="user")] // 1 uur
+{
     public class ZoekenController : ApplicationController
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IZoekenRepository _zoekenRepository;
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
-       private readonly IPrekenWebUserManager _prekenWebUserManager;
+        private readonly IPrekenWebUserManager _prekenWebUserManager;
 
-       public ZoekenController(IPrekenwebContext<Gebruiker> context, 
-                                IZoekenRepository zoekenRepository,
-                                IGebruikerRepository gebruikerRepository,
-                                IHuidigeGebruiker huidigeGebruiker,
-                                IPrekenWebUserManager prekenWebUserManager)
+        public ZoekenController(IPrekenwebContext<Gebruiker> context,
+                                 IZoekenRepository zoekenRepository,
+                                 IGebruikerRepository gebruikerRepository,
+                                 IHuidigeGebruiker huidigeGebruiker,
+                                 IPrekenWebUserManager prekenWebUserManager)
         {
             _context = context;
             _zoekenRepository = zoekenRepository;
@@ -38,10 +38,11 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*", Order = 0)] // 1 uur
+        [TrackSearch(Order = 1)]
+        [AddTokenCookie(Order = 2)]
         public async Task<ActionResult> Index(PreekZoeken viewModel)
         {
-            Session["ZoekParameters"] = Request.QueryString; 
-
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
 
             return View(viewModel);
@@ -49,8 +50,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         [Authorize]
         public async Task<ActionResult> ZoekOpdrachtBewaren(PreekZoeken viewModel)
-        { 
-
+        {
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
             var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
@@ -68,8 +68,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return RedirectToAction("Index", viewModel);
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public async Task<ActionResult> PartialInlineZoek(PreekZoeken viewModel)
-        { 
+        {
             viewModel = await GetPreekZoekenViewModel(viewModel, 6);
 
             return PartialView("PartialInlineZoek", viewModel);
@@ -111,8 +112,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             viewModel.LezingCatorieen = (!viewModel.LeesPreken && !viewModel.AudioPreken && viewModel.Lezingen) ? await _context.LezingCategories.ToListAsync() : null;
 
             return viewModel;
-        } 
+        }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Boek()
         {
             return View(new ZoekenBoek
@@ -125,6 +127,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Predikant()
         {
             return View(new ZoekenPredikant
@@ -136,6 +139,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gelegenheid()
         {
             return View(new ZoekenGebeurtenis
@@ -149,6 +153,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Series()
         {
             return View(new ZoekenSerie
@@ -157,6 +162,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gemeente()
         {
             return View(new ZoekenGemeente
@@ -169,6 +175,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
         public JsonResult Autocomplete(string type, string term)
         {
             switch (type)

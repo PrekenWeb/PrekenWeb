@@ -8,14 +8,12 @@ using Prekenweb.Models.Identity;
 namespace Prekenweb.Models.Repository
 {
     public interface IGebruikerRepository : IPrekenWebRepository
-    {
-        //Task<Gebruiker> GetGebruikerById(int id);
-        //IEnumerable<Gebruiker> GetAlleGebruikers(bool alleenBeheerders, string zoekterm);
+    { 
         IEnumerable<PreekCookie> GetBeluisterdePreken(int gebruikerId, int taalId);
+        Task<IEnumerable<PreekCookie>> GetBeluisterdePreken(int gebruikerId, int[] preekIds);
         IEnumerable<PreekCookie> GetPrekenMetBladwijzer(int gebruikerId, int taalId);
         Task VerwijderGebruikerData(int gebruikerId);
-        Task<IList<PreekCookie>> GetCookiesVoorGebruiker(int gebruikerId);
-        //Task RemoveLoginAsync(int loggedInGebruikerId);
+        Task<IList<PreekCookie>> GetCookiesVoorGebruiker(int gebruikerId); 
         Task AddToRolesAsync(int gebruikerId, string[] roleNames);
         Task RemoveAllRolesAsync(int gebruikerId);
     }
@@ -25,25 +23,7 @@ namespace Prekenweb.Models.Repository
         public GebruikerRepository(IPrekenwebContext<Gebruiker> prekenWebContext)
             : base(prekenWebContext)
         {
-        }
-        //public async Task<Gebruiker> GetGebruikerById(int id)
-        //{
-        //    return await Context.Users.Include(x => x.Roles).Include(x => x.Mailings).SingleAsync(g => g.Id == id);
-        //}
-
-        //public IEnumerable<Gebruiker> GetAlleGebruikers(bool alleenBeheerders, string zoekterm)
-        //{  
-        //    return PrekenWebUserManager.Users
-        //        .Include(x => x.Roles)
-        //        .Where(x =>
-        //            (x.Roles.Any() == alleenBeheerders || !alleenBeheerders)
-        //            && (x.Naam.Contains(zoekterm) || zoekterm == null || zoekterm == "")
-        //            )
-        //        .OrderByDescending(g => g.Roles.Count)
-        //                .ThenBy(g => g.LaatstIngelogd)
-        //                .ThenBy(g => g.Naam)
-        //                .ToList();
-        //}
+        } 
 
         public IEnumerable<PreekCookie> GetBeluisterdePreken(int gebruikerId, int taalId)
         {
@@ -57,6 +37,20 @@ namespace Prekenweb.Models.Repository
                 )
                 .OrderByDescending(x => x.DateTime)
                 .ToList();
+        }
+
+        public async Task<IEnumerable<PreekCookie>> GetBeluisterdePreken(int gebruikerId, int[] preekIds)
+        {
+            return await Context
+                .PreekCookies
+                .Include(x => x.Preek)
+                .Where(x =>
+                    x.GebruikerId == gebruikerId
+                    && preekIds.Contains(x.Preek.Id)
+                    && x.DateTime.HasValue
+                )
+                .OrderByDescending(x => x.DateTime)
+                .ToListAsync();
         }
         public IEnumerable<PreekCookie> GetPrekenMetBladwijzer(int gebruikerId, int taalId)
         {
@@ -104,7 +98,7 @@ namespace Prekenweb.Models.Repository
                 var dbContext = Context as PrekenwebContext;
                 var role = await dbContext.Roles.SingleAsync(x => x.Name == roleName);
                 await Context.Database.ExecuteSqlCommandAsync("insert into AspNetUserRoles values({0},{1},{2})", gebruikerId, role.Id, gebruikerId);
-            } 
+            }
         }
 
         //public async Task RemoveLoginAsync(int loggedInGebruikerId)

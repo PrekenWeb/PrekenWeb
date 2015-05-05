@@ -8,7 +8,6 @@ using Prekenweb.Models.Identity;
 using Prekenweb.Models.TestData;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
-using Prekenweb.Website.Lib.Identity;
 
 namespace Website.UnitTests.Controllers
 {

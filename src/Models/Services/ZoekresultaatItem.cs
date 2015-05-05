@@ -7,7 +7,6 @@ namespace Prekenweb.Models.Services
     {
         public Preek Preek { get; set; }
         public ResultaatReden ResultaatReden { get; set; }
-        public PreekCookie Cookie { get; set; }
         public string Boek
         {
             get

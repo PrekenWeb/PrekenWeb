@@ -1,8 +1,7 @@
 ﻿using System.Security.Principal;
 using System.Threading.Tasks;
-using PrekenWeb.Security;
 
-namespace Prekenweb.Website.Lib.Identity
+namespace PrekenWeb.Security
 {
     public interface IHuidigeGebruiker
     {

@@ -32,24 +32,7 @@ namespace Prekenweb.Website
         protected void Application_End(object sender, EventArgs e)
         {
             HangfireBootstrapper.Instance.Stop();
-        }
-
-        public override string GetVaryByCustomString(HttpContext context, string custom)
-        {
-            if (custom == "user")
-            {
-                if (context.User.Identity.IsAuthenticated)
-                {
-                    return context.User.Identity.Name;
-                }
-                else
-                {
-                    return "";
-                }
-            }
-
-            return null; //base.GetVaryByCustomString(context, custom);
-        }
+        } 
 
         public void Application_Error(Object sender, EventArgs e)
         {

@@ -2,15 +2,66 @@
 /// <reference path="typings/modernizr/modernizr.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/custom/custom.d.ts" />
+/// <reference path="typings/jquery.cookie/jquery.cookie.d.ts" />
 /// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" />
 var Prekenweb;
 (function (_Prekenweb) {
     'use strict';
     var Prekenweb = (function () {
         function Prekenweb() {
+            var _this = this;
             this.taal = "";
             this.inMijn = false;
             this.authenticated = false;
+            this.zoekOpdrachtOpslaanNaarFeed = function (sender) {
+                var pw = _this;
+                sender.innerHTML = "Zoek opdracht opslaan...";
+                $.ajax({
+                    url: sender.href,
+                    success: function (data) {
+                        sender.innerHTML = "Zoek opdracht opgeslagen, feed laden...";
+                        window.location.href = pw.rootUrl + pw.taal + '/Home/RssFeed/' + data;
+                    },
+                    error: function () {
+                        alert('Kon zoekopdracht helaas niet opslaan...');
+                    }
+                });
+            };
+            this.preekBezochtChecksTonen = function (preekIds) {
+                if (!$.cookie('Token'))
+                    return;
+
+                $.ajax({
+                    type: 'GET',
+                    url: prekenweb.apiRootUrl + 'api/Gebruiker/GeopendePreken',
+                    data: { preekIds: preekIds },
+                    headers: { "Authorization": "Bearer " + $.cookie('Token') },
+                    //dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (preekCookies) {
+                        for (var i = 0; i < preekCookies.length; i++) {
+                            var el = $(".preek-bezocht-check-" + preekCookies[i].PreekId);
+                            el.show();
+                            el.attr("title", el.attr("title") + " " + new Date(preekCookies[i].DateTime).toLocaleDateString());
+                            $(".datum-bezocht", el).text(new Date(preekCookies[i].DateTime).toLocaleDateString());
+
+                            var el2 = $(".preek-bladwijzer-" + preekCookies[i].PreekId);
+                            $("span", el2).removeClass("fa-bookmark");
+                            $("span", el2).removeClass("fa-bookmark-o");
+                            if (preekCookies[i].BladwijzerGelegdOp == null) {
+                                $("span", el2).addClass("fa-bookmark-o");
+                                el2.data("active", "False");
+                            } else {
+                                $("span", el2).addClass("fa-bookmark");
+                                el2.data("active", "True");
+                            }
+                        }
+                    },
+                    error: function (XHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
+            };
         }
         Prekenweb.prototype.dataRelatedTooltips = function () {
             var pw = this;
@@ -81,19 +132,20 @@ var Prekenweb;
         //}
         // jquery.ajax.unobtrusive werkt nog niet met jQuery 2.0, daarom zelf even een functionaliteit gemaakt :)
         Prekenweb.prototype.unobtrusiveAjaxReplacement = function () {
-            $(document).on('click', "a[data-ajax='true']", function (e) {
-                var url = $(this).attr("href");
-                var target = $(this).data("ajaxUpdate");
-                $.ajax({
-                    url: url,
-                    success: function (data) {
-                        $(target).html(data);
-                        this.standaardTooltip();
-                        this.dataRelatedTooltips();
-                    }
-                });
-                e.preventDefault();
-            });
+            // 05-05-2015 uitgezet, zorge voor een dubbele http request op homepage
+            //$(document).on('click', "a[data-ajax='true']", function (e) {
+            //    var url = $(this).attr("href");
+            //    var target = $(this).data("ajaxUpdate");
+            //    $.ajax({
+            //        url: url,
+            //        success: function (data) {
+            //            $(target).html(data);
+            //            this.standaardTooltip();
+            //            this.dataRelatedTooltips();
+            //        }
+            //    });
+            //    e.preventDefault();
+            //});
         };
 
         //
@@ -482,20 +534,6 @@ var Prekenweb;
         Prekenweb.prototype.RssFeed = function (sender) {
             var pw = this;
             $("#RssFeedModal").modal();
-        };
-        Prekenweb.prototype.ZoekOpdrachtOpslaanNaarFeed = function (sender) {
-            var pw = this;
-            sender.innerHTML = "Zoek opdracht opslaan...";
-            $.ajax({
-                url: sender.href,
-                success: function (data) {
-                    sender.innerHTML = "Zoek opdracht opgeslagen, feed laden...";
-                    window.location.href = pw.rootUrl + pw.taal + '/Home/RssFeed/' + data;
-                },
-                error: function () {
-                    alert('Kon zoekopdracht helaas niet opslaan...');
-                }
-            });
         };
         return Prekenweb;
     })();

@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
-using Prekenweb.Attributes;
 using Prekenweb.Models.Repository;
 using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib;
