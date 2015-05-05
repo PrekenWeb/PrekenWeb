@@ -3,23 +3,129 @@ Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
-body
-{
-	/* Font */
-	font-family: Arial, Verdana, sans-serif;
-	font-size: 12px;
-
-	/* Text color */
-	color: #222;
-
-	/* Remove the background color to make it transparent */
-	background-color: #fff;
+body {
+    /* Font */
+    font-family: Arial, Verdana, sans-serif;
+    font-size: 12px;
+    /* Text color */
+    color: #222;
+    /* Remove the background color to make it transparent */
+    background-color: #fff;
 }
 
-ol,ul,dl
-{
-	/* IE7: reset rtl list margin. (#7334) */
-	*margin-right:0px;
-	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
-    padding:0 40px;
+ol, ul, dl {
+    /* IE7: reset rtl list margin. (#7334) */
+    *margin-right: 0px;
+    /* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+    padding: 0 40px;
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 12.5pt;
+    font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.boek {
+    background-color: #dbe1ed;
+    margin: 20px;
+    width: 300px;
+    border-radius: 2px;
+    border: 1px solid #1274ba;
+    padding: 10px;
+}
+
+    .boek > img {
+        float: right;
+    }
+
+.fontface h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.no-fontface h1 {
+    font-family: 'Times New Roman';
+    font-size: 32px;
+}
+/*.textshadow h1 {
+    -webkit-text-shadow: 2px 2px 3px @kleur2;
+    text-shadow: 2px 2px 3px @kleur2;
+    filter: dropshadow(color=@kleur2, offx=2, offy=2);
+}*/
+h1 {
+    padding: 0px 0px 10px 0px;
+    margin: 0px;
+    color: #1274ba;
+    font-weight: normal;
+    line-height: normal;
+}
+
+    h1 a {
+        color: #1274ba;
+        text-decoration: none;
+    }
+
+        h1 a:hover {
+            text-decoration: underline;
+        }
+
+.fontface h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.no-fontface h2 {
+    font-family: Arial;
+    font-size: 22px;
+}
+
+h2 {
+    padding: 0px;
+    margin: 0px;
+    color: #1274ba;
+    line-height: normal;
+}
+
+    h2 a {
+        color: #1274ba;
+        text-decoration: none;
+    }
+
+        h2 a:hover {
+            text-decoration: underline;
+        }
+
+.fontface h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.no-fontface h4 {
+    font-family: Arial;
+    font-size: 20px;
+}
+
+h4 {
+    padding: 0px;
+    margin: 0px;
+    color: #1274ba;
+}
+
+    h4 a {
+        color: #1274ba;
+        text-decoration: none;
+    }
+
+        h4 a:hover {
+            text-decoration: underline;
+        }
+
+a {
+    color: black;
+    text-decoration: underline;
 }
