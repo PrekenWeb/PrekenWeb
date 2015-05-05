@@ -35,9 +35,6 @@ namespace Prekenweb.Website
                 "~/Content/jquery.qtip*",
                 "~/Content/site.css",
                 "~/Content/mediaQueries.css" ));
-
-            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
-                "~/Content/themes/base/all.css"));
         }
     }
 }
