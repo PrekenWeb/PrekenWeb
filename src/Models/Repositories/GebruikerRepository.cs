@@ -10,7 +10,7 @@ namespace Prekenweb.Models.Repository
     public interface IGebruikerRepository : IPrekenWebRepository
     { 
         IEnumerable<PreekCookie> GetBeluisterdePreken(int gebruikerId, int taalId);
-        Task<IEnumerable<PreekCookie>> GetBeluisterdePreken(int gebruikerId, int[] preekIds);
+        Task<IEnumerable<PreekCookie>> GetPreekCookies(int gebruikerId, int[] preekIds);
         IEnumerable<PreekCookie> GetPrekenMetBladwijzer(int gebruikerId, int taalId);
         Task VerwijderGebruikerData(int gebruikerId);
         Task<IList<PreekCookie>> GetCookiesVoorGebruiker(int gebruikerId); 
@@ -39,7 +39,7 @@ namespace Prekenweb.Models.Repository
                 .ToList();
         }
 
-        public async Task<IEnumerable<PreekCookie>> GetBeluisterdePreken(int gebruikerId, int[] preekIds)
+        public async Task<IEnumerable<PreekCookie>> GetPreekCookies(int gebruikerId, int[] preekIds)
         {
             return await Context
                 .PreekCookies
@@ -47,7 +47,6 @@ namespace Prekenweb.Models.Repository
                 .Where(x =>
                     x.GebruikerId == gebruikerId
                     && preekIds.Contains(x.Preek.Id)
-                    && x.DateTime.HasValue
                 )
                 .OrderByDescending(x => x.DateTime)
                 .ToListAsync();

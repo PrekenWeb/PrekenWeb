@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         public async Task<IEnumerable<PreekCookie>> GeopendePreken([FromUri]int[] preekIds)
         {
             var gebruikerId = await _huidigeGebruiker.GetId(_userManager, User); 
-            return await _gebruikerRepository.GetBeluisterdePreken(gebruikerId, preekIds); 
+            return await _gebruikerRepository.GetPreekCookies(gebruikerId, preekIds); 
         }
     }
 }

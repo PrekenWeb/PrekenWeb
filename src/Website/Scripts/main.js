@@ -40,14 +40,17 @@ var Prekenweb;
                     contentType: 'application/json',
                     success: function (preekCookies) {
                         for (var i = 0; i < preekCookies.length; i++) {
-                            var el = $(".preek-bezocht-check-" + preekCookies[i].PreekId);
-                            el.show();
-                            el.attr("title", el.attr("title") + " " + new Date(preekCookies[i].DateTime).toLocaleDateString());
-                            $(".datum-bezocht", el).text(new Date(preekCookies[i].DateTime).toLocaleDateString());
+                            if (preekCookies[i].DateTime != null) {
+                                var el = $(".preek-bezocht-check-" + preekCookies[i].PreekId);
+                                el.show();
+                                el.attr("title", el.attr("title") + " " + new Date(preekCookies[i].DateTime).toLocaleDateString());
+                                $(".datum-bezocht", el).text(new Date(preekCookies[i].DateTime).toLocaleDateString());
+                            }
 
                             var el2 = $(".preek-bladwijzer-" + preekCookies[i].PreekId);
                             $("span", el2).removeClass("fa-bookmark");
                             $("span", el2).removeClass("fa-bookmark-o");
+
                             if (preekCookies[i].BladwijzerGelegdOp == null) {
                                 $("span", el2).addClass("fa-bookmark-o");
                                 el2.data("active", "False");
