@@ -200,7 +200,7 @@
                     }
                     else
                     {
-                        <a href="@queryStringStart.Replace("Pagina=" + Model.Pagina, "Pagina=" + i.ToString())" class="Knop @active Nummer">
+                        <a href="@queryStringStart.Replace("Pagina=" + Model.Pagina, "Pagina=" + i.ToString()).TrimEnd('&')" class="Knop @active Nummer">
                             @i
                         </a>
                     }

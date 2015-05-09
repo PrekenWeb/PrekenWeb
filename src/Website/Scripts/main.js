@@ -43,12 +43,14 @@ var Prekenweb;
                             var preekCookie = preekCookies[i];
 
                             if (preekCookie.DateTime != null) {
+                                // vinkje weergeven achter preek
                                 var bezochtCheckElement = $(".preek-bezocht-check-" + preekCookie.PreekId);
                                 bezochtCheckElement.show();
                                 bezochtCheckElement.attr("title", bezochtCheckElement.attr("title") + " " + new Date(preekCookie.DateTime).toLocaleDateString());
                                 $(".datum-bezocht", bezochtCheckElement).text(new Date(preekCookie.DateTime).toLocaleDateString());
                             }
 
+                            // in zoekresultaten, bladwijzer icoon actief maken
                             var bladwijzerIcoonElement = $(".preek-bladwijzer-" + preekCookie.PreekId);
                             $("span", bladwijzerIcoonElement).removeClass("fa-bookmark");
                             $("span", bladwijzerIcoonElement).removeClass("fa-bookmark-o");
