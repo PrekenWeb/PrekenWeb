@@ -315,6 +315,7 @@
     <Compile Include="Areas\Mijn\Models\Registreer.cs" />
     <Compile Include="Areas\Mijn\Models\AccountLogin.cs" />
     <Compile Include="Areas\Mijn\Models\WachtwoordVergeten.cs" />
+    <Compile Include="Lib\AnonymousOnlyOutputCacheAttribute.cs" />
     <Compile Include="Lib\TrackSearchAttribute.cs" />
     <Compile Include="Lib\Identity\AddTokenCookieFilter.cs" />
     <Compile Include="Lib\Identity\AsyncHelper.cs" />

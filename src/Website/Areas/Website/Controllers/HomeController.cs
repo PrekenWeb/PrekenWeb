@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.Lib.Identity;
 using Prekenweb.Website.ViewModels;
@@ -46,7 +47,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
-        [OutputCache(Duration = 1800, VaryByParam = "*", Order=0)] // 30 minuten
+        [AnonymousOnlyOutputCache(Duration = 1800, VaryByParam = "*", Order = 0)] // 30 minuten
         [AddTokenCookie(Order=1)]
         public async Task<ActionResult> Index()
         { 

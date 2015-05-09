@@ -38,7 +38,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             ViewBag.Taalkeuze = true;
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*", Order = 0)] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*", Order = 0)] // 1 uur
         [TrackSearch(Order = 1)]
         [AddTokenCookie(Order = 2)]
         public async Task<ActionResult> Index(PreekZoeken viewModel)
@@ -68,7 +68,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return RedirectToAction("Index", viewModel);
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public async Task<ActionResult> PartialInlineZoek(PreekZoeken viewModel)
         {
             viewModel = await GetPreekZoekenViewModel(viewModel, 6);
@@ -114,7 +114,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return viewModel;
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Boek()
         {
             return View(new ZoekenBoek
@@ -127,7 +127,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Predikant()
         {
             return View(new ZoekenPredikant
@@ -139,7 +139,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gelegenheid()
         {
             return View(new ZoekenGebeurtenis
@@ -153,7 +153,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Series()
         {
             return View(new ZoekenSerie
@@ -162,7 +162,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gemeente()
         {
             return View(new ZoekenGemeente
@@ -175,7 +175,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "*")] // 1 uur
+        [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public JsonResult Autocomplete(string type, string term)
         {
             switch (type)
