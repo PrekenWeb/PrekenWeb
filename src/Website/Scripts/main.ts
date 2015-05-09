@@ -532,29 +532,33 @@ module Prekenweb {
                 contentType: 'application/json',
                 success: preekCookies => {
                     for (var i = 0; i < preekCookies.length; i++) {
-                        if (preekCookies[i].DateTime != null) {
-                            var el = $(".preek-bezocht-check-" + preekCookies[i].PreekId);
-                            el.show();
-                            el.attr("title", el.attr("title") + " " + new Date(preekCookies[i].DateTime).toLocaleDateString());
-                            $(".datum-bezocht", el).text(new Date(preekCookies[i].DateTime).toLocaleDateString());
+                        var preekCookie = preekCookies[i];
+
+                        if (preekCookie.DateTime != null) { // preek is bezocht
+                            // vinkje weergeven achter preek
+                            var bezochtCheckElement = $(".preek-bezocht-check-" + preekCookie.PreekId);
+                            bezochtCheckElement.show();
+                            bezochtCheckElement.attr("title", bezochtCheckElement.attr("title") + " " + new Date(preekCookie.DateTime).toLocaleDateString());
+                            $(".datum-bezocht", bezochtCheckElement).text(new Date(preekCookie.DateTime).toLocaleDateString());
                         }
 
-                        var el2 = $(".preek-bladwijzer-" + preekCookies[i].PreekId);
-                        $("span", el2).removeClass("fa-bookmark");
-                        $("span", el2).removeClass("fa-bookmark-o");
+                        // in zoekresultaten, bladwijzer icoon actief maken
+                        var bladwijzerIcoonElement = $(".preek-bladwijzer-" + preekCookie.PreekId);
+                        $("span", bladwijzerIcoonElement).removeClass("fa-bookmark");
+                        $("span", bladwijzerIcoonElement).removeClass("fa-bookmark-o");
 
-                        if (preekCookies[i].BladwijzerGelegdOp == null) {
-                            $("span", el2).addClass("fa-bookmark-o");
-                            el2.data("active", "False");
+                        if (preekCookie.BladwijzerGelegdOp == null) {
+                            $("span", bladwijzerIcoonElement).addClass("fa-bookmark-o");
+                            bladwijzerIcoonElement.data("active", "False");
                         } else {
-                            $("span", el2).addClass("fa-bookmark");
-                            el2.data("active", "True"); 
+                            $("span", bladwijzerIcoonElement).addClass("fa-bookmark");
+                            bladwijzerIcoonElement.data("active", "True"); 
                         }
 
                     }
                 },
                 error: (XHR, textStatus, errorThrown) => {
-                    console.log(textStatus);
+                    $.removeCookie("Token");
                 }
             });
         }
