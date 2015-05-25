@@ -97,6 +97,7 @@ namespace Website.UnitTests
         }
 
         public Database Database { get; private set; }
-        public IDbSet<T> Users { get; set; }
+        public IDbSet<T> Users { get; set; } 
+        public DbContextConfiguration Configuration { get; private set; }
     }
 }

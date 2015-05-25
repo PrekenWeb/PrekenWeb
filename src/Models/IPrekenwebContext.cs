@@ -35,15 +35,16 @@ namespace Prekenweb.Models
         IDbSet<ZoekOpdracht> ZoekOpdrachten { get; set; }
 
         // Implemented by DbContext
-        DbEntityEntry Entry(object entity); 
+        DbEntityEntry Entry(object entity);
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
         int SaveChanges();
-        Task<int> SaveChangesAsync(); 
+        Task<int> SaveChangesAsync();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         Database Database { get; }
-       
+        DbContextConfiguration Configuration { get; }
+
         // Implemented by IdentityDbContext 
-         IDbSet<T> Users { get; set; }
+        IDbSet<T> Users { get; set; }
 
     }
 }

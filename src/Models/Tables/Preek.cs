@@ -11,7 +11,7 @@ using System.Linq;
 namespace Prekenweb.Models
 {
     [Serializable]
-    [DataContract(IsReference = true)]
+    [DataContract(IsReference = true)] // to prevent circular reference expections when serializing
     public class Preek
     { 
         public Preek()
@@ -26,7 +26,7 @@ namespace Prekenweb.Models
             PreekLezenEnZingens = new List<PreekLezenEnZingen>();
             
         }
-        [DataMember]
+
         public int Id { get; set; }
 
         [UIHint("Boekhoofdstuk"), Display(Name = "Boek", ResourceType = typeof(Resources.Resources))]
@@ -41,7 +41,7 @@ namespace Prekenweb.Models
         [UIHint("Gebeurtenis"), Display(Name = "Gebeurtenis", ResourceType = typeof(Resources.Resources))]
         public int? GebeurtenisId { get; set; }
 
-        [DataType(DataType.DateTime), Display(Name = "AangemaaktOp", ResourceType = typeof(Resources.Resources)), DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = false), DataMember]
+        [DataType(DataType.DateTime), Display(Name = "AangemaaktOp", ResourceType = typeof(Resources.Resources)), DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = false)]
         public DateTime? DatumAangemaakt { get; set; }
 
         [DataType(DataType.DateTime), Display(Name = "BijgewerktOp", ResourceType = typeof(Resources.Resources)), DisplayFormat(DataFormatString = "{0:d}")]
@@ -248,7 +248,7 @@ namespace Prekenweb.Models
             }
         }
 
-        [NotMapped, DataMember]
+        [NotMapped]
         public string PreekTitel { get { return GetPreekTitel(); }
              set { }
         }

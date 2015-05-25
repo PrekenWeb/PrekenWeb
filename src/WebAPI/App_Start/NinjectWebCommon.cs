@@ -5,6 +5,7 @@ using Ninject.Web.Common;
 using Prekenweb.Models;
 using Prekenweb.Models.Identity;
 using Prekenweb.Models.Repository;
+using Prekenweb.Models.Services;
 using PrekenWeb.Security;
 
 namespace WebAPI
@@ -15,10 +16,7 @@ namespace WebAPI
         {
             var kernel = new StandardKernel();
             try
-            {
-                //kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-                //kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
+            {  
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -35,6 +33,7 @@ namespace WebAPI
             kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>();
             kernel.Bind<PrekenwebContext>().ToSelf().WithConstructorArgument("proxyCreation", true);
             kernel.Bind<IPreekRepository>().To<PreekRepository>();
+            kernel.Bind<IHomeService>().To<HomeService>();
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();
             kernel.Bind<IPrekenWebUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<PrekenWebUserManager>()).InRequestScope(); 
 

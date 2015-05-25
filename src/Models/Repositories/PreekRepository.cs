@@ -14,7 +14,9 @@ namespace Prekenweb.Models.Repository
 
         public async Task<IEnumerable<Preek>> GetAllePreken(int taalId)
         {
-            return await Context.Preeks
+            Context.Configuration.ProxyCreationEnabled = false;  // to prevent proxy creation, proxies are not serializable by the API
+
+            return await Context.Preeks 
                 .Include(x => x.PreekCookies)
                 .Include(x => x.Predikant)
                 .Include(x => x.Gemeente)
