@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Moq;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.TestData;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
-using Prekenweb.Models.TestData;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
 

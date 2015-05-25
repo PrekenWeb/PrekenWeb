@@ -2,10 +2,11 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using Ninject.Web.Common;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.Repositories;
+using PrekenWeb.Data.Services;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
-using Prekenweb.Models.Repository;
-using Prekenweb.Models.Services;
 using PrekenWeb.Security;
 
 namespace WebAPI

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PrekenWeb.Data.Tables;
 using Prekenweb.Models;
 
 namespace Prekenweb.Website.Areas.Mijn.Models

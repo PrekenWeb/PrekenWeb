@@ -2,8 +2,9 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
 
 namespace PrekenWeb.Security
 { 

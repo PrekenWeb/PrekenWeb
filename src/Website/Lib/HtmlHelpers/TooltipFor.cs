@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using Prekenweb.Attributes;
+using PrekenWeb.Data.Attributes;
 
 namespace Prekenweb.Website.Lib.HtmlHelpers
 {

@@ -1,4 +1,4 @@
-﻿using Prekenweb.Models.ViewModels;
+﻿using PrekenWeb.Data.ViewModels;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

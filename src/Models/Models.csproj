@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Prekenweb.Models</RootNamespace>
     <AssemblyName>Prekenweb.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -17,8 +18,8 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-    <TargetFrameworkProfile />
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode> 
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -121,27 +122,7 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -150,208 +131,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\Preek.cs" />
-    <Compile Include="FakeDbSet\DbAsyncEnumerable.cs" />
-    <Compile Include="FakeDbSet\DbAsyncEnumerator.cs" />
-    <Compile Include="FakeDbSet\DbAsyncQueryProvider.cs" />
-    <Compile Include="FakeDbSet\InMemoryDbSet.cs" />
-    <Compile Include="Identity\PrekenWebRole.cs" />
-    <Compile Include="Identity\PrekenWebUserClaim.cs" />
-    <Compile Include="Identity\PrekenWebUserLogin.cs" />
-    <Compile Include="Identity\PrekenWebUserRole.cs" />
-    <Compile Include="Migrations\201502051157493_InitialCreate.cs" />
-    <Compile Include="Migrations\201502051157493_InitialCreate.Designer.cs">
-      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repositories\ZoekenRepository.cs" />
-    <Compile Include="Repositories\SpotlightRepository.cs" />
-    <Compile Include="Repositories\PrekenRepository.cs" />
-    <Compile Include="Repositories\IPreekRepository.cs" />
-    <Compile Include="Repositories\PreekRepository.cs" />
-    <Compile Include="Repositories\TekstRepository.cs" />
-    <Compile Include="Repositories\MailingRepository.cs" />
-    <Compile Include="Repositories\GebruikerRepository.cs" />
-    <Compile Include="Repositories\PrekenWebRepositoryBase.cs" />
-    <Compile Include="Services\IHomeService.cs" />
-    <Compile Include="Services\ResultaatReden.cs" />
-    <Compile Include="Services\Zoekresultaat.cs" />
-    <Compile Include="Services\ZoekresultaatItem.cs" />
-    <Compile Include="Services\HomeService.cs" />
-    <Compile Include="Services\ZoekService.cs" />
-    <Compile Include="Tables\Afbeelding.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\AfbeeldingConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Boek.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\BoekConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\BoekHoofdstukConfiguration.cs" />
-    <Compile Include="Tables\BoekHoofdstuk.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\BoekHoofdstukTekst.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\BoekHoofdstukTekstConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Attributes\TooltipAttribute.cs" />
-    <Compile Include="Tables\ElmahError.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\ElmahErrorConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Gebeurtenis.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\GebeurtenisConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Identity\Gebruiker.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Identity\GebruikerConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Gemeente.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\GemeenteConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Inbox.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\InboxConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\InboxOpvolging.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\InboxOpvolgingConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\InboxType.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\InboxTypeConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="IPrekenwebContext.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\LezingCategorie.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\LezingCategorieConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Mailing.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\MailingConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\NieuwsbriefInschrijving.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\NieuwsbriefInschrijvingConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Pagina.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PaginaConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Predikant.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PredikantConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Preek.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekCookie.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekCookieConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekLezenEnZingen.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekLezenEnZingenConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekType.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\PreekTypeConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\ZoekOpdracht.cs" />
-    <Compile Include="Tables\ZoekOpdrachtConfiguration.cs" />
-    <Compile Include="TestData\TestDataProvider.cs" />
-    <Compile Include="ViewModels\PreekTypeEnum.cs" />
-    <Compile Include="PrekenwebContext.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tables\RefactorLog.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\RefactorLogConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Serie.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\SerieConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Spotlight.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\SpotlightConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Taal.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\TaalConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\Tekst.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tables\TekstConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModels\TekstPagina.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -362,12 +148,8 @@
       <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502051157493_InitialCreate.resx">
-      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -375,7 +157,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

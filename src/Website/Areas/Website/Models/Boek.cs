@@ -1,7 +1,7 @@
-﻿using Prekenweb.Models.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using PrekenWeb.Data.ViewModels;
 
 namespace Prekenweb.Website.ViewModels
 {

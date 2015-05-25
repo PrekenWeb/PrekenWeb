@@ -1,7 +1,9 @@
 ﻿using System.Configuration;
 using System.Threading.Tasks;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.Tables;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;

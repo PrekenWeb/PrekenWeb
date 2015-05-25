@@ -1073,6 +1073,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b5be9bae-f1eb-4f71-9048-297d61a21da6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
       <Name>Models</Name>

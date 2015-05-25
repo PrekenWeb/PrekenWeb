@@ -2,9 +2,12 @@
 using System.IO;
 using CaptchaMvc.Attributes;
 using Microsoft.Reporting.WebForms;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.Repositories;
+using PrekenWeb.Data.Tables;
+using PrekenWeb.Data.ViewModels;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
-using Prekenweb.Models.Repository;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib.Cache;

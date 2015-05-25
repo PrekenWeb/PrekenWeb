@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B5BE9BAE-F1EB-4F71-9048-297D61A21DA6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PrekenWeb.Data</RootNamespace>
+    <AssemblyName>PrekenWeb.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\TooltipAttribute.cs" />
+    <Compile Include="FakeDbSet\DbAsyncEnumerable.cs" />
+    <Compile Include="FakeDbSet\DbAsyncEnumerator.cs" />
+    <Compile Include="FakeDbSet\DbAsyncQueryProvider.cs" />
+    <Compile Include="FakeDbSet\InMemoryDbSet.cs" />
+    <Compile Include="Identity\Gebruiker.cs" />
+    <Compile Include="Identity\GebruikerConfiguration.cs" />
+    <Compile Include="Identity\PrekenWebRole.cs" />
+    <Compile Include="Identity\PrekenWebUserClaim.cs" />
+    <Compile Include="Identity\PrekenWebUserLogin.cs" />
+    <Compile Include="Identity\PrekenWebUserRole.cs" />
+    <Compile Include="IPrekenwebContext.cs" />
+    <Compile Include="Migrations\201502051157493_InitialCreate.cs" />
+    <Compile Include="Migrations\201502051157493_InitialCreate.Designer.cs">
+      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PrekenwebContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\GebruikerRepository.cs" />
+    <Compile Include="Repositories\IGebruikerRepository.cs" />
+    <Compile Include="Repositories\IMailingRepository.cs" />
+    <Compile Include="Repositories\IPreekRepository.cs" />
+    <Compile Include="Repositories\IPrekenRepository.cs" />
+    <Compile Include="Repositories\IPrekenWebRepository.cs" />
+    <Compile Include="Repositories\ITekstRepository.cs" />
+    <Compile Include="Repositories\IZoekenRepository.cs" />
+    <Compile Include="Repositories\MailingRepository.cs" />
+    <Compile Include="Repositories\PreekRepository.cs" />
+    <Compile Include="Repositories\PrekenRepository.cs" />
+    <Compile Include="Repositories\PrekenWebRepositoryBase.cs" />
+    <Compile Include="Repositories\SpotlightRepository.cs" />
+    <Compile Include="Repositories\TekstRepository.cs" />
+    <Compile Include="Repositories\ZoekenRepository.cs" />
+    <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\IHomeService.cs" />
+    <Compile Include="Services\Zoekresultaat.cs" />
+    <Compile Include="Services\ZoekService.cs" />
+    <Compile Include="Tables\Afbeelding.cs" />
+    <Compile Include="Tables\AfbeeldingConfiguration.cs" />
+    <Compile Include="Tables\Boek.cs" />
+    <Compile Include="Tables\BoekConfiguration.cs" />
+    <Compile Include="Tables\BoekHoofdstuk.cs" />
+    <Compile Include="Tables\BoekHoofdstukConfiguration.cs" />
+    <Compile Include="Tables\BoekHoofdstukTekst.cs" />
+    <Compile Include="Tables\BoekHoofdstukTekstConfiguration.cs" />
+    <Compile Include="Tables\ElmahError.cs" />
+    <Compile Include="Tables\ElmahErrorConfiguration.cs" />
+    <Compile Include="Tables\Gebeurtenis.cs" />
+    <Compile Include="Tables\GebeurtenisConfiguration.cs" />
+    <Compile Include="Tables\Gemeente.cs" />
+    <Compile Include="Tables\GemeenteConfiguration.cs" />
+    <Compile Include="Tables\Inbox.cs" />
+    <Compile Include="Tables\InboxConfiguration.cs" />
+    <Compile Include="Tables\InboxOpvolging.cs" />
+    <Compile Include="Tables\InboxOpvolgingConfiguration.cs" />
+    <Compile Include="Tables\InboxType.cs" />
+    <Compile Include="Tables\InboxTypeConfiguration.cs" />
+    <Compile Include="Tables\LezingCategorie.cs" />
+    <Compile Include="Tables\LezingCategorieConfiguration.cs" />
+    <Compile Include="Tables\Mailing.cs" />
+    <Compile Include="Tables\MailingConfiguration.cs" />
+    <Compile Include="Tables\NieuwsbriefInschrijving.cs" />
+    <Compile Include="Tables\NieuwsbriefInschrijvingConfiguration.cs" />
+    <Compile Include="Tables\Pagina.cs" />
+    <Compile Include="Tables\PaginaConfiguration.cs" />
+    <Compile Include="Tables\Predikant.cs" />
+    <Compile Include="Tables\PredikantConfiguration.cs" />
+    <Compile Include="Tables\Preek.cs" />
+    <Compile Include="Tables\PreekConfiguration.cs" />
+    <Compile Include="Tables\PreekCookie.cs" />
+    <Compile Include="Tables\PreekCookieConfiguration.cs" />
+    <Compile Include="Tables\PreekLezenEnZingen.cs" />
+    <Compile Include="Tables\PreekLezenEnZingenConfiguration.cs" />
+    <Compile Include="Tables\PreekType.cs" />
+    <Compile Include="Tables\PreekTypeConfiguration.cs" />
+    <Compile Include="Tables\RefactorLog.cs" />
+    <Compile Include="Tables\RefactorLogConfiguration.cs" />
+    <Compile Include="Tables\Serie.cs" />
+    <Compile Include="Tables\SerieConfiguration.cs" />
+    <Compile Include="Tables\Spotlight.cs" />
+    <Compile Include="Tables\SpotlightConfiguration.cs" />
+    <Compile Include="Tables\Taal.cs" />
+    <Compile Include="Tables\TaalConfiguration.cs" />
+    <Compile Include="Tables\Tekst.cs" />
+    <Compile Include="Tables\TekstConfiguration.cs" />
+    <Compile Include="Tables\ZoekOpdracht.cs" />
+    <Compile Include="Tables\ZoekOpdrachtConfiguration.cs" />
+    <Compile Include="TestData\TestDataProvider.cs" />
+    <Compile Include="ViewModels\PreekTypeEnum.cs" />
+    <Compile Include="ViewModels\ResultaatReden.cs" />
+    <Compile Include="ViewModels\TekstPagina.cs" />
+    <Compile Include="ViewModels\ZoekresultaatItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502051157493_InitialCreate.resx">
+      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{c7a64c3f-773b-44c2-9e1d-c04c411d0d84}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{6794167a-6625-4be8-90cf-2473b698adea}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

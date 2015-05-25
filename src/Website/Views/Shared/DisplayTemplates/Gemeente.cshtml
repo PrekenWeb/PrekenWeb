@@ -1,4 +1,4 @@
-﻿@inherits WebViewPage<Gemeente>
+﻿@inherits WebViewPage<PrekenWeb.Data.Tables.Gemeente>
 @if (Model != null)
 { 
     @Html.ActionLink(Model.Omschrijving, "Index", "Zoeken", new { GemeenteId = Model.Id }, new { })

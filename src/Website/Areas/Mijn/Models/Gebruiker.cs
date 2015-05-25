@@ -1,5 +1,6 @@
-﻿using Prekenweb.Attributes;
-using Prekenweb.Models.Identity;
+﻿using PrekenWeb.Data;
+using PrekenWeb.Data.Attributes;
+using PrekenWeb.Data.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

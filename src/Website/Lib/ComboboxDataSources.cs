@@ -4,6 +4,9 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Tables;
+using PrekenWeb.Data.ViewModels;
 using Prekenweb.Models;
 
 namespace Prekenweb.Website.Lib
