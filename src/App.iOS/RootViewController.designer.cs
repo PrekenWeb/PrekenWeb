@@ -11,26 +11,26 @@ using UIKit;
 
 namespace App.iOS
 {
-	[Register ("MainViewController")]
-	partial class MainViewController
+	[Register ("RootViewController")]
+	partial class RootViewController
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView MainView { get; set; }
+		UIView RootViewView { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIButton testButton { get; set; }
+		UITableView TableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (MainView != null) {
-				MainView.Dispose ();
-				MainView = null;
+			if (RootViewView != null) {
+				RootViewView.Dispose ();
+				RootViewView = null;
 			}
-			if (testButton != null) {
-				testButton.Dispose ();
-				testButton = null;
+			if (TableView != null) {
+				TableView.Dispose ();
+				TableView = null;
 			}
 		}
 	}

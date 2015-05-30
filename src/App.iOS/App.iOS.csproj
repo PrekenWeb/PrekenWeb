@@ -80,16 +80,21 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MainViewController.cs" />
-    <Compile Include="MainViewController.designer.cs">
-      <DependentUpon>MainViewController.cs</DependentUpon>
+    <Compile Include="RootViewController.cs" />
+    <Compile Include="RootViewController.designer.cs">
+      <DependentUpon>RootViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreekTableSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\App.Shared\App.Shared.csproj">
       <Project>{C385C1D1-6FF0-402E-9621-A6FC0FACCB07}</Project>
       <Name>App.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
