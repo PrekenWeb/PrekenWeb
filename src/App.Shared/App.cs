@@ -13,13 +13,14 @@ namespace App.Shared
 
         public App()
         {
-            MainPage = new NavigationPage(new TodoListPage());
+            MainPage = new NavigationPage(new PreekListPage());
         }
 
         protected override void OnStart()
         {
             Debug.WriteLine("OnStart");
         }
+
         protected override void OnSleep()
         {
         }
@@ -27,7 +28,6 @@ namespace App.Shared
         protected override void OnResume()
         {
             Debug.WriteLine("OnResume");
-
         }
     }
 }

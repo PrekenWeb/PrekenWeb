@@ -36,7 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="ListPage.cs" />
+    <Compile Include="PreekPage.cs" />
+    <Compile Include="TodoItemCell.cs" />
+    <Compile Include="PreekListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClass.cs" />
   </ItemGroup>
