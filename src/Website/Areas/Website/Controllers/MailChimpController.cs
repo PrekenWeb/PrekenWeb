@@ -3,7 +3,7 @@ using MailChimp;
 using MailChimp.Campaigns;
 using MailChimp.Errors;
 using MailChimp.Helper;
-using Prekenweb.Models.Repository;
+using PrekenWeb.Data.Repositories;
 using MailChimp.Lists;
 using PrekenWeb.Security;
 using Prekenweb.Website.Controllers;

@@ -3,8 +3,10 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
+using PrekenWeb.Data;
+using PrekenWeb.Data.FakeDbSet;
+using PrekenWeb.Data.Tables;
 using Prekenweb.Models;
-using Prekenweb.Models.FakeDbSet;
 
 namespace Website.UnitTests
 {

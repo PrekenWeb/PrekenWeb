@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
+using PrekenWeb.Data.Tables;
 using Prekenweb.Models;
 
 namespace Prekenweb.Website.Areas.Mijn.Models

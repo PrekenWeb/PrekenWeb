@@ -1,5 +1,6 @@
-﻿using Prekenweb.Models;
-using Prekenweb.Models.ViewModels;
+﻿using PrekenWeb.Data.Tables;
+using PrekenWeb.Data.ViewModels;
+using Prekenweb.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Prekenweb.Website.ViewModels

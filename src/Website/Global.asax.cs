@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Prekenweb.Website.Lib.Hangfire;
+using Prekenweb.Website.Areas.Website;
+using Prekenweb.Website.Areas.Mijn;
 
 namespace Prekenweb.Website
 {
@@ -15,7 +17,9 @@ namespace Prekenweb.Website
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
 
-            AreaRegistration.RegisterAllAreas();
+            // AreaRegistration.RegisterAllAreas(); // disabled automatic area registration due to unreliable ordering which result in routing problems
+            Utils.RegisterArea<MijnAreaRegistration>(RouteTable.Routes, null);
+            Utils.RegisterArea<WebsiteAreaRegistration>(RouteTable.Routes, null);
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
@@ -43,6 +47,21 @@ namespace Prekenweb.Website
         private void DontCacheCurrentResponse(HttpContext context, Object data, ref HttpValidationStatus status)
         {
             status = HttpValidationStatus.IgnoreThisRequest;
+        }
+    }
+
+    public static class Utils
+    {
+        public static void RegisterArea<T>(RouteCollection routes, object state) where T : AreaRegistration
+        {
+            AreaRegistration registration = (AreaRegistration)Activator.CreateInstance(typeof(T));
+            AreaRegistrationContext context = new AreaRegistrationContext(registration.AreaName, routes, state);
+            string tNamespace = registration.GetType().Namespace;
+            if (tNamespace != null)
+            {
+                context.Namespaces.Add(tNamespace + ".*");
+            }
+            registration.RegisterArea(context);
         }
     }
 }

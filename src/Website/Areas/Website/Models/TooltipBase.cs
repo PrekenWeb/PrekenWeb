@@ -1,4 +1,5 @@
-﻿using Prekenweb.Models;
+﻿using PrekenWeb.Data.Tables;
+using Prekenweb.Models;
 
 namespace Prekenweb.Website.ViewModels
 {

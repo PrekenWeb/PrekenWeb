@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
-using Prekenweb.Models.Repository;
+using PrekenWeb.Data.Repositories;
+using PrekenWeb.Data.Services;
+using PrekenWeb.Data.ViewModels;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
-using Prekenweb.Models.Services;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {

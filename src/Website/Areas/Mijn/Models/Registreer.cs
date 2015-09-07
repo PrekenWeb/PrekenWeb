@@ -1,7 +1,7 @@
-﻿using Prekenweb.Attributes;
-using Prekenweb.Models.ViewModels;
+﻿using PrekenWeb.Data.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using PrekenWeb.Data.ViewModels;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

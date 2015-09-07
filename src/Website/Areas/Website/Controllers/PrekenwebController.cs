@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using CaptchaMvc.Attributes;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.Repositories;
+using PrekenWeb.Data.Tables;
 using Prekenweb.Models;
-using Prekenweb.Models.Identity;
-using Prekenweb.Models.Repository;
 using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib.ActionResults;
 using Prekenweb.Website.ViewModels;

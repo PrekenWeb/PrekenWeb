@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using PrekenWeb.Data.Services;
 using Prekenweb.Models.Dtos;
-using Prekenweb.Models.Services;
 
 namespace WebAPI.Controllers
 {
