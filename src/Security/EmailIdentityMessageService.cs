@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Configuration;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using PrekenWeb.Security.Properties;
@@ -9,7 +10,9 @@ namespace PrekenWeb.Security
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            using (SmtpClient smtpClient = new SmtpClient(Settings.Default.SMTPServer))
+            var smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
+
+            using (SmtpClient smtpClient = new SmtpClient(smtpServer))
             {
                 smtpClient.UseDefaultCredentials = true;
 

@@ -34,7 +34,7 @@ namespace Prekenweb.Website
 
         private static void RegisterServices(IKernel kernel)
         { 
-            kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>().InRequestScope();
+            kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>();//.InRequestScope();
             kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>().InRequestScope();
 
             //kernel
