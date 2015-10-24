@@ -11,26 +11,18 @@ using UIKit;
 
 namespace App.iOS
 {
-	[Register ("RootViewController")]
-	partial class RootViewController
+	[Register ("PreekViewController")]
+	partial class PreekViewController
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView RootViewView { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UITableView TableView { get; set; }
+		UIView PreekView { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (RootViewView != null) {
-				RootViewView.Dispose ();
-				RootViewView = null;
-			}
-			if (TableView != null) {
-				TableView.Dispose ();
-				TableView = null;
+			if (PreekView != null) {
+				PreekView.Dispose ();
+				PreekView = null;
 			}
 		}
 	}

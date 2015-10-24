@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="iPhoneStoryBoard.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -106,11 +105,14 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="RootViewController.cs" />
-    <Compile Include="RootViewController.designer.cs">
-      <DependentUpon>RootViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="PreekTableSource.cs" />
+    <Compile Include="PreekViewController.cs" />
+    <Compile Include="PreekViewController.designer.cs">
+      <DependentUpon>PreekViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingOverlay.cs" />
+    <Compile Include="MainMenuViewController.cs" />
+    <Compile Include="NavigationController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

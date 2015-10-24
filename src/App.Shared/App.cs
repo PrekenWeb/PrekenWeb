@@ -13,7 +13,8 @@ namespace App.Shared
 
         public App()
         {
-            MainPage = new NavigationPage(new PreekListPage());
+//            MainPage = new NavigationPage(new PreekListPage());
+			MainPage = new RootPage ();
         }
 
         protected override void OnStart()
