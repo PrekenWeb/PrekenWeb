@@ -15,7 +15,7 @@ namespace App.iOS
 		//	get;
 		//	set;
 		//}
-
+ 
 		//public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		//{ 
 		//	//Window = new UIWindow (UIScreen.MainScreen.Bounds);
@@ -24,7 +24,23 @@ namespace App.iOS
 		//	//Window.RootViewController = new MainViewController ();
 
 		//	return true;
-		//}
+		//} 
+//		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
+//		{  
+//			//Window = new UIWindow (UIScreen.MainScreen.Bounds);
+//			//Window.MakeKeyAndVisible ();
+//
+//			//Window.RootViewController = new MainViewController ();
+//			var navController = new NavigationController();
+//			Window.RootViewController = navController;
+//			navController.AddChildViewController (new MainMenuViewController ());
+//
+//			//Window.RootViewController.AddChildViewController (new PreekViewController ()); 
+//			Window.MakeKeyAndVisible();
+//
+//			return true;
+//		}
+//		  
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
