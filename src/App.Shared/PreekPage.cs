@@ -1,8 +1,5 @@
 using Xamarin.Forms;
 using Prekenweb.Models.Dtos;
-using System.Net;
-using System.IO;
-using System.Text;
 
 namespace App.Shared
 {

@@ -39,7 +39,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
-	<key>UIMainStoryboardFile</key>
-	<string>iPhoneStoryBoard</string>
+	<key>NSMainNibFile</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

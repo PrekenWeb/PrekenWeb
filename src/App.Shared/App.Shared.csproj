@@ -36,10 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="NieuwePrekenPage.cs" />
+    <Compile Include="OfflinePrekenPage.cs" />
     <Compile Include="PreekPage.cs" />
-    <Compile Include="PreekListPage.cs" />
+    <Compile Include="PreekZoekenPage.cs" />
+    <Compile Include="PreekZoekenPageViewModel.cs" />
+    <Compile Include="PrekenListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TodoItemCell.cs" />
+    <Compile Include="PreekCell.cs" />
     <Compile Include="IPrekenwebApiWrapper.cs" />
     <Compile Include="PrekenwebApiWrapper.cs" />
     <Compile Include="RootPage.cs" />
