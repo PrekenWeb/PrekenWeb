@@ -40,7 +40,9 @@
     <Compile Include="PreekListPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TodoItemCell.cs" />
-    <Compile Include="PreekZoekService.cs" />
+    <Compile Include="IPrekenwebApiWrapper.cs" />
+    <Compile Include="PrekenwebApiWrapper.cs" />
+    <Compile Include="RootPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

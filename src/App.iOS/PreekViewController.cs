@@ -35,10 +35,10 @@ namespace App.iOS
 			this._loadPop = new LoadingOverlay (bounds);
 			this.View.Add ( this._loadPop );
 			 
-			var test = new TestClass();
-			var result = await test.NieuwePreken();  
+			//var test = new TestClass();
+			//var result = await test.NieuwePreken();  
 
-			 TableView.Source = new PreekTableSource(result.ToList()); 
+			 //TableView.Source = new PreekTableSource(result.ToList()); 
 
 			this._loadPop.Hide ();
 		}

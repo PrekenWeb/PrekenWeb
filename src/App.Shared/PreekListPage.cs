@@ -8,8 +8,12 @@ namespace App.Shared
 	{ 
 		readonly ListView _listView;
 
-		public PreekListPage()
+		private readonly IPrekenwebApiWrapper _api;
+
+		public PreekListPage(IPrekenwebApiWrapper api)
 		{
+			_api = api;
+
 			Title = "Preken";
 
 			_listView = new ListView();
@@ -42,8 +46,7 @@ namespace App.Shared
 		{
 			base.OnAppearing(); 
 
-			var test = new TestClass();
-			var result = await test.NieuwePreken(); 
+			 var result = await _api.NieuwePreken(); 
 			_listView.ItemsSource = result.ToList(); 
 		}
 	} 
@@ -60,7 +63,7 @@ namespace App.Shared
 //				"Gedwonload"
 //			};
 
-			this.Children.Add (new PreekListPage ());
+			this.Children.Add (new PreekListPage (new PrekenwebApiWrapper()));
  
 		}
 		 
