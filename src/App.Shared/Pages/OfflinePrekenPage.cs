@@ -1,6 +1,7 @@
+using App.Shared.Controls;
 using Xamarin.Forms;
 
-namespace App.Shared
+namespace App.Shared.Pages
 {
     public class OfflinePrekenPage : ContentPage
     { 

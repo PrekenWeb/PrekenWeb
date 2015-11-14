@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Prekenweb.Models.Dtos;
 
-namespace App.Shared
+namespace App.Shared.Api
 {
 	public interface IPrekenwebApiWrapper
 	{

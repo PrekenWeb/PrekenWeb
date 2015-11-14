@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Prekenweb.Models.Dtos;
 
-namespace App.Shared
+namespace App.Shared.Api
 {
     public class PrekenwebApiWrapper : IPrekenwebApiWrapper
     { 

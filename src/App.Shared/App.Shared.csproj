@@ -34,19 +34,37 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mobile|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Mobile\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="NieuwePrekenPage.cs" />
-    <Compile Include="OfflinePrekenPage.cs" />
-    <Compile Include="PreekPage.cs" />
-    <Compile Include="PreekZoekenPage.cs" />
+    <Compile Include="Db\IPrekenwebAppDatabase.cs" />
+    <Compile Include="Db\ISqLite.cs" />
+    <Compile Include="Db\NieuwePreekInLocalDb.cs" />
+    <Compile Include="Db\OfflinePreekInLocalDb.cs" />
+    <Compile Include="Db\PreekInLocalDb.cs" />
+    <Compile Include="Db\PrekenwebAppDatabase.cs" />
+    <Compile Include="Db\ZoekresultaatPreekInLocalDb.cs" />
+    <Compile Include="Pages\NieuwePrekenPage.cs" />
+    <Compile Include="Pages\OfflinePrekenPage.cs" />
+    <Compile Include="Pages\PreekPage.cs" />
+    <Compile Include="Pages\PreekZoekenPage.cs" />
     <Compile Include="PreekZoekenPageViewModel.cs" />
-    <Compile Include="PrekenListView.cs" />
+    <Compile Include="Controls\PrekenListView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PreekCell.cs" />
-    <Compile Include="IPrekenwebApiWrapper.cs" />
-    <Compile Include="PrekenwebApiWrapper.cs" />
+    <Compile Include="Controls\PreekCell.cs" />
+    <Compile Include="Api\IPrekenwebApiWrapper.cs" />
+    <Compile Include="Api\PrekenwebApiWrapper.cs" />
     <Compile Include="RootPage.cs" />
+    <Compile Include="Services\IPreekService.cs" />
+    <Compile Include="Services\PreekService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
@@ -58,6 +76,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCL.raw, Version=0.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCL.raw_basic.0.7.1\lib\portable-net45+netcore45+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCL.raw.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>

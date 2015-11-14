@@ -1,3 +1,7 @@
+using App.Shared.Api;
+using App.Shared.Db;
+using App.Shared.Pages;
+using App.Shared.Services;
 using Xamarin.Forms;
 
 namespace App.Shared
@@ -15,7 +19,7 @@ namespace App.Shared
             //				"Gedwonload"
             //			}; 
 
-            this.Children.Add(new NieuwePrekenPage(new PrekenwebApiWrapper()));
+            this.Children.Add(new NieuwePrekenPage(new PreekService(new PrekenwebApiWrapper(), App.Database)));
             this.Children.Add(new OfflinePrekenPage(null));
             this.Children.Add(new PreekZoekenPage(new PrekenwebApiWrapper()));
 

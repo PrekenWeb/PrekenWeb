@@ -1,7 +1,7 @@
-using Xamarin.Forms;
 using Prekenweb.Models.Dtos;
+using Xamarin.Forms;
 
-namespace App.Shared
+namespace App.Shared.Pages
 {
     public class PreekPage : ContentPage
     {

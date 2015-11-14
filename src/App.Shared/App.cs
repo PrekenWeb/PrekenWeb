@@ -1,29 +1,30 @@
 ﻿using Xamarin.Forms;
 using System.Diagnostics;
+using App.Shared.Db;
 
 namespace App.Shared
 {
     public class App : Application
     {
 
+        static PrekenwebAppDatabase database;
+         
+
+        public static PrekenwebAppDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new PrekenwebAppDatabase();
+                }
+                return database;
+            }
+        }
+
         public App()
-        {
-//            MainPage = new NavigationPage(new PreekListPage());
+        { 
 			MainPage = new RootPage ();
-        }
-
-        protected override void OnStart()
-        {
-            Debug.WriteLine("OnStart");
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-            Debug.WriteLine("OnResume");
-        }
+        } 
     }
 }

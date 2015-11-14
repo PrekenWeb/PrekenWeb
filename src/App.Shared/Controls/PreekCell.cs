@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace App.Shared
+namespace App.Shared.Controls
 {
     public class PreekCell : ViewCell
     {
@@ -11,7 +11,7 @@ namespace App.Shared
                 YAlign = TextAlignment.Start,
                
             };
-            label.SetBinding(Label.TextProperty, "PreekTitel"); 
+            label.SetBinding(Label.TextProperty, "Titel"); 
 
             var layout = new StackLayout
             {
