@@ -47,8 +47,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     case "links":
                         return RedirectToActionPermanent("Pagina", "Prekenweb", new { Area = "Website", pagina = "links", Culture = "nl" });
 
-                    case "boeken":
-                        return RedirectToActionPermanent("Pagina", "Prekenweb", new { Area = "Website", pagina = "boeken", Culture = "nl" });
+                    //case "boeken":
+                    //    return RedirectToActionPermanent("Pagina", "Prekenweb", new { Area = "Website", pagina = "boeken", Culture = "nl" });
 
                     case "laatst-toegevoegde-preken":
                         return RedirectToActionPermanent("Index", "Zoeken", new { Area = "Website", Laatste = true, Culture = "nl" });
