@@ -42,11 +42,6 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         <p style='font-family:arial; font-size:12px; color:#070045'>{0}<br>
         <a href='mailto:info@prekenweb.nl'><span>info@prekenweb.nl</span></a> <a href='http://www.prekenweb.nl/'><span>www.prekenweb.nl</span></a></p>
 
-        <p style='font-family:arial; font-size:12px; color:#070045'>Bestel hier het prachtige boek van ds.
-        G.J. Baan, ‘Die dorst heeft, kome’ en steun hiermee PrekenWeb.nl:&nbsp; <a href='http://bestellen.prekenweb.nl/?boekid=2'><span>http://bestellen.prekenweb.nl/?boekid=2</span></a></p>
-
-        <p style='font-family:arial; font-size:12px; color:#070045'></p>
-
         <p style='font-family:arial; font-size:12px; color:#070045'></p>
 
         <p style='font-family:arial; font-size:10px; color:#070045'><font size='1'><i>De informatie in dit e-mailbericht is
