@@ -51,19 +51,28 @@
     {
         GedeelteTekst += Model.Preek.VersOmschrijving;
     }
+
+    var sermonChangeDateTime = Model.Preek.DatumBijgewerkt ??
+                               Model.Preek.DatumAangemaakt ??
+                               DateTime.UtcNow;
+    var sermonChangeDateTimeString = sermonChangeDateTime.ToString("yyyyMMddhhmmss"); 
 }
 @section ogMetaTags{
-    <meta property="og:type" content="music.song" />
-    <meta property="og:audio" content="@Url.ContentAbsolute(Url.Action("Download", new { Id = Model.Preek.Id, inline = false }))" />
-    <meta property="og:audio:type" content="audio/vnd.facebook.bridge" />
 
-    <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
-    <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
-    <meta property="music:album" content="@Url.ContentAbsolute(Url.Action("Download", new { Id = Model.Preek.Id, inline = false }))">
-    <meta property="music:album:track" content="@Model.Preek.Id">
-    @if (Model.Preek.Duur.HasValue)
+    @if (Model.Preek.PreekTypeId != (int) PreekTypeEnum.LeesPreek)
     {
-        <meta property="music:duration" content="@Model.Preek.Duur.Value.TotalSeconds">
+        <meta property="og:type" content="music.song"/>
+        <meta property="og:audio" content="@Url.ContentAbsolute(Url.Action("Download", new {Id = Model.Preek.Id, inline = false}))"/>
+        <meta property="og:audio:type" content="audio/vnd.facebook.bridge"/>
+
+        <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
+        <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
+        <meta property="music:album" content="@Url.ContentAbsolute(Url.Action("Download", new {Id = Model.Preek.Id, inline = false}))">
+        <meta property="music:album:track" content="@Model.Preek.Id">
+        if (Model.Preek.Duur.HasValue)
+        {
+            <meta property="music:duration" content="@Model.Preek.Duur.Value.TotalSeconds">
+        }
     }
 
 }
@@ -329,14 +338,14 @@
         <h2>@Resources.Delen &amp; Download</h2>
         @if (string.IsNullOrEmpty(Model.Preek.Bestandsnaam) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
         {
-            <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, format = "PDF" })" class="GroteDownloadKnop" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
+            <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString, format = "PDF" })" class="GroteDownloadKnop" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                 <div class="fa fa-save"></div>
                 @Resources.DownloadPreekAlsPDF
             </a>
         }
         else
         {
-            <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false })" class="GroteDownloadKnop" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
+            <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString })" class="GroteDownloadKnop" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                 <div class="fa fa-cloud-download"></div>
                 @Resources.DownloadPreek
             </a>
@@ -346,7 +355,7 @@
             @if (!string.IsNullOrWhiteSpace(Model.Preek.LeesPreekTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
             { 
                 <li>
-                    <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, format = "EPUB" })" class="" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
+                    <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString, format = "EPUB" })" class="" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                         <div class="fa fa-save"></div>
                         @Resources.DownloadPreekAlsEpub
                     </a>
