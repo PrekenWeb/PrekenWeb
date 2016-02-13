@@ -124,7 +124,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (await _prekenWebUserManager.FindByEmailAsync(viewModel.Email) != null)
                 ModelState.AddModelError("Email", string.Format(Resources.Resources.EmailNietBeschikbaar, Url.Action("WachtwoordVergeten", new { gebruikersnaam = viewModel.Email })));
 
-            if (await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruikersnaam) != null)
+            if(!string.IsNullOrEmpty(viewModel.Gebruikersnaam) && 
+                await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruikersnaam) != null)
                 ModelState.AddModelError("Gebruikersnaam", Resources.Resources.GebruikerIsAlGeregistreerd);
 
             if (!ModelState.IsValid) return View(viewModel);
