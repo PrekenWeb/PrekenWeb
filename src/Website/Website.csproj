@@ -940,6 +940,7 @@
       <DependentUpon>PrekenwebDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="App_Data\IZ.WebFileManager.dll" />
+    <Content Include="Website.nuspec" />
     <Resource Include="robots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

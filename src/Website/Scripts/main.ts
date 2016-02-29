@@ -22,7 +22,7 @@ module Prekenweb {
         public dataRelatedTooltips() {
             var pw = this;
             $('a[data-linktype]').each(function (i, sender) {
-                if ($(sender).data("relid") == undefined || $(sender).data("relid") == "") return;
+                if ($(sender).data("relid") == undefined || (<any>$(sender).data("relid")) === "") return;
                 var url = pw.rootUrl + pw.taal + '/Tooltip/' + $(sender).data("linktype") + '/' + $(sender).data("relid");
 
                 if ($(sender).data("preek-id") != undefined) {
@@ -355,7 +355,7 @@ module Prekenweb {
             //window.open(, "Print", "height=600,width=600,scrollbars=yes,status=no,titlebar=no,toolbar=no");
             var width = window.innerWidth < 750 ? window.innerWidth - 50 : 750;
             var height = window.innerWidth < 750 ? undefined : 350;
-            var tag = $("<div class='prekenwebPopup'>Laden...</div>");
+            var tag = <any>$("<div class='prekenwebPopup'>Laden...</div>");
             tag.dialog({
                 modal: true,
                 width: width,
@@ -386,7 +386,7 @@ module Prekenweb {
             //window.open(, "Print", "height=600,width=600,scrollbars=yes,status=no,titlebar=no,toolbar=no");
             var width = window.innerWidth < 750 ? window.innerWidth - 50 : 750;
             var height = window.innerHeight < 750 ? window.innerHeight - 10 : 750;
-            var tag = $("<div class='prekenwebPopup'>Laden...</div>");
+            var tag = <any>$("<div class='prekenwebPopup'>Laden...</div>");
             tag.dialog({
                 modal: true,
                 width: width,
@@ -421,7 +421,7 @@ module Prekenweb {
                 return false;
             }
 
-            if ($(sender).data("active") == "True") {
+            if ((<any>$(sender).data("active")) === "True") {
                 pw.bladwijzerVerwijderenVanuitZoekresultaten(sender);
             }
             else {
@@ -437,7 +437,7 @@ module Prekenweb {
 
         public bladWijzerMouseOut() {
             $(this).removeClass('fa-bookmark');
-            if ($(this).parent().data("active") == "True") {
+            if ((<any>$(this).parent().data("active")) === "True") {
                 $(this).addClass('fa-bookmark');
             }
             else {
