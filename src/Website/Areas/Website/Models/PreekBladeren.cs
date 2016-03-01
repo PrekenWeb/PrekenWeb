@@ -3,7 +3,6 @@ using PrekenWeb.Data.Attributes;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Services;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -79,18 +78,19 @@ namespace Prekenweb.Website.ViewModels
         {
             get
             {
-                if (Laatste.HasValue && Laatste.Value) return string.Format("{0} 50 ", Resources.Resources.Laatste);
-                if (GebeurtenisId.HasValue) { return string.Format("{0} {1}", Resources.Resources.PrekenVoorGebeurtenis, Gebeurtenis); }
-                if (SerieId.HasValue) { return string.Format("{0} {1}", Resources.Resources.PrekenUitDeSerie, Serie); }
-                if (GemeenteId.HasValue) { return string.Format("{0} {1}", Resources.Resources.Gemeente, Gemeente); }
-                if (LezingCategorieId.HasValue) { return string.Format("{0} {1}", Resources.Resources.LezingCategorie, LezingCategorie); }
+                if (Laatste.HasValue && Laatste.Value) return string.Concat(Resources.Resources.Laatste, " 50 ");
+                if (GebeurtenisId.HasValue) { return string.Concat(Resources.Resources.PrekenVoorGebeurtenis, " ", Gebeurtenis); }
+                if (SerieId.HasValue) { return string.Concat(Resources.Resources.PrekenUitDeSerie, " ", Serie); }
+                if (GemeenteId.HasValue) { return string.Concat(Resources.Resources.Gemeente, " ", Gemeente); }
+                if (LezingCategorieId.HasValue) { return string.Concat(Resources.Resources.LezingCategorie, " ", LezingCategorie); }
                 if (BoekHoofdstukId.HasValue)
                 {
-                    if (Hoofdstuk.HasValue) return string.Format("{0} {1} {2}", Resources.Resources.Prekenuit, BoekHoofdstuk, Hoofdstuk.Value);
-                    else return string.Format("{0} {1}", Resources.Resources.Prekenuit, BoekHoofdstuk);
+                    return Hoofdstuk.HasValue 
+                        ? string.Join(" ", Resources.Resources.Prekenuit, BoekHoofdstuk, Hoofdstuk.Value) 
+                        : string.Concat(Resources.Resources.Prekenuit, " ", BoekHoofdstuk);
                 }
-                if (PredikantId.HasValue) { return string.Format("{0} {1}", Resources.Resources.PrekenVanPredikant, Predikant); }
-                if (BoekId.HasValue) { return string.Format("{0} {1}", Resources.Resources.PrekenInBoek, Boek); }
+                if (PredikantId.HasValue) { return string.Concat(Resources.Resources.PrekenVanPredikant, " ", Predikant); }
+                if (BoekId.HasValue) { return string.Concat(Resources.Resources.PrekenInBoek, " ", Boek); }
                 return Resources.Resources.PrekenZoeken;
             }
             set { }
@@ -110,7 +110,7 @@ namespace Prekenweb.Website.ViewModels
                 if (predikant == null) throw new KeyNotFoundException("Deze predikant bestaat niet");
                 else if (predikant.TaalId != TaalId)
                 {
-                     redirectRoute = new RouteValueDictionary(new { culture = predikant.Taal.Code.ToString().Trim(), controller = "Zoeken", action = "Index", PredikantId = PredikantId });
+                     redirectRoute = new RouteValueDictionary(new { culture = predikant.Taal.Code.Trim(), controller = "Zoeken", action = "Index", PredikantId = PredikantId });
                 }
             }
 
@@ -121,13 +121,13 @@ namespace Prekenweb.Website.ViewModels
                 if (gebeurtenis == null) throw new KeyNotFoundException("Deze gebeurtenis bestaat niet");
                 else if (gebeurtenis.TaalId != TaalId)
                 {
-                     redirectRoute = new RouteValueDictionary(new { culture = gebeurtenis.Taal.Code.ToString().Trim(), controller = "Zoeken", action = "Index", GebeurtenisId = GebeurtenisId });
+                     redirectRoute = new RouteValueDictionary(new { culture = gebeurtenis.Taal.Code.Trim(), controller = "Zoeken", action = "Index", GebeurtenisId = GebeurtenisId });
                 }
             }
 
             if (BoekId.HasValue)
             {
-                Boek = context.Boeks.SingleOrDefault(b => b.Id == BoekId.Value).Boeknaam;
+                Boek = context.Boeks.SingleOrDefault(b => b.Id == BoekId.Value)?.Boeknaam;
                 if (Boek == null) throw new KeyNotFoundException("Dit boek bestaat niet");
             }
 
@@ -138,7 +138,7 @@ namespace Prekenweb.Website.ViewModels
                 if (hoofdstuk == null) throw new KeyNotFoundException("Dit hoofdstuk bestaat niet");
                 else if (hoofdstuk.Boek.TaalId != TaalId)
                 {
-                    redirectRoute = new RouteValueDictionary(new { culture = hoofdstuk.Boek.Taal.Code.ToString().Trim(), controller = "Zoeken", action = "Index", BoekHoofdstukId = BoekHoofdstukId });
+                    redirectRoute = new RouteValueDictionary(new { culture = hoofdstuk.Boek.Taal.Code.Trim(), controller = "Zoeken", action = "Index", BoekHoofdstukId = BoekHoofdstukId });
                 }
             }
 
@@ -148,19 +148,19 @@ namespace Prekenweb.Website.ViewModels
                 if (serie == null) throw new KeyNotFoundException("Deze serie bestaat niet");
                 else if (serie.TaalId != TaalId)
                 {
-                     redirectRoute = new RouteValueDictionary(new { culture = serie.Taal.Code.ToString().Trim(), controller = "Zoeken", action = "Index", SerieId = SerieId });
+                     redirectRoute = new RouteValueDictionary(new { culture = serie.Taal.Code.Trim(), controller = "Zoeken", action = "Index", SerieId = SerieId });
                 }
             }
 
             if (GemeenteId.HasValue)
             {
-                Gemeente = context.Gemeentes.SingleOrDefault(p => p.Id == GemeenteId.Value).Omschrijving; 
+                Gemeente = context.Gemeentes.SingleOrDefault(p => p.Id == GemeenteId.Value)?.Omschrijving; 
                 if (Gemeente == null) throw new KeyNotFoundException("Deze gemeente bestaat niet");
             }
 
             if (LezingCategorieId.HasValue)
             {
-                LezingCategorie = context.LezingCategories.SingleOrDefault(lc => lc.Id == LezingCategorieId.Value).Omschrijving;
+                LezingCategorie = context.LezingCategories.SingleOrDefault(lc => lc.Id == LezingCategorieId.Value)?.Omschrijving;
                 if (LezingCategorie == null) throw new KeyNotFoundException("Deze lezing categorie bestaat niet");
             }
         }

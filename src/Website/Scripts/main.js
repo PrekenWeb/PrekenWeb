@@ -70,7 +70,7 @@ var Prekenweb;
         Prekenweb.prototype.dataRelatedTooltips = function () {
             var pw = this;
             $('a[data-linktype]').each(function (i, sender) {
-                if ($(sender).data("relid") == undefined || $(sender).data("relid") == "")
+                if ($(sender).data("relid") == undefined || $(sender).data("relid") === "")
                     return;
                 var url = pw.rootUrl + pw.taal + '/Tooltip/' + $(sender).data("linktype") + '/' + $(sender).data("relid");
                 if ($(sender).data("preek-id") != undefined) {
@@ -425,7 +425,7 @@ var Prekenweb;
                 pw.toonMijnReclame("Bladwijzer");
                 return false;
             }
-            if ($(sender).data("active") == "True") {
+            if ($(sender).data("active") === "True") {
                 pw.bladwijzerVerwijderenVanuitZoekresultaten(sender);
             }
             else {
@@ -439,7 +439,7 @@ var Prekenweb;
         };
         Prekenweb.prototype.bladWijzerMouseOut = function () {
             $(this).removeClass('fa-bookmark');
-            if ($(this).parent().data("active") == "True") {
+            if ($(this).parent().data("active") === "True") {
                 $(this).addClass('fa-bookmark');
             }
             else {
