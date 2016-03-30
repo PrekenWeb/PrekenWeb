@@ -52,7 +52,7 @@ namespace PrekenWeb.Data
                 var objectContext = (this as IObjectContextAdapter).ObjectContext;
                 if (objectContext != null) // needed since Moq (unit test mocking) does not mock the IObjectContextAdapter interface.
                 { 
-                    objectContext.CommandTimeout = 3;
+                    objectContext.CommandTimeout = 30;
                 }
             }
             catch (DataException de)
