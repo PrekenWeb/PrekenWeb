@@ -41,7 +41,6 @@ namespace PrekenWeb.Data
 
         static PrekenwebContext()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PrekenwebContext, Configuration>());
         }
 
         public PrekenwebContext()
