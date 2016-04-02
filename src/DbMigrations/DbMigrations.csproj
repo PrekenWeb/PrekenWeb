@@ -55,7 +55,9 @@
     <None Include="App.config" />
     <Content Include="Deploy.ps1" />
     <None Include="packages.config" />
-    <Content Include="DbMigrations.nuspec" />
+    <Content Include="DbMigrations.nuspec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
