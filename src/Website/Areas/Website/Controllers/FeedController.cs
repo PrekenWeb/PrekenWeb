@@ -35,7 +35,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         }
 
-        [OutputCache(Duration = 3600), Throttle(Seconds = 10)] // 1 uur
+        [OutputCache(Duration = 3600)] // 1 uur
         public async Task<ActionResult> Twitter()
         {
             //TODO: Replace with TwitterService NuGet Package implementation
