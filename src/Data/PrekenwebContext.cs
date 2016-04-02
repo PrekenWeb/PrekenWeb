@@ -6,7 +6,6 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Migrations;
 using PrekenWeb.Data.Tables;
 
 namespace PrekenWeb.Data

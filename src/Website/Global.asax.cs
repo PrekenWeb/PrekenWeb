@@ -10,7 +10,6 @@ using Prekenweb.Website.Lib.Hangfire;
 using Prekenweb.Website.Areas.Website;
 using Prekenweb.Website.Areas.Mijn;
 using PrekenWeb.Data;
-using PrekenWeb.Data.Migrations;
 
 namespace Prekenweb.Website
 {
@@ -19,7 +18,6 @@ namespace Prekenweb.Website
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PrekenwebContext, Configuration>());
 
             // AreaRegistration.RegisterAllAreas(); // disabled automatic area registration due to unreliable ordering which results in routing problems
             Utils.RegisterArea<MijnAreaRegistration>(RouteTable.Routes, null);

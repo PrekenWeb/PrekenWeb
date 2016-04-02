@@ -26,12 +26,19 @@ using Prekenweb.Website.Lib.Hangfire;
 namespace Prekenweb.Website
 {
     public class OwinStartup
-    { 
+    {
+        public static BackgroundJobServerOptions BackgroundJobServerOptions = new BackgroundJobServerOptions
+        {
+            ServerName = $"PrekenWebHangfireServer-V1",
+            SchedulePollingInterval = TimeSpan.FromMinutes(1),
+            WorkerCount = 2 // two concurrent workers is more than enough!
+        };
+
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
             app.CreatePerOwinContext(PrekenwebContext.Create);
-            app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create); 
+            app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -72,16 +79,16 @@ namespace Prekenweb.Website
                 app.UseHangfire(config =>
                 {
                     config.UseSqlServerStorage("hangfire-sqlserver");
-                    config.UseServer();
+                    config.UseServer(BackgroundJobServerOptions);
                     config.UseAuthorizationFilters(new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() });
                 });
                 AchtergrondTaken.RegistreerTaken();
             }
             catch (SqlException)
             {
-                // probably wrong db-connection or non-existing db, let DbContext handle this 
+                // probably wrong db-connection or non-existing db, let DbContext handle this
             }
-        } 
+        }
 
         private Task OnAuthenticated(TwitterAuthenticatedContext context)
         {

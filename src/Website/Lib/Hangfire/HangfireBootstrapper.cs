@@ -4,33 +4,7 @@ using Hangfire;
 using Hangfire.SqlServer;
 
 namespace Prekenweb.Website.Lib.Hangfire
-{
-    //public static class HangfireBootstrapper
-    //{
-    //    private static BackgroundJobServer _backgroundJobServer;
-    //    private static bool _starting;
-    //    private static bool _started;
-
-    //    public static void Start()
-    //    {
-    //        if (_started || _starting) return;
-    //        _starting = true; 
-
-    //        JobStorage.Current = new SqlServerStorage("hangfire-sqlserver");
-
-    //        _backgroundJobServer = new BackgroundJobServer();
-
-    //        _backgroundJobServer.Start();
-
-    //        _started = true; 
-    //        _starting = false;
-    //    }
-
-    //    public static void Stop()
-    //    {
-    //        if (_backgroundJobServer != null) _backgroundJobServer.Stop();
-    //    }
-    //}
+{ 
     public class HangfireBootstrapper : IRegisteredObject
     {
         public static readonly HangfireBootstrapper Instance = new HangfireBootstrapper();
@@ -59,7 +33,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                     return;
                 }
 
-                _backgroundJobServer = new BackgroundJobServer();
+                _backgroundJobServer = new BackgroundJobServer(OwinStartup.BackgroundJobServerOptions);
                 _backgroundJobServer.Start();
             }
         }

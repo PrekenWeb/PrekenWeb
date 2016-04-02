@@ -78,11 +78,6 @@
     <Compile Include="Identity\PrekenWebUserLogin.cs" />
     <Compile Include="Identity\PrekenWebUserRole.cs" />
     <Compile Include="IPrekenwebContext.cs" />
-    <Compile Include="Migrations\201502051157493_InitialCreate.cs" />
-    <Compile Include="Migrations\201502051157493_InitialCreate.Designer.cs">
-      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PrekenwebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepository.cs" />
@@ -159,11 +154,6 @@
     <Compile Include="ViewModels\ResultaatReden.cs" />
     <Compile Include="ViewModels\TekstPagina.cs" />
     <Compile Include="ViewModels\ZoekresultaatItem.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502051157493_InitialCreate.resx">
-      <DependentUpon>201502051157493_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
