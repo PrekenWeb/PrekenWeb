@@ -58,6 +58,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\0000 - Initial Db Create.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
