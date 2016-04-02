@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="WebAPI.nuspec" />
     <None Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />

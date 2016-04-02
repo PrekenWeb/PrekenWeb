@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>PrekenWeb.WebAPI</id>
+    <version>0.0.0</version>
+    <title>PrekenWeb WebAPI</title>
+    <authors>Websitecommissie PrekenWeb</authors>
+    <owners>Websitecommissie PrekenWeb</owners>
+    <licenseUrl>http://www.prekenweb.nl</licenseUrl>
+    <projectUrl>http://www.prekenweb.nl</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PrekenWeb WebAPI</description>
+  </metadata>
+  <files>
+    <file src="**" exclude="App_Code\**;App_Data\**;Content\Images\Uploads\**;Content\Preken\**;log.txt;Log\**;Logs\**;obj\**;Properties\**;**\*.cs;WebAPI.*" />
+  </files>
+</package>
