@@ -11,7 +11,4 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>PrekenWeb DbMigrations</description>
   </metadata>
-  <files>
-    <file src="**" exclude="App_Code\**;App_Data\**;Content\Images\Uploads\**;Content\Preken\**;log.txt;Log\**;Logs\**;obj\**;Properties\**;**\*.cs;DbMigrations.*" />
-  </files>
 </package>
