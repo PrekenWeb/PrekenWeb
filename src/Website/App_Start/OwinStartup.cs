@@ -27,9 +27,8 @@ namespace Prekenweb.Website
 {
     public class OwinStartup
     {
-        public static BackgroundJobServerOptions BackgroundJobServerOptions = new BackgroundJobServerOptions
+        public static readonly BackgroundJobServerOptions BackgroundJobServerOptions = new BackgroundJobServerOptions
         {
-            ServerName = $"PrekenWebHangfireServer-V1",
             SchedulePollingInterval = TimeSpan.FromMinutes(1),
             WorkerCount = 2 // two concurrent workers is more than enough!
         };
@@ -76,12 +75,13 @@ namespace Prekenweb.Website
 
             try
             {
-                app.UseHangfire(config =>
+                app.UseHangfireServer(BackgroundJobServerOptions);
+                app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
-                    config.UseSqlServerStorage("hangfire-sqlserver");
-                    config.UseServer(BackgroundJobServerOptions);
-                    config.UseAuthorizationFilters(new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() });
+                    AuthorizationFilters = new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() }
                 });
+                GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
+
                 AchtergrondTaken.RegistreerTaken();
             }
             catch (SqlException)

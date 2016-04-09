@@ -24,7 +24,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                 HostingEnvironment.RegisterObject(this);
                 try
                 {
-                    JobStorage.Current = new SqlServerStorage("hangfire-sqlserver");
+                    GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver"); 
                 }
                 catch (SqlException)
                 {
@@ -33,8 +33,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                     return;
                 }
 
-                _backgroundJobServer = new BackgroundJobServer(OwinStartup.BackgroundJobServerOptions);
-                _backgroundJobServer.Start();
+                _backgroundJobServer = new BackgroundJobServer(OwinStartup.BackgroundJobServerOptions); 
             }
         }
 
@@ -42,10 +41,7 @@ namespace Prekenweb.Website.Lib.Hangfire
         {
             lock (_lockObject)
             {
-                if (_backgroundJobServer != null)
-                {
-                    _backgroundJobServer.Dispose();
-                }
+                _backgroundJobServer?.Dispose();
 
                 HostingEnvironment.UnregisterObject(this);
             }
