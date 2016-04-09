@@ -2,7 +2,6 @@
 Deze repository bevat de broncode van prekenweb.nl en sermonweb.nl.
 
 [![Build status](https://img.shields.io/teamcity/http/www.prekenweb.nl:13826/s/PrekenWeb_Build.svg?label=TeamCity%20build)](http://www.prekenweb.nl:13826/viewType.html?buildTypeId=PrekenWeb_Build&guest=1)
-[![Deploy to test](https://img.shields.io/teamcity/http/www.prekenweb.nl:13826/s/PrekenWeb_Deploy_To_Test.svg?label=Deploy%20to%20Test)](http://www.prekenweb.nl:13826/viewType.html?buildTypeId=PrekenWeb_Deploy_To_Test&guest=1)
 
 #Bijdrage leveren
 We staan open voor bijdrages, voel vrij om code aan te bieden, een issue aan te maken of in contact met ons te komen over een goed idee! Het is verstandig om, voordat je ergens aan begint, even met ons af te stemmen of we open staan voor het specifieke idee. Daarnaast rekenen we er wel op dat mensen die een bijdrage willen leveren voldoende kennis hebben van de hieronder genoemde technieken.

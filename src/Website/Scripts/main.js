@@ -502,7 +502,7 @@ var Prekenweb;
             $("#RssFeedModal").modal();
         };
         return Prekenweb;
-    })();
+    }());
     Prekenweb_1.Prekenweb = Prekenweb;
 })(Prekenweb || (Prekenweb = {}));
 var prekenweb = new Prekenweb.Prekenweb();
