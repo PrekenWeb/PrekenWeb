@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -36,14 +32,25 @@ namespace Prekenweb.Website.Areas.Website
             context.MapRoute(
                 name: "MultiCultiRoute",
                 url: "{culture}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new {  controller = "Home", action = "Index", id = UrlParameter.Optional }
                 );
 
             context.MapRoute(
                 name: "RootUrl",
-               url: ""
-            );//.RouteHandler = new RootUrlHandler();
+                url: ""
+                //defaults: new { culture = "nl", controller = "Home", action = "Index", id = UrlParameter.Optional }
+            ).RouteHandler = new RootUrlHandler();
 
+        }
+    }
+    public class RootUrlHandler : MvcRouteHandler
+    {
+        protected override IHttpHandler GetHttpHandler(RequestContext requestContext)
+        {
+            if (requestContext.HttpContext.Request.Url.Host.EndsWith("prekenweb.nl")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/nl/", requestContext.HttpContext.Request.Url.Host), true);
+            else if (requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/en/", requestContext.HttpContext.Request.Url.Host), true);
+            else requestContext.HttpContext.Response.Redirect(requestContext.HttpContext.Request.Url + "/nl/", true);
+            return base.GetHttpHandler(requestContext);
         }
     }
 }

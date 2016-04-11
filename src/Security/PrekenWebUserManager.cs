@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
-using Prekenweb.Models;
 
 namespace PrekenWeb.Security
 { 

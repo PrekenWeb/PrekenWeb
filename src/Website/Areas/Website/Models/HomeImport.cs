@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class HomeImport
     {

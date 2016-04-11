@@ -8,11 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace Prekenweb.Website.Content
+{
 #pragma warning disable 1591
 
-namespace Prekenweb.Website.Content {
-    
-    
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
@@ -46,7 +45,7 @@ namespace Prekenweb.Website.Content {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected PrekenwebDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                base(info, context, false) {
+            base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -80,7 +79,7 @@ namespace Prekenweb.Website.Content {
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
-        }
+            }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -236,8 +235,8 @@ namespace Prekenweb.Website.Content {
             this.tablePreekLezenEnZingen = new PreekLezenEnZingenDataTable();
             base.Tables.Add(this.tablePreekLezenEnZingen);
             this.relationFK_PreekLezenEnZingen_Preek = new global::System.Data.DataRelation("FK_PreekLezenEnZingen_Preek", new global::System.Data.DataColumn[] {
-                        this.tablePreek.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePreekLezenEnZingen.PreekIdColumn}, false);
+                this.tablePreek.IdColumn}, new global::System.Data.DataColumn[] {
+                    this.tablePreekLezenEnZingen.PreekIdColumn}, false);
             this.Relations.Add(this.relationFK_PreekLezenEnZingen_Preek);
         }
         
@@ -286,9 +285,9 @@ namespace Prekenweb.Website.Content {
                             s1.Position = 0;
                             s2.Position = 0;
                             for (; ((s1.Position != s1.Length) 
-                                        && (s1.ReadByte() == s2.ReadByte())); ) {
-                                ;
-                            }
+                                    && (s1.ReadByte() == s2.ReadByte())); ) {
+                                        ;
+                                    }
                             if ((s1.Position == s1.Length)) {
                                 return type;
                             }
@@ -430,9 +429,9 @@ namespace Prekenweb.Website.Content {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected PreekDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+                base(info, context) {
                 this.InitVars();
-            }
+                }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -792,97 +791,97 @@ namespace Prekenweb.Website.Content {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PreekRow AddPreekRow(
-                        int BoekhoofdstukId, 
-                        string BijbeltekstOmschrijving, 
-                        int SerieId, 
-                        int GebeurtenisId, 
-                        System.DateTime DatumAangemaakt, 
-                        System.DateTime DatumBijgewerkt, 
-                        string Bestandsnaam, 
-                        int AantalKeerGedownload, 
-                        int OudID, 
-                        int PredikantId, 
-                        int Hoofdstuk, 
-                        string VanVers, 
-                        string TotVers, 
-                        string Punt1, 
-                        string Punt2, 
-                        string Punt3, 
-                        string Punt4, 
-                        string Punt5, 
-                        int GemeenteId, 
-                        System.DateTime DatumPreek, 
-                        string Informatie, 
-                        string ThemaOmschrijving, 
-                        int AfbeeldingId, 
-                        int PreekTypeId, 
-                        int LezingCategorieId, 
-                        int TaalId, 
-                        bool Gepubliceerd, 
-                        string LezingOmschrijving, 
-                        System.TimeSpan Duur, 
-                        int Bestandsgrootte, 
-                        int VersVanId, 
-                        int VersTotId, 
-                        int GedeelteVanVersId, 
-                        int GedeelteTotVersId, 
-                        string VersOmschrijving, 
-                        bool AutomatischeTeksten, 
-                        int AangemaaktDoor, 
-                        int AangepastDoor, 
-                        string LeesPreekTekst) {
+                int BoekhoofdstukId, 
+                string BijbeltekstOmschrijving, 
+                int SerieId, 
+                int GebeurtenisId, 
+                System.DateTime DatumAangemaakt, 
+                System.DateTime DatumBijgewerkt, 
+                string Bestandsnaam, 
+                int AantalKeerGedownload, 
+                int OudID, 
+                int PredikantId, 
+                int Hoofdstuk, 
+                string VanVers, 
+                string TotVers, 
+                string Punt1, 
+                string Punt2, 
+                string Punt3, 
+                string Punt4, 
+                string Punt5, 
+                int GemeenteId, 
+                System.DateTime DatumPreek, 
+                string Informatie, 
+                string ThemaOmschrijving, 
+                int AfbeeldingId, 
+                int PreekTypeId, 
+                int LezingCategorieId, 
+                int TaalId, 
+                bool Gepubliceerd, 
+                string LezingOmschrijving, 
+                System.TimeSpan Duur, 
+                int Bestandsgrootte, 
+                int VersVanId, 
+                int VersTotId, 
+                int GedeelteVanVersId, 
+                int GedeelteTotVersId, 
+                string VersOmschrijving, 
+                bool AutomatischeTeksten, 
+                int AangemaaktDoor, 
+                int AangepastDoor, 
+                string LeesPreekTekst) {
                 PreekRow rowPreekRow = ((PreekRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
-                        BoekhoofdstukId,
-                        BijbeltekstOmschrijving,
-                        SerieId,
-                        GebeurtenisId,
-                        DatumAangemaakt,
-                        DatumBijgewerkt,
-                        Bestandsnaam,
-                        AantalKeerGedownload,
-                        OudID,
-                        PredikantId,
-                        Hoofdstuk,
-                        VanVers,
-                        TotVers,
-                        Punt1,
-                        Punt2,
-                        Punt3,
-                        Punt4,
-                        Punt5,
-                        GemeenteId,
-                        DatumPreek,
-                        Informatie,
-                        ThemaOmschrijving,
-                        AfbeeldingId,
-                        PreekTypeId,
-                        LezingCategorieId,
-                        TaalId,
-                        Gepubliceerd,
-                        LezingOmschrijving,
-                        Duur,
-                        Bestandsgrootte,
-                        VersVanId,
-                        VersTotId,
-                        GedeelteVanVersId,
-                        GedeelteTotVersId,
-                        VersOmschrijving,
-                        AutomatischeTeksten,
-                        AangemaaktDoor,
-                        AangepastDoor,
-                        LeesPreekTekst};
+                    null,
+                    BoekhoofdstukId,
+                    BijbeltekstOmschrijving,
+                    SerieId,
+                    GebeurtenisId,
+                    DatumAangemaakt,
+                    DatumBijgewerkt,
+                    Bestandsnaam,
+                    AantalKeerGedownload,
+                    OudID,
+                    PredikantId,
+                    Hoofdstuk,
+                    VanVers,
+                    TotVers,
+                    Punt1,
+                    Punt2,
+                    Punt3,
+                    Punt4,
+                    Punt5,
+                    GemeenteId,
+                    DatumPreek,
+                    Informatie,
+                    ThemaOmschrijving,
+                    AfbeeldingId,
+                    PreekTypeId,
+                    LezingCategorieId,
+                    TaalId,
+                    Gepubliceerd,
+                    LezingOmschrijving,
+                    Duur,
+                    Bestandsgrootte,
+                    VersVanId,
+                    VersTotId,
+                    GedeelteVanVersId,
+                    GedeelteTotVersId,
+                    VersOmschrijving,
+                    AutomatischeTeksten,
+                    AangemaaktDoor,
+                    AangepastDoor,
+                    LeesPreekTekst};
                 rowPreekRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPreekRow);
                 return rowPreekRow;
-            }
+                }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PreekRow FindById(int Id) {
                 return ((PreekRow)(this.Rows.Find(new object[] {
-                            Id})));
+                    Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1028,7 +1027,7 @@ namespace Prekenweb.Website.Content {
                 this.columnLeesPreekTekst = new global::System.Data.DataColumn("LeesPreekTekst", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLeesPreekTekst);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, true));
+                    this.columnId}, true));
                 this.columnId.AutoIncrement = true;
                 this.columnId.AutoIncrementSeed = -1;
                 this.columnId.AutoIncrementStep = -1;
@@ -1157,9 +1156,9 @@ namespace Prekenweb.Website.Content {
                                 s1.Position = 0;
                                 s2.Position = 0;
                                 for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                                            ;
+                                        }
                                 if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
@@ -1226,9 +1225,9 @@ namespace Prekenweb.Website.Content {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected PreekLezenEnZingenDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
+                base(info, context) {
                 this.InitVars();
-            }
+                }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1310,11 +1309,11 @@ namespace Prekenweb.Website.Content {
             public PreekLezenEnZingenRow AddPreekLezenEnZingenRow(PreekRow parentPreekRowByFK_PreekLezenEnZingen_Preek, byte Sortering, string Soort, string Omschrijving) {
                 PreekLezenEnZingenRow rowPreekLezenEnZingenRow = ((PreekLezenEnZingenRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        Sortering,
-                        Soort,
-                        Omschrijving};
+                    null,
+                    null,
+                    Sortering,
+                    Soort,
+                    Omschrijving};
                 if ((parentPreekRowByFK_PreekLezenEnZingen_Preek != null)) {
                     columnValuesArray[1] = parentPreekRowByFK_PreekLezenEnZingen_Preek[0];
                 }
@@ -1327,7 +1326,7 @@ namespace Prekenweb.Website.Content {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PreekLezenEnZingenRow FindById(int Id) {
                 return ((PreekLezenEnZingenRow)(this.Rows.Find(new object[] {
-                            Id})));
+                    Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1368,7 +1367,7 @@ namespace Prekenweb.Website.Content {
                 this.columnOmschrijving = new global::System.Data.DataColumn("Omschrijving", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOmschrijving);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, true));
+                    this.columnId}, true));
                 this.columnId.AutoIncrement = true;
                 this.columnId.AutoIncrementSeed = -1;
                 this.columnId.AutoIncrementStep = -1;
@@ -1482,9 +1481,9 @@ namespace Prekenweb.Website.Content {
                                 s1.Position = 0;
                                 s2.Position = 0;
                                 for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
+                                        && (s1.ReadByte() == s2.ReadByte())); ) {
+                                            ;
+                                        }
                                 if ((s1.Position == s1.Length)) {
                                     return type;
                                 }
@@ -1515,9 +1514,9 @@ namespace Prekenweb.Website.Content {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal PreekRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+                base(rb) {
                 this.tablePreek = ((PreekDataTable)(this.Table));
-            }
+                }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2559,9 +2558,9 @@ namespace Prekenweb.Website.Content {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal PreekLezenEnZingenRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
+                base(rb) {
                 this.tablePreekLezenEnZingen = ((PreekLezenEnZingenDataTable)(this.Table));
-            }
+                }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2732,10 +2731,7 @@ namespace Prekenweb.Website.Content {
             }
         }
     }
-}
-namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
-    
-    
+
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
     ///</summary>
@@ -2743,7 +2739,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.ComponentModel.DataObjectAttribute(true)]
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+                                                     ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class PreekTableAdapter : global::System.ComponentModel.Component {
         
@@ -2814,17 +2810,17 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                     this.CommandCollection[i].Transaction = this._transaction;
                 }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.DeleteCommand != null))) {
+                         this.Adapter.DeleteCommand.Transaction = this._transaction;
+                     }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.InsertCommand != null))) {
+                         this.Adapter.InsertCommand.Transaction = this._transaction;
+                     }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.UpdateCommand != null))) {
+                         this.Adapter.UpdateCommand.Transaction = this._transaction;
+                     }
             }
         }
         
@@ -3052,7 +3048,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow dataRow) {
             return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
+                dataRow});
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3070,9 +3066,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.DeleteCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3089,45 +3085,45 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
         public virtual int Insert(
-                    global::System.Nullable<int> BoekhoofdstukId, 
-                    string BijbeltekstOmschrijving, 
-                    global::System.Nullable<int> SerieId, 
-                    global::System.Nullable<int> GebeurtenisId, 
-                    global::System.Nullable<global::System.DateTime> DatumAangemaakt, 
-                    global::System.Nullable<global::System.DateTime> DatumBijgewerkt, 
-                    string Bestandsnaam, 
-                    int AantalKeerGedownload, 
-                    global::System.Nullable<int> OudID, 
-                    global::System.Nullable<int> PredikantId, 
-                    global::System.Nullable<int> Hoofdstuk, 
-                    string VanVers, 
-                    string TotVers, 
-                    string Punt1, 
-                    string Punt2, 
-                    string Punt3, 
-                    string Punt4, 
-                    string Punt5, 
-                    global::System.Nullable<int> GemeenteId, 
-                    global::System.Nullable<global::System.DateTime> DatumPreek, 
-                    string Informatie, 
-                    string ThemaOmschrijving, 
-                    global::System.Nullable<int> AfbeeldingId, 
-                    int PreekTypeId, 
-                    global::System.Nullable<int> LezingCategorieId, 
-                    int TaalId, 
-                    bool Gepubliceerd, 
-                    string LezingOmschrijving, 
-                    global::System.Nullable<global::System.TimeSpan> Duur, 
-                    global::System.Nullable<int> Bestandsgrootte, 
-                    global::System.Nullable<int> VersVanId, 
-                    global::System.Nullable<int> VersTotId, 
-                    global::System.Nullable<int> GedeelteVanVersId, 
-                    global::System.Nullable<int> GedeelteTotVersId, 
-                    string VersOmschrijving, 
-                    bool AutomatischeTeksten, 
-                    global::System.Nullable<int> AangemaaktDoor, 
-                    global::System.Nullable<int> AangepastDoor, 
-                    string LeesPreekTekst) {
+            global::System.Nullable<int> BoekhoofdstukId, 
+            string BijbeltekstOmschrijving, 
+            global::System.Nullable<int> SerieId, 
+            global::System.Nullable<int> GebeurtenisId, 
+            global::System.Nullable<global::System.DateTime> DatumAangemaakt, 
+            global::System.Nullable<global::System.DateTime> DatumBijgewerkt, 
+            string Bestandsnaam, 
+            int AantalKeerGedownload, 
+            global::System.Nullable<int> OudID, 
+            global::System.Nullable<int> PredikantId, 
+            global::System.Nullable<int> Hoofdstuk, 
+            string VanVers, 
+            string TotVers, 
+            string Punt1, 
+            string Punt2, 
+            string Punt3, 
+            string Punt4, 
+            string Punt5, 
+            global::System.Nullable<int> GemeenteId, 
+            global::System.Nullable<global::System.DateTime> DatumPreek, 
+            string Informatie, 
+            string ThemaOmschrijving, 
+            global::System.Nullable<int> AfbeeldingId, 
+            int PreekTypeId, 
+            global::System.Nullable<int> LezingCategorieId, 
+            int TaalId, 
+            bool Gepubliceerd, 
+            string LezingOmschrijving, 
+            global::System.Nullable<global::System.TimeSpan> Duur, 
+            global::System.Nullable<int> Bestandsgrootte, 
+            global::System.Nullable<int> VersVanId, 
+            global::System.Nullable<int> VersTotId, 
+            global::System.Nullable<int> GedeelteVanVersId, 
+            global::System.Nullable<int> GedeelteTotVersId, 
+            string VersOmschrijving, 
+            bool AutomatischeTeksten, 
+            global::System.Nullable<int> AangemaaktDoor, 
+            global::System.Nullable<int> AangepastDoor, 
+            string LeesPreekTekst) {
             if ((BoekhoofdstukId.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(BoekhoofdstukId.Value));
             }
@@ -3339,9 +3335,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.InsertCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3351,53 +3347,53 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
-        }
+            }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> BoekhoofdstukId, 
-                    string BijbeltekstOmschrijving, 
-                    global::System.Nullable<int> SerieId, 
-                    global::System.Nullable<int> GebeurtenisId, 
-                    global::System.Nullable<global::System.DateTime> DatumAangemaakt, 
-                    global::System.Nullable<global::System.DateTime> DatumBijgewerkt, 
-                    string Bestandsnaam, 
-                    int AantalKeerGedownload, 
-                    global::System.Nullable<int> OudID, 
-                    global::System.Nullable<int> PredikantId, 
-                    global::System.Nullable<int> Hoofdstuk, 
-                    string VanVers, 
-                    string TotVers, 
-                    string Punt1, 
-                    string Punt2, 
-                    string Punt3, 
-                    string Punt4, 
-                    string Punt5, 
-                    global::System.Nullable<int> GemeenteId, 
-                    global::System.Nullable<global::System.DateTime> DatumPreek, 
-                    string Informatie, 
-                    string ThemaOmschrijving, 
-                    global::System.Nullable<int> AfbeeldingId, 
-                    int PreekTypeId, 
-                    global::System.Nullable<int> LezingCategorieId, 
-                    int TaalId, 
-                    bool Gepubliceerd, 
-                    string LezingOmschrijving, 
-                    global::System.Nullable<global::System.TimeSpan> Duur, 
-                    global::System.Nullable<int> Bestandsgrootte, 
-                    global::System.Nullable<int> VersVanId, 
-                    global::System.Nullable<int> VersTotId, 
-                    global::System.Nullable<int> GedeelteVanVersId, 
-                    global::System.Nullable<int> GedeelteTotVersId, 
-                    string VersOmschrijving, 
-                    bool AutomatischeTeksten, 
-                    global::System.Nullable<int> AangemaaktDoor, 
-                    global::System.Nullable<int> AangepastDoor, 
-                    string LeesPreekTekst, 
-                    int Original_Id) {
+            global::System.Nullable<int> BoekhoofdstukId, 
+            string BijbeltekstOmschrijving, 
+            global::System.Nullable<int> SerieId, 
+            global::System.Nullable<int> GebeurtenisId, 
+            global::System.Nullable<global::System.DateTime> DatumAangemaakt, 
+            global::System.Nullable<global::System.DateTime> DatumBijgewerkt, 
+            string Bestandsnaam, 
+            int AantalKeerGedownload, 
+            global::System.Nullable<int> OudID, 
+            global::System.Nullable<int> PredikantId, 
+            global::System.Nullable<int> Hoofdstuk, 
+            string VanVers, 
+            string TotVers, 
+            string Punt1, 
+            string Punt2, 
+            string Punt3, 
+            string Punt4, 
+            string Punt5, 
+            global::System.Nullable<int> GemeenteId, 
+            global::System.Nullable<global::System.DateTime> DatumPreek, 
+            string Informatie, 
+            string ThemaOmschrijving, 
+            global::System.Nullable<int> AfbeeldingId, 
+            int PreekTypeId, 
+            global::System.Nullable<int> LezingCategorieId, 
+            int TaalId, 
+            bool Gepubliceerd, 
+            string LezingOmschrijving, 
+            global::System.Nullable<global::System.TimeSpan> Duur, 
+            global::System.Nullable<int> Bestandsgrootte, 
+            global::System.Nullable<int> VersVanId, 
+            global::System.Nullable<int> VersTotId, 
+            global::System.Nullable<int> GedeelteVanVersId, 
+            global::System.Nullable<int> GedeelteTotVersId, 
+            string VersOmschrijving, 
+            bool AutomatischeTeksten, 
+            global::System.Nullable<int> AangemaaktDoor, 
+            global::System.Nullable<int> AangepastDoor, 
+            string LeesPreekTekst, 
+            int Original_Id) {
             if ((BoekhoofdstukId.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(BoekhoofdstukId.Value));
             }
@@ -3610,9 +3606,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this.Adapter.UpdateCommand.Parameters[39].Value = ((int)(Original_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.UpdateCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3622,7 +3618,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
+            }
     }
     
     /// <summary>
@@ -3632,7 +3628,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.ComponentModel.DataObjectAttribute(true)]
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+                                                     ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class PreekLezenEnZingenTableAdapter : global::System.ComponentModel.Component {
         
@@ -3703,17 +3699,17 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                     this.CommandCollection[i].Transaction = this._transaction;
                 }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.DeleteCommand != null))) {
+                         this.Adapter.DeleteCommand.Transaction = this._transaction;
+                     }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.InsertCommand != null))) {
+                         this.Adapter.InsertCommand.Transaction = this._transaction;
+                     }
                 if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
+                     && (this.Adapter.UpdateCommand != null))) {
+                         this.Adapter.UpdateCommand.Transaction = this._transaction;
+                     }
             }
         }
         
@@ -3760,7 +3756,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[PreekLezenEnZingen] ([PreekId], [Sortering], [Soort], [Omschri" +
-                "jving]) VALUES (@PreekId, @Sortering, @Soort, @Omschrijving)";
+                                                      "jving]) VALUES (@PreekId, @Sortering, @Soort, @Omschrijving)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PreekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PreekId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sortering", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sortering", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3769,8 +3765,8 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[PreekLezenEnZingen] SET [PreekId] = @PreekId, [Sortering] = @Sorter" +
-                "ing, [Soort] = @Soort, [Omschrijving] = @Omschrijving WHERE (([Id] = @Original_I" +
-                "d))";
+                                                      "ing, [Soort] = @Soort, [Omschrijving] = @Omschrijving WHERE (([Id] = @Original_I" +
+                                                      "d))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PreekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PreekId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sortering", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sortering", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3839,7 +3835,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow dataRow) {
             return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
+                dataRow});
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3857,9 +3853,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.DeleteCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3892,9 +3888,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.InsertCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3928,9 +3924,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
+                 != global::System.Data.ConnectionState.Open)) {
+                     this.Adapter.UpdateCommand.Connection.Open();
+                 }
             try {
                 int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
                 return returnValue;
@@ -3949,7 +3945,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerDesigner, Microsoft.VSD" +
-        "esigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+                                                     "esigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapterManager")]
     public partial class TableAdapterManager : global::System.ComponentModel.Component {
         
@@ -3977,8 +3973,8 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
+                                                       "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+                                                       "a", "System.Drawing.Design.UITypeEditor")]
         public PreekTableAdapter PreekTableAdapter {
             get {
                 return this._preekTableAdapter;
@@ -3991,8 +3987,8 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
+                                                       "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+                                                       "a", "System.Drawing.Design.UITypeEditor")]
         public PreekLezenEnZingenTableAdapter PreekLezenEnZingenTableAdapter {
             get {
                 return this._preekLezenEnZingenTableAdapter;
@@ -4022,13 +4018,13 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                     return this._connection;
                 }
                 if (((this._preekTableAdapter != null) 
-                            && (this._preekTableAdapter.Connection != null))) {
-                    return this._preekTableAdapter.Connection;
-                }
+                     && (this._preekTableAdapter.Connection != null))) {
+                         return this._preekTableAdapter.Connection;
+                     }
                 if (((this._preekLezenEnZingenTableAdapter != null) 
-                            && (this._preekLezenEnZingenTableAdapter.Connection != null))) {
-                    return this._preekLezenEnZingenTableAdapter.Connection;
-                }
+                     && (this._preekLezenEnZingenTableAdapter.Connection != null))) {
+                         return this._preekLezenEnZingenTableAdapter.Connection;
+                     }
                 return null;
             }
             set {
@@ -4063,19 +4059,19 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                 global::System.Data.DataRow[] updatedRows = dataSet.Preek.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._preekTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
+                     && (0 < updatedRows.Length))) {
+                         result = (result + this._preekTableAdapter.Update(updatedRows));
+                         allChangedRows.AddRange(updatedRows);
+                     }
             }
             if ((this._preekLezenEnZingenTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PreekLezenEnZingen.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._preekLezenEnZingenTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
+                     && (0 < updatedRows.Length))) {
+                         result = (result + this._preekLezenEnZingenTableAdapter.Update(updatedRows));
+                         allChangedRows.AddRange(updatedRows);
+                     }
             }
             return result;
         }
@@ -4090,18 +4086,18 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             if ((this._preekTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Preek.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._preekTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
+                     && (0 < addedRows.Length))) {
+                         result = (result + this._preekTableAdapter.Update(addedRows));
+                         allAddedRows.AddRange(addedRows);
+                     }
             }
             if ((this._preekLezenEnZingenTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PreekLezenEnZingen.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._preekLezenEnZingenTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
+                     && (0 < addedRows.Length))) {
+                         result = (result + this._preekLezenEnZingenTableAdapter.Update(addedRows));
+                         allAddedRows.AddRange(addedRows);
+                     }
             }
             return result;
         }
@@ -4116,18 +4112,18 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             if ((this._preekLezenEnZingenTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.PreekLezenEnZingen.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._preekLezenEnZingenTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
+                     && (0 < deletedRows.Length))) {
+                         result = (result + this._preekLezenEnZingenTableAdapter.Update(deletedRows));
+                         allChangedRows.AddRange(deletedRows);
+                     }
             }
             if ((this._preekTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Preek.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._preekTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
+                     && (0 < deletedRows.Length))) {
+                         result = (result + this._preekTableAdapter.Update(deletedRows));
+                         allChangedRows.AddRange(deletedRows);
+                     }
             }
             return result;
         }
@@ -4139,13 +4135,13 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private global::System.Data.DataRow[] GetRealUpdatedRows(global::System.Data.DataRow[] updatedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             if (((updatedRows == null) 
-                        || (updatedRows.Length < 1))) {
-                return updatedRows;
-            }
+                 || (updatedRows.Length < 1))) {
+                     return updatedRows;
+                 }
             if (((allAddedRows == null) 
-                        || (allAddedRows.Count < 1))) {
-                return updatedRows;
-            }
+                 || (allAddedRows.Count < 1))) {
+                     return updatedRows;
+                 }
             global::System.Collections.Generic.List<global::System.Data.DataRow> realUpdatedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
             for (int i = 0; (i < updatedRows.Length); i = (i + 1)) {
                 global::System.Data.DataRow row = updatedRows[i];
@@ -4169,25 +4165,25 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                 return 0;
             }
             if (((this._preekTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._preekTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
+                 && (this.MatchTableAdapterConnection(this._preekTableAdapter.Connection) == false))) {
+                     throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                                                                "tring.");
+                 }
             if (((this._preekLezenEnZingenTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._preekLezenEnZingenTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
+                 && (this.MatchTableAdapterConnection(this._preekLezenEnZingenTableAdapter.Connection) == false))) {
+                     throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                                                                "tring.");
+                 }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
-                        "ger TableAdapter property to a valid TableAdapter instance.");
+                                                              "ger TableAdapter property to a valid TableAdapter instance.");
             }
             bool workConnOpened = false;
             if (((workConnection.State & global::System.Data.ConnectionState.Broken) 
-                        == global::System.Data.ConnectionState.Broken)) {
-                workConnection.Close();
-            }
+                 == global::System.Data.ConnectionState.Broken)) {
+                     workConnection.Close();
+                 }
             if ((workConnection.State == global::System.Data.ConnectionState.Closed)) {
                 workConnection.Open();
                 workConnOpened = true;
@@ -4195,7 +4191,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             global::System.Data.IDbTransaction workTransaction = workConnection.BeginTransaction();
             if ((workTransaction == null)) {
                 throw new global::System.ApplicationException("The transaction cannot begin. The current data connection does not support transa" +
-                        "ctions or the current state is not allowing the transaction to begin.");
+                                                              "ctions or the current state is not allowing the transaction to begin.");
             }
             global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
             global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows = new global::System.Collections.Generic.List<global::System.Data.DataRow>();
@@ -4319,9 +4315,9 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                 return true;
             }
             if (((this.Connection == null) 
-                        || (inputConnection == null))) {
-                return true;
-            }
+                 || (inputConnection == null))) {
+                     return true;
+                 }
             if (string.Equals(this.Connection.ConnectionString, inputConnection.ConnectionString, global::System.StringComparison.Ordinal)) {
                 return true;
             }
@@ -4373,28 +4369,28 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
 
                 global::System.Data.DataRow parent = row.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
                 for (
-                ; ((parent != null) 
-                            && (traversedRows.ContainsKey(parent) == false)); 
-                ) {
-                    distance = (distance + 1);
-                    root = parent;
-                    traversedRows[parent] = parent;
-                    parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
-                }
+                    ; ((parent != null) 
+                       && (traversedRows.ContainsKey(parent) == false)); 
+                    ) {
+                        distance = (distance + 1);
+                        root = parent;
+                        traversedRows[parent] = parent;
+                        parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
+                    }
 
                 if ((distance == 0)) {
                     traversedRows.Clear();
                     traversedRows[row] = row;
                     parent = row.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
                     for (
-                    ; ((parent != null) 
-                                && (traversedRows.ContainsKey(parent) == false)); 
-                    ) {
-                        distance = (distance + 1);
-                        root = parent;
-                        traversedRows[parent] = parent;
-                        parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
-                    }
+                        ; ((parent != null) 
+                           && (traversedRows.ContainsKey(parent) == false)); 
+                        ) {
+                            distance = (distance + 1);
+                            root = parent;
+                            traversedRows[parent] = parent;
+                            parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
+                        }
                 }
 
                 return root;
@@ -4424,7 +4420,7 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
                 }
                 else {
                     global::System.Diagnostics.Debug.Assert(((root1.Table != null) 
-                                    && (root2.Table != null)));
+                                                             && (root2.Table != null)));
                     if ((root1.Table.Rows.IndexOf(root1) < root2.Table.Rows.IndexOf(root2))) {
                         return -1;
                     }
@@ -4435,6 +4431,6 @@ namespace Prekenweb.Website.Content.PrekenwebDataSetTableAdapters {
             }
         }
     }
-}
 
 #pragma warning restore 1591
+}

@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.Dashboard;
-using Hangfire.SqlServer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -16,7 +15,6 @@ using Ninject.Web.Common.OwinHost;
 using Owin;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website;
 using Prekenweb.Website.Lib.Hangfire;
@@ -27,12 +25,6 @@ namespace Prekenweb.Website
 {
     public class OwinStartup
     {
-        public static readonly BackgroundJobServerOptions BackgroundJobServerOptions = new BackgroundJobServerOptions
-        {
-            SchedulePollingInterval = TimeSpan.FromMinutes(1),
-            WorkerCount = 2 // two concurrent workers is more than enough!
-        };
-
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
@@ -75,12 +67,10 @@ namespace Prekenweb.Website
 
             try
             {
-                app.UseHangfireServer(BackgroundJobServerOptions);
                 app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
                     AuthorizationFilters = new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() }
                 });
-                GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
 
                 AchtergrondTaken.RegistreerTaken();
             }

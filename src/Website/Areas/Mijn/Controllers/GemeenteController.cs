@@ -1,9 +1,7 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,7 +9,7 @@ using System.Web.Mvc;
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Stamgegevens")]
-    public class GemeenteController : ApplicationController
+    public class GemeenteController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 

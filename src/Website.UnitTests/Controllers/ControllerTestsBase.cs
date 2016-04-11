@@ -6,9 +6,7 @@ using Moq;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.TestData;
-using Prekenweb.Models;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
 
 namespace Website.UnitTests.Controllers
 {
@@ -47,7 +45,7 @@ namespace Website.UnitTests.Controllers
             HuidigeGebruiker = huidigeGebruikerMock.Object;
         }
 
-        protected T GetController<T>(bool authenticated, T controller) where T : ApplicationController
+        protected T GetController<T>(bool authenticated, T controller) where T : Controller
         {
             var controllerContextMock = new Mock<ControllerContext>();
             var httpContextMock = new Mock<HttpContextBase>();

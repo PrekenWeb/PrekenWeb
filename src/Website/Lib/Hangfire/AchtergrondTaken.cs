@@ -11,7 +11,6 @@ using log4net;
 using NAudio.FileFormats.Mp3;
 using NAudio.Wave;
 using PrekenWeb.Data;
-using Prekenweb.Models;
 
 namespace Prekenweb.Website.Lib.Hangfire
 {

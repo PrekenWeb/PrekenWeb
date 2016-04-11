@@ -9,7 +9,6 @@ using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using PrekenWeb.Data;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using WebAPI;
 

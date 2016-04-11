@@ -2,9 +2,7 @@
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Data.Entity;
 using System.Drawing;
@@ -14,11 +12,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Spotlight")]
-    public class AfbeeldingController : ApplicationController
+    public class AfbeeldingController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
@@ -47,7 +46,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (System.IO.File.Exists(thumbnailLocatie)) System.IO.File.Delete(thumbnailLocatie);
             if (System.IO.File.Exists(homepageLocatie)) System.IO.File.Delete(homepageLocatie);
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
             _context.Afbeeldings.Remove(afbeelding);
             _context.SaveChanges();
@@ -97,7 +96,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 if (!ModelState.IsValid) return View(viewModel);
             }
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
             return View(new AfbeeldingEditViewModel
             {
@@ -159,7 +158,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             ModelState.Clear();
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
             string geuploadeAfbeeldingLocatie;
 

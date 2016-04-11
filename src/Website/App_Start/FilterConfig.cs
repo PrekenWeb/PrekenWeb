@@ -1,5 +1,8 @@
-﻿using Elmah;
+﻿using System.Globalization;
+using System.Threading;
+using Elmah;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website
 {
@@ -8,6 +11,7 @@ namespace Prekenweb.Website
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CultureFilter());
         }
 
         public class HandleErrorAttribute : System.Web.Mvc.HandleErrorAttribute
@@ -20,6 +24,18 @@ namespace Prekenweb.Website
                 var httpContext = context.HttpContext.ApplicationInstance.Context;
                 var signal = ErrorSignal.FromContext(httpContext);
                 signal.Raise(context.Exception, httpContext);
+            }
+        }
+
+        public class CultureFilter : IAuthorizationFilter
+        {
+
+            public void OnAuthorization(AuthorizationContext filterContext)
+            {
+                var taalInfo = TaalInfoHelper.FromRouteData(filterContext.RouteData);
+
+                Thread.CurrentThread.CurrentCulture = taalInfo.CultureInfo;
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(taalInfo.CultureInfo.Name);
             }
         }
     }

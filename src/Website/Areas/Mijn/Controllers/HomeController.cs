@@ -1,17 +1,16 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
-using Prekenweb.Website.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Areas.Website.Models;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize]
-    public class HomeController : ApplicationController
+    public class HomeController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
@@ -32,7 +31,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         { 
             return View(new NieuwsbriefIndexViewModel
             {
-                NieuwsbriefInschrijvingen = _context.NieuwsbriefInschrijvings.Where(ni => ni.TaalId == TaalId).ToList()
+                NieuwsbriefInschrijvingen = _context.NieuwsbriefInschrijvings.Where(ni => ni.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).ToList()
             });
         }
         public ActionResult Stamgegevens()

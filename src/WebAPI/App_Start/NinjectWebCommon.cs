@@ -6,7 +6,6 @@ using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.Services;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 
 namespace WebAPI

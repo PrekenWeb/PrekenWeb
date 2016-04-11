@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.IO;
 using System.Web;
 using System.Web.Http;
@@ -9,7 +8,6 @@ using System.Web.Routing;
 using Prekenweb.Website.Lib.Hangfire;
 using Prekenweb.Website.Areas.Website;
 using Prekenweb.Website.Areas.Mijn;
-using PrekenWeb.Data;
 
 namespace Prekenweb.Website
 {

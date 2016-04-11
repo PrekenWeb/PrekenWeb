@@ -1,15 +1,13 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
-using Prekenweb.Website.Controllers;
-using Prekenweb.Website.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class TooltipController : ApplicationController
+    public class TooltipController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 

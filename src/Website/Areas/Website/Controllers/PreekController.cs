@@ -7,11 +7,8 @@ using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.Tables;
 using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib.Cache;
-using Prekenweb.Website.ViewModels;
 using SharpEpub;
 using System;
 using System.Collections.Generic;
@@ -21,12 +18,14 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Prekenweb.Website.Areas.Website.Models;
+using Prekenweb.Website.Lib;
 using VikingErik.Mvc.ResumingActionResults;
 using ContentDisposition = System.Net.Mime.ContentDisposition;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class PreekController : ApplicationController
+    public class PreekController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly ITekstRepository _tekstRepository;
@@ -65,7 +64,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             if (viewModel.Preek == null) return HttpNotFound("Preek bestaat niet (meer)");
 
-            if (viewModel.Preek.TaalId != TaalId)
+            if (viewModel.Preek.TaalId != TaalInfoHelper.FromRouteData(RouteData).Id)
             {
                 var taal = "nl";
                 if (viewModel.Preek.TaalId == 2) taal = "en";
@@ -381,7 +380,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             return View(new GegevensAanvullen
             {
-                TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalId),
+                TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id),
                 PreekId = preekId,
                 Preek = preek,
                 Verzonden = false
@@ -391,8 +390,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [HttpPost, CaptchaVerify("Captcha is not valid")]
         public ActionResult GegevensAanvullen(GegevensAanvullen viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalId);
-            viewModel.TekstPaginaCompleet = _tekstRepository.GetTekstPagina("gegevens-aanvullen-compleet", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id);
+            viewModel.TekstPaginaCompleet = _tekstRepository.GetTekstPagina("gegevens-aanvullen-compleet", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             if (ModelState.IsValid)
             {

@@ -1,9 +1,8 @@
-﻿using PrekenWeb.Data.Tables;
+﻿using System.ComponentModel.DataAnnotations;
+using PrekenWeb.Data.Tables;
 using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
-using System.ComponentModel.DataAnnotations;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class GegevensAanvullen
     {

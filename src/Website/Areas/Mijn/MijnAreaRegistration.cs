@@ -1,6 +1,4 @@
-﻿using Prekenweb.Website.Areas.Website;
-using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Prekenweb.Website.Areas.Mijn
 {

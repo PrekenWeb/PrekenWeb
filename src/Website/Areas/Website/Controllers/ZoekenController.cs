@@ -4,21 +4,19 @@ using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.Services;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Identity;
-using Prekenweb.Website.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class ZoekenController : ApplicationController
+    public class ZoekenController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IZoekenRepository _zoekenRepository;
@@ -56,7 +54,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
             var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
-            zoekOpdracht.TaalId = TaalId;
+            zoekOpdracht.TaalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             _context.ZoekOpdrachten.Add(zoekOpdracht);
@@ -82,7 +80,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         {
             ViewBag.Taalkeuze = !(viewModel.PredikantId.HasValue || viewModel.GebeurtenisId.HasValue || viewModel.BoekId.HasValue || viewModel.BoekHoofdstukId.HasValue || viewModel.SerieId.HasValue || viewModel.GemeenteId.HasValue || viewModel.LezingCategorieId.HasValue);
 
-            viewModel.TaalId = TaalId;
+            viewModel.TaalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             if (viewModel.Pagina == null) viewModel.Pagina = 1;
 
             if (!viewModel.LeesPreken && !viewModel.AudioPreken && !viewModel.Lezingen)
@@ -124,7 +122,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 Hoofdstukken = _context
                     .BoekHoofdstuks
                     .Include(x => x.Boek)
-                    .Where(b => b.Boek.TaalId == TaalId)
+                    .Where(b => b.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                     .ToList()
             });
         }
@@ -136,7 +134,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             {
                 Predikanten = _context
                     .Predikants.OrderBy(p => p.Achternaam)
-                    .Where(p => p.TaalId == TaalId)
+                    .Where(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                     .ToList()
             });
         }
@@ -150,7 +148,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                         .Gebeurtenis
                         .OrderBy(g => g.Sortering)
                         .ThenBy(g => g.Omschrijving)
-                        .Where(g => g.TaalId == TaalId)
+                        .Where(g => g.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                         .ToList()
             });
         }
@@ -160,7 +158,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         {
             return View(new ZoekenSerie
             {
-                Series = _context.Series.OrderBy(s => s.Omschrijving).Where(s => s.TaalId == TaalId).ToList()
+                Series = _context.Series.OrderBy(s => s.Omschrijving).Where(s => s.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).ToList()
             });
         }
 
@@ -172,7 +170,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 Gemeentes = _context
                     .Gemeentes
                     .OrderBy(s => s.Omschrijving)
-                    .Where(g => g.Preeks.Any(p => p.TaalId == TaalId))
+                    .Where(g => g.Preeks.Any(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id))
                     .ToList()
             });
         }
@@ -184,7 +182,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             {
                 case "Predikant":
                     return Json(_context.Predikants
-                    .Where(p => p.TaalId == TaalId && (((p.Titels ?? "") + " " + (p.Voorletters ?? "")).Trim() + " " + ((p.Tussenvoegsels ?? "") + " " + (p.Achternaam ?? "")).Trim()).Contains(term))
+                    .Where(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id && (((p.Titels ?? "") + " " + (p.Voorletters ?? "")).Trim() + " " + ((p.Tussenvoegsels ?? "") + " " + (p.Achternaam ?? "")).Trim()).Contains(term))
                     .Take(10)
                     .ToList()
                     .Select(p => new { p.Id, value = p.VolledigeNaam })
@@ -193,7 +191,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "BoekHoofdstuk":
                     return Json(_context.BoekHoofdstuks.Include(x => x.Boek)
-                   .Where(b => b.Omschrijving.Contains(term) && b.Boek.TaalId == TaalId)
+                   .Where(b => b.Omschrijving.Contains(term) && b.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                    .Take(10)
                    .ToList()
                    .Select(b => new { b.Id, value = b.Omschrijving })
@@ -202,7 +200,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "Gebeurtenis":
                     return Json(_context.Gebeurtenis
-                   .Where(g => g.Omschrijving.Contains(term) && g.TaalId == TaalId)
+                   .Where(g => g.Omschrijving.Contains(term) && g.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                    .Take(10)
                    .ToList()
                    .Select(g => new { g.Id, value = g.Omschrijving })
@@ -220,7 +218,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "Serie":
                     return Json(_context.Series
-                   .Where(s => s.Omschrijving.Contains(term) && s.TaalId == TaalId)
+                   .Where(s => s.Omschrijving.Contains(term) && s.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
                    .Take(10)
                    .ToList()
                    .Select(s => new { s.Id, value = s.Omschrijving })

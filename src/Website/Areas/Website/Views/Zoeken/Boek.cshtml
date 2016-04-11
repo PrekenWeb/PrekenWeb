@@ -1,6 +1,6 @@
 ﻿@using PrekenWeb.Data.Tables
 @using Prekenweb.Website.Lib.HtmlHelpers
-@model ZoekenBoek
+@model Prekenweb.Website.Areas.Website.Models.ZoekenBoek
 @{ 
     ViewBag.Title = Resources.ZoekenBoek;
     List<Boek> boeken = Model.Hoofdstukken.Select(h => h.Boek).Distinct().ToList();

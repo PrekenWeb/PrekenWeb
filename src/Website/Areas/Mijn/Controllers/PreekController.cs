@@ -5,10 +5,8 @@ using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
 using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,12 +14,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Hangfire;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize]
-    public class PreekController : ApplicationController
+    public class PreekController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
@@ -75,7 +74,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             preek.DatumBijgewerkt = DateTime.Now;
             preek.AangepastDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
             _context.SaveChanges();
 
             BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(preek.Id));
@@ -142,7 +141,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 DatumBijgewerkt = DateTime.Now,
                 Gepubliceerd = User.IsInRole("PreekFiatteren"),
                 PreekTypeId = (int)PreekTypeEnum.Peek,
-                TaalId = TaalId,
+                TaalId = TaalInfoHelper.FromRouteData(RouteData).Id,
                 PreekLezenEnZingens = new List<PreekLezenEnZingen>
                 { 
                     new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 1 }, 
@@ -180,7 +179,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 preek.DatumBijgewerkt = DateTime.Now;
                 preek.AangemaaktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
-                ClearOutputCaches();
+                OutputCacheHelpers.ClearOutputCaches(Response, Url);
                 _context.SaveChanges(); 
 
                 BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(preek.Id));
@@ -228,7 +227,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                                 .Include(x => x.BoekHoofdstuk)
                                 .Where(p =>
                                     !p.Gepubliceerd
-                                    && p.TaalId == TaalId
+                                    && p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
                                 ).ToList(),
                     FromPreekId = fromPreekId
                 });
@@ -244,7 +243,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     .Include(x => x.BoekHoofdstuk)
                     .Where(p =>
                         !p.Gepubliceerd
-                        && p.TaalId == TaalId
+                        && p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
                         && p.AangemaaktDoor == gebruikerId
                     ).ToList(),
                 FromPreekId = fromPreekId
@@ -283,7 +282,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 .Include(x => x.BoekHoofdstuk)
                 .Include(x => x.BoekHoofdstuk.Boek)
                 .Where(bh =>
-                    bh.BoekHoofdstuk.Boek.TaalId == TaalId
+                    bh.BoekHoofdstuk.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
                     && (bh.Hoofdstuk == viewModel.Hoofdstuk || !viewModel.Hoofdstuk.HasValue)
                     && (bh.BoekHoofdstuk.Omschrijving.Contains(viewModel.Boek) || string.IsNullOrEmpty(viewModel.Boek))
                 )
