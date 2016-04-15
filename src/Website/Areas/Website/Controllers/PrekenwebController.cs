@@ -24,8 +24,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                    ITekstRepository tekstRepository )
         {
             _context = context;
-            _tekstRepository = tekstRepository;
-            ViewBag.Taalkeuze = true;
+            _tekstRepository = tekstRepository; 
         }
 
         public ActionResult Footer()
@@ -58,28 +57,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             return RedirectToAction("Index", "Home", new { Area = "Mijn", Culture = "nl" });
         }
-
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification="Controller.Redirect only accepts a string based Uri")]
-        public ActionResult WisselTaal(string taal, string returnUrl)
-        {
-            var rootFolder = Url.Content("~/");
-            if (string.IsNullOrWhiteSpace(returnUrl)) returnUrl = "/";
-
-            var applicationUrl = (returnUrl.Substring(0, rootFolder.Length) == rootFolder) ? returnUrl.Substring(rootFolder.Length) : returnUrl;
-
-            if (Request.Url != null && !Request.Url.Host.EndsWith("localhost"))
-            {
-                switch (taal)
-                {
-                    case "en":
-                        return Redirect("http://www.sermonweb.org" + rootFolder + taal + applicationUrl);
-                    default:
-                    //case "nl":
-                        return Redirect("http://www.prekenweb.nl" + rootFolder + taal + applicationUrl);
-                }
-            }
-            return Redirect(rootFolder + taal + applicationUrl);
-        }
+ 
 
         public ActionResult Pagina(string pagina)
         {
@@ -172,11 +150,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         public RssActionResult Rss()
         {
             var feed = new SyndicationFeed();
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
 
             var items = _context
                 .Preeks
                 .Include(x => x.Predikant)
-                .Where(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id && x.Gepubliceerd)
+                .Where(x => x.TaalId == taalId && x.Gepubliceerd)
                 .OrderByDescending(x => x.DatumAangemaakt)
                 .Take(10)
                 .ToList()
@@ -206,7 +185,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [OutputCache(Duration = 86400)] // 1 dag
         public ActionResult Nieuwsbrief()
         {
-            var mailChimpListId = _context.Mailings.First(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).MailChimpId;
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
+            var mailChimpListId = _context.Mailings.First(x => x.TaalId == taalId).MailChimpId;
             var nieuwsbrieven = MailChimpController.GetSendCampains(mailChimpListId);
 
             var viewmodel = new Nieuwsbrief

@@ -35,7 +35,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _gebruikerRepository = gebruikerRepository;
             _huidigeGebruiker = huidigeGebruiker;
             _prekenWebUserManager = prekenWebUserManager;
-            ViewBag.Taalkeuze = true;
         }
 
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*", Order = 0)] // 1 uur
@@ -78,8 +77,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         private async Task<PreekZoeken> GetPreekZoekenViewModel(PreekZoeken viewModel, int pagesize)
         {
-            ViewBag.Taalkeuze = !(viewModel.PredikantId.HasValue || viewModel.GebeurtenisId.HasValue || viewModel.BoekId.HasValue || viewModel.BoekHoofdstukId.HasValue || viewModel.SerieId.HasValue || viewModel.GemeenteId.HasValue || viewModel.LezingCategorieId.HasValue);
-
             viewModel.TaalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             if (viewModel.Pagina == null) viewModel.Pagina = 1;
 
@@ -117,12 +114,13 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Boek()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new ZoekenBoek
             {
                 Hoofdstukken = _context
                     .BoekHoofdstuks
                     .Include(x => x.Boek)
-                    .Where(b => b.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                    .Where(b => b.Boek.TaalId == taalId)
                     .ToList()
             });
         }
@@ -130,11 +128,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Predikant()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new ZoekenPredikant
             {
                 Predikanten = _context
                     .Predikants.OrderBy(p => p.Achternaam)
-                    .Where(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                    .Where(p => p.TaalId == taalId)
                     .ToList()
             });
         }
@@ -142,13 +141,14 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gelegenheid()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new ZoekenGebeurtenis
             {
                 Gebeurtenissen = _context
                         .Gebeurtenis
                         .OrderBy(g => g.Sortering)
                         .ThenBy(g => g.Omschrijving)
-                        .Where(g => g.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                        .Where(g => g.TaalId == taalId)
                         .ToList()
             });
         }
@@ -156,21 +156,23 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Series()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new ZoekenSerie
             {
-                Series = _context.Series.OrderBy(s => s.Omschrijving).Where(s => s.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).ToList()
+                Series = _context.Series.OrderBy(s => s.Omschrijving).Where(s => s.TaalId == taalId).ToList()
             });
         }
 
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public ActionResult Gemeente()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new ZoekenGemeente
             {
                 Gemeentes = _context
                     .Gemeentes
                     .OrderBy(s => s.Omschrijving)
-                    .Where(g => g.Preeks.Any(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id))
+                    .Where(g => g.Preeks.Any(p => p.TaalId == taalId))
                     .ToList()
             });
         }
@@ -178,11 +180,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*")] // 1 uur
         public JsonResult Autocomplete(string type, string term)
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             switch (type)
             {
                 case "Predikant":
                     return Json(_context.Predikants
-                    .Where(p => p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id && (((p.Titels ?? "") + " " + (p.Voorletters ?? "")).Trim() + " " + ((p.Tussenvoegsels ?? "") + " " + (p.Achternaam ?? "")).Trim()).Contains(term))
+                    .Where(p => p.TaalId == taalId && (((p.Titels ?? "") + " " + (p.Voorletters ?? "")).Trim() + " " + ((p.Tussenvoegsels ?? "") + " " + (p.Achternaam ?? "")).Trim()).Contains(term))
                     .Take(10)
                     .ToList()
                     .Select(p => new { p.Id, value = p.VolledigeNaam })
@@ -191,7 +194,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "BoekHoofdstuk":
                     return Json(_context.BoekHoofdstuks.Include(x => x.Boek)
-                   .Where(b => b.Omschrijving.Contains(term) && b.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                   .Where(b => b.Omschrijving.Contains(term) && b.Boek.TaalId == taalId)
                    .Take(10)
                    .ToList()
                    .Select(b => new { b.Id, value = b.Omschrijving })
@@ -200,7 +203,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "Gebeurtenis":
                     return Json(_context.Gebeurtenis
-                   .Where(g => g.Omschrijving.Contains(term) && g.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                   .Where(g => g.Omschrijving.Contains(term) && g.TaalId == taalId)
                    .Take(10)
                    .ToList()
                    .Select(g => new { g.Id, value = g.Omschrijving })
@@ -218,7 +221,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 case "Serie":
                     return Json(_context.Series
-                   .Where(s => s.Omschrijving.Contains(term) && s.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id)
+                   .Where(s => s.Omschrijving.Contains(term) && s.TaalId == taalId)
                    .Take(10)
                    .ToList()
                    .Select(s => new { s.Id, value = s.Omschrijving })

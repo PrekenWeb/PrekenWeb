@@ -43,11 +43,10 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _prekenWebUserManager = prekenWebUserManager;
             _huidigeGebruiker = huidigeGebruiker;
 
-            ViewBag.Taalkeuze = true;
         }
 
         [AnonymousOnlyOutputCache(Duration = 1800, VaryByParam = "*", Order = 0)] // 30 minuten
-        [AddTokenCookie(Order=1)]
+        [AddTokenCookie(Order = 1)]
         public async Task<ActionResult> Index()
         {
             return View(await GetHomeIndexViewModel());

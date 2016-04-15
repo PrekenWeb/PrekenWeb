@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Threading;
+using System.Web.Http;
 using Elmah;
 using System.Web.Mvc;
 using Prekenweb.Website.Lib;
@@ -32,11 +34,16 @@ namespace Prekenweb.Website
 
             public void OnAuthorization(AuthorizationContext filterContext)
             {
-                var taalInfo = TaalInfoHelper.FromRouteData(filterContext.RouteData);
+                var hostName = filterContext.HttpContext.Request.Url?.GetLeftPart(UriPartial.Authority).ToLower();
+                var taalInfo = TaalInfoHelper.FromRouteData(filterContext.RouteData, hostName);
+
+                if (hostName != null && !hostName.Contains(taalInfo.Hostname.ToLower())) filterContext.Result = new HttpNotFoundResult();
 
                 Thread.CurrentThread.CurrentCulture = taalInfo.CultureInfo;
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(taalInfo.CultureInfo.Name);
             }
         }
     }
+
+
 }

@@ -64,7 +64,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             try
             {
-                viewModel.Bestandsnaam = HandleUpload(bestand,viewModel.Id, viewModel.Bestandsnaam);
+                viewModel.Bestandsnaam = HandleUpload(bestand, viewModel.Id, viewModel.Bestandsnaam);
             }
             catch (Exception ex)
             {
@@ -134,7 +134,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         #region Maak
         [Authorize(Roles = "PreekToevoegen")]
         public ActionResult Maak()
-        { 
+        {
             return View(new Preek
             {
                 DatumAangemaakt = DateTime.Now,
@@ -143,12 +143,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 PreekTypeId = (int)PreekTypeEnum.Peek,
                 TaalId = TaalInfoHelper.FromRouteData(RouteData).Id,
                 PreekLezenEnZingens = new List<PreekLezenEnZingen>
-                { 
-                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 1 }, 
-                    new PreekLezenEnZingen { Soort = Resources.Resources.Lezen, Sortering= 2 }, 
-                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 3 }, 
-                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 4 }, 
-                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 5 }, 
+                {
+                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 1 },
+                    new PreekLezenEnZingen { Soort = Resources.Resources.Lezen, Sortering= 2 },
+                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 3 },
+                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 4 },
+                    new PreekLezenEnZingen { Soort = Resources.Resources.Zingen, Sortering= 5 },
                 }
             });
         }
@@ -180,17 +180,17 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 preek.AangemaaktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
                 OutputCacheHelpers.ClearOutputCaches(Response, Url);
-                _context.SaveChanges(); 
+                _context.SaveChanges();
 
                 BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(preek.Id));
 
                 if (ModelState.IsValid) return RedirectToAction("NogTePubliceren", new { fromPreekId = preek.Id });
-                
-                return View(preek);  
+
+                return View(preek);
             }
 
             if (bestand != null) ModelState.AddModelError("", "Let op, er waren fouten, corrigeer deze maar kies ook opnieuw het bestand want deze is nog niet opgeslagen en wordt ook niet onthouden");
-            
+
             return View(viewModel);
         }
 
@@ -215,7 +215,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ViewResult> NogTePubliceren(int? fromPreekId)
         {
             var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
-
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             if (User.IsInRole("PrekenVanAnderenBewerken"))
             {
                 return View(new PreekNogTePublicerenViewModel
@@ -227,15 +227,16 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                                 .Include(x => x.BoekHoofdstuk)
                                 .Where(p =>
                                     !p.Gepubliceerd
-                                    && p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
+                                    && p.TaalId == taalId
                                 ).ToList(),
                     FromPreekId = fromPreekId
                 });
             }
-            
+
             // Alleen eigen preken
             return View(new PreekNogTePublicerenViewModel
             {
+
                 Preken = _context
                     .Preeks
                     .Include(x => x.Predikant)
@@ -243,7 +244,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     .Include(x => x.BoekHoofdstuk)
                     .Where(p =>
                         !p.Gepubliceerd
-                        && p.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
+                        && p.TaalId == taalId
                         && p.AangemaaktDoor == gebruikerId
                     ).ToList(),
                 FromPreekId = fromPreekId
@@ -277,12 +278,13 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [Authorize(Roles = "PreekToevoegen")]
         public ActionResult KiesVers(KiesVers viewModel)
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             viewModel.Teksten = _context
                 .BoekHoofdstukTeksts
                 .Include(x => x.BoekHoofdstuk)
                 .Include(x => x.BoekHoofdstuk.Boek)
                 .Where(bh =>
-                    bh.BoekHoofdstuk.Boek.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id
+                    bh.BoekHoofdstuk.Boek.TaalId == taalId
                     && (bh.Hoofdstuk == viewModel.Hoofdstuk || !viewModel.Hoofdstuk.HasValue)
                     && (bh.BoekHoofdstuk.Omschrijving.Contains(viewModel.Boek) || string.IsNullOrEmpty(viewModel.Boek))
                 )

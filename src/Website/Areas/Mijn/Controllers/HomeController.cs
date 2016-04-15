@@ -28,10 +28,11 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         public ActionResult Nieuwsbrief()
-        { 
+        {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new NieuwsbriefIndexViewModel
             {
-                NieuwsbriefInschrijvingen = _context.NieuwsbriefInschrijvings.Where(ni => ni.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).ToList()
+                NieuwsbriefInschrijvingen = _context.NieuwsbriefInschrijvings.Where(ni => ni.TaalId == taalId).ToList()
             });
         }
         public ActionResult Stamgegevens()

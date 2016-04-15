@@ -21,9 +21,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public ActionResult Index()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new SerieIndexViewModel
             {
-                Series = _context.Series.Where(s => s.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id).OrderBy(s => s.Omschrijving).ToList()
+                Series = _context.Series.Where(s => s.TaalId == taalId).OrderBy(s => s.Omschrijving).ToList()
             });
         }
 
