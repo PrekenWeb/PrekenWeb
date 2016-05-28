@@ -67,6 +67,8 @@ namespace Prekenweb.Website
 
             try
             {
+                GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
+
                 app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
                     AuthorizationFilters = new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() }
