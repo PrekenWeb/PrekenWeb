@@ -1,5 +1,4 @@
 using App.Shared.Api;
-using App.Shared.Db;
 using App.Shared.Pages;
 using App.Shared.Services;
 using Xamarin.Forms;

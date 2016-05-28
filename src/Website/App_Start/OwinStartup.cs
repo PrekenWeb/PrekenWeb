@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.Dashboard;
-using Hangfire.SqlServer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -16,7 +15,6 @@ using Ninject.Web.Common.OwinHost;
 using Owin;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website;
 using Prekenweb.Website.Lib.Hangfire;
@@ -27,13 +25,6 @@ namespace Prekenweb.Website
 {
     public class OwinStartup
     {
-        public static BackgroundJobServerOptions BackgroundJobServerOptions = new BackgroundJobServerOptions
-        {
-            ServerName = $"PrekenWebHangfireServer-V1",
-            SchedulePollingInterval = TimeSpan.FromMinutes(1),
-            WorkerCount = 2 // two concurrent workers is more than enough!
-        };
-
         public void Configuration(IAppBuilder app)
         {
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
@@ -76,17 +67,20 @@ namespace Prekenweb.Website
 
             try
             {
-                app.UseHangfire(config =>
+                app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
-                    config.UseSqlServerStorage("hangfire-sqlserver");
-                    config.UseServer(BackgroundJobServerOptions);
-                    config.UseAuthorizationFilters(new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() });
+                    AuthorizationFilters = new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() }
                 });
+
                 AchtergrondTaken.RegistreerTaken();
             }
-            catch (SqlException)
+            catch (InvalidOperationException ex)
             {
-                // probably wrong db-connection or non-existing db, let DbContext handle this
+                throw new Exception("Need to register application for autostart, for more information visit: http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html#enabling-service-auto-start", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Problem connecting to HangFire database", ex);
             }
         }
 

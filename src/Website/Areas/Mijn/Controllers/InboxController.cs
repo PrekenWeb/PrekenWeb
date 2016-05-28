@@ -3,10 +3,8 @@ using Hangfire;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -17,7 +15,7 @@ using Prekenweb.Website.Lib.Hangfire;
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Inbox")]
-    public class InboxController : ApplicationController
+    public class InboxController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IPrekenWebUserManager _prekenWebUserManager;

@@ -1,17 +1,16 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Spotlight")]
-    public class SpotlightController : ApplicationController
+    public class SpotlightController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
@@ -22,9 +21,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public ActionResult Index()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new SpotlightIndexViewModel
             {
-                Spotlights = _context.Spotlights.Where(sl => sl.TaalId == TaalId).OrderBy(sl => sl.Sortering).ToList()
+                Spotlights = _context.Spotlights.Where(sl => sl.TaalId == taalId).OrderBy(sl => sl.Sortering).ToList()
             });
         }
 
@@ -35,7 +35,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             _context.Spotlights.Remove(spotlight);
             _context.SaveChanges();
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
             return RedirectToAction("Index");
         }
@@ -58,7 +58,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 _context.SaveChanges();
             }
 
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
             return View(viewModel);
         }
@@ -67,7 +67,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             return View(new SpotlightEditViewModel
             {
-                Spotlight = new Spotlight { TaalId = TaalId }
+                Spotlight = new Spotlight { TaalId = TaalInfoHelper.FromRouteData(RouteData).Id }
             });
         }
 
@@ -79,7 +79,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 _context.Spotlights.Add(viewModel.Spotlight);
                 _context.SaveChanges();
 
-                ClearOutputCaches();
+                OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
                 return RedirectToAction("Bewerk", new {viewModel.Spotlight.Id });
             }

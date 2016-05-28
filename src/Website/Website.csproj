@@ -258,7 +258,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\OwinStartup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Lib\TaalInfoHelper.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Lib\WebsiteTaal.cs" />
     <Compile Include="Areas\Mijn\Controllers\ZoekOpdrachtController.cs" />
     <Compile Include="Areas\Mijn\Controllers\BladwijzerController.cs" />
     <Compile Include="Areas\Mijn\MijnAreaRegistration.cs" />
@@ -300,7 +302,6 @@
     <Compile Include="Areas\Website\Controllers\FeedController.cs" />
     <Compile Include="Areas\Website\Controllers\MailChimpController.cs" />
     <Compile Include="Areas\Website\Controllers\TooltipController.cs" />
-    <Compile Include="Areas\Website\Controllers\LegacyRoutingController.cs" />
     <Compile Include="Areas\Website\Models\Bijbelgedeelte.cs" />
     <Compile Include="Areas\Website\Models\BladerenBoek.cs" />
     <Compile Include="Areas\Website\Models\BladerenGebeurtenis.cs" />
@@ -331,7 +332,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\Website\Controllers\HomeController.cs" />
     <Compile Include="Areas\Website\WebsiteAreaRegistration.cs" />
-    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Lib\OutputCacheHelpers.cs" />
     <Compile Include="Areas\Website\Controllers\ZoekenController.cs" />
     <Compile Include="Areas\Website\Controllers\PreekController.cs" />
     <Compile Include="Areas\Website\Controllers\PrekenwebController.cs" />

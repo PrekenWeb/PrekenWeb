@@ -6,7 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-PrivateSettings.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -195,3 +194,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+/src/Website/log.txt
+/src/Website/PrivateSettings.config

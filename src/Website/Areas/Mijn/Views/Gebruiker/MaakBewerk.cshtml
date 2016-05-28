@@ -75,7 +75,7 @@
     }
     <div class="field">
         <div class="label">@Html.LabelFor(m => m.SelectedNieuwsbrieven)</div>
-        <div class="value">@Html.DropDownListFor(m => m.SelectedNieuwsbrieven, ComboboxDataSources.GetAllMailings(Model.Gebruiker.Mailings, (int)ViewBag.TaalId), new { multiple = "multiple" })</div>
+        <div class="value">@Html.DropDownListFor(m => m.SelectedNieuwsbrieven, ComboboxDataSources.GetAllMailings(Model.Gebruiker.Mailings, (int)TaalInfoHelper.FromRouteData(Request.RequestContext.RouteData).Id), new { multiple = "multiple" })</div>
         <div class="tooltip">@Html.ToolTipFor(m => m.SelectedNieuwsbrieven)</div>
         <div class="validator">@Html.ValidationMessageFor(m => m.SelectedNieuwsbrieven)</div>
     </div>

@@ -1,12 +1,11 @@
-﻿using System.Web.UI;
-using IZ.WebFileManager;
-using PrekenWeb.Data;
-using Prekenweb.Models;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
+using System.Web.UI;
+using IZ.WebFileManager;
+using PrekenWeb.Data;
 
-namespace Prekenweb.Website
+namespace Prekenweb.Website.Areas.Mijn
 {
     public partial class FileManagerWebForm : Page
     {

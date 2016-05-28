@@ -1,17 +1,16 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Stamgegevens")]
-    public class GelegenheidController : ApplicationController
+    public class GelegenheidController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
@@ -22,9 +21,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public ActionResult Index()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new GebeurtenisIndexViewModel
             {
-                Gebeurteniss = _context.Gebeurtenis.Where(g => g.TaalId == TaalId).OrderBy(g => g.Sortering).ThenBy(g => g.Omschrijving).ToList()
+                Gebeurteniss = _context.Gebeurtenis.Where(g => g.TaalId == taalId).OrderBy(g => g.Sortering).ThenBy(g => g.Omschrijving).ToList()
             });
         }
 
@@ -61,7 +61,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             return View(new GebeurtenisEditViewModel
             {
-                Gebeurtenis = new Gebeurtenis { TaalId = TaalId }
+                Gebeurtenis = new Gebeurtenis { TaalId = TaalInfoHelper.FromRouteData(RouteData).Id }
             });
         }
 

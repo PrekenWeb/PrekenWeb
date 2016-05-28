@@ -4,8 +4,6 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-using App.Shared;
-
 namespace App.iOS
 { 
 	[Register ("AppDelegate")]

@@ -9,11 +9,9 @@ using Microsoft.Owin.Security;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Areas.Website.Controllers;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -30,7 +28,7 @@ using TweetSharp;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
-    public class GebruikerController : ApplicationController
+    public class GebruikerController : Controller
     {
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IMailingRepository _mailingRepository;
@@ -71,15 +69,15 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             {
                 ReturnUrl = returnUrl,
                 Onthouden = true,
-                TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalId),
-                SocialLogin = Taal == "nl" // nl
+                TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id),
+                SocialLogin = TaalInfoHelper.FromRouteData(RouteData).Naam == "nl" // nl
             });
         }
 
         [System.Web.Mvc.HttpPost, ValidateAntiForgeryToken, System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> Inloggen(AccountInloggen viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             if (!ModelState.IsValid) return View(viewModel);
 
@@ -112,25 +110,25 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             return View(new RegistreerViewModel
             {
-                TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalId)
+                TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id)
             });
         }
 
         [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost, CaptchaVerify("Captcha is not valid")]
         public async Task<ActionResult> Registreer(RegistreerViewModel viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             if (await _prekenWebUserManager.FindByEmailAsync(viewModel.Email) != null)
                 ModelState.AddModelError("Email", string.Format(Resources.Resources.EmailNietBeschikbaar, Url.Action("WachtwoordVergeten", new { gebruikersnaam = viewModel.Email })));
 
-            if(!string.IsNullOrEmpty(viewModel.Gebruikersnaam) && 
+            if(!string.IsNullOrEmpty(viewModel.Gebruikersnaam) &&
                 await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruikersnaam) != null)
                 ModelState.AddModelError("Gebruikersnaam", Resources.Resources.GebruikerIsAlGeregistreerd);
 
             if (!ModelState.IsValid) return View(viewModel);
 
-            var standaaardNieuwsbrief = (await _mailingRepository.GetAlleMailings()).First(x => x.TaalId == TaalId);
+            var standaaardNieuwsbrief = (await _mailingRepository.GetAlleMailings()).First(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id);
             var gebruiker = new Gebruiker
             {
                 Email = viewModel.Email,
@@ -164,8 +162,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             return View(new RegistreerSuccesvol
             {
-                RegistreerSuccesvolTekst = _tekstRepository.GetTekstPagina("RegistreerSuccesvol", TaalId),
-                WatIsMijnTekst = _tekstRepository.GetTekstPagina("Wat-is-mijn-PrekenWeb", TaalId)
+                RegistreerSuccesvolTekst = _tekstRepository.GetTekstPagina("RegistreerSuccesvol", TaalInfoHelper.FromRouteData(RouteData).Id),
+                WatIsMijnTekst = _tekstRepository.GetTekstPagina("Wat-is-mijn-PrekenWeb", TaalInfoHelper.FromRouteData(RouteData).Id)
             });
         }
 
@@ -331,7 +329,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             {
                 //// remove all roles
                 //foreach (var role in await _prekenWebUserManager.GetRolesAsync(viewModel.Gebruiker.Id))
-                //{  
+                //{
                 //    await _prekenWebUserManager.RemoveFromRoleAsync(viewModel.Gebruiker.Id, role);
                 //}
 
@@ -355,11 +353,11 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
                 await _mailingRepository.NieuwsbrievenOverschrijvenBijGebruiker(viewModel.Gebruiker.Id, viewModel.SelectedNieuwsbrieven);
                 viewModel.SelectedNieuwsbrieven = null;
-                
+
                 MailChimpController.UnSubscribe(viewModel.Gebruiker.Email, viewModel.Gebruiker.Naam, mcListIdsWasSubscribedTo.Where(x => !mcListIdsIsNowSubscribedTo.Contains(x)).ToList());
                 MailChimpController.Subscribe(viewModel.Gebruiker.Email, viewModel.Gebruiker.Naam, mcListIdsIsNowSubscribedTo.Where(x => !mcListIdsWasSubscribedTo.Contains(x)).ToList());
             }
-            
+
             catch (Exception ex)
             {
                 ModelState.AddModelError("SelectedNieuwsbrieven", string.Format("Your profile changes are saved but there was an error (un)subscribing to mailing(s): {0}", ex.Message));
@@ -412,7 +410,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             //    {
             //        await _prekenWebUserManager.AddToRoleAsync(nieuweGebruiker.Id, role);
             //    }
-            //todo: Geen idee hoe boventaande werkend te krijgen (zorgt nl. voor een null value in de kolom gebruiker_id), vooralsnog maar onderstaande regel 
+            //todo: Geen idee hoe boventaande werkend te krijgen (zorgt nl. voor een null value in de kolom gebruiker_id), vooralsnog maar onderstaande regel
             await _gebruikerRepository.AddToRolesAsync(nieuweGebruiker.Id, viewModel.SelectedRoles.Where(x => !string.IsNullOrEmpty(x)).ToArray());
 
             viewModel.SelectedRoles = (await _prekenWebUserManager.GetRolesAsync(nieuweGebruiker.Id)).ToArray();
@@ -438,7 +436,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             var viewmodel = new WachtwoordVergeten
             {
-                TekstPagina = _tekstRepository.GetTekstPagina("WachtwoordVergeten", TaalId),
+                TekstPagina = _tekstRepository.GetTekstPagina("WachtwoordVergeten", TaalInfoHelper.FromRouteData(RouteData).Id),
                 Gebruikersnaam = gebruikersnaam
             };
             return View(viewmodel);
@@ -447,7 +445,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [System.Web.Mvc.HttpPost, ValidateAntiForgeryToken, System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> WachtwoordVergeten(WachtwoordVergeten viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("WachtwoordVergeten", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("WachtwoordVergeten", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             var gebruiker = await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruikersnaam) ??
                             await _prekenWebUserManager.FindByEmailAsync(viewModel.Gebruikersnaam);
@@ -470,7 +468,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [System.Web.Mvc.AllowAnonymous]
         public ActionResult WachtwoordVergetenBevestiging()
         {
-            return View(_tekstRepository.GetTekstPagina("WachtwoordVergetenBevestiging", TaalId));
+            return View(_tekstRepository.GetTekstPagina("WachtwoordVergetenBevestiging", TaalInfoHelper.FromRouteData(RouteData).Id));
         }
 
         [System.Web.Mvc.AllowAnonymous]
@@ -480,7 +478,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             return View(new ResetWachtwoordViewModel
             {
-                TekstPagina = _tekstRepository.GetTekstPagina("ResetWachtwoord", TaalId)
+                TekstPagina = _tekstRepository.GetTekstPagina("ResetWachtwoord", TaalInfoHelper.FromRouteData(RouteData).Id)
             });
         }
 
@@ -489,7 +487,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetWachtwoord(ResetWachtwoordViewModel viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("ResetWachtwoord", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("ResetWachtwoord", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             var gebruiker = await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruikersnaam) ??
                             await _prekenWebUserManager.FindByEmailAsync(viewModel.Gebruikersnaam);
@@ -512,7 +510,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [System.Web.Mvc.AllowAnonymous]
         public ActionResult ResetWachtwoordBevestiging()
         {
-            return View(_tekstRepository.GetTekstPagina("ResetWachtwoordBevestiging", TaalId));
+            return View(_tekstRepository.GetTekstPagina("ResetWachtwoordBevestiging", TaalInfoHelper.FromRouteData(RouteData).Id));
         }
 
         #endregion
@@ -635,7 +633,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     // Nieuwe gebruiker, direct abonneren op nieuwsbrief
                     try
                     {
-                        var standaaardNieuwsbrief = (await _mailingRepository.GetAlleMailings()).First(x => x.TaalId == TaalId);
+                        var standaaardNieuwsbrief = (await _mailingRepository.GetAlleMailings()).First(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id);
                         await _mailingRepository.NieuwsbriefToevoegenAanGebruiker(user.Id, standaaardNieuwsbrief.Id);
                         MailChimpController.Subscribe(user.Email, user.Naam, standaaardNieuwsbrief.MailChimpId);
                     }
@@ -650,7 +648,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             }
             AddIdentityResultErrorsToModelState(idenityCreateUserResult);
 
-            return View("Inloggen", new AccountInloggen { Gebruikersnaam = email, ReturnUrl = returnUrl, TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalId) });
+            return View("Inloggen", new AccountInloggen { Gebruikersnaam = email, ReturnUrl = returnUrl, TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id) });
         }
 
         [System.Web.Mvc.HttpPost]

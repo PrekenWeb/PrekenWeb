@@ -1,9 +1,9 @@
-/// <reference path="typings/jquery/jquery.d.ts" />  
+/// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/modernizr/modernizr.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/custom/custom.d.ts" />
 /// <reference path="typings/jquery.cookie/jquery.cookie.d.ts" />
-/// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" /> 
+/// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" />
 var Prekenweb;
 (function (Prekenweb_1) {
     'use strict';
@@ -128,7 +128,7 @@ var Prekenweb;
         //            $(".ui-dialog-titlebar").hide();
         //        }
         //    });
-        //} 
+        //}
         // jquery.ajax.unobtrusive werkt nog niet met jQuery 2.0, daarom zelf even een functionaliteit gemaakt :)
         Prekenweb.prototype.unobtrusiveAjaxReplacement = function () {
             // 05-05-2015 uitgezet, zorge voor een dubbele http request op homepage
@@ -344,7 +344,7 @@ var Prekenweb;
             if (show == undefined)
                 show = !$("#PrekenwebTabMijn").hasClass("active");
             if (show) {
-                $("#zoeker").hide("fade", {}, 300);
+                $("#zoeker").css("visibility", "hidden");
                 $(".DefaultMenu").hide("fade", {}, 300, function () {
                     $(".MijnMenu").show("fade", {}, 300);
                 });

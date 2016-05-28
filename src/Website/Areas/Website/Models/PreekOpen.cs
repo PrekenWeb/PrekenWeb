@@ -1,9 +1,8 @@
-﻿using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using PrekenWeb.Data.Tables;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class PreekOpen
     {

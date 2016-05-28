@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using PrekenWeb.Data.ViewModels;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class Nieuwsbrief
     {

@@ -1,10 +1,9 @@
-﻿using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using PrekenWeb.Data.Tables;
+using PrekenWeb.Data.ViewModels;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class HomeIndex
     {

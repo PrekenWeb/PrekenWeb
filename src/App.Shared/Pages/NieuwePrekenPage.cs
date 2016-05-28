@@ -1,7 +1,4 @@
-using System;
-using App.Shared.Api;
 using App.Shared.Controls;
-using App.Shared.Db;
 using App.Shared.Services;
 using Xamarin.Forms;
 

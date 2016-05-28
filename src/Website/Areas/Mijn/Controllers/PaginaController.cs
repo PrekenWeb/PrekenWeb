@@ -3,21 +3,20 @@ using System.Threading.Tasks;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Pagina")]
-    public class PaginaController : ApplicationController
+    public class PaginaController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
@@ -119,7 +118,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 viewModel.Teksten.ForEach(t => _context.Teksts.Add(t));
                 _context.SaveChanges();
 
-                ClearOutputCaches();
+                OutputCacheHelpers.ClearOutputCaches(Response, Url);
             }
             viewModel.Teksten = GetPaginaTeksten(viewModel.Pagina.Id);
             return View(viewModel);
@@ -151,7 +150,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             _context.Paginas.Add(viewModel.Pagina);
             _context.SaveChanges();
             
-            ClearOutputCaches();
+            OutputCacheHelpers.ClearOutputCaches(Response, Url);
             
             return RedirectToAction("Bewerk", new { viewModel.Pagina.Id });
         }

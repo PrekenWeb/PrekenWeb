@@ -7,7 +7,6 @@ using Ninject.Web.Mvc.FilterBindingSyntax;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
-using Prekenweb.Models;
 using PrekenWeb.Security;
 using Microsoft.AspNet.Identity.Owin;
 using Prekenweb.Website.Lib.Cache;

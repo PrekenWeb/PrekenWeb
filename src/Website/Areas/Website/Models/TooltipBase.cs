@@ -1,7 +1,6 @@
 ﻿using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class TooltipBase<T>
     {

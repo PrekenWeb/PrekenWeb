@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

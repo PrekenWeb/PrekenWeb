@@ -1,17 +1,16 @@
 ﻿using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
     [Authorize(Roles = "Stamgegevens")]
-    public class PredikantController : ApplicationController
+    public class PredikantController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
 
@@ -23,9 +22,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public ActionResult Index()
         {
+            var taalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             return View(new PredikantIndexViewModel
             {
-                Predikanten = _context.Predikants.Where(p => p.TaalId == TaalId).OrderBy(p => p.Achternaam).ToList()
+                Predikanten = _context.Predikants.Where(p => p.TaalId == taalId).OrderBy(p => p.Achternaam).ToList()
             });
         }
 
@@ -62,7 +62,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             return View(new PredikantEditViewModel
             {
-                Predikant = new Predikant { Titels = "Ds.", TaalId = TaalId }
+                Predikant = new Predikant { Titels = "Ds.", TaalId = TaalInfoHelper.FromRouteData(RouteData).Id }
             });
         }
 

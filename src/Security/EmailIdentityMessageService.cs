@@ -2,7 +2,6 @@
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using PrekenWeb.Security.Properties;
 
 namespace PrekenWeb.Security
 { 

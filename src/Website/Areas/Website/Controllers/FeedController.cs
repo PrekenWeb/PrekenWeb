@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.Services;
-using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib;
 using System;
 using System.Linq;
@@ -19,7 +18,7 @@ using Prekenweb.Website.Lib.HtmlHelpers;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class FeedController : ApplicationController
+    public class FeedController : Controller
     {
         private readonly IPrekenRepository _prekenRepository;
         private readonly IZoekenRepository _zoekenRepository;
@@ -69,7 +68,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         public async Task<ActionResult> ITunesPodcast()
         {
             var siteTitle = Resources.Resources.PrekenWebNL;
-            var siteDescription = TaalId == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
+            var siteDescription = TaalInfoHelper.FromRouteData(RouteData).Id == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
             const string siteUrl = "http://www.prekenweb.nl";
             var authorName = Resources.Resources.PrekenWebNL;
             const string authorEmail = "info@prekenweb.nl";
@@ -103,7 +102,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 writer.WriteElementString("title", siteTitle);
                 writer.WriteElementString("description", siteDescription);
                 writer.WriteElementString("link", siteUrl);
-                writer.WriteElementString("language", TaalCode);
+                var taalInfo = TaalInfoHelper.FromRouteData(RouteData);
+                writer.WriteElementString("language", taalInfo.CultureInfo.TextInfo.CultureName);
                 writer.WriteElementString("copyright", HttpUtility.HtmlEncode(string.Format("Copyright {0}, {1}", DateTime.UtcNow.Year, authorName)));
                 writer.WriteElementString("lastBuildDate", DateTime.UtcNow.ToString("r"));
                 writer.WriteElementString("pubDate", DateTime.UtcNow.ToString("r"));
@@ -167,7 +167,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 // End itunes:category
                 writer.WriteEndElement();
 
-                foreach (var preek in await _prekenRepository.GetPrekenForItunesPodcast(TaalId))
+                foreach (var preek in await _prekenRepository.GetPrekenForItunesPodcast(TaalInfoHelper.FromRouteData(RouteData).Id))
                 {
 
                     // Start podcast item
@@ -241,7 +241,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             if (zoekOpdracht == null) return HttpNotFound();
 
             var siteTitle = Resources.Resources.PrekenWebNL;
-            var siteDescription = TaalId == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
+            var siteDescription = TaalInfoHelper.FromRouteData(RouteData).Id == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
             var siteUrl = "http://www.prekenweb.nl";
             var authorName = Resources.Resources.PrekenWebNL;
             var authorEmail = "info@prekenweb.nl";
@@ -260,7 +260,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 writer.WriteElementString("title", siteTitle);
                 writer.WriteElementString("description", siteDescription);
                 writer.WriteElementString("link", siteUrl);
-                writer.WriteElementString("language", TaalCode);
+                var taalInfo = TaalInfoHelper.FromRouteData(RouteData);
+                writer.WriteElementString("language", taalInfo.CultureInfo.TextInfo.CultureName);
                 writer.WriteElementString("copyright", HttpUtility.HtmlEncode(string.Format("Copyright {0}, {1}", DateTime.UtcNow.Year, authorName)));
                 writer.WriteElementString("lastBuildDate", DateTime.UtcNow.ToString("r"));
                 writer.WriteElementString("pubDate", DateTime.UtcNow.ToString("r"));

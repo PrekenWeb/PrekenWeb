@@ -1,12 +1,19 @@
+using System;
 using System.Data.SqlClient;
 using System.Web.Hosting;
 using Hangfire;
-using Hangfire.SqlServer;
 
 namespace Prekenweb.Website.Lib.Hangfire
 { 
     public class HangfireBootstrapper : IRegisteredObject
     {
+        private readonly BackgroundJobServerOptions _backgroundJobServerOptions = new BackgroundJobServerOptions
+        {
+            SchedulePollingInterval = TimeSpan.FromMinutes(1),
+            WorkerCount = 2 // two concurrent workers is more than enough!
+        };
+
+
         public static readonly HangfireBootstrapper Instance = new HangfireBootstrapper();
 
         private readonly object _lockObject = new object();
@@ -24,7 +31,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                 HostingEnvironment.RegisterObject(this);
                 try
                 {
-                    JobStorage.Current = new SqlServerStorage("hangfire-sqlserver");
+                    GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver"); 
                 }
                 catch (SqlException)
                 {
@@ -33,8 +40,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                     return;
                 }
 
-                _backgroundJobServer = new BackgroundJobServer(OwinStartup.BackgroundJobServerOptions);
-                _backgroundJobServer.Start();
+                _backgroundJobServer = new BackgroundJobServer(_backgroundJobServerOptions); 
             }
         }
 
@@ -42,10 +48,7 @@ namespace Prekenweb.Website.Lib.Hangfire
         {
             lock (_lockObject)
             {
-                if (_backgroundJobServer != null)
-                {
-                    _backgroundJobServer.Dispose();
-                }
+                _backgroundJobServer?.Dispose();
 
                 HostingEnvironment.UnregisterObject(this);
             }

@@ -2,23 +2,21 @@
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.Lib.Identity;
-using Prekenweb.Website.ViewModels;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class HomeController : ApplicationController
+    public class HomeController : Controller
     {
         private readonly IMailingRepository _mailingRepository;
         private readonly ITekstRepository _tekstRepository;
@@ -27,7 +25,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
         private readonly IPrekenwebCache _cache;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
-        private readonly IHuidigeGebruiker _huidigeGebruiker; 
+        private readonly IHuidigeGebruiker _huidigeGebruiker;
 
         public HomeController(IMailingRepository mailingRepository,
                               ITekstRepository tekstRepository,
@@ -45,13 +43,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             _prekenWebUserManager = prekenWebUserManager;
             _huidigeGebruiker = huidigeGebruiker;
 
-            ViewBag.Taalkeuze = true;
         }
 
         [AnonymousOnlyOutputCache(Duration = 1800, VaryByParam = "*", Order = 0)] // 30 minuten
-        [AddTokenCookie(Order=1)]
+        [AddTokenCookie(Order = 1)]
         public async Task<ActionResult> Index()
-        { 
+        {
             return View(await GetHomeIndexViewModel());
         }
 
@@ -61,10 +58,10 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var viewModel = new HomeIndex
             {
                 NieuwePreken = await GetNieuwPreken(new NieuwePreken()),
-                Teksten = _cache.GetCached("HomePageTeksten", TaalId, User.Identity.Name, () => _tekstRepository.GetHomepageTeksten(TaalId)),
-                SpotlightItems = _cache.GetCached("SpotlightItems", TaalId, User.Identity.Name, () => _spotlightRepository.GetSpotlightItemsForHomepage(TaalId)),
-                WelkomsTekst = _cache.GetCached("WelkomsTekst", TaalId, User.Identity.Name, () => _tekstRepository.GetTekstPagina("home-welkom", TaalId)),
-                Taal = Taal
+                Teksten = _cache.GetCached("HomePageTeksten", TaalInfoHelper.FromRouteData(RouteData).Id, User.Identity.Name, () => _tekstRepository.GetHomepageTeksten(TaalInfoHelper.FromRouteData(RouteData).Id)),
+                SpotlightItems = _cache.GetCached("SpotlightItems", TaalInfoHelper.FromRouteData(RouteData).Id, User.Identity.Name, () => _spotlightRepository.GetSpotlightItemsForHomepage(TaalInfoHelper.FromRouteData(RouteData).Id)),
+                WelkomsTekst = _cache.GetCached("WelkomsTekst", TaalInfoHelper.FromRouteData(RouteData).Id, User.Identity.Name, () => _tekstRepository.GetTekstPagina("home-welkom", TaalInfoHelper.FromRouteData(RouteData).Id)),
+                Taal = TaalInfoHelper.FromRouteData(RouteData).Naam
             };
             return viewModel;
         }
@@ -80,7 +77,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
-            nieuwePreken.Preken = await _cache.GetCached(cacheKey, TaalId, User.Identity.Name, async () => await _prekenRepository.GetNieuwePreken(preekTypIds, TaalId, gebruikerId));
+            nieuwePreken.Preken = await _cache.GetCached(cacheKey, TaalInfoHelper.FromRouteData(RouteData).Id, User.Identity.Name, async () => await _prekenRepository.GetNieuwePreken(preekTypIds, TaalInfoHelper.FromRouteData(RouteData).Id, gebruikerId));
             return nieuwePreken;
         }
 
@@ -115,7 +112,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 return View("Index", defaultHomeIndexViewModel);
             }
             var gebruiker = await _prekenWebUserManager.FindByEmailAsync(viewModel.InschrijvenNieuwsbriefForm.Email);
-            var mailing = (await _mailingRepository.GetAlleMailings()).FirstOrDefault(x => x.TaalId == TaalId);
+            var mailing = (await _mailingRepository.GetAlleMailings()).FirstOrDefault(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id);
 
             if (gebruiker == null && mailing != null)
             {

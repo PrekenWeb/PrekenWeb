@@ -1,9 +1,9 @@
-﻿/// <reference path="typings/jquery/jquery.d.ts" />  
+﻿/// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/modernizr/modernizr.d.ts" />
 /// <reference path="typings/jqueryui/jqueryui.d.ts" />
 /// <reference path="typings/custom/custom.d.ts" />
 /// <reference path="typings/jquery.cookie/jquery.cookie.d.ts" />
-/// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" /> 
+/// <reference path="typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" />
 
 module Prekenweb {
     'use strict';
@@ -83,7 +83,7 @@ module Prekenweb {
         //            $(".ui-dialog-titlebar").hide();
         //        }
         //    });
-        //} 
+        //}
 
         // jquery.ajax.unobtrusive werkt nog niet met jQuery 2.0, daarom zelf even een functionaliteit gemaakt :)
         public unobtrusiveAjaxReplacement() {
@@ -328,7 +328,7 @@ module Prekenweb {
             if (show == undefined) show = !$("#PrekenwebTabMijn").hasClass("active");
 
             if (show) {
-                $("#zoeker").hide("fade", {}, 300);
+                $("#zoeker").css("visibility","hidden");
                 $(".DefaultMenu").hide("fade", {}, 300, function () {
                     $(".MijnMenu").show("fade", {}, 300);
                 });
@@ -340,7 +340,7 @@ module Prekenweb {
             else {
                 $(".MijnMenu").hide("fade", {}, 300, function () {
                     $("#zoeker").show("fade", {}, 300);
-                    $(".DefaultMenu").show("fade", {}, 300)
+                    $(".DefaultMenu").show("fade", {}, 300);
                 });
                 ;
                 $("#PrekenwebTabMijn").removeClass("active");
@@ -518,7 +518,7 @@ module Prekenweb {
                     alert('Kon zoekopdracht helaas niet opslaan...');
                 }
             });
-        } 
+        }
 
         public preekBezochtChecksTonen = (preekIds: string) => {
             if (!$.cookie('Token')) return;
@@ -552,7 +552,7 @@ module Prekenweb {
                             bladwijzerIcoonElement.data("active", "False");
                         } else {
                             $("span", bladwijzerIcoonElement).addClass("fa-bookmark");
-                            bladwijzerIcoonElement.data("active", "True"); 
+                            bladwijzerIcoonElement.data("active", "True");
                         }
 
                     }

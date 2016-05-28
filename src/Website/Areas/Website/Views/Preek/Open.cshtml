@@ -1,6 +1,5 @@
-﻿@using PrekenWeb.Data.ViewModels
-@using Prekenweb.Website.Lib.HtmlHelpers
-@model PreekOpen
+﻿@using Prekenweb.Website.Lib.HtmlHelpers
+@model Prekenweb.Website.Areas.Website.Models.PreekOpen
 @{
     ViewBag.Title = Model.Titel;
     string predikant = Model.Preek.PredikantId.HasValue ? Model.Preek.Predikant.VolledigeNaam : string.Empty;

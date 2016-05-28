@@ -42,13 +42,11 @@
                 <option value="@Url.Action("Registreer", "Gebruiker", new { Area = "Mijn" })">@Resources.Registreren</option>
             }
         </optgroup>
-        @if (ViewBag.Taalkeuze != null && (bool)ViewBag.Taalkeuze)
-        {
-            <optgroup label="@Resources.Taal">
-                <option value="@Url.Action("WisselTaal", "Prekenweb", new { Area = "Website", taal = "en", returnUrl = Request.RawUrl })">@Resources.Engels</option>
-                <option value="@Url.Action("WisselTaal", "Prekenweb", new { Area = "Website", taal = "nl", returnUrl = Request.RawUrl })">@Resources.Nederlands</option>
-            </optgroup>
-        }
+
+        <optgroup label="@Resources.Taal">
+            <option value="http://www.sermonweb.org">@Resources.Engels</option>
+            <option value="http://www.prekenweb.nl">@Resources.Nederlands</option>
+        </optgroup>
     </select>
 </div>
 <div id="WebsiteMenu">
@@ -63,13 +61,11 @@
         </div>
     </div>
 
-    @if ((ViewBag.Taalkeuze != null && (bool)ViewBag.Taalkeuze) && !Request.RawUrl.Contains("/Mijn"))
-    {
-        <ul id="taalkeuze">
-            <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "en", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselEN"><span>Change to English</span></a></li>
-            <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "nl", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselNL"><span>Wissel naar Nederlands</span></a></li>
-        </ul>
-    }
+
+    <ul id="taalkeuze">
+        <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "en", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselEN"><span>Change to English</span></a></li>
+        <li><a href="@Url.Action("WisselTaal", "Prekenweb", new { taal = "nl", returnUrl = Request.RawUrl, area = "Website" })" id="TaalWisselNL"><span>Wissel naar Nederlands</span></a></li>
+    </ul>
 
     <ul class="hoofdmenuCol VerbergTelefoon hoofdmenuColLarge MijnMenu">
         @if (Request.IsAuthenticated)
@@ -117,7 +113,7 @@
     </ul>
     <ul class="hoofdmenuCol VerbergTelefoon MijnMenu">
         @Html.SecuredActionLinkLI(Resources.PreekMaken, "Maak", "Preek", new { Area = "Mijn" }, new { }, "PreekToevoegen", "plus")
-       @Html.SecuredActionLinkLI(Resources.Gebruikers, "Index", "Gebruiker", new { Area = "Mijn" }, new { }, "Gebruikers", "group")
+        @Html.SecuredActionLinkLI(Resources.Gebruikers, "Index", "Gebruiker", new { Area = "Mijn" }, new { }, "Gebruikers", "group")
         @Html.SecuredActionLinkLI(Resources.Paginas, "Index", "Pagina", new { Area = "Mijn" }, new { }, "Pagina", "font")
         @Html.SecuredActionLinkLI("Inbox", "Index", "Home", new { Area = "Mijn" }, new { }, "Inbox", "envelope")
     </ul>
