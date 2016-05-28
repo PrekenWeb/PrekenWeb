@@ -6,18 +6,17 @@ using MailChimp.Helper;
 using PrekenWeb.Data.Repositories;
 using MailChimp.Lists;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
-using Prekenweb.Website.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Web.Mvc;
+using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class MailChimpController : ApplicationController
+    public class MailChimpController : Controller
     {
         private readonly IMailingRepository _mailingRepository;
         private readonly IPrekenWebUserManager _prekenWebUserManager;

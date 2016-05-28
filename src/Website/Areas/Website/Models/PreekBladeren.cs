@@ -1,15 +1,15 @@
-﻿using PrekenWeb.Data;
-using PrekenWeb.Data.Attributes;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Services;
-using PrekenWeb.Data.Tables;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using PrekenWeb.Data;
+using PrekenWeb.Data.Attributes;
+using PrekenWeb.Data.Identity;
+using PrekenWeb.Data.Services;
+using PrekenWeb.Data.Tables;
 
-namespace Prekenweb.Website.ViewModels
+namespace Prekenweb.Website.Areas.Website.Models
 {
     public class PreekZoeken
     {

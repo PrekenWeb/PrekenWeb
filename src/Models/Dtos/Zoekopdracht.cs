@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Prekenweb.Models.Dtos
+﻿namespace Prekenweb.Models.Dtos
 {
 	public class Zoekopdracht
 	{

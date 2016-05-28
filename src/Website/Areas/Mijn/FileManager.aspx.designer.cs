@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Prekenweb.Website {
+namespace Prekenweb.Website.Areas.Mijn {
     
     
     public partial class FileManagerWebForm {

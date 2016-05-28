@@ -1,7 +1,7 @@
 ﻿@using Prekenweb.Website.Lib.HtmlHelpers
 @model PaginaEditViewModel
-@{ ViewBag.Title = string.Format("Bewerk pagina '{0}'", Model.Pagina.GetKop(ViewBag.TaalID)); }
- 
+@{ ViewBag.Title = string.Format("Bewerk pagina '{0}'", Model.Pagina.GetKop(TaalInfoHelper.FromRouteData(Request.RequestContext.RouteData).Id)); }
+
 <h1>@ViewBag.Title</h1>
 @using (Html.BeginForm("Bewerk", "Pagina", FormMethod.Post, new { name = "FormPagina" }))
 {
@@ -44,7 +44,7 @@
             </div>
         }
         <p class="clear"></p>
-    </div> 
+    </div>
     <p class="clear"></p>
 
     <a href="@Url.Action("Index")" class="IconKnop">

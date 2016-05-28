@@ -7,11 +7,8 @@ using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
 using PrekenWeb.Data.Tables;
 using PrekenWeb.Data.ViewModels;
-using Prekenweb.Models;
 using PrekenWeb.Security;
-using Prekenweb.Website.Controllers;
 using Prekenweb.Website.Lib.Cache;
-using Prekenweb.Website.ViewModels;
 using SharpEpub;
 using System;
 using System.Collections.Generic;
@@ -21,12 +18,14 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Prekenweb.Website.Areas.Website.Models;
+using Prekenweb.Website.Lib;
 using VikingErik.Mvc.ResumingActionResults;
 using ContentDisposition = System.Net.Mime.ContentDisposition;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    public class PreekController : ApplicationController
+    public class PreekController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly ITekstRepository _tekstRepository;
@@ -51,7 +50,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         {
             var viewModel = new PreekOpen();
 
-            viewModel.Preek = _context
+            viewModel.Preek = await _context
                 .Preeks
                 .Include(x => x.PreekType)
                 .Include(x => x.Predikant)
@@ -61,39 +60,33 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 .Include(x => x.PreekLezenEnZingens)
                 .Include(x => x.BoekHoofdstuk)
                 .Include(x => x.BoekHoofdstuk.Boek)
-                .SingleOrDefault(p => p.Id == id && p.Gepubliceerd);
+                .SingleOrDefaultAsync(p => p.Id == id && p.Gepubliceerd);
 
             if (viewModel.Preek == null) return HttpNotFound("Preek bestaat niet (meer)");
 
-            if (viewModel.Preek.TaalId != TaalId)
+            var taalInfo = TaalInfoHelper.FromRouteData(RouteData);
+            if (viewModel.Preek.TaalId != taalInfo.Id)
             {
-                var taal = "nl";
-                if (viewModel.Preek.TaalId == 2) taal = "en";
-                return RedirectToActionPermanent("Open", new { Id = id, Culture = taal });
+                return RedirectToActionPermanent("Open", new { Id = id, Culture = taalInfo.Naam });
             }
 
             viewModel.Preek.AantalKeerGedownload++;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             viewModel.Titel = viewModel.Preek.GetPreekTitel();
 
-            DateTime? laatsteBezoek;
             var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
-            viewModel.Cookie =   EnsureCookie(id, gebruikerId, out laatsteBezoek);
-            viewModel.LaatsteBezoek = laatsteBezoek;
-
-            ViewBag.TaalKeuze = false;
+            viewModel.Cookie = await EnsureCookieAsync(id, gebruikerId);
+            viewModel.LaatsteBezoek = viewModel.Cookie.DateTime < DateTime.Now.AddMinutes(-10) ? viewModel.Cookie.DateTime : null;
 
             return View(viewModel);
         }
 
-        private PreekCookie EnsureCookie(int preekId, int gebruikerId, out DateTime? laatsteBezoek)
+        private async Task<PreekCookie> EnsureCookieAsync(int preekId, int gebruikerId)
         {
-            laatsteBezoek = new DateTime?();
-
             if (!Request.IsAuthenticated) return new PreekCookie();
 
-            var preekCookie = _context.PreekCookies.SingleOrDefault(pc => pc.PreekId == preekId && pc.GebruikerId == gebruikerId);
+            var preekCookie = await _context.PreekCookies.SingleOrDefaultAsync(pc => pc.PreekId == preekId && pc.GebruikerId == gebruikerId);
             if (preekCookie == null)
             {
                 preekCookie = new PreekCookie
@@ -104,16 +97,14 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     GebruikerId = gebruikerId
                 };
                 _context.PreekCookies.Add(preekCookie);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 _cache.RemoveCached("NieuwePreken");
             }
             else
             {
-                laatsteBezoek = preekCookie.DateTime;
-
                 preekCookie.DateTime = DateTime.Now;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return preekCookie;
         }
@@ -271,7 +262,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                 .LeespreekAfdruk .HeleLeespreek {
                                     border: 0px;
                                     padding: 0px;
-                                } 
+                                }
 
                                 .HeleLeespreek {
                                     border-radius: 3px;
@@ -332,7 +323,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                     <meta http-equiv='content-type' content='text/html; charset=iso-8859-15'></meta>
                                     <link rel='stylesheet' type='text/css' href='Css/style.css'></link>
                                 </head>
-                                <body> 
+                                <body>
                                     <div class='LeespreekAfdruk'>
                                         <div class='HeleLeespreek'>
                                             <div class='Thema'>" + WebUtility.HtmlEncode(preek.ThemaOmschrijving) + @"</div>
@@ -340,8 +331,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                             <div class='Subtitel'>" + string.Format("{0}", preek.GebeurtenisId.HasValue ? '(' + WebUtility.HtmlEncode(preek.Gebeurtenis.Omschrijving) + ')' : string.Empty) + @"</div>
                                             <table class='HeleLeespreekTable'>" + lezenEnZingen + @"</table>
                                             " + preek.LeesPreekTekst + @"
-                                        </div> 
-                                    </div> 
+                                        </div>
+                                    </div>
                                 </body>
                                 </html>");
 
@@ -365,7 +356,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 new ReportParameter("Thema",preek.ThemaOmschrijving),
                 new ReportParameter("Subtitel", preek.GebeurtenisId.HasValue ? string.Format("({0})", preek.Gebeurtenis.Omschrijving) : string.Empty),
                 new ReportParameter("PreekId",preek.Id.ToString(CultureInfo.InvariantCulture)),
-                new ReportParameter("Titel",preek.GetPreekTitel()) 
+                new ReportParameter("Titel",preek.GetPreekTitel())
             });
 
             viewer.LocalReport.DataSources.Add(new ReportDataSource("Preek", new List<Preek> { preek }));
@@ -381,7 +372,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             return View(new GegevensAanvullen
             {
-                TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalId),
+                TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id),
                 PreekId = preekId,
                 Preek = preek,
                 Verzonden = false
@@ -391,8 +382,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [HttpPost, CaptchaVerify("Captcha is not valid")]
         public ActionResult GegevensAanvullen(GegevensAanvullen viewModel)
         {
-            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalId);
-            viewModel.TekstPaginaCompleet = _tekstRepository.GetTekstPagina("gegevens-aanvullen-compleet", TaalId);
+            viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id);
+            viewModel.TekstPaginaCompleet = _tekstRepository.GetTekstPagina("gegevens-aanvullen-compleet", TaalInfoHelper.FromRouteData(RouteData).Id);
 
             if (ModelState.IsValid)
             {

@@ -3,15 +3,13 @@ using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
-using Prekenweb.Models;
 using System.Web.Routing;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
-    public class ZoekOpdrachtController : ApplicationController
+    public class ZoekOpdrachtController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IHuidigeGebruiker _huidigeGebruiker;

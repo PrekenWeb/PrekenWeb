@@ -15,32 +15,11 @@ namespace Prekenweb.Website
 
             routes.MapRoute("CaptchaRefresh", "DefaultCaptcha/Refresh", new { controller = "DefaultCaptcha", action = "Refresh" });
             routes.MapRoute("CaptchaImage", "DefaultCaptcha/Generate", new { controller = "DefaultCaptcha", action = "Generate" });
-
-            routes.MapRoute(
-                 "LegacyRouting1",
-                 "index.php/{queryString}",
-                 new { controller = "LegacyRouting", action = "LegacyRouting" },
-                 new[] { "Prekenweb.Website.Areas.Website.Controllers" }
-            );
-
-            routes.MapRoute(
-                "LegacyRouting2",
-                "index.php",
-                new { controller = "LegacyRouting", action = "LegacyRouting" },
-                new[] { "Prekenweb.Website.Areas.Website.Controllers" }
-            );
-
-            routes.MapRoute(
-                "LegacyRouting3",
-                "{queryString}/download.php",
-                new { controller = "LegacyRouting", action = "LegacyRouting" },
-                new[] { "Prekenweb.Website.Areas.Website.Controllers" }
-            );
-
+ 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { /*controller = "Prekenweb", action = "Home", */id = UrlParameter.Optional }
+                defaults: new { id = UrlParameter.Optional }
             );
 
             var defaultCaptchaManager = (DefaultCaptchaManager)CaptchaUtils.CaptchaManager;

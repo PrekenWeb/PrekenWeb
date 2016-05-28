@@ -4,13 +4,13 @@ using PrekenWeb.Data.Services;
 using PrekenWeb.Data.ViewModels;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Controllers;
 using System.Linq;
 using System.Web.Mvc;
+using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
-    public class BladwijzerController : ApplicationController
+    public class BladwijzerController : Controller
     {
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
@@ -29,7 +29,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ActionResult> DoorMijBeluisterd()
         { 
             var resultaten = _gebruikerRepository
-                .GetBeluisterdePreken(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalId)
+                .GetBeluisterdePreken(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalInfoHelper.FromRouteData(RouteData).Id)
                 .Select(p => new ZoekresultaatItem
                 {
                     Preek = p.Preek,
@@ -50,7 +50,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public async Task<ActionResult> MetBladwijzer()
         {
             var resultaten =  _gebruikerRepository
-                .GetPrekenMetBladwijzer(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalId)
+                .GetPrekenMetBladwijzer(await _huidigeGebruiker.GetId(_prekenWebUserManager, User), TaalInfoHelper.FromRouteData(RouteData).Id)
                 .Select(p => new ZoekresultaatItem
                 {
                     Preek = p.Preek,

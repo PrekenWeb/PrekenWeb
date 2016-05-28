@@ -1,5 +1,4 @@
 ﻿using Xamarin.Forms;
-using System.Diagnostics;
 using App.Shared.Db;
 
 namespace App.Shared

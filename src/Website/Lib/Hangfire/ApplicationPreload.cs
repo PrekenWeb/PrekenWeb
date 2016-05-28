@@ -8,14 +8,14 @@ namespace Prekenweb.Website.Lib.Hangfire
         public void Preload(string[] parameters)
         {
             // catch all, if exception occurres here, application pool crashes...
-            try
-            { 
+            //try
+            //{ 
                 HangfireBootstrapper.Instance.Start();
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+            //{
 
-            }
+            //}
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using PrekenWeb.Data.Tables;
-using Prekenweb.Models;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {
