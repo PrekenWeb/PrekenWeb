@@ -23,7 +23,6 @@ using System.Web;
 using System.Web.Mvc;
 using VikingErik.Mvc.ResumingActionResults;
 using ContentDisposition = System.Net.Mime.ContentDisposition;
-using System.Configuration;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
@@ -192,12 +191,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 }
             }
             if (inline.Value)
-            {  
-                return new ResumingFilePathResult(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam), preek.GetContentType());
+            {
+                return new ResumingFilePathResult(Server.MapPath("~/Content/Preken/" + preek.Bestandsnaam), preek.GetContentType());
             }
 
             Response.AppendHeader("Content-Disposition", new ContentDisposition { FileName = preek.Bestandsnaam, Inline = false }.ToString());
-            return File(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam), preek.GetContentType());
+            return File("~/Content/Preken/" + preek.Bestandsnaam, preek.GetContentType());
 
         }
 
