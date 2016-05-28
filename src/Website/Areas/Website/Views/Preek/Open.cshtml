@@ -500,7 +500,8 @@
                             $(".jp-gui").addClass("jp-no-volume");
                         }
                         $(this).jPlayer("setMedia", {
-                            mp3: "@Url.Content(string.Format("~/Content/preken/{0}", Model.Preek.Bestandsnaam))"
+                            mp3: "@Url.Action("Download", new { id = Model.Preek.Id, inline = true })"
+                            //mp3: "@Url.Content(string.Format("~/Content/preken/{0}", Model.Preek.Bestandsnaam))"
                         });
                     },
                     timeupdate: function (event) {
