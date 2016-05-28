@@ -74,9 +74,13 @@ namespace Prekenweb.Website
 
                 AchtergrondTaken.RegistreerTaken();
             }
-            catch (SqlException)
+            catch (InvalidOperationException ex)
             {
-                // probably wrong db-connection or non-existing db, let DbContext handle this
+                throw new Exception("Need to register application for autostart, for more information visit: http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html#enabling-service-auto-start", ex);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Problem connecting to HangFire database", ex);
             }
         }
 

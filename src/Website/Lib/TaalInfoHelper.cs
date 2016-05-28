@@ -17,8 +17,8 @@ namespace Prekenweb.Website.Lib
         {
             Talen = new Dictionary<string, WebsiteTaal>
             {
-                ["nl"] = new WebsiteTaal("prekenweb.nl", "nl", 1),
-                ["en"] = new WebsiteTaal("sermonweb.org", "en", 2)
+                ["nl"] = new WebsiteTaal(new[] { "prekenweb.nl", "localhost" }, "nl", 1),
+                ["en"] = new WebsiteTaal(new[] { "sermonweb.org", "localhost" }, "en", 2)
             };
         }
 
@@ -31,14 +31,14 @@ namespace Prekenweb.Website.Lib
 
             if (string.IsNullOrWhiteSpace(routeData?.Values["culture"]?.ToString()) && hostName != null)
             {
-                var taalInfoByHostname = Talen.Any(x => hostName.Contains(x.Value.Hostname));
-                if (taalInfoByHostname) return Talen.First(x => hostName.Contains(x.Value.Hostname)).Value;
+                var taalInfoByHostname = Talen.Any(x => x.Value.Hostnames.Any(y => hostName.Contains(y.ToLower())));
+                if (taalInfoByHostname) return Talen.First(x => x.Value.Hostnames.Any(y => hostName.Contains(y.ToLower()))).Value;
             }
 
             var cultureRouteValue = (string)routeData?.Values["culture"] ?? _defaultCulture;
 
             var taalInfo = Talen[cultureRouteValue.ToLower()];
-            if (taalInfo == null && hostName != null) taalInfo = Talen.First(x => hostName.Contains(x.Value.Hostname)).Value;
+            if (taalInfo == null && hostName != null) taalInfo = Talen.First(x => x.Value.Hostnames.Any(y => hostName.Contains(y.ToLower()))).Value;
 
             return taalInfo;
         }
