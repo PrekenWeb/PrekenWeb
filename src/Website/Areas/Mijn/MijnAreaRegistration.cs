@@ -14,6 +14,8 @@ namespace Prekenweb.Website.Areas.Mijn
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
             context.MapRoute(
                 "Mijn_default",
                 "{culture}/Mijn/{controller}/{action}/{id}",

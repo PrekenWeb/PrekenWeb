@@ -16,6 +16,7 @@ namespace Prekenweb.Website.Areas.Website
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             context.MapRoute(
                 name: "iTunesRouting",
                 url: "{culture}/iTunes.xml",

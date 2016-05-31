@@ -37,6 +37,9 @@ namespace Prekenweb.Website.Lib
 
             var cultureRouteValue = (string)routeData?.Values["culture"] ?? _defaultCulture;
 
+
+            if (!Talen.ContainsKey(cultureRouteValue.ToLower())) cultureRouteValue = _defaultCulture;
+
             var taalInfo = Talen[cultureRouteValue.ToLower()];
             if (taalInfo == null && hostName != null) taalInfo = Talen.First(x => x.Value.Hostnames.Any(y => hostName.Contains(y.ToLower()))).Value;
 
