@@ -184,7 +184,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             }
             if (inline.Value)
             {
-                return new ResumingFilePathResult(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam), preek.GetContentType());
+                return new ResumingFilePathResult(Server.MapPath(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam)), preek.GetContentType());
             }
 
             Response.AppendHeader("Content-Disposition", new ContentDisposition { FileName = preek.Bestandsnaam, Inline = false }.ToString());
