@@ -67,7 +67,7 @@ namespace Prekenweb.Website
 
             try
             {
-                GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
+                //GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
 
                 app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
