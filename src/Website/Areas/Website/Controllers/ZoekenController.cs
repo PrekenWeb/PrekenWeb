@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
@@ -91,7 +92,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             // Tekst velden vullen als er een ID mee komt
             RouteValueDictionary redirectRouteValues;
             viewModel.VulTekstVeldenOpBasisVanIDs(_context, out redirectRouteValues);
-            if (redirectRouteValues != null) Response.RedirectToRoutePermanent("MultiCultiRouteIncorrectDomain", redirectRouteValues);
+            if (redirectRouteValues != null) throw new Exception("Een van de opgevraagde gegevens hoort niet bij deze taal!");
 
             // ViewModel values kopieren naar instantie van ZoekOpdracht 
             Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
