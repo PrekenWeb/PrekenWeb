@@ -27,6 +27,8 @@ using TweetSharp;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
+    using BotDetect.Web.Mvc;
+
     public class GebruikerController : Controller
     {
         private readonly IGebruikerRepository _gebruikerRepository;
@@ -113,12 +115,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             });
         }
 
-        [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
         public async Task<ActionResult> Registreer(RegistreerViewModel viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id);
 
-            if (await _prekenWebUserManager.FindByEmailAsync(viewModel.Email) != null)
+            if (!string.IsNullOrEmpty(viewModel.Email) && await _prekenWebUserManager.FindByEmailAsync(viewModel.Email) != null)
                 ModelState.AddModelError("Email", string.Format(Resources.Resources.EmailNietBeschikbaar, Url.Action("WachtwoordVergeten", new { gebruikersnaam = viewModel.Email })));
 
             if(!string.IsNullOrEmpty(viewModel.Gebruikersnaam) &&

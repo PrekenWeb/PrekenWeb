@@ -17,6 +17,10 @@ namespace Prekenweb.Website.Areas.Website
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            // BotDetect requests must not be routed
+            context.Routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+
             context.MapRoute(
                 name: "iTunesRouting",
                 url: "{culture}/iTunes.xml",

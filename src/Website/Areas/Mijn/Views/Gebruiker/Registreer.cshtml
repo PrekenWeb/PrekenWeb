@@ -1,6 +1,9 @@
 ﻿@using Prekenweb.Website.Lib.HtmlHelpers
+@using BotDetect.Web.Mvc;
+@using CaptchaMvc.HtmlHelpers
+
 @model RegistreerViewModel
-@{     
+@{
     ViewBag.Title = Model.TekstPagina.Kop;
 }
 <h1>@ViewBag.Title</h1>
@@ -35,13 +38,17 @@
         </div>
     </div>
     <p class="clear"></p>
-    @*<div class="ColumnMax">
+    <div class="ColumnMax">
         <div class="field">
-            <div class="label"> </div>
-            <div class="value">@Html.Captcha("Refresh", Resources.CaptchaOvertypen, 5, null)</div>
-            <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
+            <div class="label">&nbsp;</div>
+            @{ MvcCaptcha captcha = new MvcCaptcha("Captcha"); }
+            <div class="value">
+                @Html.Captcha(captcha)<br/>
+                @Html.TextBox("CaptchaCode")
+            </div>
+            <div class="validator">@Html.ValidationMessage("CaptchaCode")</div>
         </div>
-    </div>*@
+    </div>
     <p class="clear"></p>
     <a href="@Url.Action("Index")" class="IconKnop">
         <div class="fa fa-arrow-left"></div>
@@ -53,4 +60,4 @@
     </a>
 
     <p class="clear"></p>
-}
+                }

@@ -79,6 +79,7 @@
 
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
     <!--[if IE 7]>
         <link rel="stylesheet" href="@Url.Content("~/Content/ie7.css")">
     <![endif]-->
@@ -183,7 +184,7 @@
         @if (Request.RequestContext.RouteData.Values["culture"] != null)
         {
             @:prekenweb.taal = '@Request.RequestContext.RouteData.Values["culture"].ToString()';
-               }
+                       }
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-38278370-2']);
         @RenderSection("GoogleAnalyticsScripts", false)
