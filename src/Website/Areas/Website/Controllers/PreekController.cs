@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.IO;
-using CaptchaMvc.Attributes;
+//using CaptchaMvc.Attributes;
 using Microsoft.Reporting.WebForms;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
@@ -380,7 +380,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [HttpPost, CaptchaVerify("Captcha is not valid")]
+        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/]
         public ActionResult GegevensAanvullen(GegevensAanvullen viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id);

@@ -6,6 +6,8 @@ using System.Web.Routing;
 
 namespace Prekenweb.Website
 {
+    using CaptchaMvc.Controllers;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

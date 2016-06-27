@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Data.Entity;
 using System.Web.Http;
-using CaptchaMvc.Attributes;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -114,7 +113,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             });
         }
 
-        [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost, CaptchaVerify("Captcha is not valid")]
+        [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost]
         public async Task<ActionResult> Registreer(RegistreerViewModel viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id);

@@ -53,11 +53,11 @@ else
             <div class="tooltip">@Html.ToolTipFor(m => m.Aanvulling)</div>
             <div class="validator">@Html.ValidationMessageFor(m => m.Aanvulling)</div>
         </div>
-         <div class="field">
+         @*<div class="field">
             <div class="label"> </div>
             <div class="value">@Html.Captcha("Refresh", Resources.CaptchaOvertypen, 4, null)</div>
             <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
-        </div>
+        </div>*@
    </div>
     <p class="clear"></p>
     <a href="#" onclick="document.forms[0].submit(); return false;" class="IconKnop">
