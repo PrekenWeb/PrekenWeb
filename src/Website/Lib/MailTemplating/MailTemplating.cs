@@ -6,28 +6,21 @@ using PrekenWeb.Security;
 namespace Prekenweb.Website.Lib.MailTemplating
 {
     public class MailTemplating
-    {
-        private static MailTemplating _mailTemplating;
+    { 
         private IGebruikerRepository _gebruikerRepository;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
 
-        private MailTemplating(IGebruikerRepository gebruikerRepository, IPrekenWebUserManager prekenWebUserManager)
+        public  MailTemplating(IGebruikerRepository gebruikerRepository, IPrekenWebUserManager prekenWebUserManager)
         {
             _gebruikerRepository = gebruikerRepository;
             _prekenWebUserManager = prekenWebUserManager;
-        }
-
-        public static MailTemplating GetMailTemplating(IGebruikerRepository gebruikerRepository, IPrekenWebUserManager prekenWebUserManager)
-        {
-            if (_mailTemplating == null) _mailTemplating = new MailTemplating(gebruikerRepository, prekenWebUserManager);
-            return _mailTemplating;
-        }
+        } 
 
         public async Task<string> GetWachtwoordVergetenMailBody(int gebruikerId, string onderwerp, string callbackUrl)
         {
             var gebruiker = await _prekenWebUserManager.FindByIdAsync(gebruikerId);
-
-            StringBuilder sb = new StringBuilder();
+            
+            var sb = new StringBuilder();
             sb.Append(getHeader(onderwerp));
             sb.AppendFormat("<p>Beste {0}</p>", gebruiker.Naam);
             sb.AppendFormat("<p>Via PrekenWeb.nl is een nieuw wachtwoord aangevraagd voor dit email adres</p>");

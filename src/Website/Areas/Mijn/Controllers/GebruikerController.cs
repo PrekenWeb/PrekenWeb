@@ -459,7 +459,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var passwordResetToken = await _prekenWebUserManager.GeneratePasswordResetTokenAsync(gebruiker.Id);
             var callbackUrl = Url.Action("ResetWachtwoord", "Gebruiker", new { userId = gebruiker.Id, code = passwordResetToken }, Request.Url.Scheme);
 
-            var mailTemplating = MailTemplating.GetMailTemplating(_gebruikerRepository, _prekenWebUserManager);
+            var mailTemplating = new MailTemplating(_gebruikerRepository, _prekenWebUserManager);
             var mailbody = await mailTemplating.GetWachtwoordVergetenMailBody(gebruiker.Id, Resources.Resources.WachtwoordVergetenEmailOnderwerp, callbackUrl);
             await _prekenWebUserManager.SendEmailAsync(gebruiker.Id, Resources.Resources.WachtwoordVergetenEmailOnderwerp, mailbody);
             return RedirectToAction("WachtwoordVergetenBevestiging");
