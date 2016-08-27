@@ -68,7 +68,7 @@ namespace Prekenweb.Website
             try
             {
                 //GlobalConfiguration.Configuration.UseSqlServerStorage("hangfire-sqlserver");
-
+                HangfireBootstrapper.Instance.Start(true); // make sure it is started
                 app.UseHangfireDashboard("/hangfire", new DashboardOptions
                 {
                     AuthorizationFilters = new IAuthorizationFilter[] { new LocalRequestsOnlyAuthorizationFilter() }

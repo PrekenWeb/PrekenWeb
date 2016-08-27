@@ -21,7 +21,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 
         private BackgroundJobServer _backgroundJobServer;
 
-        public void Start()
+        public void Start(bool throwOnException)
         {
             lock (_lockObject)
             {
@@ -37,6 +37,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                 {
                     // probably wrong db-connection or non-existing db, let DbContext handle this
                     _started = false;
+                    if (throwOnException) throw;
                     return;
                 }
 

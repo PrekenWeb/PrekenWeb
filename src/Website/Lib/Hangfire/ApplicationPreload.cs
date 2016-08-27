@@ -7,15 +7,7 @@ namespace Prekenweb.Website.Lib.Hangfire
     {
         public void Preload(string[] parameters)
         {
-            // catch all, if exception occurres here, application pool crashes...
-            //try
-            //{ 
-                HangfireBootstrapper.Instance.Start();
-            //}
-            //catch (Exception)
-            //{
-
-            //}
+            HangfireBootstrapper.Instance.Start(false); // do not throw exceptions here, if exception occurres here, application pool crashes...
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Prekenweb.Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            HangfireBootstrapper.Instance.Start();
+            HangfireBootstrapper.Instance.Start(true);
 
         }
 
