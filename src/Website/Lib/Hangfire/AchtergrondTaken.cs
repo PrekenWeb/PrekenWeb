@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Web.Hosting;
@@ -16,7 +17,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 {
     public class AchtergrondTaken
     {
-        private readonly  ILog _logger =  LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void RegistreerTaken()
         {
@@ -27,11 +28,11 @@ namespace Prekenweb.Website.Lib.Hangfire
         public void AnalyseerAudioTaak(int id)
         {
             if (bool.Parse(ConfigurationManager.AppSettings["TestEnvironement"])) return;
-            
+
             using (var context = new PrekenwebContext())
-            { 
+            {
                 var preek = context.Preeks.Single(x => x.Id == id);
-                
+
                 var filename = HostingEnvironment.MapPath(Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam));
                 if (!File.Exists(filename) || Path.GetExtension(filename) != ".mp3")
                 {
@@ -42,7 +43,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                 using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
                 {
                     preek.Duur = fr.TotalTime;
-                    preek.Bestandsgrootte = (int)new FileInfo(filename).Length; 
+                    preek.Bestandsgrootte = (int)new FileInfo(filename).Length;
                     context.SaveChanges();
                 }
             }
@@ -62,10 +63,8 @@ namespace Prekenweb.Website.Lib.Hangfire
 
                 try
                 {
-                    using (var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SMTPServer"]))
+                    using (var smtpClient = SmtpClientProvider.GetSmtpClient())
                     {
-                        smtpClient.UseDefaultCredentials = true;
-
                         var message = new MailMessage
                         {
                             From = new MailAddress("info@prekenweb.nl", "PrekenWeb"),
@@ -110,7 +109,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                 if (!inboxItems.Any()) return;
 
                 foreach (var ontvanger in inboxItems)
-                { 
+                {
                     var sb = new StringBuilder();
 
                     sb.Append("<table width=500 style='width:500px;'><tr><td width=500 style='width:500px; text-align:center;'>");
@@ -145,10 +144,8 @@ namespace Prekenweb.Website.Lib.Hangfire
                     sb.Append("</td></tr></table>");
 
 
-                    using (var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SMTPServer"]))
+                    using (var smtpClient = SmtpClientProvider.GetSmtpClient())
                     {
-                        smtpClient.UseDefaultCredentials = true;
-
                         var message = new MailMessage
                         {
                             From = new MailAddress("info@prekenweb.nl", "PrekenWeb"),
@@ -158,9 +155,25 @@ namespace Prekenweb.Website.Lib.Hangfire
                         };
                         message.To.Add(new MailAddress(ontvanger.First().AanEmail, ontvanger.First().AanNaam));
                         smtpClient.Send(message);
-                    } 
+                    }
                 }
             }
+
+
+        }
+    }
+    public static class SmtpClientProvider
+    {
+        public static SmtpClient GetSmtpClient()
+        {
+            var host = ConfigurationManager.AppSettings["SMTPServer.Host"];
+            var port = int.Parse(ConfigurationManager.AppSettings["SMTPServer.Port"]);
+            var userName = ConfigurationManager.AppSettings["SMTPServer.Username"];
+            var password = ConfigurationManager.AppSettings["SMTPServer.Password"];
+            var smtpClient = new SmtpClient(host, port);
+            smtpClient.EnableSsl = port != 25;
+            smtpClient.Credentials = new NetworkCredential(userName, password);
+            return smtpClient;
         }
     }
 }
