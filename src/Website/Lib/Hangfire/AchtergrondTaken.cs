@@ -63,7 +63,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 
                 try
                 {
-                    using (var smtpClient = SmtpClientProvider.GetSmtpClient())
+                    using (var smtpClient = GetSmtpClient())
                     {
                         var message = new MailMessage
                         {
@@ -144,7 +144,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                     sb.Append("</td></tr></table>");
 
 
-                    using (var smtpClient = SmtpClientProvider.GetSmtpClient())
+                    using (var smtpClient = GetSmtpClient())
                     {
                         var message = new MailMessage
                         {
@@ -161,10 +161,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 
 
         }
-    }
-    public static class SmtpClientProvider
-    {
-        public static SmtpClient GetSmtpClient()
+        public   SmtpClient GetSmtpClient()
         {
             var host = ConfigurationManager.AppSettings["SMTPServer.Host"];
             var port = int.Parse(ConfigurationManager.AppSettings["SMTPServer.Port"]);
@@ -175,5 +172,5 @@ namespace Prekenweb.Website.Lib.Hangfire
             smtpClient.Credentials = new NetworkCredential(userName, password);
             return smtpClient;
         }
-    }
+    } 
 }

@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -11,9 +12,8 @@ namespace PrekenWeb.Security
         {
             var smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
 
-            using (SmtpClient smtpClient = new SmtpClient(smtpServer))
-            {
-                smtpClient.UseDefaultCredentials = true;
+            using (SmtpClient smtpClient = GetSmtpClient())
+            { 
 
                 MailMessage mailMessage = new MailMessage()
                 {
@@ -26,6 +26,18 @@ namespace PrekenWeb.Security
                 //message.To.Add(new MailAddress(opvolging.Inbox.VanEmail, opvolging.Inbox.VanNaam));
                 await smtpClient.SendMailAsync(mailMessage);
             } 
+        }
+
+        public SmtpClient GetSmtpClient()
+        {
+            var host = ConfigurationManager.AppSettings["SMTPServer.Host"];
+            var port = int.Parse(ConfigurationManager.AppSettings["SMTPServer.Port"]);
+            var userName = ConfigurationManager.AppSettings["SMTPServer.Username"];
+            var password = ConfigurationManager.AppSettings["SMTPServer.Password"];
+            var smtpClient = new SmtpClient(host, port);
+            smtpClient.EnableSsl = port != 25;
+            smtpClient.Credentials = new NetworkCredential(userName, password);
+            return smtpClient;
         }
     }
 }
