@@ -1,4 +1,6 @@
 ﻿@using Prekenweb.Website.Lib.HtmlHelpers
+@using BotDetect.Web.Mvc;
+
 @model Prekenweb.Website.Areas.Website.Models.GegevensAanvullen
 @{ 
     ViewBag.Title = Resources.GegevensAanvullen;
@@ -54,9 +56,13 @@ else
             <div class="validator">@Html.ValidationMessageFor(m => m.Aanvulling)</div>
         </div>
          <div class="field">
-            <div class="label"> </div>
-            <div class="value">@Html.Captcha("Refresh", Resources.CaptchaOvertypen, 4, null)</div>
-            <div class="validator">@Html.ValidationMessage("CaptchaInputText")</div>
+             <div class="label">&nbsp;</div>
+             @{ MvcCaptcha captcha = new MvcCaptcha("Captcha"); }
+             <div class="value">
+                 @Html.Captcha(captcha)<br />
+                 @Html.TextBox("CaptchaCode")
+             </div>
+             <div class="validator">@Html.ValidationMessage("CaptchaCode")</div>
         </div>
    </div>
     <p class="clear"></p>

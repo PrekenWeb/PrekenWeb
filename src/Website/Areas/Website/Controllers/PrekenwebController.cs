@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using CaptchaMvc.Attributes;
+//using CaptchaMvc.Attributes;
 using PrekenWeb.Data;
 using PrekenWeb.Data.Identity;
 using PrekenWeb.Data.Repositories;
@@ -15,6 +15,8 @@ using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
+    using BotDetect.Web.Mvc;
+
     public class PrekenwebController : Controller
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
@@ -89,7 +91,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [HttpPost, CaptchaVerify("Captcha is not valid")]
+        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
         public ActionResult Contact(Contact viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Contact", TaalInfoHelper.FromRouteData(RouteData).Id);
@@ -122,7 +124,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [HttpPost, CaptchaVerify("Captcha is not valid")]
+        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
         public ActionResult PreekToevoegen(PreekToevoegen viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("preek-toevoegen", TaalInfoHelper.FromRouteData(RouteData).Id);

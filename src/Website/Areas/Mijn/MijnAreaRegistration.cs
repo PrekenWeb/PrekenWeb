@@ -16,6 +16,9 @@ namespace Prekenweb.Website.Areas.Mijn
         {
             context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // BotDetect requests must not be routed
+            context.Routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+
             context.MapRoute(
                 "Mijn_default",
                 "{culture}/Mijn/{controller}/{action}/{id}",
