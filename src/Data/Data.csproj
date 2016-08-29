@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -99,6 +100,7 @@
     <Compile Include="Services\IHomeService.cs" />
     <Compile Include="Services\Zoekresultaat.cs" />
     <Compile Include="Services\ZoekService.cs" />
+    <Compile Include="Smtp\SmtpHelper.cs" />
     <Compile Include="Tables\Afbeelding.cs" />
     <Compile Include="Tables\AfbeeldingConfiguration.cs" />
     <Compile Include="Tables\Boek.cs" />

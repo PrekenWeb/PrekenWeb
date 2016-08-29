@@ -12,6 +12,7 @@ using log4net;
 using NAudio.FileFormats.Mp3;
 using NAudio.Wave;
 using PrekenWeb.Data;
+using PrekenWeb.Data.Smtp;
 
 namespace Prekenweb.Website.Lib.Hangfire
 {
@@ -63,7 +64,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 
                 try
                 {
-                    using (var smtpClient = GetSmtpClient())
+                    using (var smtpClient = SmtpHelper.GetSmtpClient())
                     {
                         var message = new MailMessage
                         {
@@ -144,7 +145,7 @@ namespace Prekenweb.Website.Lib.Hangfire
                     sb.Append("</td></tr></table>");
 
 
-                    using (var smtpClient = GetSmtpClient())
+                    using (var smtpClient = SmtpHelper.GetSmtpClient())
                     {
                         var message = new MailMessage
                         {
@@ -160,17 +161,6 @@ namespace Prekenweb.Website.Lib.Hangfire
             }
 
 
-        }
-        public   SmtpClient GetSmtpClient()
-        {
-            var host = ConfigurationManager.AppSettings["SMTPServer.Host"];
-            var port = int.Parse(ConfigurationManager.AppSettings["SMTPServer.Port"]);
-            var userName = ConfigurationManager.AppSettings["SMTPServer.Username"];
-            var password = ConfigurationManager.AppSettings["SMTPServer.Password"];
-            var smtpClient = new SmtpClient(host, port);
-            smtpClient.EnableSsl = port != 25;
-            smtpClient.Credentials = new NetworkCredential(userName, password);
-            return smtpClient;
-        }
+        }v
     } 
 }

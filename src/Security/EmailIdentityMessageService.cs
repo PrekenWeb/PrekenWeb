@@ -1,8 +1,10 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using PrekenWeb.Data.Smtp;
 
 namespace PrekenWeb.Security
 { 
@@ -12,7 +14,7 @@ namespace PrekenWeb.Security
         {
             var smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
 
-            using (SmtpClient smtpClient = GetSmtpClient())
+            using (SmtpClient smtpClient = SmtpHelper.GetSmtpClient())
             { 
 
                 MailMessage mailMessage = new MailMessage()
@@ -24,20 +26,19 @@ namespace PrekenWeb.Security
                 };
                 mailMessage.To.Add(message.Destination);
                 //message.To.Add(new MailAddress(opvolging.Inbox.VanEmail, opvolging.Inbox.VanNaam));
-                await smtpClient.SendMailAsync(mailMessage);
+                try
+                {
+                    await smtpClient.SendMailAsync(mailMessage);
+                }
+                catch (SmtpException ex)
+                {
+                    Debug.Write(ex.Message);
+                    throw;
+                }
             } 
         }
 
-        public SmtpClient GetSmtpClient()
-        {
-            var host = ConfigurationManager.AppSettings["SMTPServer.Host"];
-            var port = int.Parse(ConfigurationManager.AppSettings["SMTPServer.Port"]);
-            var userName = ConfigurationManager.AppSettings["SMTPServer.Username"];
-            var password = ConfigurationManager.AppSettings["SMTPServer.Password"];
-            var smtpClient = new SmtpClient(host, port);
-            smtpClient.EnableSsl = port != 25;
-            smtpClient.Credentials = new NetworkCredential(userName, password);
-            return smtpClient;
-        }
+       
     }
+
 }
