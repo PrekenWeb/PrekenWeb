@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Web.Hosting;
 using Hangfire;
@@ -65,12 +66,18 @@ namespace Prekenweb.Website.Lib.Hangfire
                     _logger.Warn("Verwerking preek overgeslagen: geen (MP3) bestand gevonden");
                     return;
                 }
-
-                using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
+                try
                 {
-                    preek.Duur = fr.TotalTime;
-                    preek.Bestandsgrootte = (int)new FileInfo(filename).Length;
-                    context.SaveChanges();
+                    using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
+                    {
+                        preek.Duur = fr.TotalTime;
+                        preek.Bestandsgrootte = (int) new FileInfo(filename).Length;
+                        context.SaveChanges();
+                    }
+                }
+                catch (COMException ex)
+                {
+                    throw new Exception("Problem with processing audio of preek, probably required to configure codec on server or install 'desktop experience'? http://mark-dot-net.blogspot.nl/2014/04/nodriver-calling-acmformatsuggest.html", ex) ;
                 }
             }
         }
