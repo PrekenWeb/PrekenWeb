@@ -4,8 +4,10 @@ using Prekenweb.Website.Areas.Mijn.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Hangfire;
 using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;
+using Prekenweb.Website.Lib.Hangfire;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -44,6 +46,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         public ActionResult Bestandsbeheer()
         {
             return View();
+        }
+
+        public ActionResult HerstelWerkzaamheden()
+        {
+            BackgroundJob.Enqueue<AchtergrondTaken>(x => x.HerstelWerkzaamheden());
+            return RedirectToAction("Index");
         }
 
     }

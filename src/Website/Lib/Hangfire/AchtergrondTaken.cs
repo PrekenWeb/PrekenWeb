@@ -25,6 +25,31 @@ namespace Prekenweb.Website.Lib.Hangfire
             RecurringJob.AddOrUpdate<AchtergrondTaken>("InboxSamenvattingTaak", x => x.InboxSamenvattingTaak(), Cron.Daily(1, 0));
         }
 
+        [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
+        public void HerstelWerkzaamheden()
+        {
+            using (var context = new PrekenwebContext())
+            {
+                var prekenZonderTijd = context.Preeks.Where(x => !x.Duur.HasValue).Select(x => x.Id).ToArray();
+                foreach (var id in prekenZonderTijd)
+                {
+                    BackgroundJob.Enqueue<AchtergrondTaken>(x => x.AnalyseerAudioTaak(id));
+                }
+
+                var inboxOpvolgingIds = context
+                    .InboxOpvolgings
+                    .Where(x => x.Verstuurd.HasValue && x.VerstuurAlsMail && x.GebruikerId.HasValue)
+                    .Select(x => x.Id)
+                    .Distinct()
+                    .ToArray();
+
+                foreach (var id in inboxOpvolgingIds)
+                {
+                    BackgroundJob.Enqueue<AchtergrondTaken>(x => x.InboxOpvolgingTaak(id));
+                }
+            }
+        }
+
         [AutomaticRetry(Attempts = 3, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
         public void AnalyseerAudioTaak(int id)
         {
