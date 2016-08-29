@@ -159,8 +159,6 @@ namespace Prekenweb.Website.Lib.Hangfire
                     }
                 }
             }
-
-
-        }v
-    } 
+        }
+    }
 }
