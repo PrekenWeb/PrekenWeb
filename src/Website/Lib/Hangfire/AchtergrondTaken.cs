@@ -38,7 +38,7 @@ namespace Prekenweb.Website.Lib.Hangfire
 
                 var inboxOpvolgingIds = context
                     .InboxOpvolgings
-                    .Where(x => x.Verstuurd.HasValue && x.VerstuurAlsMail && x.GebruikerId.HasValue)
+                    .Where(x => !x.Verstuurd.HasValue && x.VerstuurAlsMail && !x.GebruikerId.HasValue)
                     .Select(x => x.Id)
                     .Distinct()
                     .ToArray();
