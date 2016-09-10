@@ -12,7 +12,7 @@ namespace App.Shared.Api
 		private readonly string _rootUri;
 		private readonly HttpClient _httpClient;
 
-		public PrekenwebApiWrapper() : this ("http://api.test.prekenweb.nl/api/")
+		public PrekenwebApiWrapper() : this ("http://test.api.prekenweb.nl/api/")
 		{
 		}
 
