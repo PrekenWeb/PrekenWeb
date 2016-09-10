@@ -20,7 +20,7 @@ namespace WebAPI
 
         public void Configuration(IAppBuilder app)
         {
-            var config = new HttpConfiguration();
+            var config = GlobalConfiguration.Configuration ?? new HttpConfiguration();
 
             app.CreatePerOwinContext(PrekenwebContext.Create);
             app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
