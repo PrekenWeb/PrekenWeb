@@ -52,6 +52,7 @@
     <Compile Include="Db\PreekInLocalDb.cs" />
     <Compile Include="Db\PrekenwebAppDatabase.cs" />
     <Compile Include="Db\ZoekresultaatPreekInLocalDb.cs" />
+    <Compile Include="IAudio.cs" />
     <Compile Include="Pages\NieuwePrekenPage.cs" />
     <Compile Include="Pages\OfflinePrekenPage.cs" />
     <Compile Include="Pages\PreekPage.cs" />

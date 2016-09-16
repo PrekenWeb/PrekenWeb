@@ -41,5 +41,7 @@
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>NSMainNibFile</key>
 	<string>LaunchScreen</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>
