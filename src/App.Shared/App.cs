@@ -7,7 +7,7 @@ namespace App.Shared
     {
 
         static PrekenwebAppDatabase database;
-         
+
 
         public static PrekenwebAppDatabase Database
         {
@@ -22,8 +22,8 @@ namespace App.Shared
         }
 
         public App()
-        { 
-			MainPage = new RootPage ();
-        } 
+        {
+            MainPage = new NavigationPage(new RootPage());
+        }
     }
 }

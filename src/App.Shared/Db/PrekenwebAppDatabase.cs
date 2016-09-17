@@ -13,7 +13,8 @@ namespace App.Shared.Db
 
         public PrekenwebAppDatabase()
         {
-            _database = DependencyService.Get<ISqLite>().GetConnection();
+            var sqlLite = DependencyService.Get<ISqLite>();
+            _database = sqlLite.GetConnection();
             _database.CreateTable<NieuwePreekInLocalDb>();
         }
 

@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 namespace App.Droid
@@ -10,9 +11,11 @@ namespace App.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            //DependencyService.Register<SqLiteDroid>();
+
             base.OnCreate(bundle);
 
-            Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
 
             LoadApplication(new Shared.App());
         }

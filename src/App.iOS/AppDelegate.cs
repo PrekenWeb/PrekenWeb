@@ -13,7 +13,7 @@ namespace App.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
-            LoadApplication(new App.Shared.App());
+            LoadApplication(new Shared.App());
             return base.FinishedLaunching(app, options);
         }
     }

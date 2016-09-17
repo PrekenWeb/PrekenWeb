@@ -29,7 +29,8 @@ namespace App.Shared.Services
             var nieuwePreken = await _prekenwebApiWrapper.NieuwePreken();
 
             AutoMapper.Mapper.CreateMap<Preek, NieuwePreekInLocalDb>()
-                .ForMember(x => x.Titel, y => y.MapFrom(z => z.PreekTitel));
+                .ForMember(x => x.Titel, y => y.MapFrom(z => z.PreekTitel))
+                .ForMember(x => x.Filename, y => y.MapFrom(z => z.Bestandsnaam));
 
             var nieuwePrekenInDb = AutoMapper.Mapper.Map<IEnumerable<NieuwePreekInLocalDb>>(nieuwePreken);
             _prekenwebAppDatabase.UpdateNieuwePreken(nieuwePrekenInDb);

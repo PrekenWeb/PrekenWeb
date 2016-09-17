@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Net.Http;
+using App.Shared.Db;
 using Prekenweb.Models.Dtos;
 using Xamarin.Forms;
 
@@ -10,21 +14,14 @@ namespace App.Shared.Pages
             this.SetBinding(ContentPage.TitleProperty, "PreekTitel");
 
             NavigationPage.SetHasNavigationBar(this, true);
-            var nameLabel = new Label {Text = "PreekTitel" };
+            var nameLabel = new Label { Text = "PreekTitel" };
 
             var saveButton = new Button { Text = "Save" };
-            saveButton.Clicked += (sender, e) => {
-                var todoItem = (Preek)BindingContext;
-                                                     asd();
-                                                     //var webClient = new WebClient();
-
-                                                     //webClient.DownloadStringCompleted += (s, e) => {
-                                                     //    var text = e.Result; // get the downloaded text
-                                                     //    string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                                                     //    string localFilename = "downloaded.txt";
-                                                     //    string localPath = Path.Combine(documentsPath, localFilename);
-                                                     //    File.WriteAllText(localpath, text); // writes to local storage
-                                                     //};
+            saveButton.Clicked += async (sender, e) =>
+            {
+                var preek = (PreekInLocalDb)BindingContext;
+                var localFilename = await DependencyService.Get<IPreekStorage>().DownloadPreek(preek.Id, preek.Filename).ConfigureAwait(false);
+                DependencyService.Get<IAudio>().PlayMp3File(localFilename);
             };
 
             Content = new StackLayout
@@ -37,11 +34,6 @@ namespace App.Shared.Pages
                     saveButton
                 }
             };
-        }
-
-        public void asd()
-        {
-            DependencyService.Get<IAudio>().PlayMp3File("test.mp3");
         }
     }
 }

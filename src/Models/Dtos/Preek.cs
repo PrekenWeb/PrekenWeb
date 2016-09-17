@@ -17,13 +17,13 @@ namespace Prekenweb.Models.Dtos
         public DateTime? DatumAangemaakt { get; set; }
 
         public DateTime? DatumBijgewerkt { get; set; }
-         
-        //public string Bestandsnaam { get; set; }
-         
+
+        public string Bestandsnaam { get; set; }
+
         //public int AantalKeerGedownload { get; set; }
 
         //public int? OudId { get; set; }
-         
+
         public int? PredikantId { get; set; }
          
         public int? Hoofdstuk { get; set; }
@@ -95,8 +95,6 @@ namespace Prekenweb.Models.Dtos
         public string SerieOmschrijving { get; set; }
         public string TaalOmschrijving { get; set; }
          
-        public string PreekTitel { get; set; }
-          
-    
+        public string PreekTitel { get; set; } 
     }
 }

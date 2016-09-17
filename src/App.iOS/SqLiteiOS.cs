@@ -12,7 +12,7 @@ namespace App.iOS
     // ReSharper disable once InconsistentNaming
     public class SqLiteiOS : ISqLite
     {
-        public SQLite.SQLiteConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
            var sqliteFilename = "PrekenWebSQLite.db3";
 

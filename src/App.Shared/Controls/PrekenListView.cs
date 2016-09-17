@@ -18,7 +18,7 @@ namespace App.Shared.Controls
 
             ItemSelected += (sender, e) =>
             {
-                var preek = (Preek)e.SelectedItem;
+                var preek = (PreekInLocalDb)e.SelectedItem;
                 var todoPage = new PreekPage();
                 todoPage.BindingContext = preek;
 

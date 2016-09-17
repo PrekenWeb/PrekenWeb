@@ -1,19 +1,23 @@
-﻿using App.Droid;
+﻿using System;
+using System.IO;
+using App.Droid;
 using App.Shared.Db;
 using SQLite;
-using Xamarin.Forms;
 
-[assembly: Dependency(typeof(SqLiteDroid))]
+[assembly: Xamarin.Forms.Dependency(typeof(SqLiteDroid))]
 
 namespace App.Droid
-{ 
+{
     public class SqLiteDroid : ISqLite
     {
-        public  SQLiteConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
-           
+            var sqliteFilename = "PrekenWeb.db3";
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var path = Path.Combine(documentsPath, sqliteFilename);
 
-            return new SQLiteConnection("");
+            var conn = new SQLiteConnection(path); 
+            return conn;
         }
     }
 }
