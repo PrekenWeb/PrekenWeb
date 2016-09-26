@@ -20,10 +20,10 @@ namespace PrekenWeb.Data.Services
             var preken = await _preekRepository.GetAllePreken(taalId);
 
             Mapper.CreateMap<Preek, Prekenweb.Models.Dtos.Preek>()
-                .ForMember(x => x.LezingCategorieNaam, opt => opt.Ignore())
-                .ForMember(x => x.GemeenteNaam, opt => opt.Ignore())
-                .ForMember(x => x.PredikantNaam, opt => opt.Ignore())
-                .ForMember(x => x.PreekTypeNaam, opt => opt.Ignore());
+                .ForMember(x => x.LezingCategorieNaam, opt => opt.Ignore()) //todo
+				.ForMember(x => x.GemeenteNaam, opt => opt.MapFrom(y => y.Gemeente.Omschrijving))
+				.ForMember(x => x.PredikantNaam, opt => opt.MapFrom(y => y.Predikant.VolledigeNaam))
+				.ForMember(x => x.PreekTypeNaam, opt => opt.MapFrom(y => y.PreekType.Omschrijving));
 
             var prekenDtos = Mapper.Map<IEnumerable<Preek>, IEnumerable<Prekenweb.Models.Dtos.Preek>>(preken);
             Mapper.AssertConfigurationIsValid();
