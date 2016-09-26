@@ -2,7 +2,7 @@
 {
     public interface IAudio
     {
-        bool PlayMp3File(string fileName);
-        bool PlayWavFile(string fileName);
+        bool PlayMp3File(string fileName); 
+        void Pause(); 
     }
 }

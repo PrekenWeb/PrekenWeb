@@ -20,7 +20,7 @@ namespace App.Droid
             var file = await dbfolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 
             using (var client = new HttpClient())
-            using (var response = await client.GetAsync($"http://www.prekenweb.nl/nl/Preek/Download/{id}?inline=False", HttpCompletionOption.ResponseHeadersRead))
+            using (var response = await client.GetAsync($"http://test.prekenweb.nl/nl/Preek/Download/{id}?inline=False", HttpCompletionOption.ResponseHeadersRead))
             using (var fileHandler = await file.OpenAsync(PCLStorage.FileAccess.ReadAndWrite))
             {
                 var dataBuffer = await response.Content.ReadAsByteArrayAsync();

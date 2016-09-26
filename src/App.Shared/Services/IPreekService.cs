@@ -8,5 +8,6 @@ namespace App.Shared.Services
     {
         IEnumerable<PreekInLocalDb> GetNieuwePreken();
         Task UpdatePreken();
+        Task SetLocalPreekFilename(int preekId, string localFilename);
     }
 }

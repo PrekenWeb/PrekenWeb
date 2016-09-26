@@ -9,6 +9,8 @@ namespace App.Shared.Db
 
         public string Titel { get; set; } 
 
-        public string Filename { get; set; } 
+        public string Filename { get; set; }
+
+        public string LocalFilePath { get; set; } 
     }
 }

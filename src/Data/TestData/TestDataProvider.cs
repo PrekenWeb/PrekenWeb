@@ -96,6 +96,7 @@ namespace PrekenWeb.Data.TestData
 
             var preek1 = context.Preeks.Add(new Preek
             {
+                Bestandsnaam = "VisserRAM-Matth13v33(dl4)_21746.mp3",
                 Gebruiker_AangemaaktDoor = testgebruiker1,
                 BoekHoofdstuk = boekHoofdstukGenesis,
                 BoekHoofdstukTekst_VersVanId = genesis1V1,
@@ -123,6 +124,7 @@ namespace PrekenWeb.Data.TestData
             });
             var preek2 = context.Preeks.Add(new Preek
             {
+                Bestandsnaam = "JongsteCde-Leespreek-Openb12.4b-5_21745_2016-09-14_09-06-22.pdf",
                 Gebruiker_AangemaaktDoor = testgebruiker2,
                 BoekHoofdstuk = boekHoofdstukLeviticus,
                 BoekHoofdstukTekst_VersVanId = leviticus1V1,
@@ -149,6 +151,7 @@ namespace PrekenWeb.Data.TestData
 
             var preek3 = context.Preeks.Add(new Preek
             {
+                Bestandsnaam = "Brugge, A.A. - Ps 126 (En)_21747.pdf",
                 Gebruiker_AangemaaktDoor = testgebruiker2,
                 BoekHoofdstuk = boekHoofdstukLeviticus,
                 BoekHoofdstukTekst_VersVanId = leviticus1V1,

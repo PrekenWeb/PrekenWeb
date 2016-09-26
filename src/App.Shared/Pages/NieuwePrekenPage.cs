@@ -23,7 +23,7 @@ namespace App.Shared.Pages
                 var items = _preekService.GetNieuwePreken();
                 _listView.RenderItems(items);
                 _listView.IsRefreshing = false;
-            });
+            }, _preekService);
 
             var layout = new StackLayout();
             layout.Children.Add(_listView);

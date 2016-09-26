@@ -140,10 +140,12 @@
   <ItemGroup>
     <Compile Include="AudioService.cs" />
     <Compile Include="AndroidPreekStorage.cs" />
+    <Compile Include="RemoteControlBroadcastReceiver.cs" />
     <Compile Include="SqLiteDroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamingBackgroundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

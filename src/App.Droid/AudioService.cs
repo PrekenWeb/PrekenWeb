@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Media;
+﻿using Android.Content;
 using App.Droid;
 using App.Shared; 
 using Xamarin.Forms; 
@@ -8,27 +7,29 @@ using Xamarin.Forms;
 namespace App.Droid
 {
     public class AudioService : IAudio
-    { 
-
-        private MediaPlayer _mediaPlayer;
-
+    {  
         public bool PlayMp3File(string filename)
-        { 
-                _mediaPlayer = new MediaPlayer();
-                _mediaPlayer.Reset();
-                _mediaPlayer.SetDataSource(filename);
-                _mediaPlayer.Prepare();
-                _mediaPlayer.Start();
-             
+        {
+            var setTrackIntent = new Intent(StreamingBackgroundService.ActionSetTrack);
+            setTrackIntent.PutExtra("filename", filename);
+            Android.App.Application.Context.StartService(setTrackIntent);
+
+            var actionPlayIntent = new Intent(StreamingBackgroundService.ActionPlay);
+            Android.App.Application.Context.StartService(actionPlayIntent);
+
+            //_mediaPlayer = new MediaPlayer();
+            //_mediaPlayer.Reset();
+            //_mediaPlayer.SetDataSource(filename);
+            //_mediaPlayer.Prepare();
+            //_mediaPlayer.Start();
+
             return true;
         }
 
-        public bool PlayWavFile(string fileName)
+        public void Pause()
         {
-            _mediaPlayer = MediaPlayer.Create(Android.App.Application.Context, null);
-            _mediaPlayer.Start();
-
-            return true;
+            var actionPauseIntent = new Intent(StreamingBackgroundService.ActionPause);
+            Android.App.Application.Context.StartService(actionPauseIntent);
         }
     }
 }

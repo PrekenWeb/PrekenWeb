@@ -35,5 +35,13 @@ namespace App.Shared.Services
             var nieuwePrekenInDb = AutoMapper.Mapper.Map<IEnumerable<NieuwePreekInLocalDb>>(nieuwePreken);
             _prekenwebAppDatabase.UpdateNieuwePreken(nieuwePrekenInDb);
         }
+
+        public Task SetLocalPreekFilename(int preekId, string localFilename)
+        {
+            var preek = _prekenwebAppDatabase.GetPreek(preekId);
+            preek.LocalFilePath = localFilename;
+            _prekenwebAppDatabase.SavePreek(preek);
+            return Task.FromResult(true);
+        }
     }
 }
