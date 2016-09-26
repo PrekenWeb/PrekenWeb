@@ -23,7 +23,15 @@ namespace App.Shared
 
         public App()
         {
-            MainPage = new NavigationPage(new RootPage());
+            MainPage = new PrekenwebNavigationPage(new RootPage());
+        }
+    }
+
+    public class PrekenwebNavigationPage : NavigationPage
+    {
+        public PrekenwebNavigationPage(Page root):base(root)
+        {
+            
         }
     }
 }

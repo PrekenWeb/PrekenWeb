@@ -8,10 +8,10 @@ namespace App.Droid
 {
     public class AudioService : IAudio
     {  
-        public bool PlayMp3File(string filename)
+        public void PlayMp3File(PlayablePreekMetadata preek)
         {
             var setTrackIntent = new Intent(StreamingBackgroundService.ActionSetTrack);
-            setTrackIntent.PutExtra("filename", filename);
+            setTrackIntent.PutExtra("filename", preek.LocalFileUrl);
             Android.App.Application.Context.StartService(setTrackIntent);
 
             var actionPlayIntent = new Intent(StreamingBackgroundService.ActionPlay);
@@ -21,9 +21,7 @@ namespace App.Droid
             //_mediaPlayer.Reset();
             //_mediaPlayer.SetDataSource(filename);
             //_mediaPlayer.Prepare();
-            //_mediaPlayer.Start();
-
-            return true;
+            //_mediaPlayer.Start(); 
         }
 
         public void Pause()

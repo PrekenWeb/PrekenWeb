@@ -1,4 +1,6 @@
-﻿using Foundation;
+﻿using App.iOS;
+using App.Shared;
+using Foundation;
 using UIKit;
 
 using Xamarin.Forms;
@@ -13,11 +15,10 @@ namespace App.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
-            LoadApplication(new Shared.App());
+            LoadApplication(new Shared.App()); 
             return base.FinishedLaunching(app, options);
-        }
+        } 
     }
- 
 }
 
 

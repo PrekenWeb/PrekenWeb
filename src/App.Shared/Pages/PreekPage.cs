@@ -34,7 +34,13 @@ namespace App.Shared.Pages
                     //todo message 'download first'
                     return;
                 }
-                DependencyService.Get<IAudio>().PlayMp3File(preek.LocalFilePath);
+                var preekMetadata = new PlayablePreekMetadata
+                {
+                    UniqueId = Convert.ToUInt32(preek.Id),
+                    Title =  $"TestTitle {preek.Id}",
+                    LocalFileUrl = preek.LocalFilePath
+                };
+                DependencyService.Get<IAudio>().PlayMp3File(preekMetadata);
             };
 
             var pauseButton = new Button { Text = "Pause" };
