@@ -9,17 +9,17 @@
     <div class="Inbox">
         <h3>Openstaand</h3>
         @{
-            @GetWebGridHtml(Model.Inbox.Where(i => !i.Afgehandeld))
+            @GetWebGridHtml(Model.Inbox.Where(i => !i.Afgehandeld), "inbox")
         }
     </div>
 
-    <div class="Inbox inbox-done collapsed">
+    <div class="@(Request.QueryString.AllKeys.Any(k => k.StartsWith("inbox-done")) ? "Inbox inbox-done" : "Inbox inbox-done collapsed")">
         <h3>Afgehandeld</h3>
         @{
-            @GetWebGridHtml(Model.Inbox.Where(i => i.Afgehandeld))
+            @GetWebGridHtml(Model.Inbox.Where(i => i.Afgehandeld), "inbox-done")
         }
     </div>
-}
+            }
 
 @section scripts{
     <script type="text/javascript">
@@ -33,9 +33,9 @@
 
 @functions
 {
-    private IHtmlString GetWebGridHtml(IEnumerable<PrekenWeb.Data.Tables.Inbox> inbox)
+    private IHtmlString GetWebGridHtml(IEnumerable<PrekenWeb.Data.Tables.Inbox> inbox, string gridId)
     {
-        var wb = new WebGrid(inbox, new[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving"/*, "Afgehandeld"*/ }, rowsPerPage: 30);
+        var wb = new WebGrid(inbox, new[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving"/*, "Afgehandeld"*/ }, fieldNamePrefix: gridId, rowsPerPage: 30);
         return wb.GetHtml(
         columns:
             wb.Columns(

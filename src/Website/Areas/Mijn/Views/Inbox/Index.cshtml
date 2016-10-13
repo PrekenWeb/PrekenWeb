@@ -6,47 +6,27 @@
     <div class="Inbox">
         <h3>Openstaand</h3>
         @{
-            @GetWebGridHtml(Model.InboxIitems.Where(i => !i.Afgehandeld))
+            @GetWebGridHtml(Model.InboxIitems.Where(i => !i.Afgehandeld), "inbox")
         }
     </div>
 
-    <div class="Inbox inbox-done collapsed">
+    <div class="@(Request.QueryString.AllKeys.Any(k => k.StartsWith("inbox-done")) ? "Inbox inbox-done" : "Inbox inbox-done collapsed")">
         <h3>Afgehandeld</h3>
         @{
-            @GetWebGridHtml(Model.InboxIitems.Where(i => i.Afgehandeld))
+            @GetWebGridHtml(Model.InboxIitems.Where(i => i.Afgehandeld), "inbox-done")
         }
     </div>
-
-    @*@{
-        WebGrid wb = new WebGrid(Model.InboxIitems, new string[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving", "Afgehandeld" }, rowsPerPage: 30);
-        @wb.GetHtml(
-            columns:
-                wb.Columns(
-                    wb.Column("Bewerk", "Datum", format: (item) => { return string.Format("{0:dd-MM}", item.Aangemaakt); }),
-                    wb.Column(columnName: "InboxType.Omschrijving", header: "Soort"),
-                    wb.Column(columnName: "VanNaam", header: "Afzender"),
-                    wb.Column("Omschrijving", "Onderwerp", format: (item) =>
-                    {
-                        return ((string)item.Omschrijving).Length < 30 ? item.Omschrijving : ((string)item.Omschrijving).Substring(0, 30) + "...";
-                    }),
-                    wb.Column("Omschrijving", "Afgehandeld", format: (item) =>
-                    {
-                        return (bool)item.Afgehandeld ? "Ja" : "Nee";
-                    }),
-                    wb.Column("Open", " ", format: (item) => { return Html.ActionLink("Open", "Tonen", "Inbox", new { Id = item.Id }, new { }); })
-                )
-            );
-    }*@
-</div>  
+</div>
 <a href="@Url.Action("Index", "Home", new { Area = "Mijn" })" class="IconKnop">
     <div class="fa fa-arrow-left"></div>
-    Beheer</a>
- <br />
+    Beheer
+</a>
+<br />
 
 @section scripts{
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.inbox-done h3').click(function(e) {
+        $(document).ready(function () {
+            $('.inbox-done h3').click(function (e) {
                 $('.inbox-done').toggleClass('collapsed');
             });
         });
@@ -55,9 +35,9 @@
 
 @functions
 {
-    private IHtmlString GetWebGridHtml(IEnumerable<PrekenWeb.Data.Tables.Inbox> inbox)
+    private IHtmlString GetWebGridHtml(IEnumerable<PrekenWeb.Data.Tables.Inbox> inbox, string gridId)
     {
-        var wb = new WebGrid(inbox, new[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving"/*, "Afgehandeld"*/ }, rowsPerPage: 30);
+        var wb = new WebGrid(inbox, new[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving"/*, "Afgehandeld"*/ }, fieldNamePrefix: gridId, rowsPerPage: 30);
         return wb.GetHtml(
         columns:
             wb.Columns(
