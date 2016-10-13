@@ -71,13 +71,13 @@ namespace Prekenweb.Website.Lib.Hangfire
                     using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
                     {
                         preek.Duur = fr.TotalTime;
-                        preek.Bestandsgrootte = (int) new FileInfo(filename).Length;
+                        preek.Bestandsgrootte = (int)new FileInfo(filename).Length;
                         context.SaveChanges();
                     }
                 }
                 catch (COMException ex)
                 {
-                    throw new Exception("Problem with processing audio of preek, probably required to configure codec on server or install 'desktop experience'? http://mark-dot-net.blogspot.nl/2014/04/nodriver-calling-acmformatsuggest.html", ex) ;
+                    throw new Exception("Problem with processing audio of preek, probably required to configure codec on server or install 'desktop experience'? http://mark-dot-net.blogspot.nl/2014/04/nodriver-calling-acmformatsuggest.html", ex);
                 }
             }
         }
@@ -152,42 +152,49 @@ namespace Prekenweb.Website.Lib.Hangfire
                     foreach (var inbox in ontvanger)
                     {
                         sb.Append("<div style='border:2px solid #1274BA; background-color:#F2F3F8; margin:0 auto; padding:10px; width:500px; font-family:arial; font-size:12px;'>");
-                        sb.AppendFormat("<b>Ontvangen:</b> {0:g}<br/>", inbox.Aangemaakt);
-                        sb.AppendFormat("<b>Van:</b> {0} {1}<br/>", inbox.VanNaam, inbox.VanEmail);
-                        sb.AppendFormat("<b>Reden:</b> {0}<br/>", inbox.InboxType.Omschrijving);
-                        sb.AppendFormat("<b>Onderwerp:</b> {0}<br/><hr style='border:1px solid gray;' />", inbox.Omschrijving);
-                        sb.AppendFormat("{0}", inbox.Inhoud);
+                        sb.Append($"<b>Ontvangen:</b> {inbox.Aangemaakt:g}<br/>");
+                        sb.Append($"<b>Van:</b> {inbox.VanNaam} {inbox.VanEmail}<br/>");
+                        sb.Append($"<b>Reden:</b> {inbox.InboxType.Omschrijving}<br/>");
+                        sb.Append($"<b>Onderwerp:</b> {inbox.Omschrijving}<br/><hr style='border:1px solid gray;' />");
+                        sb.Append($"{inbox.Inhoud}");
                         var i = 1;
                         foreach (var opvolging in inbox.InboxOpvolgings)
                         {
                             sb.Append("<div style='border:1px solid gray; margin:10px; padding:10px;'>");
-                            sb.AppendFormat("<h2 style='font-family:arial; font-size:14px; color:#1274BA;' color='#1274BA'>Opvolging {0}</h2>", i++);
-                            sb.AppendFormat("<b>Aangemaakt:</b> {0:g}<br/>", opvolging.Aangemaakt);
-                            sb.AppendFormat("<b>Als mail versturen?:</b> {0}<br/>", opvolging.VerstuurAlsMail);
-                            sb.AppendFormat("<b>Verstuurd:</b> {0:g}<br/>", opvolging.Verstuurd);
+                            sb.Append($"<h2 style='font-family:arial; font-size:14px; color:#1274BA;' color='#1274BA'>Opvolging {i++}</h2>");
+                            sb.Append($"<b>Aangemaakt:</b> {opvolging.Aangemaakt:g}<br/>");
+                            sb.Append($"<b>Als mail versturen?:</b> {opvolging.VerstuurAlsMail}<br/>");
+                            sb.Append($"<b>Verstuurd:</b> {opvolging.Verstuurd:g}<br/>");
                             if (opvolging.GebruikerId.HasValue)
-                                sb.AppendFormat("<b>Door:</b> {0}<br/>", opvolging.Gebruiker.Naam);
-                            sb.AppendFormat("<b>Aan:</b> {0} {1}<br/>", opvolging.Inbox.VanNaam, opvolging.Inbox.VanEmail);
-                            sb.AppendFormat("<b>Onderwerp:</b> {0}<br/><hr style='border:1px solid gray;' />", opvolging.Onderwerp);
-                            sb.AppendFormat("{0}", opvolging.Tekst);
+                                sb.Append($"<b>Door:</b> {opvolging.Gebruiker.Naam}<br/>");
+                            sb.Append($"<b>Aan:</b> {opvolging.Inbox.VanNaam} {opvolging.Inbox.VanEmail}<br/>");
+                            sb.Append($"<b>Onderwerp:</b> {opvolging.Onderwerp}<br/><hr style='border:1px solid gray;' />");
+                            sb.Append($"{opvolging.Tekst}");
                             sb.Append("</div>");
                         }
                         sb.Append("</div><br/><br/>");
                     }
                     sb.Append("</td></tr></table>");
 
-
-                    using (var smtpClient = SmtpHelper.GetSmtpClient())
+                    try
                     {
-                        var message = new MailMessage
+                        using (var smtpClient = SmtpHelper.GetSmtpClient())
                         {
-                            From = new MailAddress("info@prekenweb.nl", "PrekenWeb"),
-                            Subject = "Samenvatting mailcontact",
-                            IsBodyHtml = true,
-                            Body = sb.ToString()
-                        };
-                        message.To.Add(new MailAddress(ontvanger.First().AanEmail, ontvanger.First().AanNaam));
-                        smtpClient.Send(message);
+                            var message = new MailMessage
+                            {
+                                From = new MailAddress("info@prekenweb.nl", "PrekenWeb"),
+                                Subject = "Samenvatting mailcontact",
+                                IsBodyHtml = true,
+                                Body = sb.ToString()
+                            };
+                            message.To.Add(new MailAddress(ontvanger.First().AanEmail, ontvanger.First().AanNaam));
+                            smtpClient.Send(message);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Warn("Versturen samenvatting mailcontact mislukt", ex);
+                        throw;
                     }
                 }
             }
