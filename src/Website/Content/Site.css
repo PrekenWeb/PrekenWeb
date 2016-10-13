@@ -1335,13 +1335,13 @@ ul.sliders-wrap-inner li img {
   cursor: pointer;
 }
 .lof-slidecontent .action-start {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRFmZmZ+fv49/r2////PR7kvgAAAAR0Uk5T////AEAqqfQAAAAvSURBVHjaYmBGAwzECjBgCDBgCDBgCDBgCDBgCDBgUcGEbgYjHlsIuRSP5wACDABiQgKS8j2/ewAAAABJRU5ErkJggg==') /*../Images/play.png*/ no-repeat center center #ffffff;
-  *background: url(Images/play.png) no-repeat center center #ffffff;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRFmZmZ+fv49/r2////PR7kvgAAAAR0Uk5T////AEAqqfQAAAAvSURBVHjaYmBGAwzECjBgCDBgCDBgCDBgCDBgCDBgUcGEbgYjHlsIuRSP5wACDABiQgKS8j2/ewAAAABJRU5ErkJggg==') /*../Images/play.png*/ no-repeat center center #FFF;
+  *background: url(Images/play.png) no-repeat center center #FFF;
   /* For IE 6 and 7 */
 }
 .lof-slidecontent .action-stop {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRFmZmZ////g+4zGQAAAAJ0Uk5T/wDltzBKAAAAG0lEQVR42mJgRAMMxAkwMDAgyKElgNdzAAEGAGhSAL/eZLrcAAAAAElFTkSuQmCC') /*../Images/pause.png*/ no-repeat center center #ffffff;
-  *background: url(Images/pause.png) no-repeat center center #ffffff;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRFmZmZ////g+4zGQAAAAJ0Uk5T/wDltzBKAAAAG0lEQVR42mJgRAMMxAkwMDAgyKElgNdzAAEGAGhSAL/eZLrcAAAAAElFTkSuQmCC') /*../Images/pause.png*/ no-repeat center center #FFF;
+  *background: url(Images/pause.png) no-repeat center center #FFF;
   /* For IE 6 and 7 */
 }
 .Nieuwsbrief {
@@ -1438,9 +1438,6 @@ form {
 }
 .ZoekenTabel tr.hover td {
   background-color: #c6cddc;
-  /*border-top:1px solid #534A3A;
-        border-bottom:1px solid #534A3A;
-        cursor:pointer;*/
 }
 .ZoekenTabel tr td a {
   color: black;
@@ -1496,29 +1493,26 @@ form {
   padding: 20px 20px 20px 20px;
   width: auto;
 }
-
 .Inbox.collapsed {
-    height: 60px;
-    overflow: hidden;
+  height: 60px;
+  overflow: hidden;
 }
-
 .Inbox h3 {
-    margin-top: 0;
-    padding-top: 0;
-    width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+  width: 100%;
 }
-
 .inbox-done h3:before {
-    content: '-';
-    position: relative;
-    float: right;
-    padding: 0;
-    margin: 0;
+  content: '-';
+  position: relative;
+  float: right;
+  padding: 0;
+  margin: 0;
 }
 .inbox-done.collapsed h3:before {
-    content: '+';
-    position: relative;
-    float: right;
+  content: '+';
+  position: relative;
+  float: right;
 }
 .Inbox table {
   width: 100%;
@@ -2354,4 +2348,3 @@ body .ui-widget textarea {
 #RssFeedModal.modal a {
   text-decoration: none;
 }
-/*# sourceMappingURL=site.css.map */

@@ -556,6 +556,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="PrivateSettings.config" />
     <Content Include="Areas\Mijn\Views\Gebruiker\Uitloggen.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
