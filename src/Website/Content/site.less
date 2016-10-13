@@ -1779,6 +1779,31 @@ form {
     width: auto;
 }
 
+.Inbox.collapsed {
+    height: 60px;
+    overflow: hidden;
+}
+
+.Inbox h3 {
+    margin-top: 0;
+    padding-top: 0;
+    width: 100%;
+}
+
+.inbox-done h3:before {
+    content: '-';
+    position: relative;
+    float: right;
+    padding: 0;
+    margin: 0;
+}
+
+.inbox-done.collapsed h3:before {
+    content: '+';
+    position: relative;
+    float: right;
+}
+
 .Inbox table {
     width: 100%;
 }
