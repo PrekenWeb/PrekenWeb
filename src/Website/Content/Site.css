@@ -1586,11 +1586,9 @@ body .ui-autocomplete .ui-menu-item a {
   border: 2px solid white;
   border-radius: 3px;
   width: 94%;
-  /*min-height: 700px;*/
   -moz-box-shadow: 0px 0px 10px 4px #282828;
   -webkit-box-shadow: 0px 0px 10px 4px #282828;
   box-shadow: 0px 0px 10px 4px #282828;
-  /*background-color:#98b3d2;*/
   background-image: url("Images/background-3.png");
   background-repeat: repeat;
   background-position: left center;
@@ -2022,6 +2020,14 @@ body .ui-widget textarea {
   float: left;
   margin-right: 10px;
 }
+.Preek #afspelen {
+  /*.jp-gui ul li.jp-play a {
+            margin-right: 10px;
+        }*/
+  /*.jp-gui ul li.jp-pause a {
+            margin-right: 10px;
+        }*/
+}
 .Preek #afspelen .jp-gui {
   position: relative;
   margin: 0 auto;
@@ -2041,32 +2047,35 @@ body .ui-widget textarea {
   /*IE7*/
   list-style: none;
   margin: 2px;
-  padding: 0px 0;
+  padding: 4px;
   cursor: pointer;
+  vertical-align: middle;
+}
+.Preek #afspelen .jp-gui ul li > span {
+  float: left;
 }
 .Preek #afspelen .jp-gui ul li a {
   margin: 0px;
 }
+.Preek #afspelen .jp-gui ul li .fa {
+  font-size: 16px;
+  /*float: left;*/
+  margin: 0 4px;
+  width: 13px;
+}
 .Preek #afspelen .jp-gui ul li.jp-play {
   font-size: 14px;
-}
-.Preek #afspelen .jp-gui ul li.jp-play a {
-  margin-right: 10px;
-  font-size: 16px;
 }
 .Preek #afspelen .jp-gui ul li.jp-pause {
   font-size: 14px;
 }
-.Preek #afspelen .jp-gui ul li.jp-pause a {
-  margin-right: 10px;
-  font-size: 16px;
-}
-.Preek #afspelen .jp-gui ul li.VolumeLabel {
+.Preek #afspelen .jp-gui ul li.volume-control {
   margin-left: 30px;
 }
 .Preek #afspelen .jp-gui ul li.DownloadLinkInPlayer {
   float: right;
   margin-left: 30px;
+  font-size: 14px;
 }
 .Preek #afspelen .jp-gui ul li.DownloadLinkInPlayer a:hover {
   text-decoration: none;
@@ -2075,8 +2084,6 @@ body .ui-widget textarea {
   color: #1274ba;
 }
 .Preek #afspelen .jp-button a {
-  color: black;
-  font-size: 20px;
   -moz-box-shadow: inherit;
   -webkit-box-shadow: inherit;
   box-shadow: inherit;
@@ -2095,30 +2102,23 @@ body .ui-widget textarea {
 .Preek #afspelen .jp-no-solution {
   display: none;
 }
-.Preek #afspelen .jp-progress-slider {
-  /*margin: 0 auto;*/
-}
 .Preek #afspelen .jp-progress-slider .ui-slider-handle {
   cursor: pointer;
-  /*padding-left:-10px;*/
 }
 .Preek #afspelen .jp-volume-slider {
-  width: 90px;
-  height: 4px;
-  border-radius: 0px;
-  border-width: 0px 0px 1px 0px;
+  float: left;
+  width: 100px;
+  margin-left: 8px;
   border-color: black;
   background-color: #e4e4f0;
+  top: 3px;
 }
 .Preek #afspelen .jp-volume-slider .ui-slider-handle {
-  height: 10px;
-  width: 10px;
   cursor: pointer;
-  border-radius: 3px 3px 0px 0px;
-  margin-top: -2px;
 }
-.Preek #afspelen .jp-gui.jp-no-volume .jp-volume-slider {
+.Preek #afspelen .jp-gui.jp-no-volume .volume-control {
   display: none;
+  visibility: hidden;
 }
 .Preek #afspelen .jp-current-time,
 .Preek #afspelen .jp-duration {
@@ -2142,11 +2142,7 @@ body .ui-widget textarea {
 .Preek #afspelen .jp-gui .jp-progress-slider {
   margin-top: 35px;
   margin-bottom: -5px;
-  margin-left: 0px;
-  /*width: 210px;*/
-  height: 3px;
-  border-radius: 0px;
-  border-width: 0px 0px 1px 0px;
+  margin-left: 8px;
   border-color: black;
   background-color: #e4e4f0;
 }
@@ -2157,17 +2153,11 @@ body .ui-widget textarea {
 .Preek #afspelen .jp-gui .jp-progress-slider .ui-slider-handle {
   background-image: none;
   background-color: black;
-  width: 10px;
-  height: 10px;
-  -moz-border-radius: 3px 3px 0px 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
-  margin-top: -2px;
-  margin-left: 0px;
 }
 .Preek #afspelen .jp-gui .jp-volume-slider .ui-slider-range {
   background-image: none;
   background-color: #1274ba;
+  height: 100%;
 }
 .Preek #afspelen .jp-gui .jp-volume-slider .ui-slider-handle {
   background-image: none;
@@ -2197,15 +2187,9 @@ body .ui-widget textarea {
 }
 .Preek #leespreekTekst .HeleLeespreek {
   border-radius: 3px;
-  /*border: 1px solid #808080;*/
-  /*background-color: white;*/
   font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
   font-size: 12.5pt;
   margin-bottom: 20px;
-  /*float: left;*/
-  /*padding: 20px 20px 20px 20px;*/
-  /*max-height:600px;*/
-  /*overflow: auto;*/
 }
 .Preek #leespreekTekst .HeleLeespreek .HeleLeespreekTable {
   margin-bottom: 20px;
@@ -2232,10 +2216,6 @@ body .ui-widget textarea {
   font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
   text-align: justify;
 }
-/*.Preek section > div
-        {
-            margin-top:10px;
-        }*/
 .boek {
   background-color: #dbe1ed;
   margin: 20px;

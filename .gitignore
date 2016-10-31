@@ -198,3 +198,5 @@ FakesAssemblies/
 /src/Website/PrivateSettings.config
 /src/Website/Content/Images/Uploads
 /src/Website/Content/Preken
+
+src/Website/Preken/

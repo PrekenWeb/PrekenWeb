@@ -9,7 +9,7 @@
 @kleur8: #1274ba;
 @kleur9: #ededf5;
 
-@font-face { 
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 100;
@@ -1899,11 +1899,9 @@ body .ui-autocomplete .ui-menu-item a {
     border: 2px solid white;
     border-radius: 3px;
     width: 94%;
-    /*min-height: 700px;*/
     -moz-box-shadow: 0px 0px 10px 4px #282828;
     -webkit-box-shadow: 0px 0px 10px 4px #282828;
     box-shadow: 0px 0px 10px 4px #282828;
-    /*background-color:#98b3d2;*/
     background-image: url("Images/background-3.png");
     background-repeat: repeat;
     background-position: left center;
@@ -2447,39 +2445,50 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
             *zoom: 1; /*IE7*/
             list-style: none;
             margin: 2px;
-            padding: 0px 0;
+            padding: 4px;
             cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .jp-gui ul li > span {
+            float: left;
         }
 
         .jp-gui ul li a {
             margin: 0px;
         }
 
+        .jp-gui ul li .fa {
+            font-size: 16px;
+            /*float: left;*/
+            margin: 0 4px;
+            width: 13px;
+        }
+
         .jp-gui ul li.jp-play {
             font-size: 14px;
         }
 
-        .jp-gui ul li.jp-play a {
+        /*.jp-gui ul li.jp-play a {
             margin-right: 10px;
-            font-size: 16px;
-        }
+        }*/
 
         .jp-gui ul li.jp-pause {
             font-size: 14px;
         }
 
-        .jp-gui ul li.jp-pause a {
+        /*.jp-gui ul li.jp-pause a {
             margin-right: 10px;
-            font-size: 16px;
-        }
+        }*/
 
-        .jp-gui ul li.VolumeLabel {
+        .jp-gui ul li.volume-control {
             margin-left: 30px;
         }
 
         .jp-gui ul li.DownloadLinkInPlayer {
             float: right;
             margin-left: 30px;
+            font-size: 14px;
         }
 
         .jp-gui ul li.DownloadLinkInPlayer a:hover {
@@ -2491,8 +2500,6 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
         }
 
         .jp-button a {
-            color: black;
-            font-size: 20px;
             -moz-box-shadow: inherit;
             -webkit-box-shadow: inherit;
             box-shadow: inherit;
@@ -2515,34 +2522,26 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
             display: none;
         }
 
-        .jp-progress-slider {
-            /*margin: 0 auto;*/
-        }
-
         .jp-progress-slider .ui-slider-handle {
             cursor: pointer;
-            /*padding-left:-10px;*/
         }
 
         .jp-volume-slider {
-            width: 90px;
-            height: 4px;
-            border-radius: 0px;
-            border-width: 0px 0px 1px 0px;
+            float: left;
+            width: 100px;
+            margin-left: 8px;
             border-color: black;
             background-color: @kleur7;
+            top: 3px;
         }
 
         .jp-volume-slider .ui-slider-handle {
-            height: 10px;
-            width: 10px;
             cursor: pointer;
-            border-radius: 3px 3px 0px 0px;
-            margin-top: -2px;
         }
 
-        .jp-gui.jp-no-volume .jp-volume-slider {
+        .jp-gui.jp-no-volume .volume-control {
             display: none;
+            visibility: hidden;
         }
 
         .jp-current-time,
@@ -2571,11 +2570,7 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
         .jp-gui .jp-progress-slider {
             margin-top: 35px;
             margin-bottom: -5px;
-            margin-left: 0px;
-            /*width: 210px;*/
-            height: 3px;
-            border-radius: 0px;
-            border-width: 0px 0px 1px 0px;
+            margin-left: 8px;
             border-color: black;
             background-color: @kleur7;
         }
@@ -2588,18 +2583,12 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
         .jp-gui .jp-progress-slider .ui-slider-handle {
             background-image: none;
             background-color: black;
-            width: 10px;
-            height: 10px;
-            -moz-border-radius: 3px 3px 0px 0px;
-            -webkit-border-radius: 3px 3px 0px 0px;
-            border-radius: 3px 3px 0px 0px;
-            margin-top: -2px;
-            margin-left: 0px;
         }
 
         .jp-gui .jp-volume-slider .ui-slider-range {
             background-image: none;
             background-color: @kleur2;
+            height: 100%;
         }
 
         .jp-gui .jp-volume-slider .ui-slider-handle {
@@ -2636,15 +2625,9 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
 
         .HeleLeespreek {
             border-radius: 3px;
-            /*border: 1px solid #808080;*/
-            /*background-color: white;*/
             font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
             font-size: 12.5pt;
             margin-bottom: 20px;
-            /*float: left;*/
-            /*padding: 20px 20px 20px 20px;*/
-            /*max-height:600px;*/
-            /*overflow: auto;*/
         }
 
         .HeleLeespreek .HeleLeespreekTable {
@@ -2676,11 +2659,6 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
         }
     }
 }
-
-/*.Preek section > div
-        {
-            margin-top:10px;
-        }*/
 
 .boek {
     background-color: @kleur6;
