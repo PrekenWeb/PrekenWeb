@@ -523,9 +523,11 @@ module Prekenweb {
         public preekBezochtChecksTonen = (preekIds: string) => {
             if (!$.cookie('Token')) return;
 
+            let apiRootUrl = prekenweb.apiRootUrl.replace(/\/$/, '');
+
             $.ajax({
                 type: 'GET',
-                url: prekenweb.apiRootUrl + 'api/Gebruiker/GeopendePreken',
+                url: apiRootUrl + '/api/Gebruiker/GeopendePreken',
                 data: { preekIds: preekIds },
                 headers: { "Authorization": "Bearer " + $.cookie('Token') },
                 //dataType: 'json',
