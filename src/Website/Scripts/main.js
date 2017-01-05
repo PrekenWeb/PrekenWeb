@@ -518,3 +518,4 @@ $(document).ready(function () {
     prekenweb.prekenWebMenu(prekenweb.inMijn);
     $(".tabs").tabs();
 });
+//# sourceMappingURL=main.js.map
