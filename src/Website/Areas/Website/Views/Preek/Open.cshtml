@@ -54,15 +54,15 @@
     var sermonChangeDateTime = Model.Preek.DatumBijgewerkt ??
                                Model.Preek.DatumAangemaakt ??
                                DateTime.UtcNow;
-    var sermonChangeDateTimeString = sermonChangeDateTime.ToString("yyyyMMddhhmmss"); 
+    var sermonChangeDateTimeString = sermonChangeDateTime.ToString("yyyyMMddhhmmss");
 }
 @section ogMetaTags{
 
-    @if (Model.Preek.PreekTypeId != (int) PreekTypeEnum.LeesPreek)
+    @if (Model.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
     {
-        <meta property="og:type" content="music.song"/>
-        <meta property="og:audio" content="@Url.ContentAbsolute(Url.Action("Download", new {Id = Model.Preek.Id, inline = false}))"/>
-        <meta property="og:audio:type" content="audio/vnd.facebook.bridge"/>
+        <meta property="og:type" content="music.song" />
+        <meta property="og:audio" content="@Url.ContentAbsolute(Url.Action("Download", new {Id = Model.Preek.Id, inline = false}))" />
+        <meta property="og:audio:type" content="audio/vnd.facebook.bridge" />
 
         <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
         <meta property="music:musician" content="@Url.ContentAbsolute("~/")">
@@ -352,7 +352,7 @@
 
         <ul id="DownloadLinks">
             @if (!string.IsNullOrWhiteSpace(Model.Preek.LeesPreekTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
-            { 
+            {
                 <li>
                     <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString, format = "EPUB" })" class="" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                         <div class="fa fa-save"></div>
@@ -467,15 +467,15 @@
 @section scripts {
     <script type="text/javascript">
         function checkiOS(bestandsnaaam) {
-            if (bestandsnaaam.indexOf('mp3') == -1) return true;
+            if (bestandsnaaam.indexOf('mp3') === -1) return true;
             if (!navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
                 //alert(bestandsnaaam);
                 return true;
             }
             var tochStreamen = confirm("@Resources.iOSDownloadBevestiging");
-            if (tochStreamen == true) return true;
+            if (tochStreamen === true) return true;
             var meerInfo = confirm("@Resources.PodcastMeerInfo");
-            if (meerInfo == true) window.location = '@Url.Action("Pagina", "Prekenweb", new { pagina = "iTunes-podcast" })';
+            if (meerInfo === true) window.location = '@Url.Action("Pagina", "Prekenweb", new { pagina = "iTunes-podcast" })';
             return false;
         }
         $(document).ready(function () {

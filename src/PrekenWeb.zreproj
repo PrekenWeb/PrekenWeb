@@ -23,7 +23,7 @@
     <globalSetting name="ColorifyNullCells">True</globalSetting>
     <globalSetting name="EnableExcelExportSnapshots">True</globalSetting>
     <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="2" checksum="499566629" /&gt;&lt;item type="2" checksum="1350889153" /&gt;&lt;/items&gt;</globalSetting>
-    <userSetting name="BertLoedeman@AzureAD.filesInitialDir">D:\Code\PrekenWeb\src\Resources</userSetting>
+    <userSetting name="BertLoedeman@AzureAD.filesInitialDir">D:\Code\Intion\Remote Engineer BV\RemoteEngineer.ManagementWebsite\App_GlobalResources</userSetting>
     <userSetting name="BertLoedeman@AzureAD.FindText">
     </userSetting>
     <userSetting name="BertLoedeman@AzureAD.RecentFiles">D:\Code\PrekenWeb\src\Resources\Resources.resx###***###D:\Code\PrekenWeb\src\Resources\Resources.resx;D:\Code\PrekenWeb\src\Resources\Resources.nl.resx</userSetting>

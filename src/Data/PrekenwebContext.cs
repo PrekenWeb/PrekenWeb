@@ -48,8 +48,9 @@ namespace PrekenWeb.Data
             try
             {
                 var objectContext = (this as IObjectContextAdapter).ObjectContext;
-                if (objectContext != null) // needed since Moq (unit test mocking) does not mock the IObjectContextAdapter interface.
-                { 
+                if (objectContext != null)
+                {
+                    // needed since Moq (unit test mocking) does not mock the IObjectContextAdapter interface.
                     objectContext.CommandTimeout = 30;
                 }
             }
@@ -58,11 +59,14 @@ namespace PrekenWeb.Data
                 var ie = de.InnerException as DbEntityValidationException;
                 if (ie != null)
                 {
-                    var fouten = string.Join(Environment.NewLine, ie.EntityValidationErrors.Select(x => string.Format("{0}:{1}", x.ValidationErrors.First().PropertyName, x.ValidationErrors.First().ErrorMessage)));
-                    throw new Exception("Fout bij initialiseren database:" + Environment.NewLine + fouten); 
+                    var fouten = string.Join(
+                        Environment.NewLine,
+                        ie.EntityValidationErrors.Select(x => $"{x.ValidationErrors.First().PropertyName}:{x.ValidationErrors.First().ErrorMessage}")
+                    );
+                    throw new Exception("Fout bij initialiseren database:" + Environment.NewLine + fouten);
                 }
             }
-        } 
+        }
 
         public static PrekenwebContext Create()
         {

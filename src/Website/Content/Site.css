@@ -1,15 +1,16 @@
-﻿@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 100;
-  src: local('Roboto Thin'), local('Roboto-Thin'), url(http://themes.googleusercontent.com/static/fonts/roboto/v8/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+﻿/*@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Roboto Thin'), local('Roboto-Thin'), url(http://themes.googleusercontent.com/static/fonts/roboto/v8/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
+
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url(http://themes.googleusercontent.com/static/fonts/roboto/v8/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
-}
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Roboto Medium'), local('Roboto-Medium'), url(http://themes.googleusercontent.com/static/fonts/roboto/v8/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}*/
 body {
   background-color: #8ac;
   line-height: 1.4;
@@ -58,7 +59,7 @@ body {
   background-image: none;
 }
 #PopupBody #PopupContainer {
-  font-family: Arial;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   color: black;
   font-size: 14px;
   padding: 10px 0px 0px 20px;
@@ -123,7 +124,7 @@ body {
   margin-bottom: 5px;
 }
 .Topper .hoofdmenuCol li a {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 500;
   text-decoration: none;
   display: block;
@@ -248,10 +249,10 @@ body {
 }
 .fontface #PageHeader,
 .fontface #LogoTekst {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   color: #808285;
   color: #47494b;
-  font-weight: 100;
+  font-weight: 200;
   line-height: 1.4;
 }
 .no-fontface #PageHeader,
@@ -332,14 +333,14 @@ body {
 }
 #pageContent {
   padding: 140px 20px 20px 0px;
-  font-family: Arial;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   color: black;
   font-size: 14px;
   margin-left: 210px;
   z-index: 10;
 }
 .fontface h1 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 40px;
   font-weight: 500;
 }
@@ -367,12 +368,12 @@ h1 a:hover {
   text-decoration: underline;
 }
 .fontface h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 24px;
   font-weight: 500;
 }
 .no-fontface h2 {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 22px;
 }
 h2 {
@@ -389,12 +390,12 @@ h2 a:hover {
   text-decoration: underline;
 }
 .fontface h4 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 20px;
   font-weight: 500;
 }
 .no-fontface h4 {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 20px;
 }
 h4 {
@@ -603,9 +604,9 @@ a {
 }
 .ZoekResultaat .simpel .ZoekResultaatBoek {
   float: left;
-  width: 170px;
+  width: 215px;
   height: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 .ZoekResultaat .simpel .ZoekResultaatLezingOmschrijving {
   float: left;
@@ -1471,7 +1472,7 @@ form {
   width: 180px;
 }
 .StandaardLijst .StandaardLijstHeader {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 24px;
   float: none;
   clear: both;
@@ -1638,7 +1639,7 @@ body .ui-widget textarea {
   background-color: white;
   margin-bottom: 20px;
   font-size: 12.5pt;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
 }
 .Bijbelgedeelte .BoekInhoud {
   padding: 0px 10px 10px 10px;
@@ -1819,7 +1820,7 @@ body .ui-widget textarea {
   border: 1px solid black;
   background-color: white;
   font-size: 12.5pt;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   margin-bottom: 20px;
   float: left;
 }
@@ -1881,7 +1882,7 @@ body .ui-widget textarea {
   border-radius: 3px;
   border: 1px solid #808080;
   background-color: white;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   font-size: 12.5pt;
   margin-bottom: 20px;
   float: left;
@@ -1911,7 +1912,7 @@ body .ui-widget textarea {
   margin-top: 0px;
   margin-bottom: 0px;
   font-size: 12.5pt;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   text-align: justify;
 }
 #oudePreekContainer .PreekKnoppen {
@@ -2187,7 +2188,7 @@ body .ui-widget textarea {
 }
 .Preek #leespreekTekst .HeleLeespreek {
   border-radius: 3px;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   font-size: 12.5pt;
   margin-bottom: 20px;
 }
@@ -2213,7 +2214,7 @@ body .ui-widget textarea {
   margin-top: 0px;
   margin-bottom: 0px;
   font-size: 12.5pt;
-  font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-family: 'Open Sans', Tahoma, sans-serif;
   text-align: justify;
 }
 .boek {

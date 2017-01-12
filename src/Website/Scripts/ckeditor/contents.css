@@ -41,7 +41,7 @@ p {
     }
 
 .fontface h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 40px;
     font-weight: 500;
 }
@@ -73,7 +73,7 @@ h1 {
         }
 
 .fontface h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 24px;
     font-weight: 500;
 }
@@ -100,7 +100,7 @@ h2 {
         }
 
 .fontface h4 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 20px;
     font-weight: 500;
 }

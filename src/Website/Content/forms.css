@@ -11,7 +11,7 @@ form .field .label {
     width: 300px;
     float: left;
     margin-right: 20px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
     .field .label, .label {
@@ -37,7 +37,7 @@ form .field .label {
         }
 
 form .field .label label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 }
 

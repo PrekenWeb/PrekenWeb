@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 body {
     /* Font */
-    font-family: Arial, Verdana, sans-serif;
+    font-family: 'Open Sans', Tahoma, sans-serif;
     font-size: 12px;
     /* Text color */
     color: #222;
@@ -24,7 +24,7 @@ p {
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 12.5pt;
-    font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-family: 'Open Sans', Tahoma, sans-serif;
 }
 
 .boek {
@@ -40,7 +40,7 @@ p {
 }
 
 .fontface h1 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 40px;
   font-weight: 500;
 }
@@ -68,12 +68,12 @@ h1 a:hover {
   text-decoration: underline;
 }
 .fontface h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 24px;
   font-weight: 500;
 }
 .no-fontface h2 {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 22px;
 }
 h2 {
@@ -90,12 +90,12 @@ h2 a:hover {
   text-decoration: underline;
 }
 .fontface h4 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 20px;
   font-weight: 500;
 }
 .no-fontface h4 {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 20px;
 }
 h4 {

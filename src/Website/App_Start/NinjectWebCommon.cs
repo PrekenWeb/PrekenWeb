@@ -14,13 +14,13 @@ using Prekenweb.Website.Lib.Identity;
 
 namespace Prekenweb.Website
 {
-    public static class NinjectWebCommon 
-    { 
+    public static class NinjectWebCommon
+    {
         public static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
-            { 
+            {
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -29,10 +29,10 @@ namespace Prekenweb.Website
                 kernel.Dispose();
                 throw;
             }
-        } 
+        }
 
         private static void RegisterServices(IKernel kernel)
-        { 
+        {
             kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>();//.InRequestScope();
             kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>().InRequestScope();
 
@@ -46,7 +46,7 @@ namespace Prekenweb.Website
                 .BindFilter<AddTokenCookieFilter>(FilterScope.Action, 0)
                 .WhenActionMethodHas<AddTokenCookieAttribute>()
                 .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
-                .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]); 
+                .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]);
 
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();
             kernel.Bind<IMailingRepository>().To<MailingRepository>();
@@ -55,7 +55,7 @@ namespace Prekenweb.Website
             kernel.Bind<ISpotlightRepository>().To<SpotlightRepository>();
             kernel.Bind<IZoekenRepository>().To<ZoekenRepository>();
             kernel.Bind<IPrekenwebCache>().To<PrekenwebHttpCache>().InRequestScope();
-            kernel.Bind<IPrekenWebUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<PrekenWebUserManager>()).InRequestScope(); 
-        }        
+            kernel.Bind<IPrekenWebUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<PrekenWebUserManager>()).InRequestScope();
+        }
     }
 }
