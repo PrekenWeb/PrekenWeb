@@ -4,8 +4,12 @@
 @{
     //ViewBag.Title = Resources.ZoekenKop;
     ViewBag.Title = Model.Title;
-
+    if (Model.HideMinisterFromIndexingRobots)
+    {
+        ViewBag.MetaRobots = "NOINDEX, NOFOLLOW";
+    }
 }
+
 <h1>@ViewBag.Title</h1>
 @section GoogleAnalyticsScripts{
     @if (Model.PredikantId.HasValue)

@@ -169,6 +169,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 foreach (var preek in await _prekenRepository.GetPrekenForItunesPodcast(TaalInfoHelper.FromRouteData(RouteData).Id))
                 {
+                    var minister = preek.PredikantId.HasValue ? preek.Predikant : null;
+                    if (minister != null && minister.HideFromPodcast)
+                        continue;
 
                     // Start podcast item
                     writer.WriteStartElement("item");

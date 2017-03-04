@@ -2,8 +2,16 @@
 @model Prekenweb.Website.Areas.Website.Models.PreekOpen
 @{
     ViewBag.Title = Model.Titel;
-    string predikant = Model.Preek.PredikantId.HasValue ? Model.Preek.Predikant.VolledigeNaam : string.Empty;
+    var minister = Model.Preek.PredikantId.HasValue ? Model.Preek.Predikant : null;
+    var ministerName = minister != null ? minister.VolledigeNaam : string.Empty;
+
     string bijbelboek = Model.Preek.BoekhoofdstukId.HasValue ? Model.Preek.BoekHoofdstuk.Omschrijving : string.Empty;
+
+    if (minister != null && minister.HideFromIndexingRobots)
+    {
+        ViewBag.MetaRobots = "NOINDEX, NOFOLLOW";
+    }
+
     if (string.IsNullOrWhiteSpace(Model.Preek.ThemaOmschrijving))
     {
         if (!string.IsNullOrEmpty(Model.Preek.BijbeltekstOmschrijving))
@@ -76,16 +84,16 @@
 
 }
 @section GoogleAnalyticsScripts{
-    @if (!string.IsNullOrEmpty(predikant))
+    @if (!string.IsNullOrEmpty(ministerName))
     {
         <text>_gaq.push(['_setCustomVar',
             1,                // Slot 1-5.
             'Predikant',      // Name of variable
-            '@predikant',     // Value
+            '@ministerName',     // Value
             3                 // 1 = visitor 2 = session 3 = page
             ]);</text>
     }
-    @if (!string.IsNullOrEmpty(predikant))
+    @if (!string.IsNullOrEmpty(ministerName))
     {
         <text>_gaq.push(['_setCustomVar',
             2,

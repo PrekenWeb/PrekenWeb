@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
     <None Include="App.config" />
     <Content Include="Deploy.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -60,7 +61,7 @@
     <Content Include="DbMigrations.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
+    <EmbeddedResource Include="Migrations\0002 - Add Predikant_HideFromIndexingRobots.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\0000 - Initial Db Create.sql" />

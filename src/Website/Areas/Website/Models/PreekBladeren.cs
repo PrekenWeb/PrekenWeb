@@ -17,6 +17,8 @@ namespace Prekenweb.Website.Areas.Website.Models
         [Display(Name = "Predikant", ResourceType = typeof(Resources.Resources)), Tooltip(Name = "TooltipPredikant", ResourceType = typeof(Resources.Resources))]
         public string Predikant { get; set; }
 
+        public bool HideMinisterFromIndexingRobots { get; set; }
+
         public int? BoekHoofdstukId { get; set; }
         [Display(Name = "Bijbelboek", ResourceType = typeof(Resources.Resources)), Tooltip(Name = "TooltipBijbelboek", ResourceType = typeof(Resources.Resources))]
         public string BoekHoofdstuk { get; set; }
@@ -108,10 +110,11 @@ namespace Prekenweb.Website.Areas.Website.Models
             { 
                 var predikant = context.Predikants.SingleOrDefault(p => p.Id == PredikantId.Value);
                 if (predikant == null) throw new KeyNotFoundException("Deze predikant bestaat niet");
-                else if (predikant.TaalId != TaalId)
-                {
-                     redirectRoute = new RouteValueDictionary(new { culture = predikant.Taal.Code.Trim(), controller = "Zoeken", action = "Index", PredikantId = PredikantId });
-                }
+
+                if (predikant.TaalId != TaalId)
+                    redirectRoute = new RouteValueDictionary(new { culture = predikant.Taal.Code.Trim(), controller = "Zoeken", action = "Index", PredikantId = PredikantId });
+
+                HideMinisterFromIndexingRobots = predikant.HideFromIndexingRobots;
             }
 
             if (GebeurtenisId.HasValue)

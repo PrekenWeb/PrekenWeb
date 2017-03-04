@@ -37,6 +37,9 @@ namespace PrekenWeb.Data.Tables
         public virtual Gemeente Gemeente_GemeenteId { get; set; } 
         public virtual Taal Taal { get; set; } 
 
+        public virtual bool HideFromIndexingRobots { get; set; }
+        public virtual bool HideFromPodcast { get; set; }
+
         public Predikant()
         {
             TaalId = 1;
