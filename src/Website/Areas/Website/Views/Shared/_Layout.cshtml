@@ -14,9 +14,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     *@
 
-    @if (!string.IsNullOrEmpty(ViewBag.MetaRobots))
+    @if (ViewBag.HideFromIndexingRobots != null && ViewBag.HideFromIndexingRobots)
     {
-        <meta name="robots" content="@ViewBag.MetaRobots">
+        <meta name="robots" content="NOINDEX, NOFOLLOW">
     }
     @if (string.IsNullOrEmpty(ViewBag.Description))
     {

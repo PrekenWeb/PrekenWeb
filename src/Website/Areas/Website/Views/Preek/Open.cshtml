@@ -9,7 +9,7 @@
 
     if (minister != null && minister.HideFromIndexingRobots)
     {
-        ViewBag.MetaRobots = "NOINDEX, NOFOLLOW";
+        ViewBag.HideFromIndexingRobots = true;
     }
 
     if (string.IsNullOrWhiteSpace(Model.Preek.ThemaOmschrijving))

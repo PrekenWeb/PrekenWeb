@@ -4,9 +4,9 @@
 @{
     //ViewBag.Title = Resources.ZoekenKop;
     ViewBag.Title = Model.Title;
-    if (Model.HideMinisterFromIndexingRobots)
+    if (Model.HideMinisterFromIndexingRobots || (Model.Zoekresultaat != null && Model.Zoekresultaat.HideFromIndexingRobots))
     {
-        ViewBag.MetaRobots = "NOINDEX, NOFOLLOW";
+        ViewBag.HideFromIndexingRobots = true;
     }
 }
 

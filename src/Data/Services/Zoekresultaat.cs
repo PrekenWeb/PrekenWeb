@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PrekenWeb.Data.Tables;
 using PrekenWeb.Data.ViewModels;
 
@@ -9,6 +10,17 @@ namespace PrekenWeb.Data.Services
         public ZoekOpdracht ZoekOpdracht { get; set; }
         public IEnumerable<ZoekresultaatItem> Items { get; set; }
         public int AantalResultaten { get; set; }
+
+        public bool HideFromIndexingRobots
+        {
+            get
+            {
+                if (Items == null || !Items.Any())
+                    return false;
+
+                return Items.Any(i => i.Preek?.Predikant != null && i.Preek.Predikant.HideFromIndexingRobots);
+            }
+        }
 
         public Zoekresultaat()
         {
