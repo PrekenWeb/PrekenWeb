@@ -1,6 +1,6 @@
 ﻿@model PredikantEditViewModel
 @Html.ValidationSummary(true)
-<div class="ColumnM">
+<div class="ColumnL">
     <div class="field">
         <div class="label">@Html.LabelFor(m => m.Predikant.Titels)</div>
         <div class="value">@Html.EditorFor(m => m.Predikant.Titels)</div>
@@ -30,6 +30,14 @@
         <div class="label">@Html.LabelFor(m => m.Predikant.LevensPeriode)</div>
         <div class="value">@Html.EditorFor(m => m.Predikant.LevensPeriode)</div>
         <div class="validator">@Html.ValidationMessageFor(m => m.Predikant.LevensPeriode)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.HideFromIndexingRobots)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.HideFromIndexingRobots)</div>
+    </div>
+    <div class="field">
+        <div class="label">@Html.LabelFor(m => m.Predikant.HideFromPodcast)</div>
+        <div class="value">@Html.EditorFor(m => m.Predikant.HideFromPodcast)</div>
     </div>
 </div>
 <p class="clear"></p>

@@ -112,7 +112,7 @@ form .field .label label {
 }
 
 .ColumnL {
-    width: 400px;
+    width: 450px;
 }
 
 .ColumnS .field {
@@ -124,7 +124,7 @@ form .field .label label {
 }
 
 .ColumnL .field {
-    width: 400px;
+    width: 450px;
 }
 
 .ColumnS .field .label {
@@ -136,7 +136,7 @@ form .field .label label {
 }
 
 .ColumnL .field .label {
-    width: 145px;
+    width: 175px;
 }
 
 .ColumnS .field .value input, .ColumnS .field .value select, .ColumnS .field .value textarea, .ColumnS .field .value {
