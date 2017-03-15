@@ -463,7 +463,7 @@
             }
             else
             {
-                <iframe src="@Url.Action("Download", new { Id = Model.Preek.Id, inline = true })" class="PreekLezenIframe"></iframe>
+                <iframe src="@Url.Action("Download", new { Id = Model.Preek.Id, inline = true, version = sermonChangeDateTimeString })" class="PreekLezenIframe"></iframe>
             }
             @*<iframe src="@Url.Content(string.Format("~/Content/preken/{0}", Model.Preek.Bestandsnaam))" class="PreekLezenIframe"></iframe>*@
 
