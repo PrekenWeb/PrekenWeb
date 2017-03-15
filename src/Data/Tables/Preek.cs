@@ -8,9 +8,9 @@ using PrekenWeb.Data.Attributes;
 using PrekenWeb.Data.Identity;
 
 namespace PrekenWeb.Data.Tables
-{ 
+{
     public class Preek
-    { 
+    {
         public Preek()
         {
             DatumAangemaakt = DateTime.Now;
@@ -21,7 +21,6 @@ namespace PrekenWeb.Data.Tables
             Inboxes = new List<Inbox>();
             PreekCookies = new List<PreekCookie>();
             PreekLezenEnZingens = new List<PreekLezenEnZingen>();
-            
         }
 
         public int Id { get; set; }
@@ -161,7 +160,7 @@ namespace PrekenWeb.Data.Tables
         public virtual Serie Serie { get; set; }
         public virtual Taal Taal { get; set; }
 
-        
+
 
 
         public string GetShortBijbelTekst(string zoekTerm)
@@ -224,7 +223,7 @@ namespace PrekenWeb.Data.Tables
                 return string.Format("{0}", Gebruiker_AangemaaktDoor.Naam);
             }
             set { }
-        } 
+        }
 
         public string GetContentType()
         {
@@ -246,8 +245,10 @@ namespace PrekenWeb.Data.Tables
         }
 
         [NotMapped]
-        public string PreekTitel { get { return GetPreekTitel(); }
-             set { }
+        public string PreekTitel
+        {
+            get { return GetPreekTitel(); }
+            set { }
         }
 
         public string GetPreekTitel()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Prekenweb.Models.Dtos;
 
-namespace PrekenWeb.Data.Services
+namespace PrekenWeb.Data.Services.Interfaces
 {
     public interface IHomeService
     {

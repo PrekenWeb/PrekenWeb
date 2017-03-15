@@ -7,12 +7,24 @@ namespace WebAPI
     {
         public static void Register(HttpConfiguration config)
         { 
-            GlobalConfiguration.Configure(x => x.MapHttpAttributeRoutes()); 
+            GlobalConfiguration.Configure(x => x.MapHttpAttributeRoutes());
+
+            config.Routes.MapHttpRoute("PreekNieuwDutchApi", "api/Preek/Nieuw", new { controller = "Sermons", action = "New"});
+            config.Routes.MapHttpRoute("PreekDutchApi", "api/Preek", new { controller = "Sermons", id = RouteParameter.Optional });
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "DefaultApiWithActionAndId",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: null,
+                //defaults: new { id = RouteParameter.Optional },
+                constraints: new { action= @"\w+", id = @"\d*" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApiWithId",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional }//,
+                //constraints: new { id = @"\d*" }
             );
 
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -24,7 +36,8 @@ namespace WebAPI
                 "http://sermonweb.org",
                 "http://www.sermonweb.org",
                 "http://www.prekenweb.nl",
-                "http://test.prekenweb.nl"
+                "http://test.prekenweb.nl",
+                "http://dev.prekenweb.nl"
             };
 
             config.EnableCors(new EnableCorsAttribute(string.Join(",", trustedHostNames), "*", "GET, POST, OPTIONS, PUT, DELETE"));

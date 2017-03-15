@@ -6,6 +6,7 @@ namespace PrekenWeb.Data.Repositories
 {
     public interface IPreekRepository
     {
-        Task<IEnumerable<Preek>> GetAllePreken(int taalId);
+        Task<Preek> GetSingle(int id);
+        Task<IEnumerable<Preek>> Get(SermonDataFilter filter);
     }
 }

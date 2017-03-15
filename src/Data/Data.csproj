@@ -34,9 +34,15 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework">
@@ -79,6 +85,9 @@
     <Compile Include="Identity\PrekenWebUserLogin.cs" />
     <Compile Include="Identity\PrekenWebUserRole.cs" />
     <Compile Include="IPrekenwebContext.cs" />
+    <Compile Include="Mapping\IocInjectedMapperConfiguration.cs" />
+    <Compile Include="Mapping\Profiles\PreekDtoAutoMapperProfile.cs" />
+    <Compile Include="Mapping\Profiles\SermonModelAutoMapperProfile.cs" />
     <Compile Include="PrekenwebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepository.cs" />
@@ -96,8 +105,11 @@
     <Compile Include="Repositories\SpotlightRepository.cs" />
     <Compile Include="Repositories\TekstRepository.cs" />
     <Compile Include="Repositories\ZoekenRepository.cs" />
-    <Compile Include="Services\HomeService.cs" />
-    <Compile Include="Services\IHomeService.cs" />
+    <Compile Include="Services\Interfaces\IHomeService.cs" />
+    <Compile Include="Services\Interfaces\ILanguagesService.cs" />
+    <Compile Include="Services\Interfaces\ISermonsService.cs" />
+    <Compile Include="Services\LanguagesService.cs" />
+    <Compile Include="Services\SermonsService.cs" />
     <Compile Include="Services\Zoekresultaat.cs" />
     <Compile Include="Services\ZoekService.cs" />
     <Compile Include="Smtp\SmtpHelper.cs" />
@@ -143,6 +155,7 @@
     <Compile Include="Tables\RefactorLogConfiguration.cs" />
     <Compile Include="Tables\Serie.cs" />
     <Compile Include="Tables\SerieConfiguration.cs" />
+    <Compile Include="Tables\SermonDataFilter.cs" />
     <Compile Include="Tables\Spotlight.cs" />
     <Compile Include="Tables\SpotlightConfiguration.cs" />
     <Compile Include="Tables\Taal.cs" />
@@ -152,8 +165,11 @@
     <Compile Include="Tables\ZoekOpdracht.cs" />
     <Compile Include="Tables\ZoekOpdrachtConfiguration.cs" />
     <Compile Include="TestData\TestDataProvider.cs" />
+    <Compile Include="ViewModels\LanguageModel.cs" />
     <Compile Include="ViewModels\PreekTypeEnum.cs" />
     <Compile Include="ViewModels\ResultaatReden.cs" />
+    <Compile Include="ViewModels\SermonFilter.cs" />
+    <Compile Include="ViewModels\SermonModel.cs" />
     <Compile Include="ViewModels\TekstPagina.cs" />
     <Compile Include="ViewModels\ZoekresultaatItem.cs" />
   </ItemGroup>
