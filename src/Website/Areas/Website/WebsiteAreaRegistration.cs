@@ -17,6 +17,7 @@ namespace Prekenweb.Website.Areas.Website
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            context.Routes.IgnoreRoute("Gebruikers/*");
 
             // BotDetect requests must not be routed
             context.Routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
@@ -24,20 +25,22 @@ namespace Prekenweb.Website.Areas.Website
             context.MapRoute(
                 name: "iTunesRouting",
                 url: "{culture}/iTunes.xml",
-                defaults: new { culture= string.Empty, controller = "Home", action = "iTunesPodcast", }
+                defaults: new { culture = string.Empty, controller = "Home", action = "iTunesPodcast" },
+                constraints: new { culture = @"[a-zA-Z]{0,2}" }
                 );
 
             context.MapRoute(
                 name: "TekstPagina",
                 url: "{culture}/pagina/{pagina}",
-                defaults: new { culture = string.Empty, controller = "Prekenweb", action = "Pagina" }
+                defaults: new { culture = string.Empty, controller = "Prekenweb", action = "Pagina" },
+                constraints: new { culture = @"[a-zA-Z]{0,2}" }
                 );
-
 
             context.MapRoute(
                 name: "MultiCultiRoute",
                 url: "{culture}/{controller}/{action}/{id}",
-                defaults: new { culture = string.Empty, controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { culture = string.Empty, controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { culture = @"[a-zA-Z]{0,2}" }
                 ).RouteHandler = new RootUrlHandler();
 
             //context.MapRoute(
@@ -55,8 +58,8 @@ namespace Prekenweb.Website.Areas.Website
             var culturePartInUrl = requestContext.RouteData.Values["culture"]?.ToString();
             if (!string.IsNullOrWhiteSpace(culturePartInUrl)) return base.GetHttpHandler(requestContext);
 
-            if (requestContext.HttpContext.Request.Url.Host.EndsWith("prekenweb.nl")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/nl/", requestContext.HttpContext.Request.Url.Host), true);
-            else if (requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org")) requestContext.HttpContext.Response.Redirect(string.Format("http://{0}/en/", requestContext.HttpContext.Request.Url.Host), true);
+            if (requestContext.HttpContext.Request.Url.Host.EndsWith("prekenweb.nl")) requestContext.HttpContext.Response.Redirect($"http://{requestContext.HttpContext.Request.Url.Host}/nl/", true);
+            else if (requestContext.HttpContext.Request.Url.Host.EndsWith("sermonweb.org")) requestContext.HttpContext.Response.Redirect($"http://{requestContext.HttpContext.Request.Url.Host}/en/", true);
             else requestContext.HttpContext.Response.Redirect(requestContext.HttpContext.Request.Url + "/nl/", true);
             return base.GetHttpHandler(requestContext);
         }
