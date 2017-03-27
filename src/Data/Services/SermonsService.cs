@@ -42,7 +42,7 @@ namespace PrekenWeb.Data.Services
             var dataFilter = _mapper.Map<SermonFilter, SermonDataFilter>(filter);
             dataFilter.Page = 0;
             dataFilter.PageSize = 10;
-            //dataFilter.SortBy = preek => preek.DatumAangemaakt;
+            //dataFilter.SortBy = preek => preek.DatumGepubliceerd;
             dataFilter.SortDirection = SortDirection.Descending;
 
             var preken = await _preekRepository.Get(dataFilter);

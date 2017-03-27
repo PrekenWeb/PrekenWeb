@@ -87,13 +87,7 @@ namespace PrekenWeb.Data.ViewModels
         }
         public string ZoekResultaatTekst { get; set; }
 
-        public DateTime? Datum
-        {
-            get
-            {
-                return (!Preek.DatumAangemaakt.HasValue) ? new DateTime?() : Preek.DatumAangemaakt;
-            } 
-        }
+        public DateTime? Datum => Preek.DatumGepubliceerd ?? Preek.DatumAangemaakt ?? DateTime.Now;
 
         public string ResultaatIcon
         {

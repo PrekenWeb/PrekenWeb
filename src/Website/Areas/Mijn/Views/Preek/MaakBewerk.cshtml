@@ -57,6 +57,12 @@
                 <div class="validator">@Html.ValidationMessageFor(m => m.DatumBijgewerkt)</div>
             </div>
             <div class="field">
+                <div class="label">@Html.LabelFor(m => m.DatumGepubliceerd)</div>
+                <div class="value">@Html.EditorFor(m => m.DatumGepubliceerd)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.DatumGepubliceerd)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.DatumGepubliceerd)</div>
+            </div>
+            <div class="field">
                 <div class="label">@Html.LabelFor(m => m.Gepubliceerd)</div>
                 <div class="value">@Html.EditorFor(m => m.Gepubliceerd)</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.Gepubliceerd)</div>
@@ -73,7 +79,7 @@
                     </span>
                     @*            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">Kies @{ if (!string.IsNullOrEmpty(Model.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
             </a>*@
-                    <input name="Bestand" id="Bestand" type="file" style="border: 0px; background-color: transparent;" />
+                    <input name="Bestand" id="Bestand" type="file" style="border: 0; background-color: transparent;" />
                 </div> 
             </div>
 
@@ -97,25 +103,25 @@
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.GemeenteId)</div>
-                <div class="value">@Html.EditorFor(m => m.GemeenteId, new { TaalId = Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.GemeenteId, new {Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.GemeenteId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.GemeenteId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.PredikantId)</div>
-                <div class="value">@Html.EditorFor(m => m.PredikantId, new { TaalId = Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.PredikantId, new {Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.PredikantId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.PredikantId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.SerieId)</div>
-                <div class="value">@Html.EditorFor(m => m.SerieId, new { TaalId = Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.SerieId, new {Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.SerieId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.SerieId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.GebeurtenisId)</div>
-                <div class="value">@Html.EditorFor(m => m.GebeurtenisId, new { TaalId = Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.GebeurtenisId, new {Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.GebeurtenisId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.GebeurtenisId)</div>
             </div>
@@ -127,7 +133,7 @@
 
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.BoekhoofdstukId)</div>
-                <div class="value">@Html.EditorFor(m => m.BoekhoofdstukId, new { TaalId = Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.BoekhoofdstukId, new {Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.BoekhoofdstukId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.BoekhoofdstukId)</div>
             </div>

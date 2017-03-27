@@ -43,6 +43,8 @@ namespace PrekenWeb.Data.Tables
         [DataType(DataType.DateTime), Display(Name = "BijgewerktOp", ResourceType = typeof(Prekenweb.Resources.Resources)), DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime? DatumBijgewerkt { get; set; }
 
+        [DataType(DataType.DateTime), Display(Name = "GepubliceerdOp", ResourceType = typeof(Prekenweb.Resources.Resources)), DisplayFormat(DataFormatString = "{0:d}")]
+        public DateTime? DatumGepubliceerd { get; set; }
         [Display(Name = "Bestand", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Upload)]
         public string Bestandsnaam { get; set; }
 

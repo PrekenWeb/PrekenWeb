@@ -28,7 +28,7 @@ namespace PrekenWeb.Data.Repositories
                 .Where(p => p.TaalId == taalId)
                 .Where(p => preekTypIds.Contains(p.PreekTypeId))
                 .Where(p => p.Gepubliceerd)
-                .OrderByDescending(p => p.DatumAangemaakt)
+                .OrderByDescending(p => p.DatumGepubliceerd)
                 .Take(10)
                 .ToListAsync())
                 .Select(p => new ZoekresultaatItem

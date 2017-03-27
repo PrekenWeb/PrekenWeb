@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\0003 - Add Preek_DatumGepubliceerd.sql" />
     <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
     <None Include="App.config" />
     <Content Include="Deploy.ps1">

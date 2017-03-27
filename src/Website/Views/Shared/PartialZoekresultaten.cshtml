@@ -41,7 +41,7 @@
                         <span class="@item.UrlIcon"></span>
                     </span>
                 </div>
-                <div class="ZoekResultaatDatum tooltip" title="@string.Format(Resources.DatumPreekAangemaaktTooltip, item.Datum)" itemprop="datePublished" content="@string.Format("{0:g}", item.Preek.DatumAangemaakt)">
+                <div class="ZoekResultaatDatum tooltip" title="@string.Format(Resources.DatumPreekGepubliceerdTooltip, item.Datum)" itemprop="datePublished" content="@string.Format("{0:g}", item.Preek.DatumGepubliceerd)">
                     @string.Format("{0:d}", item.Datum)
                 </div>
                 @if (!Model.ZoekOpdracht.PredikantId.HasValue)

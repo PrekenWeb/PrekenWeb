@@ -520,6 +520,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The date on which this sermon has been published: {0:dd-MM-yyyy}.
+        /// </summary>
+        public static string DatumPreekGepubliceerdTooltip {
+            get {
+                return ResourceManager.GetString("DatumPreekGepubliceerdTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date/time.
         /// </summary>
         public static string DatumTijd {
@@ -862,6 +871,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Published on.
+        /// </summary>
+        public static string GepubliceerdOp {
+            get {
+                return ResourceManager.GetString("GepubliceerdOp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Developers.
         /// </summary>
         public static string Github {
@@ -979,6 +997,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscribe.
+        /// </summary>
+        public static string Inschrijven {
+            get {
+                return ResourceManager.GetString("Inschrijven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Newsletter.
         /// </summary>
         public static string InschrijvenNieuwsbrief {
@@ -1078,7 +1105,7 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Audio and Reading sermons.
+        ///   Looks up a localized string similar to Audio and reading sermons.
         /// </summary>
         public static string LeesEnAudioPreken {
             get {
@@ -2203,15 +2230,6 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string TooltipEmail {
-            get {
-                return ResourceManager.GetString("TooltipEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Part of an event, for example: Holy Supper, Passion, Holy Baptism and similar.
         /// </summary>
         public static string TooltipGebeurtenis {
@@ -2644,7 +2662,7 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type a searchterm for example: minister, theme, Bible book or a part of a bibletext.
+        ///   Looks up a localized string similar to Type a searchterm, for example: minister, theme, Bible book or a part of a bible text.
         /// </summary>
         public static string ZoekboxStandaardTekst {
             get {

@@ -158,7 +158,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 .Preeks
                 .Include(x => x.Predikant)
                 .Where(x => x.TaalId == taalId && x.Gepubliceerd)
-                .OrderByDescending(x => x.DatumAangemaakt)
+                .OrderByDescending(x => x.DatumGepubliceerd)
                 .Take(10)
                 .ToList()
                 .Select(x =>
@@ -166,7 +166,10 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     var i = new SyndicationItem
                     {
                         Title = new TextSyndicationContent(x.GetBoekhoofdstukOmschrijving()),
-                        PublishDate = x.DatumAangemaakt.HasValue ? new DateTimeOffset(x.DatumAangemaakt.Value) : new DateTimeOffset(),
+                        PublishDate = x.DatumGepubliceerd.HasValue 
+                            ? new DateTimeOffset(x.DatumGepubliceerd.Value)
+                            : x.DatumAangemaakt.HasValue 
+                                ? new DateTimeOffset(x.DatumAangemaakt.Value) : new DateTimeOffset(),
                         LastUpdatedTime = x.DatumBijgewerkt.HasValue ? new DateTimeOffset(x.DatumBijgewerkt.Value) : new DateTimeOffset(),
                         BaseUri = new Uri(Url.Action("Open", "Preek", new { x.Id }), UriKind.Relative),
 

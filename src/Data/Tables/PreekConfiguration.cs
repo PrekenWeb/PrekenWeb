@@ -17,6 +17,7 @@ namespace PrekenWeb.Data.Tables
             Property(x => x.GebeurtenisId).HasColumnName("GebeurtenisId").IsOptional();
             Property(x => x.DatumAangemaakt).HasColumnName("DatumAangemaakt").IsOptional();
             Property(x => x.DatumBijgewerkt).HasColumnName("DatumBijgewerkt").IsOptional();
+            Property(x => x.DatumGepubliceerd).HasColumnName("DatumGepubliceerd").IsOptional();
             Property(x => x.Bestandsnaam).HasColumnName("Bestandsnaam").IsOptional();
             Property(x => x.AantalKeerGedownload).HasColumnName("AantalKeerGedownload").IsRequired();
             Property(x => x.OudId).HasColumnName("OudID").IsOptional();

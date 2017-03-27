@@ -199,7 +199,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     // End enclosure
                     writer.WriteEndElement();
                     writer.WriteElementString("category", Resources.Resources.PrekenWeb);
-                    if (preek.DatumAangemaakt.HasValue) writer.WriteElementString("pubDate", preek.DatumAangemaakt.Value.ToString("r"));
+                    if(preek.DatumGepubliceerd.HasValue) writer.WriteElementString("pubDate", preek.DatumGepubliceerd.Value.ToString("r"));
+                    else if (preek.DatumAangemaakt.HasValue) writer.WriteElementString("pubDate", preek.DatumAangemaakt.Value.ToString("r"));
                     else if (preek.DatumPreek.HasValue) writer.WriteElementString("pubDate", preek.DatumPreek.Value.ToString("r"));
                     else writer.WriteElementString("pubDate", DateTime.Now.ToString("r"));
 
@@ -306,6 +307,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     writer.WriteEndElement(); // End enclosure
 
                     writer.WriteElementString("category", Resources.Resources.PrekenWeb);
+                    if (zoekResultaatItem.Preek.DatumGepubliceerd.HasValue) writer.WriteElementString("pubDate", zoekResultaatItem.Preek.DatumGepubliceerd.Value.ToString("r"));
                     if (zoekResultaatItem.Preek.DatumAangemaakt.HasValue) writer.WriteElementString("pubDate", zoekResultaatItem.Preek.DatumAangemaakt.Value.ToString("r"));
                     else if (zoekResultaatItem.Preek.DatumPreek.HasValue) writer.WriteElementString("pubDate", zoekResultaatItem.Preek.DatumPreek.Value.ToString("r"));
                     else writer.WriteElementString("pubDate", DateTime.Now.ToString("r"));

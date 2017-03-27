@@ -238,8 +238,8 @@
                 </div>
             }
             <div class="field">
-                <div class="label">@Html.LabelFor(m => m.Preek.DatumAangemaakt)</div>
-                <div class="value" itemprop="datePublished" content="@string.Format("{0:yyyy-MM-dd}", Model.Preek.DatumAangemaakt)">@Html.DisplayFor(m => m.Preek.DatumAangemaakt)</div>
+                <div class="label">@Html.LabelFor(m => m.Preek.DatumGepubliceerd)</div>
+                <div class="value" itemprop="datePublished" content="@string.Format("{0:yyyy-MM-dd}", Model.Preek.DatumGepubliceerd)">@Html.DisplayFor(m => m.Preek.DatumGepubliceerd)</div>
             </div>
             @if (Model.Preek.DatumAangemaakt.HasValue && Model.Preek.DatumBijgewerkt.HasValue && (Model.Preek.DatumAangemaakt.Value - Model.Preek.DatumBijgewerkt.Value).TotalDays > 1)
             {
@@ -527,7 +527,8 @@
                     swfPath: prekenweb.rootUrl + "Scripts/",
                     supplied: "mp3",
                     cssSelectorAncestor: "#jp_container_1",
-                    wmode: "window"
+                    wmode: "window",
+                    autoBlur: false
                 },
             myControl = {
                 progress: $(options.cssSelectorAncestor + " .jp-progress-slider"),

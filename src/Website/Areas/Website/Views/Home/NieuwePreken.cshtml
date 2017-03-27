@@ -28,7 +28,7 @@
     <table>
 
         <tbody>
-            @foreach (ZoekresultaatItem regel in Model.Preken.OrderByDescending(p => p.Preek.DatumAangemaakt))
+            @foreach (ZoekresultaatItem regel in Model.Preken.OrderByDescending(p => p.Preek.DatumGepubliceerd))
             {
                 <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>       }>
                     <td class="VerbergMobiel IconColumn">
@@ -76,7 +76,7 @@
                     @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
                     {
                         <td itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">@Html.ActionLink(regel.Predikant, "Index", "Zoeken", new { PredikantId = regel.Preek.PredikantId }, new { data_linktype = "Predikant", data_relid = regel.Preek.PredikantId, data_preek_id = regel.Preek.Id })</span></td>
-                        <td class="VerbergMobiel ResultaatColDatum" itemprop="datePublished" content="@string.Format("{0:yyyy-MM-dd}", regel.Preek.DatumAangemaakt)">@datum</td>
+                        <td class="VerbergMobiel ResultaatColDatum" itemprop="datePublished" content="@string.Format("{0:yyyy-MM-dd}", regel.Preek.DatumGepubliceerd)">@datum</td>
                     }
                     else
                     {

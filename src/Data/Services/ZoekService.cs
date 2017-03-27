@@ -95,7 +95,7 @@ namespace PrekenWeb.Data.Services
                     break;
 
                 case SorteerOp.Datum:
-                    query = (zoekOpdracht.SorteerVolgorde == SorteerVolgorde.DESC) ? query.OrderBy(q => q.DatumAangemaakt) : query.OrderByDescending(q => q.DatumAangemaakt);
+                    query = (zoekOpdracht.SorteerVolgorde == SorteerVolgorde.DESC) ? query.OrderBy(q => q.DatumGepubliceerd) : query.OrderByDescending(q => q.DatumGepubliceerd);
                     break;
 
                 default:
@@ -109,7 +109,7 @@ namespace PrekenWeb.Data.Services
                     {
                         zoekOpdracht.SorteerOp = SorteerOp.Datum;
                         zoekOpdracht.SorteerVolgorde = (zoekOpdracht.SorteerVolgorde == SorteerVolgorde.DESC) ? SorteerVolgorde.DESC : SorteerVolgorde.ASC;
-                        query = (zoekOpdracht.SorteerVolgorde == SorteerVolgorde.DESC) ? query.OrderBy(q => q.Id) : query.OrderByDescending(q => q.DatumAangemaakt);
+                        query = (zoekOpdracht.SorteerVolgorde == SorteerVolgorde.DESC) ? query.OrderBy(q => q.Id) : query.OrderByDescending(q => q.DatumGepubliceerd);
                     }
                     break;
             }

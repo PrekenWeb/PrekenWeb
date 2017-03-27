@@ -52,7 +52,15 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [HttpPost, Authorize(Roles = "PreekToevoegen"), ValidateInput(false)]
         public async Task<ActionResult> Bewerk(Preek viewModel, HttpPostedFileBase bestand)
         {
-            if (viewModel.Gepubliceerd && !User.IsInRole("PreekFiatteren")) ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+            if (viewModel.Gepubliceerd)
+            {
+                if (!User.IsInRole("PreekFiatteren"))
+                    ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+                else
+                    viewModel.DatumGepubliceerd = DateTime.Now;
+            }
+            else
+                viewModel.DatumGepubliceerd = null;
 
             if (!ModelState.IsValid) return View(viewModel);
 

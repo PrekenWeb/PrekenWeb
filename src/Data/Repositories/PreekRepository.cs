@@ -49,7 +49,7 @@ namespace PrekenWeb.Data.Repositories
             //if (filter.SortBy != null)
             //{
             // Order
-            var orderableQuery = query.OrderByDescending(x => x.DatumAangemaakt);
+            var orderableQuery = query.OrderByDescending(x => x.DatumGepubliceerd);
             //query = filter.SortDirection == SortDirection.Ascending
             //    ? query.OrderByDescending(filter.SortBy)
             //    : query.OrderBy(filter.SortBy);
