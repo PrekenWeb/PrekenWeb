@@ -32,7 +32,6 @@ namespace Prekenweb.Website
 
         public class CultureFilter : IAuthorizationFilter
         {
-
             public void OnAuthorization(AuthorizationContext filterContext)
             {
                 var hostName = filterContext.HttpContext.Request.Url?.GetLeftPart(UriPartial.Authority).ToLower();

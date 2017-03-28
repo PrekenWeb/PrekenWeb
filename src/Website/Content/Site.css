@@ -2058,30 +2058,43 @@ body .ui-widget textarea {
 .Preek #afspelen .jp-gui ul li a {
   margin: 0px;
 }
-.Preek #afspelen .jp-gui ul li .fa {
+.Preek #afspelen .jp-gui .jp-controls-holder {
+  overflow: auto;
+}
+.Preek #afspelen .jp-gui .jp-controls-holder .fa {
+  float: left;
   font-size: 16px;
   /*float: left;*/
   margin: 0 4px;
-  width: 13px;
+  /*width: 13px;*/
 }
-.Preek #afspelen .jp-gui ul li.jp-play {
+.Preek #afspelen .jp-gui .jp-controls-holder .jp-play {
+  padding: 8px 10px;
   font-size: 14px;
 }
-.Preek #afspelen .jp-gui ul li.jp-pause {
+.Preek #afspelen .jp-gui .jp-controls-holder .jp-pause {
+  padding: 8px 10px;
   font-size: 14px;
 }
-.Preek #afspelen .jp-gui ul li.volume-control {
-  margin-left: 30px;
+.Preek #afspelen .jp-gui .jp-controls-holder .volume-control {
+  float: left;
+  /*margin-left: 30px;*/
+  margin-left: 10px;
+  padding: 6px 0;
 }
-.Preek #afspelen .jp-gui ul li.DownloadLinkInPlayer {
+.Preek #afspelen .jp-gui .jp-controls-holder .volume-control .volume-label {
+  float: left;
+}
+.Preek #afspelen .jp-gui .jp-controls-holder .DownloadLinkInPlayer {
   float: right;
-  margin-left: 30px;
+  /*margin-left: 30px;*/
   font-size: 14px;
+  padding: 6px 10px;
 }
-.Preek #afspelen .jp-gui ul li.DownloadLinkInPlayer a:hover {
+.Preek #afspelen .jp-gui .jp-controls-holder .DownloadLinkInPlayer a:hover {
   text-decoration: none;
 }
-.Preek #afspelen .jp-gui ul li.DownloadLinkInPlayer a:hover div {
+.Preek #afspelen .jp-gui .jp-controls-holder .DownloadLinkInPlayer a:hover div {
   color: #1274ba;
 }
 .Preek #afspelen .jp-button a {

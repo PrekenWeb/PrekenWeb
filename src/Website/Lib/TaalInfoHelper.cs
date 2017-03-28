@@ -17,8 +17,21 @@ namespace Prekenweb.Website.Lib
         {
             Talen = new Dictionary<string, WebsiteTaal>
             {
-                ["nl"] = new WebsiteTaal(new[] { "prekenweb.nl", "localhost" }, "nl", 1),
-                ["en"] = new WebsiteTaal(new[] { "sermonweb.org", "localhost" }, "en", 2)
+                ["nl"] = new WebsiteTaal(new[]
+                {
+                    "prekenweb.nl"
+#if DEBUG
+                    ,"localhost", "http://192.168.", "http://10."
+#endif
+                }, "nl", 1),
+                ["en"] = new WebsiteTaal(new[]
+                {
+                    "sermonweb.org"
+#if DEBUG
+                    ,"localhost", "http://192.168.", "http://10."
+#endif
+
+                }, "en", 2)
             };
         }
 

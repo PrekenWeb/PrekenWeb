@@ -10,7 +10,7 @@ namespace Prekenweb.Website
                 "~/Scripts/bootstrap*",
                 "~/Scripts/jquery.unobtrusive-ajax*",
                 "~/Scripts/jquery.validate*",
-                "~/Scripts/jquery.jplayer*",
+                "~/Scripts/jquery.jplayer.js",
                 "~/Scripts/jquery.easing*",
                 "~/Scripts/jquery.qtip*",
                 "~/Scripts/lofslider*",

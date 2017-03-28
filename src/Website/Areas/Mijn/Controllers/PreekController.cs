@@ -98,40 +98,28 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             var rootFolder = ConfigurationManager.AppSettings["PrekenFolder"];
 
-            nieuweBestandsnaam =
-                string.Format(
-                    "{0}_{1}{2}",
-                    Path.GetFileNameWithoutExtension(uploadedPreek.FileName),
-                    preekId,
-                    Path.GetExtension(uploadedPreek.FileName)
-                    );
+            nieuweBestandsnaam = $"{Path.GetFileNameWithoutExtension(uploadedPreek.FileName)}_{preekId}{Path.GetExtension(uploadedPreek.FileName)}";
 
-            if (nieuweBestandsnaam == oudeBestandsnaam || System.IO.File.Exists(string.Format("{0}{1}", rootFolder, nieuweBestandsnaam)))
-                nieuweBestandsnaam = string.Format(
-                    "{0}_{1}_{2:yyyy-MM-dd_hh-mm-ss}{3}",
-                    Path.GetFileNameWithoutExtension(uploadedPreek.FileName),
-                    preekId,
-                    DateTime.Now,
-                    Path.GetExtension(uploadedPreek.FileName)
-                    );
+            if (nieuweBestandsnaam == oudeBestandsnaam || System.IO.File.Exists($"{rootFolder}{nieuweBestandsnaam}"))
+                nieuweBestandsnaam = $"{Path.GetFileNameWithoutExtension(uploadedPreek.FileName)}_{preekId}_{DateTime.Now:yyyy-MM-dd_hh-mm-ss}{Path.GetExtension(uploadedPreek.FileName)}";
 
             try
             {
-                uploadedPreek.SaveAs(Server.MapPath(string.Format("{0}{1}", rootFolder, nieuweBestandsnaam)));
+                uploadedPreek.SaveAs(Server.MapPath($"{rootFolder}{nieuweBestandsnaam}"));
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Could not save sermon: {0}", ex.Message));
+                throw new Exception($"Could not save sermon: {ex.Message}");
             }
 
             try
             {
                 if (!string.IsNullOrEmpty(oudeBestandsnaam))
-                    System.IO.File.Delete(Server.MapPath(string.Format("{0}{1}", rootFolder, oudeBestandsnaam)));
+                    System.IO.File.Delete(Server.MapPath($"{rootFolder}{oudeBestandsnaam}"));
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Error deleting existing file, it was probably already deleted. New file uploaded successfully: {0}", ex.Message));
+                throw new Exception($"Error deleting existing file, it was probably already deleted. New file uploaded successfully: {ex.Message}");
             }
             return nieuweBestandsnaam;
         }
@@ -163,7 +151,15 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [Authorize(Roles = "PreekToevoegen"), HttpPost, ValidateInput(false)]
         public async Task<ActionResult> Maak(Preek viewModel, HttpPostedFileBase bestand)
         {
-            if (viewModel.Gepubliceerd && !User.IsInRole("PreekFiatteren")) ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+            if (viewModel.Gepubliceerd)
+            {
+                if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
+                    ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+                else if (!viewModel.DatumGepubliceerd.HasValue)
+                    viewModel.DatumGepubliceerd = DateTime.Now;
+            }
+            else viewModel.DatumGepubliceerd = null;
+
 
             if (ModelState.IsValid)
             {

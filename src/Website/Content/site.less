@@ -2458,44 +2458,55 @@ body .ui-widget select, body .ui-widget input, body .ui-widget textarea {
             margin: 0px;
         }
 
-        .jp-gui ul li .fa {
+        .jp-gui .jp-controls-holder {
+            overflow: auto;
+        }
+
+        .jp-gui .jp-controls-holder .fa {
+            float: left;
             font-size: 16px;
             /*float: left;*/
             margin: 0 4px;
-            width: 13px;
+            /*width: 13px;*/
         }
 
-        .jp-gui ul li.jp-play {
+        .jp-gui .jp-controls-holder .jp-play {
+            padding: 8px 10px;
             font-size: 14px;
         }
-
         /*.jp-gui ul li.jp-play a {
             margin-right: 10px;
         }*/
-
-        .jp-gui ul li.jp-pause {
+        .jp-gui .jp-controls-holder .jp-pause {
+            padding: 8px 10px;
             font-size: 14px;
         }
-
         /*.jp-gui ul li.jp-pause a {
             margin-right: 10px;
         }*/
-
-        .jp-gui ul li.volume-control {
-            margin-left: 30px;
+        .jp-gui .jp-controls-holder .volume-control {
+            float: left;
+            /*margin-left: 30px;*/
+            margin-left: 10px;
+            padding: 6px 0;
         }
 
-        .jp-gui ul li.DownloadLinkInPlayer {
+        .jp-gui .jp-controls-holder .volume-control .volume-label {
+            float: left;
+        }
+
+        .jp-gui .jp-controls-holder .DownloadLinkInPlayer {
             float: right;
-            margin-left: 30px;
+            /*margin-left: 30px;*/
             font-size: 14px;
+            padding: 6px 10px;
         }
 
-        .jp-gui ul li.DownloadLinkInPlayer a:hover {
+        .jp-gui .jp-controls-holder .DownloadLinkInPlayer a:hover {
             text-decoration: none;
         }
 
-        .jp-gui ul li.DownloadLinkInPlayer a:hover div {
+        .jp-gui .jp-controls-holder .DownloadLinkInPlayer a:hover div {
             color: @kleur2;
         }
 

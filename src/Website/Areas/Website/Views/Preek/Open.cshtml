@@ -130,20 +130,22 @@
             <div id="jquery_jplayer_1" class="jp-jplayer"></div>
             <div id="jp_container_1">
                 <div class="jp-gui">
-                    <ul>
-                        <li class="jp-play jp-button ui-state-default ui-corner-all"><a href="#" class="jp-play fa fa-play" tabindex="1" title="play"></a>@*<span>@Resources.Afspelen</span>*@</li>
-                        <li class="jp-pause jp-button ui-state-default ui-corner-all"><a href="#" class="jp-pause fa fa-pause" tabindex="1" title="pause"></a>@*<span>@Resources.Pauze</span>*@</li>
-                        <li class="volume-control">
-                            <span>Volume:&nbsp;</span>
-                            <div class="jp-volume-slider"></div>
-                        </li>
-                        <li class="DownloadLinkInPlayer jp-button ui-state-default ui-corner-all">
-                            <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false })" class="" onclick="if(checkiOS('@Model.Preek.Bestandsnaam')){ window.location = this.href; } return false;;">
-                                <div class="fa fa-cloud-download"></div>
-                                @Resources.DownloadPreek
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="jp-controls-holder">
+                        <div class="jp-controls">
+                            <button class="jp-play ui-state-default ui-corner-all fa fa-play" role="button" tabindex="0"><span class="sr-only">@Resources.Afspelen</span></button>
+                            <button class="jp-pause ui-state-default ui-corner-all fa fa-pause" role="button" tabindex="0"><span class="sr-only">@Resources.Pauze</span></button>
+                            <div class="volume-control">
+                                <span class="volume-label">Volume:&nbsp;</span>
+                                <div class="jp-volume-slider"></div>
+                            </div>
+                            <span class="DownloadLinkInPlayer jp-button ui-state-default ui-corner-all">
+                                <a href="@Url.Action("Download", new {id = Model.Preek.Id, inline = false})" class="" onclick="if (checkiOS('@Model.Preek.Bestandsnaam')) { window.location = this.href; }return false;;">
+                                    <div class="fa fa-cloud-download"></div>
+                                    @Resources.DownloadPreek
+                                </a>
+                            </span>
+                        </div>
+                    </div>
                     <p class="clear"></p>
                     <div class="jp-current-time">00:00</div>
                     <div class="jp-duration">@string.Format("{0:mm\\:ss}", Model.Preek.Duur)</div>
@@ -527,8 +529,7 @@
                     swfPath: prekenweb.rootUrl + "Scripts/",
                     supplied: "mp3",
                     cssSelectorAncestor: "#jp_container_1",
-                    wmode: "window",
-                    autoBlur: false
+                    wmode: "window"
                 },
             myControl = {
                 progress: $(options.cssSelectorAncestor + " .jp-progress-slider"),
