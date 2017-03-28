@@ -54,13 +54,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             if (viewModel.Gepubliceerd)
             {
-                if (!User.IsInRole("PreekFiatteren"))
+                if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
                     ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
-                else
+                else if(!viewModel.DatumGepubliceerd.HasValue)
                     viewModel.DatumGepubliceerd = DateTime.Now;
             }
-            else
-                viewModel.DatumGepubliceerd = null;
+            else viewModel.DatumGepubliceerd = null;
 
             if (!ModelState.IsValid) return View(viewModel);
 
