@@ -19,22 +19,22 @@ namespace PrekenWeb.Data.Services
             _preekRepository = preekRepository;
         }
 
-        public async Task<SermonModel> GetSingle(int id)
+        public async Task<Sermon> GetSingle(int id)
         {
             var preek = await _preekRepository.GetSingle(id);
 
-            var sermon = _mapper.Map<Preek, SermonModel>(preek);
+            var sermon = _mapper.Map<Preek, Sermon>(preek);
             return sermon;
         }
 
-        public async Task<IEnumerable<SermonModel>> Get(SermonFilter filter)
+        public async Task<IEnumerable<Sermon>> Get(SermonFilter filter)
         {
             var preken = await _preekRepository.Get(_mapper.Map<SermonFilter,SermonDataFilter>(filter));
-            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<SermonModel>>(preken);
+            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Sermon>>(preken);
             return sermons;
         }
 
-        public async Task<IEnumerable<SermonModel>> GetNew(SermonFilter filter)
+        public async Task<IEnumerable<Sermon>> GetNew(SermonFilter filter)
         {
             if(filter == null)
                 filter = new SermonFilter();
@@ -46,8 +46,23 @@ namespace PrekenWeb.Data.Services
             dataFilter.SortDirection = SortDirection.Descending;
 
             var preken = await _preekRepository.Get(dataFilter);
-            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<SermonModel>>(preken);
+            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Sermon>>(preken);
             return sermons;
+        }
+
+        public async Task<int> Add(Sermon sermon)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<int> Update(Sermon sermon)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<bool> Delete(Sermon sermon)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

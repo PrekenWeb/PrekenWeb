@@ -41,7 +41,7 @@ namespace PrekenWeb.Data
         int SaveChanges();
         Task<int> SaveChangesAsync();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-        Database Database { get; }
+        System.Data.Entity.Database Database { get; }
         DbContextConfiguration Configuration { get; }
 
         // Implemented by IdentityDbContext 

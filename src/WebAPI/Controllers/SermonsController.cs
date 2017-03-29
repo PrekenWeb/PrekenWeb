@@ -1,68 +1,43 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using PrekenWeb.Data.Services.Interfaces;
-using PrekenWeb.Data.ViewModels;
+using WebAPI.Interfaces;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
     [RoutePrefix("api/Sermons")]
     public class SermonsController : ApiController
     {
-        private readonly ISermonsService _sermonsService;
-        private readonly ILanguagesService _languagesService;
+        private readonly ISermonsRepository _sermonsRepository;
 
-        //public SermonsController()
-        //{
-        //}
-
-        public SermonsController(ISermonsService homeService, ILanguagesService languagesService)
+        public SermonsController(ISermonsRepository sermonsRepository)
         {
-            _sermonsService = homeService;
-            _languagesService = languagesService;
+            _sermonsRepository = sermonsRepository;
         }
 
         [AllowAnonymous]
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<SermonModel> Get(int id)
+        public async Task<SermonViewModel> Get(int id)
         {
-            return await _sermonsService.GetSingle(id);
+            return await _sermonsRepository.GetSingle(id);
         }
 
         [AllowAnonymous]
         [HttpGet]
         [Route("")]
-        public async Task<IEnumerable<SermonModel>> Get([FromUri]SermonFilter filter)
+        public async Task<IEnumerable<SermonViewModel>> Get([FromUri]SermonFilterModel filter)
         {
-            filter = EnsureLanguage(filter);
-            return await _sermonsService.Get(filter);
+            return await _sermonsRepository.Get(filter);
         }
 
         [AllowAnonymous]
         [HttpGet]
         [Route("New")]
-        public async Task<IEnumerable<SermonModel>> New([FromUri]SermonFilter filter)
+        public async Task<IEnumerable<SermonViewModel>> New([FromUri]SermonFilterModel filter)
         {
-            filter = EnsureLanguage(filter);
-            return await _sermonsService.GetNew(filter);
+            return await _sermonsRepository.GetNew(filter);
         }
-
-        // private methods
-        #region EnsureLanguage
-
-        private SermonFilter EnsureLanguage(SermonFilter filter)
-        {
-            if (filter?.LanguageId != null)
-                return filter;
-
-            if (filter == null)
-                filter = new SermonFilter();
-
-            filter.LanguageId = _languagesService.GetDefault().Id;
-            return filter;
-        }
-
-        #endregion
     }
 }

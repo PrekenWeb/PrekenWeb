@@ -6,8 +6,11 @@ namespace PrekenWeb.Data.Services.Interfaces
 {
     public interface ISermonsService
     {
-        Task<SermonModel> GetSingle(int id);
-        Task<IEnumerable<SermonModel>> Get(SermonFilter filter);
-        Task<IEnumerable<SermonModel>> GetNew(SermonFilter filter);
+        Task<Sermon> GetSingle(int id);
+        Task<IEnumerable<Sermon>> Get(SermonFilter filter);
+        Task<IEnumerable<Sermon>> GetNew(SermonFilter filter);
+        Task<int> Add(Sermon sermon);
+        Task<int> Update(Sermon sermon);
+        Task<bool> Delete(Sermon sermon);
     }
 }

@@ -13,6 +13,7 @@ using PrekenWeb.Security;
 using WebAPI;
 
 [assembly: OwinStartup(typeof(Startup))]
+
 namespace WebAPI
 {
     public class Startup
@@ -26,14 +27,14 @@ namespace WebAPI
             app.CreatePerOwinContext<PrekenWebUserManager>(PrekenWebUserManager.Create);
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
+            {
+                AuthenticationMode = AuthenticationMode.Active,
+                AllowedAudiences = new[] {ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceId"]},
+                IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                 {
-                    AuthenticationMode = AuthenticationMode.Active,
-                    AllowedAudiences = new[] { ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceId"] },
-                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
-                    {
-                        new SymmetricKeyIssuerSecurityTokenProvider("PrekenWeb.Website",TextEncodings.Base64Url.Decode( ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceSecret"]))
-                    }
-                });
+                    new SymmetricKeyIssuerSecurityTokenProvider("PrekenWeb.Website", TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceSecret"]))
+                }
+            });
 
             WebApiConfig.Register(config);
 

@@ -11,7 +11,7 @@ namespace PrekenWeb.Data.Mapping.Profiles
 
         public SermonModelAutoMapperProfile()
         {
-            CreateMap<Preek, SermonModel>()
+            CreateMap<Preek, Sermon>()
                 .ForMember(sermonModel => sermonModel.Id, options => options.MapFrom(preek => preek.Id))
                 .ForMember(sermonModel => sermonModel.Title, options => options.MapFrom(preek => preek.PreekTitel))
                 .ForMember(sermonModel => sermonModel.Information, options => options.MapFrom(preek => preek.Informatie))
