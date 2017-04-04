@@ -1,4 +1,4 @@
-﻿namespace PrekenWeb.Data.ViewModels
+﻿namespace Data.ViewModels
 {
     public class TekstPagina
     {

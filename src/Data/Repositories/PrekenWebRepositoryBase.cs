@@ -1,6 +1,6 @@
-﻿using PrekenWeb.Data.Identity;
+﻿using Data.Identity;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public abstract class PrekenWebRepositoryBase : IPrekenWebRepository
     {

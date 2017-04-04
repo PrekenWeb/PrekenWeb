@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class Predikant
     {

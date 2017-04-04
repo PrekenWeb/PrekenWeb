@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Tables;
+using Data.Repositories;
+using Data.Tables;
 using PrekenWeb.Security;
 
 namespace WebAPI.Controllers

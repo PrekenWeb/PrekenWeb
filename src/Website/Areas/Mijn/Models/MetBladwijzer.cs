@@ -1,4 +1,4 @@
-﻿using PrekenWeb.Data.Services;
+﻿using Data.Services;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

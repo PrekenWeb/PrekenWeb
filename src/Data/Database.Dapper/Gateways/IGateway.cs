@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PrekenWeb.Data.Gateways
+namespace Data.Database.Dapper.Gateways
 {
     public interface IGateway<TDataModel, in TDataFilter>
     {

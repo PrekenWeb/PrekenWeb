@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data.Repositories;
+using Data.Tables;
+using Data.ViewModels;
 
-namespace PrekenWeb.Data.Services
+namespace Data.Services
 {
     public class ZoekService
     {

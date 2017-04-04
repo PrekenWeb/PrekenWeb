@@ -1,9 +1,9 @@
 using System;
 using System.Linq.Expressions;
 using DapperExtensions;
-using PrekenWeb.Data.Database.Dapper.Models;
+using Data.Database.Dapper.Models;
 
-namespace PrekenWeb.Data.Database.Dapper.Metadata
+namespace Data.Database.Dapper.Metadata
 {
     public class FilterMetadata
     {

@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Security.csproj", "{E725F7FD-732E-47AA-889E-DF9067790C9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.UnitTests", "Website.UnitTests\Website.UnitTests.csproj", "{B14C5447-82F6-4469-A3BD-A4AF459D9D8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Tests", "Test\Website.Tests\Website.Tests.csproj", "{B14C5447-82F6-4469-A3BD-A4AF459D9D8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Shared", "App.Shared\App.Shared.csproj", "{C385C1D1-6FF0-402E-9621-A6FC0FACCB07}"
 EndProject
@@ -35,6 +35,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{79D77982-B55E-46B5-AD4C-6319FF4AA7E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Tests", "Test\Data.Tests\Data.Tests.csproj", "{70699B8B-687E-4FE9-9DAF-F624B375B8CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{B8047269-0DAA-4480-91DC-AE368A78BED2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -374,11 +376,44 @@ Global
 		{70699B8B-687E-4FE9-9DAF-F624B375B8CC}.Test|iPhoneSimulator.Build.0 = Release|Any CPU
 		{70699B8B-687E-4FE9-9DAF-F624B375B8CC}.Test|x86.ActiveCfg = Release|Any CPU
 		{70699B8B-687E-4FE9-9DAF-F624B375B8CC}.Test|x86.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Debug|x86.Build.0 = Debug|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|Any CPU.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|Any CPU.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|iPhone.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|iPhone.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|x86.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Mobile|x86.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|iPhone.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|x86.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Release|x86.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|Any CPU.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|iPhone.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|iPhone.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|x86.ActiveCfg = Release|Any CPU
+		{B8047269-0DAA-4480-91DC-AE368A78BED2}.Test|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{B14C5447-82F6-4469-A3BD-A4AF459D9D8D} = {79D77982-B55E-46B5-AD4C-6319FF4AA7E4}
 		{70699B8B-687E-4FE9-9DAF-F624B375B8CC} = {79D77982-B55E-46B5-AD4C-6319FF4AA7E4}
 	EndGlobalSection
 EndGlobal

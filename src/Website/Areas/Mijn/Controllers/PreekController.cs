@@ -1,10 +1,6 @@
 ﻿using System.Configuration;
 using System.Threading.Tasks;
 using Hangfire;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using System;
@@ -14,6 +10,10 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Tables;
+using Data.ViewModels;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Hangfire;
 

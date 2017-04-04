@@ -1,7 +1,5 @@
 ﻿using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Services;
 using Prekenweb.Website.Lib;
 using System;
 using System.Linq;
@@ -14,6 +12,8 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Xml;
+using Data.Repositories;
+using Data.Services;
 using Prekenweb.Website.Lib.HtmlHelpers;
 
 namespace Prekenweb.Website.Areas.Website.Controllers

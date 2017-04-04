@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Tables;
+using Data.Tables;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public interface IPreekRepository
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using PrekenWeb.Data.Services.Interfaces;
-using PrekenWeb.Data.ViewModels;
+using Business.Models;
+using Business.Services.Interfaces;
 using WebAPI.Common;
 using WebAPI.Interfaces;
 using WebAPI.Models;

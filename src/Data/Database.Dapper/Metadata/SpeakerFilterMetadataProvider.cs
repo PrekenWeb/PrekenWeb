@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DapperExtensions;
-using PrekenWeb.Data.Database.Dapper.Models;
-using PrekenWeb.Data.DataModels;
+using Data.Database.Dapper.Models;
 
-namespace PrekenWeb.Data.Database.Dapper.Metadata
+namespace Data.Database.Dapper.Metadata
 {
     internal class SpeakerFilterMetadataProvider : IFilterMetadataProvider
     {

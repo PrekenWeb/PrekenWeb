@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PrekenWeb.Data;
+using Data;
 
 namespace Prekenweb.Website.Lib.ActionResults
 {

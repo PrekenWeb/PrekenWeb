@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PrekenWeb.Data.ViewModels;
+using Data.ViewModels;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

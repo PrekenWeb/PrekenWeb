@@ -7,9 +7,9 @@
     <ProjectGuid>{B5BE9BAE-F1EB-4F71-9048-297D61A21DA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrekenWeb.Data</RootNamespace>
-    <AssemblyName>PrekenWeb.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -41,9 +41,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
@@ -63,9 +62,8 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -87,18 +85,21 @@
   <ItemGroup>
     <Compile Include="Attributes\TooltipAttribute.cs" />
     <Compile Include="Database.Dapper\DependencyInjection.cs" />
+    <Compile Include="Database.Dapper\Gateways\ILanguagesGateway.cs" />
+    <Compile Include="Database.Dapper\Gateways\ILecturesGateway.cs" />
+    <Compile Include="Database.Dapper\Gateways\LanguagesGateway.cs" />
+    <Compile Include="Database.Dapper\Gateways\LecturesGateway.cs" />
     <Compile Include="Database.Dapper\Metadata\IPredicateFactory.cs" />
+    <Compile Include="Database.Dapper\Metadata\LanguageFilterMetadataProvider.cs" />
+    <Compile Include="Database.Dapper\Metadata\LectureFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Models\DataFilter.cs" />
     <Compile Include="Database.Dapper\Metadata\IFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Metadata\PredicateFactory.cs" />
-    <Compile Include="Database.Dapper\Models\Speaker.cs" />
-    <Compile Include="Database.Dapper\Models\SpeakerDataFilter.cs" />
+    <Compile Include="Database.Dapper\Models\LectureData.cs" />
+    <Compile Include="Database.Dapper\Models\LanguageData.cs" />
+    <Compile Include="Database.Dapper\Models\SpeakerData.cs" />
     <Compile Include="Database.Dapper\Metadata\SpeakerFilterMetadataProvider.cs" />
     <Compile Include="DependencyInjection.cs" />
-    <Compile Include="FakeDbSet\DbAsyncEnumerable.cs" />
-    <Compile Include="FakeDbSet\DbAsyncEnumerator.cs" />
-    <Compile Include="FakeDbSet\DbAsyncQueryProvider.cs" />
-    <Compile Include="FakeDbSet\InMemoryDbSet.cs" />
     <Compile Include="Database.Dapper\Metadata\FilterMetadata.cs" />
     <Compile Include="Database.Dapper\IDbConnectionFactory.cs" />
     <Compile Include="Database.Dapper\Gateways\IGateway.cs" />
@@ -112,10 +113,7 @@
     <Compile Include="Identity\PrekenWebUserLogin.cs" />
     <Compile Include="Identity\PrekenWebUserRole.cs" />
     <Compile Include="IPrekenwebContext.cs" />
-    <Compile Include="Mapping\IocInjectedMapperConfiguration.cs" />
-    <Compile Include="Mapping\Profiles\SpeakerDataToSpeakerAutoMapperProfile.cs" />
     <Compile Include="Mapping\Profiles\PreekDtoAutoMapperProfile.cs" />
-    <Compile Include="Mapping\Profiles\SermonModelAutoMapperProfile.cs" />
     <Compile Include="PrekenwebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepository.cs" />
@@ -133,16 +131,8 @@
     <Compile Include="Repositories\SpotlightRepository.cs" />
     <Compile Include="Repositories\TekstRepository.cs" />
     <Compile Include="Repositories\ZoekenRepository.cs" />
-    <Compile Include="Services\Interfaces\IHomeService.cs" />
-    <Compile Include="Services\Interfaces\ILanguagesService.cs" />
-    <Compile Include="Services\Interfaces\ISermonsService.cs" />
-    <Compile Include="Services\Interfaces\ISpeakersService.cs" />
-    <Compile Include="Services\LanguagesService.cs" />
-    <Compile Include="Services\SermonsService.cs" />
-    <Compile Include="Services\SpeakersService.cs" />
     <Compile Include="Services\Zoekresultaat.cs" />
     <Compile Include="Services\ZoekService.cs" />
-    <Compile Include="Smtp\SmtpHelper.cs" />
     <Compile Include="Tables\Afbeelding.cs" />
     <Compile Include="Tables\AfbeeldingConfiguration.cs" />
     <Compile Include="Tables\Boek.cs" />
@@ -194,12 +184,8 @@
     <Compile Include="Tables\TekstConfiguration.cs" />
     <Compile Include="Tables\ZoekOpdracht.cs" />
     <Compile Include="Tables\ZoekOpdrachtConfiguration.cs" />
-    <Compile Include="TestData\TestDataProvider.cs" />
-    <Compile Include="ViewModels\Language.cs" />
     <Compile Include="ViewModels\PreekTypeEnum.cs" />
     <Compile Include="ViewModels\ResultaatReden.cs" />
-    <Compile Include="ViewModels\Sermon.cs" />
-    <Compile Include="ViewModels\Speaker.cs" />
     <Compile Include="ViewModels\TekstPagina.cs" />
     <Compile Include="ViewModels\ZoekresultaatItem.cs" />
   </ItemGroup>

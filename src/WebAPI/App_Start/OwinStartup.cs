@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Web.Http;
+using Data;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security;
@@ -8,7 +9,6 @@ using Microsoft.Owin.Security.Jwt;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
-using PrekenWeb.Data;
 using PrekenWeb.Security;
 using WebAPI;
 

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class Tekst
     {

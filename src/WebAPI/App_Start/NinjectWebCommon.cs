@@ -1,16 +1,11 @@
 using System.Web;
 using AutoMapper;
+using Business.Mapping;
+using Data.Mapping;
+using Data.Repositories;
 using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using Ninject.Web.Common;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Gateways;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Mapping;
-using PrekenWeb.Data.Mapping.Profiles;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Services;
-using PrekenWeb.Data.Services.Interfaces;
 using PrekenWeb.Security;
 using WebAPI.Interfaces;
 using WebAPI.Mapping.Profiles;
@@ -37,8 +32,8 @@ namespace WebAPI
 
         private static void RegisterServices(IKernel kernel)
         {
-            // Data
-            DependencyInjection.RegisterDependencies(kernel);
+            // Business
+            Business.DependencyInjection.RegisterDependencies(kernel);
 
             // Security
             kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>();
@@ -47,7 +42,11 @@ namespace WebAPI
             // API
             kernel.Bind<Profile>().To<SermonApiModelAutoMapperProfile>().InSingletonScope();
 
+            kernel.Bind<ISermonsRepository>().To<SermonsRepository>();
+
+            kernel.Bind<ILanguagesRepository>().To<LanguagesRepository>();
             kernel.Bind<ISpeakersRepository>().To<SpeakersRepository>();
+            kernel.Bind<ILecturesRepository>().To<LecturesRepository>();
 
             kernel.Bind<IPreekRepository>().To<PreekRepository>();
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();

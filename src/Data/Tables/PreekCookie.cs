@@ -1,8 +1,8 @@
 using System;
+using Data.Identity;
 using Newtonsoft.Json;
-using PrekenWeb.Data.Identity;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class PreekCookie
     {

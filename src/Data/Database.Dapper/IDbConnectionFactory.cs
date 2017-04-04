@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace PrekenWeb.Data.Gateways
+namespace Data.Database.Dapper
 {
     public interface IDbConnectionFactory
     {

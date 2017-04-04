@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Data;
+using Data.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
 
 namespace PrekenWeb.Security
 { 

@@ -3,17 +3,16 @@ using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Web.Hosting;
+using Business.Helpers;
+using Data;
 using Hangfire;
 using log4net;
 using NAudio.FileFormats.Mp3;
 using NAudio.Wave;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Smtp;
 
 namespace Prekenweb.Website.Lib.Hangfire
 {

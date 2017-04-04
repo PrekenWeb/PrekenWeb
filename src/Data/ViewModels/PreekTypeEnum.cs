@@ -1,6 +1,6 @@
-﻿namespace PrekenWeb.Data.ViewModels
+﻿namespace Data.ViewModels
 {
-    public enum PreekTypeEnum : int
+    public enum PreekTypeEnum
     {
         Peek = 1,
         Lezing = 2,

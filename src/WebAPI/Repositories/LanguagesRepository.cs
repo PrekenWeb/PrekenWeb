@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using PrekenWeb.Data.Services.Interfaces;
-using PrekenWeb.Data.ViewModels;
+using Business.Models;
+using Business.Services.Interfaces;
 using WebAPI.Common;
 using WebAPI.Interfaces;
 using WebAPI.Models;
@@ -46,7 +46,7 @@ namespace WebAPI.Repositories
             return await _languagesService.Add(language);
         }
 
-        public async Task<int> Update(LanguageViewModel languageModel)
+        public async Task<bool> Update(LanguageViewModel languageModel)
         {
             var existing = _languagesService.GetSingle(languageModel.Id);
             if (existing == null) throw new ItemNotFoundException();

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using PrekenWeb.Data.Tables;
+using Data.Tables;
 
-namespace PrekenWeb.Data.ViewModels
+namespace Data.ViewModels
 {
     public class ZoekresultaatItem
     {

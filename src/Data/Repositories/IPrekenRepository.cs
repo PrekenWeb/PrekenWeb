@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data.Tables;
+using Data.ViewModels;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public interface IPrekenRepository
     {

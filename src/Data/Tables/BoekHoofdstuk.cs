@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 { 
     public class BoekHoofdstuk
     {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace PrekenWeb.Data.Identity
+namespace Data.Identity
 {
     internal partial class GebruikerConfiguration : EntityTypeConfiguration<Gebruiker>
     {

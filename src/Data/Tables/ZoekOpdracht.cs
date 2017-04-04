@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.ViewModels;
+using Data.Identity;
+using Data.ViewModels;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     [Table("ZoekOpdracht")]
     public class ZoekOpdracht : IEquatable<ZoekOpdracht>

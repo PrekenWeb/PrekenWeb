@@ -1,8 +1,8 @@
-﻿using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Tables;
 using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers

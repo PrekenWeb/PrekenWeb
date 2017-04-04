@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Repositories;
+using Data.Repositories;
 using PrekenWeb.Security;
 
 namespace Prekenweb.Website.Lib.MailTemplating

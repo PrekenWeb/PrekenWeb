@@ -3,9 +3,9 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Tables;
+using Data.Tables;
 
-namespace PrekenWeb.Data
+namespace Data
 {
     public interface IPrekenwebContext<T> : IDisposable where T : class
     {

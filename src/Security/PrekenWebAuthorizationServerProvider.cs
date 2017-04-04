@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Data.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.OAuth;
-using PrekenWeb.Data.Identity;
 
 namespace PrekenWeb.Security
 {

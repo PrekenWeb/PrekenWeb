@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using Data.Identity;
+using Data.Mapping.Profiles;
 using Ninject;
 using Ninject.Web.Common;
-using PrekenWeb.Data.Gateways;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Mapping.Profiles;
-using PrekenWeb.Data.Services;
-using PrekenWeb.Data.Services.Interfaces;
 
-namespace PrekenWeb.Data
+namespace Data
 {
     public static class DependencyInjection
     {
@@ -26,13 +18,8 @@ namespace PrekenWeb.Data
             Database.Dapper.DependencyInjection.RegisterDependencies(kernel);
 
             // AutoMapper mapping profiles
-            kernel.Bind<Profile>().To<SpeakerDataToSpeakerAutoMapperProfile>().InSingletonScope();
             kernel.Bind<Profile>().To<PreekDtoAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<SermonModelAutoMapperProfile>().InSingletonScope();
 
-            kernel.Bind<ILanguagesService>().To<LanguagesService>().InSingletonScope();
-            kernel.Bind<ISpeakersService>().To<SpeakersService>().InSingletonScope();
-            kernel.Bind<ISermonsService>().To<SermonsService>().InSingletonScope();
         }
     }
 }

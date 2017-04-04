@@ -1,9 +1,9 @@
-﻿using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using Prekenweb.Website.Areas.Mijn.Models;
+﻿using Prekenweb.Website.Areas.Mijn.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
 using Hangfire;
 using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;

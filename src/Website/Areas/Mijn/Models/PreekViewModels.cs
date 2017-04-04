@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using PrekenWeb.Data.Tables;
+using Data.Tables;
 
 namespace Prekenweb.Website.Areas.Mijn.Models
 {

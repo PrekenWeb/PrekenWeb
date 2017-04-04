@@ -3,7 +3,6 @@ using MailChimp;
 using MailChimp.Campaigns;
 using MailChimp.Errors;
 using MailChimp.Helper;
-using PrekenWeb.Data.Repositories;
 using MailChimp.Lists;
 using PrekenWeb.Security;
 using System;
@@ -12,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Web.Mvc;
+using Data.Repositories;
 using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers

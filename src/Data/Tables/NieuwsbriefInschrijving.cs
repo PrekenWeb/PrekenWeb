@@ -1,6 +1,6 @@
 using System;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class NieuwsbriefInschrijving
     {

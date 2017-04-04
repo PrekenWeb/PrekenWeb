@@ -1,8 +1,9 @@
-﻿using System;
-using System.IdentityModel.Tokens;
+﻿
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
-using Thinktecture.IdentityModel.Tokens;
 
 namespace PrekenWeb.Security
 {
@@ -11,7 +12,7 @@ namespace PrekenWeb.Security
         public const string AudienceIdPropertyKey = "audienceId";
         public const string AudienceSecretPropertyKey = "audienceSecret";
 
-        private readonly string _issuer = string.Empty;
+        private readonly string _issuer;
 
         public JwtFormat(string issuer)
         {
@@ -20,21 +21,23 @@ namespace PrekenWeb.Security
 
         public string Protect(AuthenticationTicket data)
         {
-            if (data == null)   throw new ArgumentNullException("data"); 
+            if (data == null)   throw new ArgumentNullException(nameof(data)); 
 
             string audienceId = data.Properties.Dictionary.ContainsKey(AudienceIdPropertyKey) ? data.Properties.Dictionary[AudienceIdPropertyKey] : null;
-            if (string.IsNullOrWhiteSpace(audienceId)) throw new InvalidOperationException(string.Format("AuthenticationTicket.Properties does not include {0}", AudienceIdPropertyKey));
+            if (string.IsNullOrWhiteSpace(audienceId)) throw new InvalidOperationException($"AuthenticationTicket.Properties does not include {AudienceIdPropertyKey}");
 
             string audienceSecret = data.Properties.Dictionary.ContainsKey(AudienceSecretPropertyKey) ? data.Properties.Dictionary[AudienceSecretPropertyKey] : null;
-            if (string.IsNullOrWhiteSpace(audienceSecret)) throw new InvalidOperationException(string.Format("AuthenticationTicket.Properties does not include {0}", AudienceSecretPropertyKey));
+            if (string.IsNullOrWhiteSpace(audienceSecret)) throw new InvalidOperationException($"AuthenticationTicket.Properties does not include {AudienceSecretPropertyKey}");
 
             var keyByteArray = TextEncodings.Base64Url.Decode(audienceSecret);
-            var signingKey = new HmacSigningCredentials(keyByteArray);
 
             var issued = data.Properties.IssuedUtc ?? DateTime.Now;
             var expires = data.Properties.ExpiresUtc ?? DateTime.Now.AddHours(1);
 
-            var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.UtcDateTime, expires.UtcDateTime, signingKey);
+            var securityKey = new SymmetricSecurityKey(keyByteArray);
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+
+            var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.UtcDateTime, expires.UtcDateTime, signingCredentials);
 
             var handler = new JwtSecurityTokenHandler();
 

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data.Tables;
+using Data.ViewModels;
 
-namespace PrekenWeb.Data.Services
+namespace Data.Services
 {
     public class Zoekresultaat
     {

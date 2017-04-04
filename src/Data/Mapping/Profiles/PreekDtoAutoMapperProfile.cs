@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Prekenweb.Models.Dtos;
 
-namespace PrekenWeb.Data.Mapping.Profiles
+namespace Data.Mapping.Profiles
 {
     public class PreekDtoAutoMapperProfile : Profile
     {

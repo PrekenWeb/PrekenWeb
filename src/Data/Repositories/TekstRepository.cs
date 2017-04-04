@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data.Identity;
+using Data.Tables;
+using Data.ViewModels;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public class TekstRepository : PrekenWebRepositoryBase, ITekstRepository
     {

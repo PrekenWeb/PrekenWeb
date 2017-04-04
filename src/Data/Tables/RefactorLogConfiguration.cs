@@ -1,6 +1,6 @@
 using System.Data.Entity.ModelConfiguration;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     internal class RefactorLogConfiguration : EntityTypeConfiguration<RefactorLog>
     {

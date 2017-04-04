@@ -1,7 +1,4 @@
 ﻿using System.Configuration;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.ViewModels;
 using PrekenWeb.Security;
 using System;
 using System.Collections.Generic;
@@ -9,6 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using Data.Identity;
+using Data.Repositories;
+using Data.ViewModels;
 using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Cache;

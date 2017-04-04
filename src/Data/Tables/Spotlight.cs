@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using PrekenWeb.Data.Attributes;
+using Data.Attributes;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class Spotlight
     {

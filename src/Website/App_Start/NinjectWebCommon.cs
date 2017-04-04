@@ -1,16 +1,19 @@
 using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Repositories;
 using Ninject;
 using Ninject.Web.Common;
 using Ninject.Web.Mvc.FilterBindingSyntax;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Repositories;
 using PrekenWeb.Security;
 using Microsoft.AspNet.Identity.Owin;
 using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.Lib.Identity;
+using Prekenweb.Website.Mapping.Profiles;
+using AutoMapper;
+using Business.Mapping;
 
 namespace Prekenweb.Website
 {
@@ -56,6 +59,13 @@ namespace Prekenweb.Website
             kernel.Bind<IZoekenRepository>().To<ZoekenRepository>();
             kernel.Bind<IPrekenwebCache>().To<PrekenwebHttpCache>().InRequestScope();
             kernel.Bind<IPrekenWebUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<PrekenWebUserManager>()).InRequestScope();
+
+            // AutoMapper mapping profiles
+            kernel.Bind<Profile>().To<WebsiteAutoMapperProfile>().InSingletonScope();
+
+            // Register AutoMapper (needs Profile registrations, hence registered last)
+            kernel.Bind<MapperConfiguration>().To<IocInjectedMapperConfiguration>().InSingletonScope();
+            kernel.Bind<IMapper>().ToMethod(context => context.Kernel.Get<MapperConfiguration>().CreateMapper()).InSingletonScope();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data.Tables;
+using Data.ViewModels;
 
 namespace Prekenweb.Website.Areas.Website.Models
 {

@@ -2,7 +2,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace PrekenWeb.Data.Gateways
+namespace Data.Database.Dapper
 {
     public class SqlConnectionFactory : IDbConnectionFactory
     {

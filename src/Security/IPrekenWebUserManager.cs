@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Data.Identity;
 using Microsoft.AspNet.Identity;
-using PrekenWeb.Data.Identity;
 
 namespace PrekenWeb.Security
 { 

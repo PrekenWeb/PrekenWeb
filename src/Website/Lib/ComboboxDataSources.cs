@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Tables;
-using PrekenWeb.Data.ViewModels;
+using Data;
+using Data.Tables;
+using Data.ViewModels;
 
 namespace Prekenweb.Website.Lib
 {

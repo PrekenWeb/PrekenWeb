@@ -1,4 +1,5 @@
-﻿@model Prekenweb.Website.Areas.Website.Models.HomeMijn
+﻿@using Data.Tables
+@model Prekenweb.Website.Areas.Website.Models.HomeMijn
 <h1>@ViewBag.Title</h1>
 @{
     ViewBag.Title = Resources.MijnPrekenweb;
@@ -33,7 +34,7 @@
 
 @functions
 {
-    private IHtmlString GetWebGridHtml(IEnumerable<PrekenWeb.Data.Tables.Inbox> inbox, string gridId)
+    private IHtmlString GetWebGridHtml(IEnumerable<Inbox> inbox, string gridId)
     {
         var wb = new WebGrid(inbox, new[] { "Aangemaakt", "InboxType.Omschrijving", "VanNaam", "Omschrijving"/*, "Afgehandeld"*/ }, fieldNamePrefix: gridId, rowsPerPage: 30);
         return wb.GetHtml(

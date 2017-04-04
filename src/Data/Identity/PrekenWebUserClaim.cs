@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace PrekenWeb.Data.Identity
+namespace Data.Identity
 {
     public class PrekenWebUserClaim : IdentityUserClaim<int>
     {

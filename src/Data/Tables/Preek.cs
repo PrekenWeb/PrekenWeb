@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
-using PrekenWeb.Data.Attributes;
-using PrekenWeb.Data.Identity;
+using Data.Attributes;
+using Data.Identity;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class Preek
     {

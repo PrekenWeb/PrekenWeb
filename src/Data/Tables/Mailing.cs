@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using PrekenWeb.Data.Identity;
+using Data.Identity;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class Mailing
     {

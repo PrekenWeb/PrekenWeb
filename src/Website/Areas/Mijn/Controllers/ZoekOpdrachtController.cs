@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Data;
+using Data.Identity;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {

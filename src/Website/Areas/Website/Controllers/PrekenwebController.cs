@@ -1,15 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 //using CaptchaMvc.Attributes;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Tables;
 using Prekenweb.Website.Lib.ActionResults;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Repositories;
+using Data.Tables;
 using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;
 

@@ -1,4 +1,4 @@
-﻿namespace PrekenWeb.Data.Repositories
+﻿namespace Data.Repositories
 {
     public interface IPrekenWebRepository
     {

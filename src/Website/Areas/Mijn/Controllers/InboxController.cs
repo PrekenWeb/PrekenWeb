@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Hangfire;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using System;
@@ -10,6 +7,9 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Tables;
 using Prekenweb.Website.Lib.Hangfire;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers

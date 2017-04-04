@@ -1,10 +1,10 @@
-﻿using PrekenWeb.Data;
-using PrekenWeb.Data.Attributes;
-using PrekenWeb.Data.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using Data;
+using Data.Attributes;
+using Data.Identity;
 using Microsoft.AspNet.Identity;
 
 

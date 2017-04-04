@@ -1,10 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Repositories;
-using PrekenWeb.Data.Services;
-using PrekenWeb.Data.Tables;
 using PrekenWeb.Security;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Identity;
@@ -13,6 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Data;
+using Data.Identity;
+using Data.Repositories;
+using Data.Services;
+using Data.Tables;
 using Prekenweb.Website.Areas.Website.Models;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
@@ -24,18 +24,21 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
+        private readonly IMapper _mapper;
 
         public ZoekenController(IPrekenwebContext<Gebruiker> context,
                                  IZoekenRepository zoekenRepository,
                                  IGebruikerRepository gebruikerRepository,
                                  IHuidigeGebruiker huidigeGebruiker,
-                                 IPrekenWebUserManager prekenWebUserManager)
+                                 IPrekenWebUserManager prekenWebUserManager,
+                                 IMapper mapper)
         {
             _context = context;
             _zoekenRepository = zoekenRepository;
             _gebruikerRepository = gebruikerRepository;
             _huidigeGebruiker = huidigeGebruiker;
             _prekenWebUserManager = prekenWebUserManager;
+            _mapper = mapper;
         }
 
         [AnonymousOnlyOutputCacheAttribute(Duration = 3600, VaryByParam = "*", Order = 0)] // 1 uur
@@ -52,8 +55,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         public async Task<ActionResult> ZoekOpdrachtBewaren(PreekZoeken viewModel)
         {
             viewModel = await GetPreekZoekenViewModel(viewModel, 50);
-            Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
-            var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
+            var zoekOpdracht = _mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
             zoekOpdracht.TaalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
@@ -95,16 +97,14 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             if (redirectRouteValues != null) throw new Exception("Een van de opgevraagde gegevens hoort niet bij deze taal!");
 
             // ViewModel values kopieren naar instantie van ZoekOpdracht 
-            Mapper.CreateMap<PreekZoeken, ZoekOpdracht>();
-            var zoekOpdracht = Mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
+            var zoekOpdracht = _mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
             zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
             var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);
             viewModel.Zoekresultaat = await zoekService.ZoekOpdrachtUitvoeren(zoekOpdracht, (viewModel.Pagina.Value * pagesize) - pagesize, pagesize, true);
 
             // Waardes uit de uitgevoerde zoekopdracht weer terugkopieren naar het viewmodel
-            Mapper.CreateMap<ZoekOpdracht, PreekZoeken>();
-            Mapper.Map(zoekOpdracht, viewModel);
+            _mapper.Map(zoekOpdracht, viewModel);
 
             viewModel.AantalResultaten = viewModel.Zoekresultaat.AantalResultaten;
             viewModel.LezingCatorieen = (!viewModel.LeesPreken && !viewModel.AudioPreken && viewModel.Lezingen) ? await _context.LezingCategories.ToListAsync() : null;

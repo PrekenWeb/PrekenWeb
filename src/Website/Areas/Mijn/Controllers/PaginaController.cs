@@ -1,8 +1,5 @@
 ﻿using System.Configuration;
 using System.Threading.Tasks;
-using PrekenWeb.Data;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
 using PrekenWeb.Security;
 using Prekenweb.Website.Areas.Mijn.Models;
 using System;
@@ -11,6 +8,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Data;
+using Data.Identity;
+using Data.Tables;
 using Prekenweb.Website.Lib;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers

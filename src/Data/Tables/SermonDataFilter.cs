@@ -1,7 +1,4 @@
-using System;
-using System.Linq.Expressions;
-
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class SermonDataFilter
     {

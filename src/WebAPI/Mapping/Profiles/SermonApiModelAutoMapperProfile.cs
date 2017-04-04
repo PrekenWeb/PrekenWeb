@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PrekenWeb.Data.ViewModels;
+using Business.Models;
 using WebAPI.Models;
 
 namespace WebAPI.Mapping.Profiles
@@ -17,8 +17,8 @@ namespace WebAPI.Mapping.Profiles
 
             CreateMap<Speaker, SpeakerViewModel>();
 
-            CreateMap<Sermon, SermonEditModel>();
-            CreateMap<Sermon, SermonViewModel>();
+            CreateMap<Lecture, SermonEditModel>();
+            CreateMap<Lecture, SermonViewModel>();
 
             //
             // API => Data
@@ -27,8 +27,8 @@ namespace WebAPI.Mapping.Profiles
 
             CreateMap<SpeakerFilterModel, SpeakerFilter>();
 
-            CreateMap<SermonEditModel, Sermon>();
-            CreateMap<SermonFilterModel, SermonFilter>();
+            CreateMap<SermonEditModel, Lecture>();
+            CreateMap<SermonFilterModel, LectureFilter>();
         }
     }
 }

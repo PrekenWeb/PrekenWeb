@@ -1,4 +1,4 @@
-﻿@inherits WebViewPage<PrekenWeb.Data.Tables.Serie>
+﻿@inherits WebViewPage<Data.Tables.Serie>
 @if (Model != null)
 { 
     @Html.ActionLink(Model.Omschrijving, "Index", "Zoeken", new { SerieId = Model.Id }, new { })

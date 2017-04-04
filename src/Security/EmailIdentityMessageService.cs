@@ -1,10 +1,9 @@
 ﻿using System.Configuration;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Business.Helpers;
 using Microsoft.AspNet.Identity;
-using PrekenWeb.Data.Smtp;
 
 namespace PrekenWeb.Security
 { 
@@ -12,12 +11,12 @@ namespace PrekenWeb.Security
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            var smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
+            //var smtpServer = ConfigurationManager.AppSettings["SMTPServer"];
 
-            using (SmtpClient smtpClient = SmtpHelper.GetSmtpClient())
+            using (var smtpClient = SmtpHelper.GetSmtpClient())
             { 
 
-                MailMessage mailMessage = new MailMessage()
+                var mailMessage = new MailMessage
                 {
                     From = new MailAddress("info@prekenweb.nl", "PrekenWeb"),
                     Subject = message.Subject,

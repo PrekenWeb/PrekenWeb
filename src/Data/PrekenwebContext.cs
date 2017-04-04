@@ -4,11 +4,11 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
+using Data.Identity;
+using Data.Tables;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
 
-namespace PrekenWeb.Data
+namespace Data
 {
     public partial class PrekenwebContext : IdentityDbContext<Gebruiker, PrekenWebRole, int, PrekenWebUserLogin, PrekenWebUserRole, PrekenWebUserClaim>, IPrekenwebContext<Gebruiker>
     {

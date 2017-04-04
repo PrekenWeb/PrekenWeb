@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     internal class GebeurtenisConfiguration : EntityTypeConfiguration<Gebeurtenis>
     {

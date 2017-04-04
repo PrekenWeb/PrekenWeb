@@ -2,11 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DapperExtensions;
-using PrekenWeb.Data.Database.Dapper.Metadata;
-using PrekenWeb.Data.Database.Dapper.Models;
-using PrekenWeb.Data.DataModels;
+using Data.Database.Dapper.Metadata;
+using Data.Database.Dapper.Models;
 
-namespace PrekenWeb.Data.Gateways
+namespace Data.Database.Dapper.Gateways
 {
     internal class SpeakersGateway : ISpeakersGateway
     {

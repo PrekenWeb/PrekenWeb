@@ -1,4 +1,4 @@
-namespace PrekenWeb.Data.Tables
+namespace Data.Tables
 {
     public class PreekLezenEnZingen
     {

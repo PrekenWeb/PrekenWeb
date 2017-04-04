@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using PrekenWeb.Data.Services.Interfaces;
-using PrekenWeb.Data.ViewModels;
+using Business.Models;
+using Business.Services.Interfaces;
 using WebAPI.Common;
 using WebAPI.Interfaces;
 using WebAPI.Models;
@@ -27,7 +27,7 @@ namespace WebAPI.Repositories
         {
             filterModel = await EnsureLanguage(filterModel);
 
-            var filter = _mapper.Map<SermonFilter>(filterModel);
+            var filter = _mapper.Map<LectureFilter>(filterModel);
             var sermons = _sermonsService.Get(filter);
             return _mapper.Map<IEnumerable<SermonViewModel>>(sermons);
         }
@@ -36,7 +36,7 @@ namespace WebAPI.Repositories
         {
             filterModel = await EnsureLanguage(filterModel);
 
-            var filter = _mapper.Map<SermonFilter>(filterModel);
+            var filter = _mapper.Map<LectureFilter>(filterModel);
             var sermons = await _sermonsService.GetNew(filter);
             return _mapper.Map<IEnumerable<SermonViewModel>>(sermons);
         }
@@ -50,7 +50,7 @@ namespace WebAPI.Repositories
 
         public async Task<int> Add(SermonEditModel sermonModel)
         {
-            var sermon = _mapper.Map<Sermon>(sermonModel);
+            var sermon = _mapper.Map<Lecture>(sermonModel);
             return await _sermonsService.Add(sermon);
         }
 
@@ -59,7 +59,7 @@ namespace WebAPI.Repositories
             var existing = _sermonsService.GetSingle(sermonModel.Id);
             if (existing == null) throw new ItemNotFoundException();
 
-            var sermon = _mapper.Map<Sermon>(sermonModel);
+            var sermon = _mapper.Map<Lecture>(sermonModel);
             return await _sermonsService.Update(sermon);
         }
 

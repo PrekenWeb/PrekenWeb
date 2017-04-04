@@ -2,9 +2,9 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Tables;
+using Data.Tables;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public class PreekRepository : PrekenWebRepositoryBase, IPreekRepository
     {

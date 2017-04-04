@@ -1,4 +1,4 @@
-﻿using PrekenWeb.Data.Tables;
+﻿using Data.Tables;
 
 namespace Prekenweb.Website.Areas.Website.Models
 {

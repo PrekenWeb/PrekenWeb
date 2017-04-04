@@ -2,10 +2,10 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using PrekenWeb.Data.Identity;
-using PrekenWeb.Data.Tables;
+using Data.Identity;
+using Data.Tables;
 
-namespace PrekenWeb.Data.Repositories
+namespace Data.Repositories
 {
     public class MailingRepository : PrekenWebRepositoryBase, IMailingRepository
     {

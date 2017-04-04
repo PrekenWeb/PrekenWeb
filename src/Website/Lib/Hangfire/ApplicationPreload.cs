@@ -1,4 +1,3 @@
-using System;
 using System.Web.Hosting;
 
 namespace Prekenweb.Website.Lib.Hangfire

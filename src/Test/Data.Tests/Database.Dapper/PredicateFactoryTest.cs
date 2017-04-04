@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Data.Database.Dapper.Metadata;
+using Data.Database.Dapper.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using PrekenWeb.Data.Database.Dapper.Metadata;
-using PrekenWeb.Data.Database.Dapper.Models;
 
 // ReSharper disable ClassNeverInstantiated.Local
 // ReSharper disable ObjectCreationAsStatement

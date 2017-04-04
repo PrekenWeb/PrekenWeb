@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrekenWeb.Data.Attributes
+namespace Data.Attributes
 {
     public class TooltipAttribute : Attribute
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Data.Tables;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PrekenWeb.Data.Tables;
 
-namespace PrekenWeb.Data.Identity
+namespace Data.Identity
 {
     [MetadataType(typeof(GebruikerMetaData))]
     public partial class Gebruiker : IdentityUser<int, PrekenWebUserLogin, PrekenWebUserRole, PrekenWebUserClaim>//, IUser<int>
