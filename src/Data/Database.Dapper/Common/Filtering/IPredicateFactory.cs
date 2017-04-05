@@ -1,7 +1,6 @@
 ﻿using DapperExtensions;
-using Data.Database.Dapper.Models;
 
-namespace Data.Database.Dapper.Metadata
+namespace Data.Database.Dapper.Common.Filtering
 {
     internal interface IPredicateFactory
     {

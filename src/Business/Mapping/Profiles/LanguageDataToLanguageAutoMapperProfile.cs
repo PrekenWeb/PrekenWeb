@@ -6,7 +6,7 @@ namespace Business.Mapping.Profiles
 {
     public class LanguageDataToLanguageAutoMapperProfile : Profile
     {
-        public override string ProfileName => nameof(SpeakerDataToSpeakerAutoMapperProfile);
+        public override string ProfileName => nameof(LanguageDataToLanguageAutoMapperProfile);
 
         public LanguageDataToLanguageAutoMapperProfile()
         {

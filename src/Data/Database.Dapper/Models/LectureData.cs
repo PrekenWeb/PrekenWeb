@@ -1,11 +1,14 @@
 ﻿using System;
 using DapperExtensions.Mapper;
+using Data.Database.Dapper.Common.Filtering;
 
 namespace Data.Database.Dapper.Models
 {
     public class LectureData
     {
         public int Id { get; set; }
+        public int LectureTypeId { get; set; }
+        public int LanguageId { get; set; }
         public int SpeakerId { get; set; }
         public int CongregationId { get; set; }
         public string Title { get; set; }
@@ -15,9 +18,17 @@ namespace Data.Database.Dapper.Models
         public string FileName { get; set; }
     }
 
-    public class LectureDataFilter : DataFilter<LectureDataFilter, LectureData>
+    public class ViewLectureData : LectureData
+    {
+        public string LectureTypeName { get; set; }
+        public string SpeakerName { get; set; }
+    }
+
+    public sealed class LectureDataFilter : DataFilter<LectureDataFilter, LectureData>
     {
         public int? LectureId { get; set; }
+        public int? LectureTypeId { get; set; }
+        public int? LanguageId { get; set; }
         public int? SpeakerId { get; set; }
         public int? CongregationId { get; set; }
         public string Title { get; set; }
@@ -33,6 +44,8 @@ namespace Data.Database.Dapper.Models
             Map(x => x.Id).Key(KeyType.Assigned);
 
             // Map Dutch column names to English property names
+            Map(x => x.LectureTypeId).Column("PreekTypeId");
+            Map(x => x.LanguageId).Column("TaalId");
             Map(x => x.SpeakerId).Column("PredikantId");
             Map(x => x.CongregationId).Column("GemeenteId");
             Map(x => x.Title).Column("Omschrijving");

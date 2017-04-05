@@ -13,22 +13,29 @@ namespace WebAPI.Mapping.Profiles
             //
             // Data => API
             //
-            CreateMap<Language, LanguageViewModel>();
-
-            CreateMap<Speaker, SpeakerViewModel>();
-
             CreateMap<Lecture, SermonEditModel>();
-            CreateMap<Lecture, SermonViewModel>();
+            CreateMap<ViewLecture, SermonViewModel>();
+
+            CreateMap<Book, BookViewModel>();
+            CreateMap<Image, ImageViewModel>();
+            CreateMap<Language, LanguageViewModel>();
+            CreateMap<Lecture, LectureViewModel>();
+            CreateMap<ViewLecture, LectureViewModel>();
+            CreateMap<LectureType, LectureTypeViewModel>();
+            CreateMap<Speaker, SpeakerViewModel>();
 
             //
             // API => Data
             //
-            CreateMap<LanguageFilterModel, LanguageFilter>();
-
-            CreateMap<SpeakerFilterModel, SpeakerFilter>();
-
             CreateMap<SermonEditModel, Lecture>();
             CreateMap<SermonFilterModel, LectureFilter>();
+
+            CreateMap<BookFilterModel, BookFilter>();
+            CreateMap<ImageFilterModel, ImageFilter>();
+            CreateMap<LanguageFilterModel, LanguageFilter>();
+            CreateMap<LectureFilterModel, LectureFilter>();
+            CreateMap<LectureTypeFilterModel, LectureTypeFilter>();
+            CreateMap<SpeakerFilterModel, SpeakerFilter>();
         }
     }
 }

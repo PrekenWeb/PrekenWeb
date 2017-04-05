@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business.Models;
 using Business.Services.Interfaces;
-using Data.Database.Dapper.Gateways;
+using Data.Database.Dapper.Interfaces.Gateways;
 using Data.Database.Dapper.Models;
 
 namespace Business.Services

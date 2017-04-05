@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DapperExtensions;
+using Data.Database.Dapper.Common.Filtering;
 using Data.Database.Dapper.Models;
 
 namespace Data.Database.Dapper.Metadata
@@ -15,14 +16,21 @@ namespace Data.Database.Dapper.Metadata
             {
                 FilterExpression = data => data.Id,
                 FilterType = Operator.Eq,
-                FilterValue = dataFilter => dataFilter.SpeakerId,
+                FilterValue = filter => filter.SpeakerId,
+                DefaultValue = default(int?)
+            },
+            new FilterMetadata<SpeakerDataFilter, SpeakerData>
+            {
+                FilterExpression = data => data.LanguageId,
+                FilterType = Operator.Eq,
+                FilterValue = filter => filter.LanguageId,
                 DefaultValue = default(int?)
             },
             new FilterMetadata<SpeakerDataFilter, SpeakerData>
             {
                 FilterExpression = data => data.LastName,
                 FilterType = Operator.Like,
-                FilterValue = dataFilter => $"%{dataFilter.LastName}%",
+                FilterValue = filter => $"%{filter.LastName}%",
                 DefaultValue = default(string)
             }
         };

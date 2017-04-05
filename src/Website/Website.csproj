@@ -264,6 +264,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\OwinStartup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Lib\HtmlHelpers\HtmlHelpers.DisplayWithLineBreaksFor.cs" />
     <Compile Include="Lib\TaalInfoHelper.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Lib\WebsiteTaal.cs" />

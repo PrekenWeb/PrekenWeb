@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data.Database.Dapper.Gateways
+namespace Data.Database.Dapper.Common.Data
 {
     public interface IGateway<TDataModel, in TDataFilter>
     {

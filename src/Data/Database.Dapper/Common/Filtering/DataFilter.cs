@@ -1,4 +1,4 @@
-namespace Data.Database.Dapper.Models
+namespace Data.Database.Dapper.Common.Filtering
 {
     public class DataFilter<TFilter, TData> where TFilter : DataFilter<TFilter, TData>
     {

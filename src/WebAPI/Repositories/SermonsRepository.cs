@@ -27,7 +27,7 @@ namespace WebAPI.Repositories
         {
             filterModel = await EnsureLanguage(filterModel);
 
-            var filter = _mapper.Map<LectureFilter>(filterModel);
+            var filter = _mapper.Map<SermonFilter>(filterModel);
             var sermons = _sermonsService.Get(filter);
             return _mapper.Map<IEnumerable<SermonViewModel>>(sermons);
         }
@@ -36,7 +36,7 @@ namespace WebAPI.Repositories
         {
             filterModel = await EnsureLanguage(filterModel);
 
-            var filter = _mapper.Map<LectureFilter>(filterModel);
+            var filter = _mapper.Map<SermonFilter>(filterModel);
             var sermons = await _sermonsService.GetNew(filter);
             return _mapper.Map<IEnumerable<SermonViewModel>>(sermons);
         }
@@ -50,7 +50,7 @@ namespace WebAPI.Repositories
 
         public async Task<int> Add(SermonEditModel sermonModel)
         {
-            var sermon = _mapper.Map<Lecture>(sermonModel);
+            var sermon = _mapper.Map<Sermon>(sermonModel);
             return await _sermonsService.Add(sermon);
         }
 
@@ -59,7 +59,7 @@ namespace WebAPI.Repositories
             var existing = _sermonsService.GetSingle(sermonModel.Id);
             if (existing == null) throw new ItemNotFoundException();
 
-            var sermon = _mapper.Map<Lecture>(sermonModel);
+            var sermon = _mapper.Map<Sermon>(sermonModel);
             return await _sermonsService.Update(sermon);
         }
 

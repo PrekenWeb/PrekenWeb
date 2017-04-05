@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DapperExtensions;
+using Data.Database.Dapper.Common.Filtering;
 using Data.Database.Dapper.Models;
 
 namespace Data.Database.Dapper.Metadata

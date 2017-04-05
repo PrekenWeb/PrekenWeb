@@ -2,7 +2,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Data.Database.Dapper
+namespace Data.Database.Dapper.Common.Data
 {
     public class SqlConnectionFactory : IDbConnectionFactory
     {

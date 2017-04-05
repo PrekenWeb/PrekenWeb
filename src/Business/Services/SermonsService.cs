@@ -19,48 +19,48 @@ namespace Business.Services
             _preekRepository = preekRepository;
         }
 
-        public async Task<Lecture> GetSingle(int id)
+        public async Task<Sermon> GetSingle(int id)
         {
             var preek = await _preekRepository.GetSingle(id);
 
-            var sermon = _mapper.Map<Preek, Lecture>(preek);
+            var sermon = _mapper.Map<Preek, Sermon>(preek);
             return sermon;
         }
 
-        public async Task<IEnumerable<Lecture>> Get(LectureFilter filter)
+        public async Task<IEnumerable<Sermon>> Get(SermonFilter filter)
         {
-            var preken = await _preekRepository.Get(_mapper.Map<LectureFilter,SermonDataFilter>(filter));
-            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Lecture>>(preken);
+            var preken = await _preekRepository.Get(_mapper.Map<SermonFilter,SermonDataFilter>(filter));
+            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Sermon>>(preken);
             return sermons;
         }
 
-        public async Task<IEnumerable<Lecture>> GetNew(LectureFilter filter)
+        public async Task<IEnumerable<Sermon>> GetNew(SermonFilter filter)
         {
             if(filter == null)
-                filter = new LectureFilter();
+                filter = new SermonFilter();
 
-            var dataFilter = _mapper.Map<LectureFilter, SermonDataFilter>(filter);
+            var dataFilter = _mapper.Map<SermonFilter, SermonDataFilter>(filter);
             dataFilter.Page = 0;
             dataFilter.PageSize = 10;
             //dataFilter.SortBy = preek => preek.DatumGepubliceerd;
             dataFilter.SortDirection = SortDirection.Descending;
 
             var preken = await _preekRepository.Get(dataFilter);
-            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Lecture>>(preken);
+            var sermons = _mapper.Map<IEnumerable<Preek>, IEnumerable<Sermon>>(preken);
             return sermons;
         }
 
-        public async Task<int> Add(Lecture lecture)
+        public async Task<int> Add(Sermon lecture)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<int> Update(Lecture lecture)
+        public async Task<int> Update(Sermon lecture)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<bool> Delete(Lecture lecture)
+        public async Task<bool> Delete(Sermon lecture)
         {
             throw new System.NotImplementedException();
         }

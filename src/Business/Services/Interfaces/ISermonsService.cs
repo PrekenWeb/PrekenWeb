@@ -6,11 +6,11 @@ namespace Business.Services.Interfaces
 {
     public interface ISermonsService
     {
-        Task<Lecture> GetSingle(int id);
-        Task<IEnumerable<Lecture>> Get(LectureFilter filter);
-        Task<IEnumerable<Lecture>> GetNew(LectureFilter filter);
-        Task<int> Add(Lecture lecture);
-        Task<int> Update(Lecture lecture);
-        Task<bool> Delete(Lecture lecture);
+        Task<Sermon> GetSingle(int id);
+        Task<IEnumerable<Sermon>> Get(SermonFilter filter);
+        Task<IEnumerable<Sermon>> GetNew(SermonFilter filter);
+        Task<int> Add(Sermon lecture);
+        Task<int> Update(Sermon lecture);
+        Task<bool> Delete(Sermon lecture);
     }
 }

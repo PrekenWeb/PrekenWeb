@@ -1,9 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using DapperExtensions;
-using Data.Database.Dapper.Models;
 
-namespace Data.Database.Dapper.Metadata
+namespace Data.Database.Dapper.Common.Filtering
 {
     public class FilterMetadata
     {

@@ -34,26 +34,26 @@ namespace WebAPI.Repositories
             return _mapper.Map<SpeakerViewModel>(speaker);
         }
 
-        //public async Task<int> Add(SpeakerViewModel speakerModel)
-        //{
-        //    var speaker = _mapper.Map<Speaker>(speakerModel);
-        //    return await _speakersService.Add(speaker);
-        //}
+        public async Task<int> Add(SpeakerViewModel speakerModel)
+        {
+            var speaker = _mapper.Map<Speaker>(speakerModel);
+            return await _speakersService.Add(speaker);
+        }
 
-        //public async Task<int> Update(SpeakerViewModel speakerModel)
-        //{
-        //    var existing = _speakersService.GetSingle(speakerModel.Id);
-        //    if (existing == null) throw new ItemNotFoundException();
+        public async Task<bool> Update(SpeakerViewModel speakerModel)
+        {
+            var existing = _speakersService.GetSingle(speakerModel.Id);
+            if (existing == null) throw new ItemNotFoundException();
 
-        //    var speaker = _mapper.Map<Speaker>(speakerModel);
-        //    return await _speakersService.Update(speaker);
-        //}
+            var speaker = _mapper.Map<Speaker>(speakerModel);
+            return await _speakersService.Update(speaker);
+        }
 
-        //public async Task<bool> Delete(int id)
-        //{
-        //    var existing = await _speakersService.GetSingle(id);
-        //    if (existing == null) throw new ItemNotFoundException();
-        //    return await _speakersService.Delete(existing);
-        //}
+        public async Task<bool> Delete(int id)
+        {
+            var existing = await _speakersService.GetSingle(id);
+            if (existing == null) throw new ItemNotFoundException();
+            return await _speakersService.Delete(existing);
+        }
     }
 }

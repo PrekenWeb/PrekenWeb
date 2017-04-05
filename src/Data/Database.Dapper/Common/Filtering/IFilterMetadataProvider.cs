@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Data.Database.Dapper.Metadata
+namespace Data.Database.Dapper.Common.Filtering
 {
     public interface IFilterMetadataProvider
     {

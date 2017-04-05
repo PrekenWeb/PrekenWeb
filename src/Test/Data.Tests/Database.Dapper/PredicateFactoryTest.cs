@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Data.Database.Dapper.Common.Filtering;
 using Data.Database.Dapper.Metadata;
 using Data.Database.Dapper.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

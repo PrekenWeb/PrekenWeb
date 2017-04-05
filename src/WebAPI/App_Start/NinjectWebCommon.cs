@@ -44,9 +44,12 @@ namespace WebAPI
 
             kernel.Bind<ISermonsRepository>().To<SermonsRepository>();
 
+            kernel.Bind<IBooksRepository>().To<BooksRepository>();
+            kernel.Bind<IImagesRepository>().To<ImagesRepository>();
             kernel.Bind<ILanguagesRepository>().To<LanguagesRepository>();
-            kernel.Bind<ISpeakersRepository>().To<SpeakersRepository>();
             kernel.Bind<ILecturesRepository>().To<LecturesRepository>();
+            kernel.Bind<ILectureTypesRepository>().To<LectureTypesRepository>();
+            kernel.Bind<ISpeakersRepository>().To<SpeakersRepository>();
 
             kernel.Bind<IPreekRepository>().To<PreekRepository>();
             kernel.Bind<IGebruikerRepository>().To<GebruikerRepository>();

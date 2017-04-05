@@ -1,4 +1,5 @@
 ﻿using DapperExtensions.Mapper;
+using Data.Database.Dapper.Common.Filtering;
 
 namespace Data.Database.Dapper.Models
 {
@@ -21,6 +22,7 @@ namespace Data.Database.Dapper.Models
     public class SpeakerDataFilter : DataFilter<SpeakerDataFilter, SpeakerData>
     {
         public int? SpeakerId { get; set; }
+        public int? LanguageId { get; set; }
         public string LastName { get; set; }
     }
 

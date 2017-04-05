@@ -12,16 +12,22 @@ namespace Business
         {
             kernel.Bind<ISermonsService>().To<SermonsService>().InSingletonScope();
 
+            kernel.Bind<IBooksService>().To<BooksService>().InSingletonScope();
+            kernel.Bind<IImagesService>().To<ImagesService>().InSingletonScope();
             kernel.Bind<ILanguagesService>().To<LanguagesService>().InSingletonScope();
-            kernel.Bind<ISpeakersService>().To<SpeakersService>().InSingletonScope();
             kernel.Bind<ILecturesService>().To<LecturesService>().InSingletonScope();
+            kernel.Bind<ILectureTypesService>().To<LectureTypesService>().InSingletonScope();
+            kernel.Bind<ISpeakersService>().To<SpeakersService>().InSingletonScope();
 
             // AutoMapper mapping profiles
             kernel.Bind<Profile>().To<SermonModelAutoMapperProfile>().InSingletonScope();
 
+            kernel.Bind<Profile>().To<BookDataToBookAutoMapperProfile>().InSingletonScope();
+            kernel.Bind<Profile>().To<ImageDataToImageAutoMapperProfile>().InSingletonScope();
             kernel.Bind<Profile>().To<LanguageDataToLanguageAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<SpeakerDataToSpeakerAutoMapperProfile>().InSingletonScope();
             kernel.Bind<Profile>().To<LectureDataToLectureAutoMapperProfile>().InSingletonScope();
+            kernel.Bind<Profile>().To<LectureTypeDataToLectureTypeAutoMapperProfile>().InSingletonScope();
+            kernel.Bind<Profile>().To<SpeakerDataToSpeakerAutoMapperProfile>().InSingletonScope();
 
             // Data
             Data.DependencyInjection.RegisterDependencies(kernel);

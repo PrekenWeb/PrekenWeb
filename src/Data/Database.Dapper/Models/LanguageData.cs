@@ -1,4 +1,5 @@
 ﻿using DapperExtensions.Mapper;
+using Data.Database.Dapper.Common.Filtering;
 
 namespace Data.Database.Dapper.Models
 {
