@@ -153,6 +153,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                  .Include(x => x.PreekLezenEnZingens)
                  .Include(x => x.BoekHoofdstuk)
                  .Include(x => x.BoekHoofdstuk.Boek)
+                 .Include(x => x.Taal)
                  .AsNoTracking()
                  .SingleOrDefault(p => p.Id == id && p.Gepubliceerd);
 
@@ -240,32 +241,16 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             epub.Metadata.Creator = "PrekenWeb.nl";
             //epub.Metadata.Title = "asd";
             epub.Metadata.Title = WebUtility.HtmlEncode(preek.GetPreekTitel());
+            epub.Metadata.Date = (preek.DatumPreek ?? preek.DatumGepubliceerd ?? preek.DatumAangemaakt ?? DateTime.Today).ToString("yyyy-MM-dd");
+            epub.Metadata.Language = preek.Taal.Code;
             //epub.Structure.Directories.ImageFolder = "Image";
             //epub.AddImage("img1.jpg", bytes);
             epub.AddCss("style.css", @"
-                            .LeespreekAfdruk {
-                                padding-right: 20px;
-                            }
-
-                                .LeespreekAfdruk .Thema {
-                                    font-size: 20pt;
-                                    text-align: center;
-                                    font-weight: bold;
-                                    padding-bottom: 10px;
-                                }
-
-                                .LeespreekAfdruk .Titel {
-                                    text-align: center;
-                                }
-
-                                .LeespreekAfdruk .Subtitel {
-                                    text-align: center;
-                                }
-
-                                .LeespreekAfdruk .HeleLeespreek {
-                                    border: 0px;
-                                    padding: 0px;
-                                }
+                            .LeespreekAfdruk { padding-right: 20px; }
+                                .LeespreekAfdruk .Thema { font-size: 20pt; text-align: center; font-weight: bold; padding-bottom: 10px; }
+                                .LeespreekAfdruk .Titel { text-align: center; }
+                                .LeespreekAfdruk .Subtitel { text-align: center; }
+                                .LeespreekAfdruk .HeleLeespreek { border: 0px; padding: 0px; }
 
                                 .HeleLeespreek {
                                     border-radius: 3px;
@@ -274,39 +259,16 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                     font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
                                     font-size: 12.5pt;
                                     margin-bottom: 20px;
-                                    float: left;
+                                    /*float: left;*/
                                     padding: 20px 20px 20px 20px;
-                                    /*max-height:600px;*/
-                                    overflow: auto;
+                                    /*overflow: auto;*/
                                 }
 
-                                    .HeleLeespreek .HeleLeespreekTable {
-                                        margin-bottom: 20px;
-                                        width: 100%;
-                                    }
-
-                                        .HeleLeespreek .HeleLeespreekTable .ColSoort {
-                                            width: 100px;
-                                            text-align: right;
-                                        }
-
-                                        .HeleLeespreek .HeleLeespreekTable .ColOmschrijving {
-                                            width: 150px;
-                                        }
-
-                                    .HeleLeespreek h1, .HeleLeespreek h2, .HeleLeespreek h3 {
-                                        font-size: 22px;
-                                        margin: 10px 0px 0px 0px;
-                                        padding: 0px;
-                                    }
-
-                                    .HeleLeespreek p {
-                                        margin-top: 0px;
-                                        margin-bottom: 0px;
-                                        font-size: 12.5pt;
-                                        font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
-                                        text-align: justify;
-                                    }
+                                    .HeleLeespreek .HeleLeespreekTable { margin-bottom: 20px; width: 100%; }
+                                        .HeleLeespreek .HeleLeespreekTable .ColSoort { width: 100px; text-align: right; }
+                                        .HeleLeespreek .HeleLeespreekTable .ColOmschrijving { width: 150px; }
+                                    .HeleLeespreek h1, .HeleLeespreek h2, .HeleLeespreek h3 { font-size: 22px; margin: 10px 0px 0px 0px; padding: 0px; }
+                                    .HeleLeespreek p { margin-top: 0px; margin-bottom: 0px; font-size: 12.5pt; font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif; text-align: justify; }
                         ");
             var lezenEnZingen = string.Empty;
             foreach (var plz in preek.PreekLezenEnZingens.OrderBy(x => x.Sortering))
@@ -321,10 +283,11 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             epub.AddContent("leespreektekst.html", @"
                              <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>
-                                <html lang='nl' xmlns='http://www.w3.org/1999/xhtml'>
+                                <html lang='"+ preek.Taal.Code + @"' xmlns='http://www.w3.org/1999/xhtml'>
                                 <head>
                                     <meta http-equiv='content-type' content='text/html; charset=iso-8859-15'></meta>
                                     <link rel='stylesheet' type='text/css' href='Css/style.css'></link>
+                                    <title>" + WebUtility.HtmlEncode(preek.GetPreekTitel()) + @"</title>
                                 </head>
                                 <body>
                                     <div class='LeespreekAfdruk'>
