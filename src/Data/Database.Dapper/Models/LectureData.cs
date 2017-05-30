@@ -38,7 +38,7 @@ namespace Data.Database.Dapper.Models
     {
         public LectureDataMapper()
         {
-            TableName = "Taal";
+            TableName = "Preek";
 
             //have a custom primary key
             Map(x => x.Id).Key(KeyType.Assigned);

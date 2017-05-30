@@ -9,45 +9,11 @@ using Data.Database.Dapper.Models;
 
 namespace Data.Database.Dapper.Gateways
 {
-    internal class LanguagesGateway : ILanguagesGateway
+    internal class LanguagesGateway : Gateway<LanguageData, LanguageDataFilter>, ILanguagesGateway
     {
-        private readonly IDbConnectionFactory _connectionFactory;
-        private readonly IPredicateFactory _predicateFactory;
-
         public LanguagesGateway(IDbConnectionFactory connectionFactory, IPredicateFactory predicateFactory)
+            : base(connectionFactory, predicateFactory)
         {
-            _connectionFactory = connectionFactory;
-            _predicateFactory = predicateFactory;
-        }
-
-        public async Task<IEnumerable<LanguageData>> Get(LanguageDataFilter filter)
-        {
-            var filterPredicate = _predicateFactory.GetPredicate<LanguageDataFilter, LanguageData>(filter);
-            var languages = await _connectionFactory.GetConnection().GetListAsync<LanguageData>(filterPredicate);
-            return languages?.ToList();
-        }
-
-        public async Task<LanguageData> GetSingle(int id)
-        {
-            return await _connectionFactory.GetConnection().GetAsync<LanguageData>(id);
-        }
-
-        public Task<int> Add(LanguageData model)
-        {
-            int id = _connectionFactory.GetConnection().Insert(model);
-            return Task.FromResult(id);
-        }
-
-        public Task<bool> Update(LanguageData model)
-        {
-            var success = _connectionFactory.GetConnection().Update(model);
-            return Task.FromResult(success);
-        }
-
-        public Task<bool> Delete(LanguageData language)
-        {
-            var success = _connectionFactory.GetConnection().Delete(language);
-            return Task.FromResult(success);
         }
     }
 }

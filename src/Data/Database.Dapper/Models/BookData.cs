@@ -22,7 +22,7 @@ namespace Data.Database.Dapper.Models
     {
         public BookDataMapper()
         {
-            TableName = "Afbeelding";
+            TableName = "Boek";
 
             //have a custom primary key
             Map(x => x.Id).Key(KeyType.Assigned);

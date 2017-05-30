@@ -86,6 +86,7 @@
     <Compile Include="Attributes\TooltipAttribute.cs" />
     <Compile Include="Database.Dapper\DependencyInjection.cs" />
     <Compile Include="Database.Dapper\Gateways\BooksGateway.cs" />
+    <Compile Include="Database.Dapper\Gateways\Gateway.cs" />
     <Compile Include="Database.Dapper\Gateways\ImagesGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\LectureTypesGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\IBooksGateway.cs" />
