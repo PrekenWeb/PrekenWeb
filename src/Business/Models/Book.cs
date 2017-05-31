@@ -13,5 +13,7 @@ namespace Business.Models
     public class BookFilter
     {
         public int? BookId { get; set; }
+        public int? LanguageId { get; set; }
+
     }
 }

@@ -16,6 +16,7 @@ namespace Data.Database.Dapper.Models
     public sealed class BookDataFilter : DataFilter<BookDataFilter, BookData>
     {
         public int? BookId { get; set; }
+        public int? LanguageId { get; set; }
     }
 
     public sealed class BookDataMapper : ClassMapper<BookData>
@@ -32,6 +33,7 @@ namespace Data.Database.Dapper.Models
             Map(x => x.Name).Column("Boeknaam");
             Map(x => x.FollowupNumber).Column("Sortering");
             Map(x => x.Abbreviation).Column("Afkorting");
+            Map(x => x.ShowChapter).Column("ToonHoofdstukNummer");
 
             // auto map all other columns
             AutoMap();

@@ -57,6 +57,7 @@
     <Compile Include="Mapping\Profiles\LectureDataToLectureAutoMapperProfile.cs" />
     <Compile Include="Mapping\Profiles\SermonModelAutoMapperProfile.cs" />
     <Compile Include="Mapping\Profiles\SpeakerDataToSpeakerAutoMapperProfile.cs" />
+    <Compile Include="Models\BookChapter.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Image.cs" />
@@ -65,8 +66,10 @@
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Speaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BookChaptersService.cs" />
     <Compile Include="Services\BooksService.cs" />
     <Compile Include="Services\ImagesService.cs" />
+    <Compile Include="Services\Interfaces\IBookChaptersService.cs" />
     <Compile Include="Services\Interfaces\IBooksService.cs" />
     <Compile Include="Services\Interfaces\IImagesService.cs" />
     <Compile Include="Services\Interfaces\ILanguagesService.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="Services\LecturesService.cs" />
     <Compile Include="Services\LectureTypesService.cs" />
     <Compile Include="Services\SermonsService.cs" />
+    <Compile Include="Services\Service.cs" />
     <Compile Include="Services\SpeakersService.cs" />
     <Compile Include="Helpers\SmtpHelper.cs" />
   </ItemGroup>

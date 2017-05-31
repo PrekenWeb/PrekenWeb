@@ -85,10 +85,12 @@
   <ItemGroup>
     <Compile Include="Attributes\TooltipAttribute.cs" />
     <Compile Include="Database.Dapper\DependencyInjection.cs" />
+    <Compile Include="Database.Dapper\Gateways\BookChaptersGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\BooksGateway.cs" />
-    <Compile Include="Database.Dapper\Gateways\Gateway.cs" />
+    <Compile Include="Database.Dapper\Common\Data\Gateway.cs" />
     <Compile Include="Database.Dapper\Gateways\ImagesGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\LectureTypesGateway.cs" />
+    <Compile Include="Database.Dapper\Interfaces\Gateways\IBookChaptersGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\IBooksGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\IImagesGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\ILanguagesGateway.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Database.Dapper\Common\Filtering\IFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Common\Filtering\PredicateFactory.cs" />
     <Compile Include="Database.Dapper\Metadata\LectureTypeFilterMetadataProvider.cs" />
+    <Compile Include="Database.Dapper\Models\BookChapterData.cs" />
     <Compile Include="Database.Dapper\Models\BookData.cs" />
     <Compile Include="Database.Dapper\Models\ImageData.cs" />
     <Compile Include="Database.Dapper\Models\LectureData.cs" />

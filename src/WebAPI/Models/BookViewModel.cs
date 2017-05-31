@@ -13,5 +13,6 @@ namespace WebAPI.Models
     public class BookFilterModel
     {
         public int? BookId { get; set; }
+        public int? LanguageId { get; set; }
     }
 }

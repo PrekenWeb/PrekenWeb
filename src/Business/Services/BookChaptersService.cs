@@ -6,9 +6,9 @@ using Data.Database.Dapper.Models;
 
 namespace Business.Services
 {
-    internal class BooksService : Service<Book, BookFilter, BookData, BookDataFilter>, IBooksService
+    internal class BookChaptersService : Service<BookChapter, BookChapterFilter, BookChapterData, BookChapterDataFilter>, IBookChaptersService
     {
-        public BooksService(IMapper mapper, IBooksGateway gateway)
+        public BookChaptersService(IMapper mapper, IBookChaptersGateway gateway)
             : base(mapper, gateway)
         {
         }

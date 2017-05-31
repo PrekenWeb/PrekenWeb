@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,6 +11,7 @@ using Website.Tests.TestData;
 
 namespace Website.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     public abstract class ControllerTestsBase
     {
         protected IPrekenwebContext<Gebruiker> Context;

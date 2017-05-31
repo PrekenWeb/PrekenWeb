@@ -3,20 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace Data.FakeDbSet
-{ 
+{
     //todo this is an implementation of an exiting nuget package: https://www.nuget.org/packages/AnotherFakeDbSet/
     //todo as soon as pull request for Async support is accepted and nuget package is updated switch back to nuget dependecy
     //https://github.com/realistschuckle/FakeDbSet/pull/3 
 
-	/// <summary>
-	/// The in-memory database set, taken from Microsoft's online example (http://msdn.microsoft.com/en-us/ff714955.aspx) 
-	/// and modified to be based on DbSet instead of ObjectSet.
-	/// </summary>
-	/// <typeparam name="T">The type of DbSet.</typeparam>
+    /// <summary>
+    /// The in-memory database set, taken from Microsoft's online example (http://msdn.microsoft.com/en-us/ff714955.aspx) 
+    /// and modified to be based on DbSet instead of ObjectSet.
+    /// </summary>
+    /// <typeparam name="T">The type of DbSet.</typeparam>
+    [ExcludeFromCodeCoverage]
     public class InMemoryDbSet<T> : IDbAsyncEnumerable<T>, IDbSet<T> where T : class
 	{
 		readonly HashSet<T> _data;

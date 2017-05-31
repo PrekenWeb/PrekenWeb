@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DapperExtensions;
-using Data.Database.Dapper.Common.Data;
 using Data.Database.Dapper.Common.Filtering;
 
-namespace Data.Database.Dapper.Gateways
+namespace Data.Database.Dapper.Common.Data
 {
     internal class Gateway<TData, TDataFilter> : IGateway<TData, TDataFilter> where TData: class where TDataFilter: DataFilter<TDataFilter, TData>
     {

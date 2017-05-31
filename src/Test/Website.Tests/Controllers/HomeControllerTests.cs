@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Data.Repositories;
@@ -10,6 +11,7 @@ using Prekenweb.Website.Lib.Cache;
 namespace Website.Tests.Controllers
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class HomeControllerTests : ControllerTestsBase
     {
         private IMailingRepository _mailingRepository;

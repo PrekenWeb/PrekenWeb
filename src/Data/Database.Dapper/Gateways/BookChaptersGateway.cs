@@ -5,9 +5,9 @@ using Data.Database.Dapper.Models;
 
 namespace Data.Database.Dapper.Gateways
 {
-    internal class SpeakersGateway : Gateway<SpeakerData, SpeakerDataFilter>, ISpeakersGateway
+    internal class BookChaptersGateway : Gateway<BookChapterData, BookChapterDataFilter>, IBookChaptersGateway
     {
-        public SpeakersGateway(IDbConnectionFactory connectionFactory, IPredicateFactory predicateFactory)
+        public BookChaptersGateway(IDbConnectionFactory connectionFactory, IPredicateFactory predicateFactory)
             : base(connectionFactory, predicateFactory)
         {
         }

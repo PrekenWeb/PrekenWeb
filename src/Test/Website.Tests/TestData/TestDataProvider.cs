@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Data;
 using Data.Identity;
 using Data.Tables;
 
 namespace Website.Tests.TestData
 {
+    [ExcludeFromCodeCoverage]
     public class TestDataProvider
     {
         public void Provision(IPrekenwebContext<Gebruiker> context)

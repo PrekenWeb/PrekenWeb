@@ -1,6 +1,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Data;
@@ -9,6 +10,7 @@ using Data.Tables;
 
 namespace Website.Tests
 {
+    [ExcludeFromCodeCoverage]
     class TestPrekenwebContext<T> : IPrekenwebContext<T> where T : class
     {
         public TestPrekenwebContext()
