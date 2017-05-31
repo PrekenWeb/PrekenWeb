@@ -41,7 +41,7 @@ namespace Data.Database.Dapper.Common.Filtering
             {
                 var metadata = (FilterMetadata<TFilter, TData>)untypedMetadata;
 
-                var filterValue = metadata.FilterValue(filter);
+                var filterValue = metadata.FilterValue?.Invoke(filter);
                 if (filterValue != null && filterValue != metadata.DefaultValue)
                     predicatesGroup.Predicates.Add(Predicates.Field(metadata.FilterExpression, metadata.FilterType, filterValue));
             }

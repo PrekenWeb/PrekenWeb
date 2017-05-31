@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using DapperExtensions;
 using Data.Database.Dapper.Common.Filtering;
 using Data.Database.Dapper.Metadata;
 using Data.Database.Dapper.Models;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -24,10 +27,10 @@ namespace Data.Tests.Database.Dapper
             _providers = new List<IFilterMetadataProvider>();
             _providersMock = new Mock<IEnumerable<IFilterMetadataProvider>>(MockBehavior.Strict);
             _providersMock.Setup(m => m.GetEnumerator()).Returns(() => _providers.GetEnumerator());
-
         }
 
-        #region ConstructorShouldNotAddProvidersWithoutMetadataToDictionary |
+        // Constructor
+        #region ConstructorShouldNotAddProvidersWithoutMetadataToDictionary
 
         [TestMethod]
         public void ConstructorShouldNotAddProvidersWithoutMetadataToDictionary()
@@ -47,7 +50,7 @@ namespace Data.Tests.Database.Dapper
         }
 
         #endregion
-        #region ConstructorShouldNotAddProvidersWithEmptyMetadataToDictionary |
+        #region ConstructorShouldNotAddProvidersWithEmptyMetadataToDictionary
 
         [TestMethod]
         public void ConstructorShouldNotAddProvidersWithEmptyMetadataToDictionary()
@@ -67,7 +70,7 @@ namespace Data.Tests.Database.Dapper
         }
 
         #endregion
-        #region ConstructorShouldAddProvidersWithMetadataToDictionary |
+        #region ConstructorShouldAddProvidersWithMetadataToDictionary
 
         [TestMethod]
         public void ConstructorShouldAddProvidersWithMetadataToDictionary()
@@ -89,7 +92,7 @@ namespace Data.Tests.Database.Dapper
         }
 
         #endregion
-        #region ConstructorShouldExtendProvidersWhenInDictionary |
+        #region ConstructorShouldExtendProvidersWhenInDictionary
 
         [TestMethod]
         public void ConstructorShouldExtendProvidersWhenInDictionary()
@@ -117,18 +120,125 @@ namespace Data.Tests.Database.Dapper
 
         #endregion
 
-        // Private subclasses
-        #region TestFilter |
+        // GetPredicate
+        #region GetPredicateShouldReturnNullIfFilterIsNull
 
-        private class TestFilter : DataFilter<TestFilter, TestData>
+        [TestMethod]
+        public void GetPredicateShouldReturnNullIfFilterIsNull()
         {
+            // Arrange
+            var predicateFactory = new PredicateFactory(_providersMock.Object);
+
+            // Act
+            var predicate = predicateFactory.GetPredicate<TestFilter, TestData>(null);
+
+            // Assert
+            predicate.Should().BeNull();
         }
 
         #endregion
-        #region Test       |
+        #region GetPredicateShouldReturnNullIfNoMetadataIsFoundForFilterType
+
+        [TestMethod]
+        public void GetPredicateShouldReturnNullIfNoMetadataIsFoundForFilterType()
+        {
+            // Arrange
+            //var providerMock = new Mock<IFilterMetadataProvider>(MockBehavior.Strict);
+            //providerMock.SetupGet(p => p.Metadata).Returns(new List<FilterMetadata> { new FilterMetadata() });
+            //providerMock.SetupGet(p => p.Type).Returns(typeof(TestFilter));
+
+            //_providers.Add(providerMock.Object);
+
+            var predicateFactory = new PredicateFactory(_providersMock.Object);
+
+            // Act
+            var predicate = predicateFactory.GetPredicate<TestFilter, TestData>(new TestFilter());
+
+            // Assert
+            predicate.Should().BeNull();
+        }
+
+        #endregion
+        #region GetPredicateShouldReturnNullIfNoPredicatesAreSetForFilter
+
+        [TestMethod]
+        public void GetPredicateShouldReturnNullIfNoPredicatesAreSetForFilter()
+        {
+            // Arrange
+            var providerMock = new Mock<IFilterMetadataProvider>(MockBehavior.Strict);
+            providerMock.SetupGet(p => p.Metadata).Returns(new List<FilterMetadata> { new FilterMetadata<TestFilter, TestData>() });
+            providerMock.SetupGet(p => p.Type).Returns(typeof(TestFilter));
+
+            _providers.Add(providerMock.Object);
+
+            var predicateFactory = new PredicateFactory(_providersMock.Object);
+
+            // Act
+            var predicate = predicateFactory.GetPredicate<TestFilter, TestData>(new TestFilter());
+
+            // Assert
+            predicate.Should().BeNull();
+        }
+
+        #endregion
+        #region GetPredicateShouldReturnPredicateGroupIfMetadataIsFoundForFilterType
+
+        [TestMethod]
+        public void GetPredicateShouldReturnPredicateGroupIfMetadataIsFoundForFilterType()
+        {
+            // Arrange
+            var providerMock = new Mock<IFilterMetadataProvider>(MockBehavior.Strict);
+            providerMock.SetupGet(p => p.Metadata).Returns(new List<FilterMetadata>
+            {
+                new FilterMetadata<TestFilter, TestData>
+                {
+                    FilterValue = filter => filter.Property,
+                    FilterExpression = data => data.Property,
+                    FilterType = Operator.Like
+                }
+            });
+            providerMock.SetupGet(p => p.Type).Returns(typeof(TestFilter));
+
+            _providers.Add(providerMock.Object);
+
+            var predicateFactory = new PredicateFactory(_providersMock.Object);
+
+            // Act
+            var predicate = predicateFactory.GetPredicate<TestFilter, TestData>(new TestFilter
+            {
+                Property = "PropertyValue"
+            });
+
+            // Assert
+            predicate.Should().NotBeNull();
+            predicate.Should().BeOfType<PredicateGroup>();
+
+            var predicateGroup = (PredicateGroup) predicate;
+            predicateGroup.Predicates.Should().NotBeNull().And.HaveCount(1);
+            predicateGroup.Predicates.First().Should().BeAssignableTo<IFieldPredicate>();
+
+            var fieldPredicate = (IFieldPredicate) predicateGroup.Predicates.First();
+            fieldPredicate.PropertyName.Should().Be(nameof(TestData.Property));
+            fieldPredicate.Value.Should().Be("PropertyValue");
+            fieldPredicate.Operator.Should().Be(Operator.Like);
+        }
+
+        #endregion
+
+        // Private subclasses
+        #region TestFilter
+
+        private class TestFilter : DataFilter<TestFilter, TestData>
+        {
+            public string Property { get; set; }
+        }
+
+        #endregion
+        #region Test
 
         private class TestData
         {
+            public string Property { get; set; }
         }
 
         #endregion
