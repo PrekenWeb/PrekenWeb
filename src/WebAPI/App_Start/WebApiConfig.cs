@@ -30,6 +30,8 @@ namespace WebAPI
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
 
+            //var apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;
+
             var trustedHostNames = new[]
             {
                 "http://prekenweb.nl",

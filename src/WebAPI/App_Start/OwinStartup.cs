@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Web.Http;
 using Data;
+using FluentHateoas;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security;
@@ -29,7 +30,7 @@ namespace WebAPI
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {
                 AuthenticationMode = AuthenticationMode.Active,
-                AllowedAudiences = new[] {ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceId"]},
+                AllowedAudiences = new[] { ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceId"] },
                 IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                 {
                     new SymmetricKeyIssuerSecurityTokenProvider("PrekenWeb.Website", TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["PrekenWeb.Website.AudienceSecret"]))
@@ -37,6 +38,8 @@ namespace WebAPI
             });
 
             WebApiConfig.Register(config);
+
+            // Hateoas.Startup<HateoasRegistration>(config);
 
             app.UseCors(CorsOptions.AllowAll);
 
