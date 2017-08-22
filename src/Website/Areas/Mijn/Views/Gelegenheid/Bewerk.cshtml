@@ -1,5 +1,5 @@
 ﻿@model GebeurtenisEditViewModel
-@{ ViewBag.Title = string.Format("Bewerk Gebeurtenis {0}", Model.Gebeurtenis.Omschrijving); }
+@{ ViewBag.Title = string.Format("{0} {1}", Resources.EditEvent, Model.Gebeurtenis.Omschrijving); }
 
 <h1>@ViewBag.Title</h1>
 @using (Html.BeginForm("Bewerk", "Gelegenheid", FormMethod.Post, new { name = "FormGebeurtenis" }))

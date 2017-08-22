@@ -502,6 +502,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create event.
+        /// </summary>
+        public static string CreateEvent {
+            get {
+                return ResourceManager.GetString("CreateEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Datum {
@@ -646,6 +655,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit event.
+        /// </summary>
+        public static string EditEvent {
+            get {
+                return ResourceManager.GetString("EditEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail.
         /// </summary>
         public static string Email {
@@ -687,6 +705,24 @@ namespace Prekenweb.Resources {
         public static string Engels {
             get {
                 return ResourceManager.GetString("Engels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string EventDescription {
+            get {
+                return ResourceManager.GetString("EventDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting.
+        /// </summary>
+        public static string EventSorting {
+            get {
+                return ResourceManager.GetString("EventSorting", resourceCulture);
             }
         }
         
@@ -745,7 +781,7 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username allready registred.
+        ///   Looks up a localized string similar to Username already registred.
         /// </summary>
         public static string GebruikerIsAlGeregistreerd {
             get {
