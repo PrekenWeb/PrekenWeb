@@ -1,1 +1,1 @@
-﻿& .\DbMigrations.exe
+﻿& .\PrekenWeb.Data.Migrations.exe
