@@ -7,8 +7,8 @@
     <ProjectGuid>{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Data.Migrations</RootNamespace>
-    <AssemblyName>Data.Migrations</AssemblyName>
+    <RootNamespace>PrekenWeb.Data.Migrations</RootNamespace>
+    <AssemblyName>PrekenWeb.Data.Migrations</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -65,7 +65,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <Content Include="DbMigrations.nuspec" />
+    <Content Include="PrekenWeb.Data.Migrations.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\0002 - Add Predikant_HideFromIndexingRobots.sql" />

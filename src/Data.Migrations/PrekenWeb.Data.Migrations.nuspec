@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>PrekenWeb.DbMigrations</id>
+    <id>PrekenWeb.Data.Migrations</id>
     <version>0.0.0</version>
     <title>PrekenWeb DbMigrations</title>
     <authors>Websitecommissie PrekenWeb</authors>
@@ -9,6 +9,6 @@
     <licenseUrl>http://www.prekenweb.nl</licenseUrl>
     <projectUrl>http://www.prekenweb.nl</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>PrekenWeb DbMigrations</description>
+    <description>PrekenWeb Database Migrations</description>
   </metadata>
 </package>

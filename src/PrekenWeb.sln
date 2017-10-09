@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business", "2. Business"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. API", "3. API", "{06022A00-A71A-484A-B922-AA2ED9F4FA32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Migrations", "Data.Migrations\Data.Migrations.csproj", "{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrekenWeb.Data.Migrations", "Data.Migrations\PrekenWeb.Data.Migrations.csproj", "{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. App", "4. App", "{35C2CE2B-E205-4D7C-8261-16DF78EB6467}"
 EndProject

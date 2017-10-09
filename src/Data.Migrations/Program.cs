@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Reflection;
 using DbUp;
 
-namespace Data.Migrations
+namespace PrekenWeb.Data.Migrations
 {
     class Program
     {
