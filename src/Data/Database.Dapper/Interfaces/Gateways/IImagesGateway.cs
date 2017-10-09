@@ -1,5 +1,5 @@
-using Data.Database.Dapper.Common.Data;
-using Data.Database.Dapper.Models;
+using Data.Database.Dapper.Filters;
+using Data.Models;
 
 namespace Data.Database.Dapper.Interfaces.Gateways
 {

@@ -1,9 +1,11 @@
-﻿using Data.Database.Dapper.Common.Data;
-using Data.Database.Dapper.Common.Filtering;
+﻿using System.Configuration;
+using DapperFilterExtensions.Data;
+using DapperFilterExtensions.Filtering;
 using Data.Database.Dapper.Gateways;
 using Data.Database.Dapper.Interfaces.Gateways;
 using Data.Database.Dapper.Metadata;
 using Ninject;
+using Ninject.Parameters;
 
 namespace Data.Database.Dapper
 {
@@ -11,7 +13,8 @@ namespace Data.Database.Dapper
     {
         public static void RegisterDependencies(IKernel kernel)
         {
-            kernel.Bind<IDbConnectionFactory>().To<SqlConnectionFactory>().InSingletonScope();
+            var connectionStringParameter = new ConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["PrekenwebContext"].ConnectionString);
+            kernel.Bind<IDbConnectionFactory>().To<SqlConnectionFactory>().InSingletonScope().WithParameter(connectionStringParameter);
             kernel.Bind<IPredicateFactory>().To<PredicateFactory>().InSingletonScope();
 
             kernel.Bind<IBooksGateway>().To<BooksGateway>().InSingletonScope();

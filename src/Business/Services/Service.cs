@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Data.Database.Dapper.Common.Data;
+using Data;
 
 namespace Business.Services
 {
@@ -16,7 +16,7 @@ namespace Business.Services
             Gateway = gateway;
         }
 
-        public async Task<IEnumerable<TBusiness>> Get(TBusinessFilter businessFilter)
+        public virtual async Task<IEnumerable<TBusiness>> Get(TBusinessFilter businessFilter)
         {
             var dataFilter = Mapper.Map<TBusinessFilter, TDataFilter>(businessFilter);
             var dataObjects = await Gateway.Get(dataFilter);

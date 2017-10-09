@@ -1,8 +1,9 @@
 using AutoMapper;
 using Business.Models;
 using Business.Services.Interfaces;
+using Data.Database.Dapper.Filters;
 using Data.Database.Dapper.Interfaces.Gateways;
-using Data.Database.Dapper.Models;
+using Data.Models;
 
 namespace Business.Services
 {

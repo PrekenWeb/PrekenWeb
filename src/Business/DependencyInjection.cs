@@ -20,14 +20,8 @@ namespace Business
             kernel.Bind<ISpeakersService>().To<SpeakersService>().InSingletonScope();
 
             // AutoMapper mapping profiles
-            kernel.Bind<Profile>().To<SermonModelAutoMapperProfile>().InSingletonScope();
-
-            kernel.Bind<Profile>().To<BookDataToBookAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<ImageDataToImageAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<LanguageDataToLanguageAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<LectureDataToLectureAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<LectureTypeDataToLectureTypeAutoMapperProfile>().InSingletonScope();
-            kernel.Bind<Profile>().To<SpeakerDataToSpeakerAutoMapperProfile>().InSingletonScope();
+            kernel.Bind<Profile>().To<DataModelToBusinessModelAutoMapperProfile>().InSingletonScope();
+            kernel.Bind<Profile>().To<BackwardsCompatibilityAutoMapperProfile>().InSingletonScope();
 
             // Data
             Data.DependencyInjection.RegisterDependencies(kernel);

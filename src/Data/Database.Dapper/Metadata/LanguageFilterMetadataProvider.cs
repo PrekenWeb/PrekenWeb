@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DapperExtensions;
-using Data.Database.Dapper.Common.Filtering;
-using Data.Database.Dapper.Models;
+using DapperFilterExtensions.Filtering;
+using Data.Database.Dapper.Filters;
+using Data.Models;
 
 namespace Data.Database.Dapper.Metadata
 {
@@ -10,7 +11,7 @@ namespace Data.Database.Dapper.Metadata
     {
         Type IFilterMetadataProvider.Type => typeof(LanguageDataFilter);
 
-        List<FilterMetadata> IFilterMetadataProvider.Metadata { get; } = new List<FilterMetadata>
+        IList<FilterMetadata> IFilterMetadataProvider.Metadata { get; } = new List<FilterMetadata>
         {
             new FilterMetadata<LanguageDataFilter, LanguageData>
             {

@@ -1,7 +1,8 @@
-using Data.Database.Dapper.Common.Data;
-using Data.Database.Dapper.Common.Filtering;
+using DapperFilterExtensions.Data;
+using DapperFilterExtensions.Filtering;
+using Data.Database.Dapper.Filters;
 using Data.Database.Dapper.Interfaces.Gateways;
-using Data.Database.Dapper.Models;
+using Data.Models;
 
 namespace Data.Database.Dapper.Gateways
 {

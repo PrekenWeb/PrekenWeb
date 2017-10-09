@@ -47,8 +47,11 @@
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="DapperExtensions, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DapperExtensions.1.5.0\lib\net45\DapperExtensions.dll</HintPath>
+    <Reference Include="DapperExtensions, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.6.3\lib\net45\DapperExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperFilterExtensions, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperFilterExtensions.0.1.4.0\lib\net461\DapperFilterExtensions.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -87,7 +90,6 @@
     <Compile Include="Database.Dapper\DependencyInjection.cs" />
     <Compile Include="Database.Dapper\Gateways\BookChaptersGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\BooksGateway.cs" />
-    <Compile Include="Database.Dapper\Common\Data\Gateway.cs" />
     <Compile Include="Database.Dapper\Gateways\ImagesGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\LectureTypesGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\IBookChaptersGateway.cs" />
@@ -97,39 +99,47 @@
     <Compile Include="Database.Dapper\Interfaces\Gateways\ILecturesGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\LanguagesGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\LecturesGateway.cs" />
-    <Compile Include="Database.Dapper\Common\Filtering\IPredicateFactory.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\ILectureTypesGateway.cs" />
     <Compile Include="Database.Dapper\Metadata\BookFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Metadata\ImageFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Metadata\LanguageFilterMetadataProvider.cs" />
     <Compile Include="Database.Dapper\Metadata\LectureFilterMetadataProvider.cs" />
-    <Compile Include="Database.Dapper\Common\Filtering\DataFilter.cs" />
-    <Compile Include="Database.Dapper\Common\Filtering\IFilterMetadataProvider.cs" />
-    <Compile Include="Database.Dapper\Common\Filtering\PredicateFactory.cs" />
     <Compile Include="Database.Dapper\Metadata\LectureTypeFilterMetadataProvider.cs" />
-    <Compile Include="Database.Dapper\Models\BookChapterData.cs" />
-    <Compile Include="Database.Dapper\Models\BookData.cs" />
-    <Compile Include="Database.Dapper\Models\ImageData.cs" />
-    <Compile Include="Database.Dapper\Models\LectureData.cs" />
-    <Compile Include="Database.Dapper\Models\LanguageData.cs" />
-    <Compile Include="Database.Dapper\Models\LectureTypeData.cs" />
-    <Compile Include="Database.Dapper\Models\SpeakerData.cs" />
+    <Compile Include="Database.Dapper\Filters\BookChapterDataFilter.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\BookChapterDataMapper.cs" />
+    <Compile Include="Database.Dapper\Filters\BookDataFilter.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\BookDataMapper.cs" />
+    <Compile Include="Database.Dapper\Filters\ImageDataFilter.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\ImageDataMapper.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\LanguageDataMapper.cs" />
+    <Compile Include="Database.Dapper\Filters\ViewLectureData.cs" />
+    <Compile Include="Database.Dapper\Filters\LanguageDataFilter.cs" />
+    <Compile Include="Database.Dapper\Filters\LectureDataFilter.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\LectureDataMapper.cs" />
+    <Compile Include="Database.Dapper\Filters\LectureTypeDataFilter.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\LectureTypeDataMapper.cs" />
+    <Compile Include="Database.Dapper\Filters\SpeakerDataFilter.cs" />
     <Compile Include="Database.Dapper\Metadata\SpeakerFilterMetadataProvider.cs" />
+    <Compile Include="Database.Dapper\ClassMappers\SpeakerDataMapper.cs" />
     <Compile Include="DependencyInjection.cs" />
-    <Compile Include="Database.Dapper\Common\Filtering\FilterMetadata.cs" />
-    <Compile Include="Database.Dapper\Common\Data\IDbConnectionFactory.cs" />
-    <Compile Include="Database.Dapper\Common\Data\IGateway.cs" />
     <Compile Include="Database.Dapper\Interfaces\Gateways\ISpeakersGateway.cs" />
     <Compile Include="Database.Dapper\Gateways\SpeakersGateway.cs" />
-    <Compile Include="Database.Dapper\Common\Data\SqlConnectionFactory.cs" />
     <Compile Include="Identity\Gebruiker.cs" />
     <Compile Include="Identity\GebruikerConfiguration.cs" />
     <Compile Include="Identity\PrekenWebRole.cs" />
     <Compile Include="Identity\PrekenWebUserClaim.cs" />
     <Compile Include="Identity\PrekenWebUserLogin.cs" />
     <Compile Include="Identity\PrekenWebUserRole.cs" />
+    <Compile Include="IGateway.cs" />
     <Compile Include="IPrekenwebContext.cs" />
     <Compile Include="Mapping\Profiles\PreekDtoAutoMapperProfile.cs" />
+    <Compile Include="Models\BookChapterData.cs" />
+    <Compile Include="Models\BookData.cs" />
+    <Compile Include="Models\ImageData.cs" />
+    <Compile Include="Models\LanguageData.cs" />
+    <Compile Include="Models\LectureData.cs" />
+    <Compile Include="Models\LectureTypeData.cs" />
+    <Compile Include="Models\SpeakerData.cs" />
     <Compile Include="PrekenwebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepository.cs" />

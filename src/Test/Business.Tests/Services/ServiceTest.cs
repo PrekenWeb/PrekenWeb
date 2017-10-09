@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Services;
-using Data.Database.Dapper.Common.Data;
+using Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

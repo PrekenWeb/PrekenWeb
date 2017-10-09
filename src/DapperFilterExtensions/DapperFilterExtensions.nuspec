@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DapperFilterExtensions</id>
+    <version>$version$</version>
+    <authors>Interest IT</authors>
+    <owners>Interest IT - Emmeloord, The Netherlands</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © 2017 Interest IT - Emmeloord, The Netherlands</copyright>
+    <tags>Dapper DapperExtensions InterestIT</tags>
+    <dependencies>
+      <dependency id="Dapper" version="[1.50.2, 2.0)" />
+      <dependency id="DapperExtensions" version="[1.6.3, 2.0)" />
+    </dependencies>
+  </metadata>
+</package>
