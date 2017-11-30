@@ -65,6 +65,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Migrations\0004 - Add Preek_SourceFileName.sql" />
     <Content Include="PrekenWeb.Data.Migrations.nuspec" />
   </ItemGroup>
   <ItemGroup>

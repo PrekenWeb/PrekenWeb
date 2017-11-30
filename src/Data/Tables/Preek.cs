@@ -47,6 +47,8 @@ namespace Data.Tables
         public DateTime? DatumGepubliceerd { get; set; }
         [Display(Name = "Bestand", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Upload)]
         public string Bestandsnaam { get; set; }
+        [Display(Name = "SourceFileName", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Upload)]
+        public string SourceFileName { get; set; }
 
         [Display(Name = "AantalKeerGedownload", ResourceType = typeof(Prekenweb.Resources.Resources))]
         public int AantalKeerGedownload { get; set; }

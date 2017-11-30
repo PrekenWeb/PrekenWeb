@@ -77,12 +77,21 @@
                     <span style="overflow: hidden; display: block;">
                         <a href="@Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], Model.Bestandsnaam))">@Model.Bestandsnaam</a>
                     </span>
-                    @*            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">Kies @{ if (!string.IsNullOrEmpty(Model.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
-            </a>*@
                     <input name="Bestand" id="Bestand" type="file" style="border: 0; background-color: transparent;" />
-                </div> 
+                </div>
             </div>
-
+        </div>
+        <div class="clear"></div>
+        <div class="ColumnMax alleenBijLeespreek">
+            <div class="field">
+                <div class="label">@Html.LabelFor(x => x.SourceFileName)</div>
+                <div class="value">
+                    <span style="overflow: hidden; display: block;">
+                        <a href="@Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["LectureSourcesFolder"], Model.SourceFileName))">@Model.SourceFileName</a>
+                    </span>
+                    <input name="Source" id="Source" type="file" style="border: 0; background-color: transparent;" />
+                </div>
+            </div>
         </div>
         <div class="clear"></div>
     </div>

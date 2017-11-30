@@ -50,12 +50,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         [HttpPost, Authorize(Roles = "PreekToevoegen"), ValidateInput(false)]
-        public async Task<ActionResult> Bewerk(Preek viewModel, HttpPostedFileBase bestand)
+        public async Task<ActionResult> Bewerk(Preek viewModel, HttpPostedFileBase bestand, HttpPostedFileBase source)
         {
             if (viewModel.Gepubliceerd)
             {
                 if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
-                    ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+                    ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
                 else if(!viewModel.DatumGepubliceerd.HasValue)
                     viewModel.DatumGepubliceerd = DateTime.Now;
             }
@@ -71,13 +71,25 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             try
             {
-                viewModel.Bestandsnaam = HandleUpload(bestand, viewModel.Id, viewModel.Bestandsnaam);
+                viewModel.Bestandsnaam = HandleUpload(bestand, viewModel.Id, ConfigurationManager.AppSettings["PrekenFolder"], viewModel.Bestandsnaam);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 return View(viewModel);
             }
+
+            try
+            {
+                if (source != null)
+                    viewModel.SourceFileName = HandleUpload(source, viewModel.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(viewModel);
+            }
+
             preek.DatumBijgewerkt = DateTime.Now;
             preek.AangepastDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
@@ -91,12 +103,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return View(preek);
         }
 
-        private string HandleUpload(HttpPostedFileBase uploadedPreek, int preekId, string oudeBestandsnaam)
+        private string HandleUpload(HttpPostedFileBase uploadedPreek, int preekId, string rootFolder, string oudeBestandsnaam)
         {
             var nieuweBestandsnaam = oudeBestandsnaam;
             if (uploadedPreek == null || uploadedPreek.ContentLength <= 0) return nieuweBestandsnaam;
-
-            var rootFolder = ConfigurationManager.AppSettings["PrekenFolder"];
 
             nieuweBestandsnaam = $"{Path.GetFileNameWithoutExtension(uploadedPreek.FileName)}_{preekId}{Path.GetExtension(uploadedPreek.FileName)}";
 
@@ -149,12 +159,12 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         }
 
         [Authorize(Roles = "PreekToevoegen"), HttpPost, ValidateInput(false)]
-        public async Task<ActionResult> Maak(Preek viewModel, HttpPostedFileBase bestand)
+        public async Task<ActionResult> Maak(Preek viewModel, HttpPostedFileBase bestand, HttpPostedFileBase source)
         {
             if (viewModel.Gepubliceerd)
             {
                 if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
-                    ModelState.AddModelError("Gepubliceerd", "Onvoldoende rechten");
+                    ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
                 else if (!viewModel.DatumGepubliceerd.HasValue)
                     viewModel.DatumGepubliceerd = DateTime.Now;
             }
@@ -172,13 +182,25 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 try
                 {
                     if (bestand != null)
-                        viewModel.Bestandsnaam = HandleUpload(bestand, preek.Id, bestand.FileName);
+                        viewModel.Bestandsnaam = HandleUpload(bestand, preek.Id, ConfigurationManager.AppSettings["PrekenFolder"], bestand.FileName);
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
                     return View(viewModel);
                 }
+
+                try
+                {
+                    if (source != null)
+                        viewModel.SourceFileName = HandleUpload(source, preek.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(viewModel);
+                }
+
                 preek.DatumBijgewerkt = DateTime.Now;
                 preek.AangemaaktDoor = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
@@ -192,7 +214,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 return View(preek);
             }
 
-            if (bestand != null) ModelState.AddModelError("", "Let op, er waren fouten, corrigeer deze maar kies ook opnieuw het bestand want deze is nog niet opgeslagen en wordt ook niet onthouden");
+            if (bestand != null) ModelState.AddModelError("", @"Let op, er waren fouten, corrigeer deze maar kies ook opnieuw het bestand want deze is nog niet opgeslagen en wordt ook niet onthouden");
 
             return View(viewModel);
         }
@@ -209,7 +231,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (!string.IsNullOrWhiteSpace(Request.Form["LezenZingenOmschrijving4"]) || !string.IsNullOrWhiteSpace(Request.Form["LezenZingenSoort4"])) _context.PreekLezenEnZingens.Add(new PreekLezenEnZingen { Soort = Request.Form["LezenZingenSoort4"], Omschrijving = Request.Form["LezenZingenOmschrijving4"], PreekId = viewModel.Id, Sortering = index++ });
             if (!string.IsNullOrWhiteSpace(Request.Form["LezenZingenOmschrijving5"]) || !string.IsNullOrWhiteSpace(Request.Form["LezenZingenSoort5"])) _context.PreekLezenEnZingens.Add(new PreekLezenEnZingen { Soort = Request.Form["LezenZingenSoort5"], Omschrijving = Request.Form["LezenZingenOmschrijving5"], PreekId = viewModel.Id, Sortering = index++ });
             if (!string.IsNullOrWhiteSpace(Request.Form["LezenZingenOmschrijving6"]) || !string.IsNullOrWhiteSpace(Request.Form["LezenZingenSoort6"])) _context.PreekLezenEnZingens.Add(new PreekLezenEnZingen { Soort = Request.Form["LezenZingenSoort6"], Omschrijving = Request.Form["LezenZingenOmschrijving6"], PreekId = viewModel.Id, Sortering = index++ });
-            if (!string.IsNullOrWhiteSpace(Request.Form["LezenZingenOmschrijving7"]) || !string.IsNullOrWhiteSpace(Request.Form["LezenZingenSoort7"])) _context.PreekLezenEnZingens.Add(new PreekLezenEnZingen { Soort = Request.Form["LezenZingenSoort7"], Omschrijving = Request.Form["LezenZingenOmschrijving7"], PreekId = viewModel.Id, Sortering = index++ });
+            if (!string.IsNullOrWhiteSpace(Request.Form["LezenZingenOmschrijving7"]) || !string.IsNullOrWhiteSpace(Request.Form["LezenZingenSoort7"])) _context.PreekLezenEnZingens.Add(new PreekLezenEnZingen { Soort = Request.Form["LezenZingenSoort7"], Omschrijving = Request.Form["LezenZingenOmschrijving7"], PreekId = viewModel.Id, Sortering = index });
         }
 
         #endregion
@@ -265,13 +287,26 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var preek = _context.Preeks.Single(p => p.Id == id);
             try
             {
-                string filename = Server.MapPath(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam));
-                if (!string.IsNullOrEmpty(preek.Bestandsnaam) && System.IO.File.Exists(filename))
-                    System.IO.File.Delete(filename);
+                var lectureFilename = Server.MapPath($"{ConfigurationManager.AppSettings["PrekenFolder"]}{preek.Bestandsnaam}");
+                if (!string.IsNullOrEmpty(preek.Bestandsnaam) && System.IO.File.Exists(lectureFilename))
+                    System.IO.File.Delete(lectureFilename);
             }
             catch
             {
+                // ignored
             }
+
+            try
+            {
+                var lectureSourceFilename = Server.MapPath($"{ConfigurationManager.AppSettings["LectureSourcesFolder"]}{preek.SourceFileName}");
+                if (!string.IsNullOrEmpty(preek.SourceFileName) && System.IO.File.Exists(lectureSourceFilename))
+                    System.IO.File.Delete(lectureSourceFilename);
+            }
+            catch
+            {
+                // ignored
+            }
+
             _context.Preeks.Remove(preek);
             _context.SaveChanges();
 
