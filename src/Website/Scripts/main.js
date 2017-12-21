@@ -7,7 +7,7 @@
 var Prekenweb;
 (function (Prekenweb_1) {
     'use strict';
-    var Prekenweb = (function () {
+    var Prekenweb = /** @class */ (function () {
         function Prekenweb() {
             var _this = this;
             this.taal = "";
@@ -297,12 +297,12 @@ var Prekenweb;
             $(".LezingCategorieEditor").hide();
             $(".alleenBijLeespreek").hide();
             switch (preekTypeId) {
-                case "1":
+                case "1"://preek
                     break;
-                case "2":
+                case "2"://lezing
                     $(".LezingCategorieEditor").show();
                     break;
-                case "3":
+                case "3":// leespreek
                     $(".alleenBijLeespreek").show();
                     break;
             }

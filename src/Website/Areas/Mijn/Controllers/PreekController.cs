@@ -56,7 +56,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             {
                 if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
                     ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
-                else if(!viewModel.DatumGepubliceerd.HasValue)
+                else if (!viewModel.DatumGepubliceerd.HasValue)
                     viewModel.DatumGepubliceerd = DateTime.Now;
             }
             else viewModel.DatumGepubliceerd = null;
@@ -279,9 +279,19 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [Authorize(Roles = "PreekToevoegen")]
         public ActionResult Verwijder(int id)
         {
+            // Remove lecture cookies.
             _context.PreekCookies.Where(pc => pc.PreekId == id).ToList().ForEach(pc => _context.PreekCookies.Remove(pc));
             _context.SaveChanges();
-            _context.Inboxes.Where(i => i.PreekId == id).ToList().ForEach(i => _context.Inboxes.Remove(i));
+
+            // Remove inbox (replies).
+            var inboxItems = _context.Inboxes.Where(i => i.PreekId == id).ToList();
+            inboxItems.ForEach(i =>
+            {
+                _context.InboxOpvolgings
+                    .Where(io => io.InboxId == i.Id).ToList()
+                    .ForEach(io => _context.InboxOpvolgings.Remove(io));
+                _context.Inboxes.Remove(i);
+            });
             _context.SaveChanges();
 
             var preek = _context.Preeks.Single(p => p.Id == id);
