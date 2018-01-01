@@ -250,6 +250,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All sermons have been published.
+        /// </summary>
+        public static string AllLecturesHaveBeenPublished {
+            get {
+                return ResourceManager.GetString("AllLecturesHaveBeenPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio sermon.
         /// </summary>
         public static string AudioPreek {
@@ -1096,6 +1105,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Within lectures the following categories are known:.
+        /// </summary>
+        public static string KnownLectureCategories {
+            get {
+                return ResourceManager.GetString("KnownLectureCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last.
         /// </summary>
         public static string Laatste {
@@ -1290,6 +1308,15 @@ namespace Prekenweb.Resources {
         public static string LoginVia {
             get {
                 return ResourceManager.GetString("LoginVia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U bent succesvol uitgelogd!.
+        /// </summary>
+        public static string LogoutSuccessful {
+            get {
+                return ResourceManager.GetString("LogoutSuccessful", resourceCulture);
             }
         }
         

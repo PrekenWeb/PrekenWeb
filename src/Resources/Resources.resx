@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,974 +59,983 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="AfspelenKop" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AfspelenKop" xml:space="preserve">
     <value>Play</value>
   </data>
-  <data name="Bijbelboek" xml:space="preserve">
+	<data name="Bijbelboek" xml:space="preserve">
     <value>Bible book</value>
   </data>
-  <data name="Boek" xml:space="preserve">
+	<data name="Boek" xml:space="preserve">
     <value>Book</value>
   </data>
-  <data name="ContactKop" xml:space="preserve">
+	<data name="ContactKop" xml:space="preserve">
     <value>Contact</value>
   </data>
-  <data name="Datum" xml:space="preserve">
+	<data name="Datum" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="Gebeurtenis" xml:space="preserve">
+	<data name="Gebeurtenis" xml:space="preserve">
     <value>Event</value>
   </data>
-  <data name="Gemeente" xml:space="preserve">
+	<data name="Gemeente" xml:space="preserve">
     <value>Congregation</value>
   </data>
-  <data name="HomeKop" xml:space="preserve">
+	<data name="HomeKop" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="InschrijvenNieuwsbrief" xml:space="preserve">
+	<data name="InschrijvenNieuwsbrief" xml:space="preserve">
     <value>Newsletter</value>
   </data>
-  <data name="InschrijvenNieuwsbriefKnop" xml:space="preserve">
+	<data name="InschrijvenNieuwsbriefKnop" xml:space="preserve">
     <value>Sign up</value>
   </data>
-  <data name="Laatste" xml:space="preserve">
+	<data name="Laatste" xml:space="preserve">
     <value>Last</value>
   </data>
-  <data name="MenuBoeken" xml:space="preserve">
+	<data name="MenuBoeken" xml:space="preserve">
     <value>Books</value>
   </data>
-  <data name="MenuContact" xml:space="preserve">
+	<data name="MenuContact" xml:space="preserve">
     <value>Contact</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
+	<data name="MenuHome" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="MenuHulp" xml:space="preserve">
+	<data name="MenuHulp" xml:space="preserve">
     <value>Support</value>
   </data>
-  <data name="MenuLinks" xml:space="preserve">
+	<data name="MenuLinks" xml:space="preserve">
     <value>Links</value>
   </data>
-  <data name="NieuwePreken" xml:space="preserve">
+	<data name="NieuwePreken" xml:space="preserve">
     <value>New sermons</value>
   </data>
-  <data name="NieuwsbriefEmail" xml:space="preserve">
+	<data name="NieuwsbriefEmail" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="NiewsbriefNaam" xml:space="preserve">
+	<data name="NiewsbriefNaam" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Predikant" xml:space="preserve">
+	<data name="Predikant" xml:space="preserve">
     <value>Minister</value>
   </data>
-  <data name="Prekenuit" xml:space="preserve">
+	<data name="Prekenuit" xml:space="preserve">
     <value>Sermons from</value>
   </data>
-  <data name="PrekenUitDeSerie" xml:space="preserve">
+	<data name="PrekenUitDeSerie" xml:space="preserve">
     <value>Sermons in series</value>
   </data>
-  <data name="PrekenUitGemeente" xml:space="preserve">
+	<data name="PrekenUitGemeente" xml:space="preserve">
     <value>Sermons from</value>
   </data>
-  <data name="PrekenVanPredikant" xml:space="preserve">
+	<data name="PrekenVanPredikant" xml:space="preserve">
     <value>Sermons of</value>
   </data>
-  <data name="PrekenVoorGebeurtenis" xml:space="preserve">
+	<data name="PrekenVoorGebeurtenis" xml:space="preserve">
     <value>Sermons for</value>
   </data>
-  <data name="PrekenZoeken" xml:space="preserve">
+	<data name="PrekenZoeken" xml:space="preserve">
     <value>Search sermons</value>
   </data>
-  <data name="Serie" xml:space="preserve">
+	<data name="Serie" xml:space="preserve">
     <value>Series</value>
   </data>
-  <data name="Soort" xml:space="preserve">
+	<data name="Soort" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="WisFilters" xml:space="preserve">
+	<data name="WisFilters" xml:space="preserve">
     <value>Clear filters</value>
   </data>
-  <data name="Zoek" xml:space="preserve">
+	<data name="Zoek" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="ZoekboxStandaardTekst" xml:space="preserve">
+	<data name="ZoekboxStandaardTekst" xml:space="preserve">
     <value>Type a searchterm, for example: minister, theme, Bible book or a part of a bible text</value>
   </data>
-  <data name="ZoekenBoek" xml:space="preserve">
+	<data name="ZoekenBoek" xml:space="preserve">
     <value>Books</value>
   </data>
-  <data name="DeNederlandseGeloofsbelijdenis" xml:space="preserve">
+	<data name="DeNederlandseGeloofsbelijdenis" xml:space="preserve">
     <value>The Dutch Confession</value>
   </data>
-  <data name="DordtseLeerregels" xml:space="preserve">
+	<data name="DordtseLeerregels" xml:space="preserve">
     <value>Canons</value>
   </data>
-  <data name="HeidelbergseCatechismus" xml:space="preserve">
+	<data name="HeidelbergseCatechismus" xml:space="preserve">
     <value>Heidelberg Catechism</value>
   </data>
-  <data name="NieuweTestament" xml:space="preserve">
+	<data name="NieuweTestament" xml:space="preserve">
     <value>New testament</value>
   </data>
-  <data name="OudeTestament" xml:space="preserve">
+	<data name="OudeTestament" xml:space="preserve">
     <value>Old testament</value>
   </data>
-  <data name="ZoekenPredikant" xml:space="preserve">
+	<data name="ZoekenPredikant" xml:space="preserve">
     <value>Browse ministers</value>
   </data>
-  <data name="Taal" xml:space="preserve">
+	<data name="Taal" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="PrekenInTaal" xml:space="preserve">
+	<data name="PrekenInTaal" xml:space="preserve">
     <value>Sermons spoken in</value>
   </data>
-  <data name="ZoekenGebeurtenis" xml:space="preserve">
+	<data name="ZoekenGebeurtenis" xml:space="preserve">
     <value>Events</value>
   </data>
-  <data name="MenuBeheer" xml:space="preserve">
+	<data name="MenuBeheer" xml:space="preserve">
     <value>Admin</value>
   </data>
-  <data name="Hoofdstuk" xml:space="preserve">
+	<data name="Hoofdstuk" xml:space="preserve">
     <value>Chapter</value>
   </data>
-  <data name="ZoekenSerie" xml:space="preserve">
+	<data name="ZoekenSerie" xml:space="preserve">
     <value>Series</value>
   </data>
-  <data name="ZoekenGemeente" xml:space="preserve">
+	<data name="ZoekenGemeente" xml:space="preserve">
     <value>Congregations</value>
   </data>
-  <data name="BijbelBoeken" xml:space="preserve">
+	<data name="BijbelBoeken" xml:space="preserve">
     <value>Bible books</value>
   </data>
-  <data name="Gebeurtenissen" xml:space="preserve">
+	<data name="Gebeurtenissen" xml:space="preserve">
     <value>Events</value>
   </data>
-  <data name="Lees" xml:space="preserve">
+	<data name="Lees" xml:space="preserve">
     <value>Read</value>
   </data>
-  <data name="Leespreken" xml:space="preserve">
+	<data name="Leespreken" xml:space="preserve">
     <value>Reading sermons</value>
   </data>
-  <data name="Lezingen" xml:space="preserve">
+	<data name="Lezingen" xml:space="preserve">
     <value>Lectures</value>
   </data>
-  <data name="Luister" xml:space="preserve">
+	<data name="Luister" xml:space="preserve">
     <value>Listen</value>
   </data>
-  <data name="Predikanten" xml:space="preserve">
+	<data name="Predikanten" xml:space="preserve">
     <value>Ministers</value>
   </data>
-  <data name="Series" xml:space="preserve">
+	<data name="Series" xml:space="preserve">
     <value>Series</value>
   </data>
-  <data name="NieuwsbriefEmailVerplicht" xml:space="preserve">
+	<data name="NieuwsbriefEmailVerplicht" xml:space="preserve">
     <value>Email is required</value>
   </data>
-  <data name="NieuwsbriefNaamVerplicht" xml:space="preserve">
+	<data name="NieuwsbriefNaamVerplicht" xml:space="preserve">
     <value>Name is required</value>
   </data>
-  <data name="TooltipBijbelboek" xml:space="preserve">
+	<data name="TooltipBijbelboek" xml:space="preserve">
     <value>Part of a Bible book, for example: 'Matthew', 'Revela' or 'Sunday 12'</value>
   </data>
-  <data name="TooltipGebeurtenis" xml:space="preserve">
+	<data name="TooltipGebeurtenis" xml:space="preserve">
     <value>Part of an event, for example: Holy Supper, Passion, Holy Baptism and similar</value>
   </data>
-  <data name="TooltipHoofdstuk" xml:space="preserve">
+	<data name="TooltipHoofdstuk" xml:space="preserve">
     <value>Search on Bible book chapter</value>
   </data>
-  <data name="Meer" xml:space="preserve">
+	<data name="Meer" xml:space="preserve">
     <value>More</value>
   </data>
-  <data name="DeelOpFacebook" xml:space="preserve">
+	<data name="DeelOpFacebook" xml:space="preserve">
     <value>Share on Facebook</value>
   </data>
-  <data name="DeelOpTwitter" xml:space="preserve">
+	<data name="DeelOpTwitter" xml:space="preserve">
     <value>Share on Twitter</value>
   </data>
-  <data name="DeelViaMail" xml:space="preserve">
+	<data name="DeelViaMail" xml:space="preserve">
     <value>Share via e-mail</value>
   </data>
-  <data name="DownloadPreek" xml:space="preserve">
+	<data name="DownloadPreek" xml:space="preserve">
     <value>Download sermon</value>
   </data>
-  <data name="GegevensAanvullen" xml:space="preserve">
+	<data name="GegevensAanvullen" xml:space="preserve">
     <value>Improve data</value>
   </data>
-  <data name="PlayerKop" xml:space="preserve">
+	<data name="PlayerKop" xml:space="preserve">
     <value>Play</value>
   </data>
-  <data name="TerugNaarZoekresultaten" xml:space="preserve">
+	<data name="TerugNaarZoekresultaten" xml:space="preserve">
     <value>Back to search results</value>
   </data>
-  <data name="Tot" xml:space="preserve">
+	<data name="Tot" xml:space="preserve">
     <value>till</value>
   </data>
-  <data name="Vanaf" xml:space="preserve">
+	<data name="Vanaf" xml:space="preserve">
     <value>from</value>
   </data>
-  <data name="Vers" xml:space="preserve">
+	<data name="Vers" xml:space="preserve">
     <value>Verse</value>
   </data>
-  <data name="DeelOpLinkedIn" xml:space="preserve">
+	<data name="DeelOpLinkedIn" xml:space="preserve">
     <value>Share on LinkedIn</value>
   </data>
-  <data name="Bijdragen" xml:space="preserve">
+	<data name="Bijdragen" xml:space="preserve">
     <value>Contribute</value>
   </data>
-  <data name="Email" xml:space="preserve">
+	<data name="Email" xml:space="preserve">
     <value>E-mail</value>
   </data>
-  <data name="EmailIsVerplicht" xml:space="preserve">
+	<data name="EmailIsVerplicht" xml:space="preserve">
     <value>E-mail is required</value>
   </data>
-  <data name="FinancieleBijdrage" xml:space="preserve">
+	<data name="FinancieleBijdrage" xml:space="preserve">
     <value>Donate</value>
   </data>
-  <data name="Naam" xml:space="preserve">
+	<data name="Naam" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NaamIsVerplicht" xml:space="preserve">
+	<data name="NaamIsVerplicht" xml:space="preserve">
     <value>Name is required</value>
   </data>
-  <data name="PreekToevoegen" xml:space="preserve">
+	<data name="PreekToevoegen" xml:space="preserve">
     <value>Upload sermon</value>
   </data>
-  <data name="ReactieGeven" xml:space="preserve">
+	<data name="ReactieGeven" xml:space="preserve">
     <value>Provide feedback</value>
   </data>
-  <data name="Tekst" xml:space="preserve">
+	<data name="Tekst" xml:space="preserve">
     <value>Text</value>
   </data>
-  <data name="TekstIsVerplicht" xml:space="preserve">
+	<data name="TekstIsVerplicht" xml:space="preserve">
     <value>Text is required</value>
   </data>
-  <data name="VerbeteringDoorgeven" xml:space="preserve">
+	<data name="VerbeteringDoorgeven" xml:space="preserve">
     <value>Submit improvement</value>
   </data>
-  <data name="Titel" xml:space="preserve">
+	<data name="Titel" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="NieuwOpPrekenweb" xml:space="preserve">
+	<data name="NieuwOpPrekenweb" xml:space="preserve">
     <value>Sermonweb articles</value>
   </data>
-  <data name="Verstuur" xml:space="preserve">
+	<data name="Verstuur" xml:space="preserve">
     <value>Send</value>
   </data>
-  <data name="Gedeelte" xml:space="preserve">
+	<data name="Gedeelte" xml:space="preserve">
     <value>Area on site</value>
   </data>
-  <data name="Idee" xml:space="preserve">
+	<data name="Idee" xml:space="preserve">
     <value>Idea</value>
   </data>
-  <data name="LezingCategorie" xml:space="preserve">
+	<data name="LezingCategorie" xml:space="preserve">
     <value>Lecture category</value>
   </data>
-  <data name="Opmerking" xml:space="preserve">
+	<data name="Opmerking" xml:space="preserve">
     <value>Note</value>
   </data>
-  <data name="Telefoon" xml:space="preserve">
+	<data name="Telefoon" xml:space="preserve">
     <value>Phone</value>
   </data>
-  <data name="Aanvulling" xml:space="preserve">
+	<data name="Aanvulling" xml:space="preserve">
     <value>Improvement</value>
   </data>
-  <data name="AanvullingIsVerplicht" xml:space="preserve">
+	<data name="AanvullingIsVerplicht" xml:space="preserve">
     <value>Improvement is required</value>
   </data>
-  <data name="Onderwerp" xml:space="preserve">
+	<data name="Onderwerp" xml:space="preserve">
     <value>Subject</value>
   </data>
-  <data name="Alle" xml:space="preserve">
+	<data name="Alle" xml:space="preserve">
     <value>All</value>
   </data>
-  <data name="Preken" xml:space="preserve">
+	<data name="Preken" xml:space="preserve">
     <value>Audio sermons</value>
   </data>
-  <data name="Zoeken" xml:space="preserve">
+	<data name="Zoeken" xml:space="preserve">
     <value>Browse</value>
   </data>
-  <data name="Bladeren" xml:space="preserve">
+	<data name="Bladeren" xml:space="preserve">
     <value>Browse</value>
   </data>
-  <data name="LeesEnAudioPreken" xml:space="preserve">
+	<data name="LeesEnAudioPreken" xml:space="preserve">
     <value>Audio and reading sermons</value>
   </data>
-  <data name="LeesprekenEnLezingen" xml:space="preserve">
+	<data name="LeesprekenEnLezingen" xml:space="preserve">
     <value>Reading Sermons and Lectures</value>
   </data>
-  <data name="LezingenEnAudioPreken" xml:space="preserve">
+	<data name="LezingenEnAudioPreken" xml:space="preserve">
     <value>Audio Sermons and Lectures</value>
   </data>
-  <data name="NieuweLeespreken" xml:space="preserve">
+	<data name="NieuweLeespreken" xml:space="preserve">
     <value>New Reading Sermons</value>
   </data>
-  <data name="NieuweLezingen" xml:space="preserve">
+	<data name="NieuweLezingen" xml:space="preserve">
     <value>New lectures</value>
   </data>
-  <data name="TooltipPredikant" xml:space="preserve">
+	<data name="TooltipPredikant" xml:space="preserve">
     <value>Use this field to search in a (part of the) ministers lastname</value>
   </data>
-  <data name="NieuweAudioPreken" xml:space="preserve">
+	<data name="NieuweAudioPreken" xml:space="preserve">
     <value>New audio sermons</value>
   </data>
-  <data name="BeluisterDezeLezing" xml:space="preserve">
+	<data name="BeluisterDezeLezing" xml:space="preserve">
     <value>Listen this lecture</value>
   </data>
-  <data name="BeluisterDezePreek" xml:space="preserve">
+	<data name="BeluisterDezePreek" xml:space="preserve">
     <value>Listen this sermon</value>
   </data>
-  <data name="LeesDezePreek" xml:space="preserve">
+	<data name="LeesDezePreek" xml:space="preserve">
     <value>Read this sermon</value>
   </data>
-  <data name="MeerPrekenGelegenheid" xml:space="preserve">
+	<data name="MeerPrekenGelegenheid" xml:space="preserve">
     <value>More sermons about this event</value>
   </data>
-  <data name="MeerUitDezeSerie" xml:space="preserve">
+	<data name="MeerUitDezeSerie" xml:space="preserve">
     <value>More sermons in this series</value>
   </data>
-  <data name="MeerUitDitBoek" xml:space="preserve">
+	<data name="MeerUitDitBoek" xml:space="preserve">
     <value>More of this book</value>
   </data>
-  <data name="MeerVanDezePredikant" xml:space="preserve">
+	<data name="MeerVanDezePredikant" xml:space="preserve">
     <value>More sermons of this minister</value>
   </data>
-  <data name="Op" xml:space="preserve">
+	<data name="Op" xml:space="preserve">
     <value>at</value>
   </data>
-  <data name="Uit" xml:space="preserve">
+	<data name="Uit" xml:space="preserve">
     <value>on</value>
   </data>
-  <data name="Lezing" xml:space="preserve">
+	<data name="Lezing" xml:space="preserve">
     <value>Lecture</value>
   </data>
-  <data name="Levensperiode" xml:space="preserve">
+	<data name="Levensperiode" xml:space="preserve">
     <value>Lifespan</value>
   </data>
-  <data name="TweetsWordenGeladen" xml:space="preserve">
+	<data name="TweetsWordenGeladen" xml:space="preserve">
     <value>Tweets are  being loaded</value>
   </data>
-  <data name="VolgOnsOpTwitter" xml:space="preserve">
+	<data name="VolgOnsOpTwitter" xml:space="preserve">
     <value>Follow us on Twitter</value>
   </data>
-  <data name="Voor" xml:space="preserve">
+	<data name="Voor" xml:space="preserve">
     <value>for</value>
   </data>
-  <data name="Zoekresultaten" xml:space="preserve">
+	<data name="Zoekresultaten" xml:space="preserve">
     <value>Search results</value>
   </data>
-  <data name="AangemaaktOp" xml:space="preserve">
+	<data name="AangemaaktOp" xml:space="preserve">
     <value>Published</value>
   </data>
-  <data name="Bestand" xml:space="preserve">
+	<data name="Bestand" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="BijbeltekstOmschrijving" xml:space="preserve">
+	<data name="BijbeltekstOmschrijving" xml:space="preserve">
     <value>Bible text description</value>
   </data>
-  <data name="BijgewerktOp" xml:space="preserve">
+	<data name="BijgewerktOp" xml:space="preserve">
     <value>Modified</value>
   </data>
-  <data name="Delen" xml:space="preserve">
+	<data name="Delen" xml:space="preserve">
     <value>Share</value>
   </data>
-  <data name="GepreektOp" xml:space="preserve">
+	<data name="GepreektOp" xml:space="preserve">
     <value>Preached</value>
   </data>
-  <data name="LaatsteBezoek" xml:space="preserve">
+	<data name="LaatsteBezoek" xml:space="preserve">
     <value>Last visit</value>
   </data>
-  <data name="OverigeInformatie" xml:space="preserve">
+	<data name="OverigeInformatie" xml:space="preserve">
     <value>Further information</value>
   </data>
-  <data name="PreekType" xml:space="preserve">
+	<data name="PreekType" xml:space="preserve">
     <value>Sermontype</value>
   </data>
-  <data name="Punt1" xml:space="preserve">
+	<data name="Punt1" xml:space="preserve">
     <value>Point 1</value>
   </data>
-  <data name="Punt2" xml:space="preserve">
+	<data name="Punt2" xml:space="preserve">
     <value>Point 2</value>
   </data>
-  <data name="Punt3" xml:space="preserve">
+	<data name="Punt3" xml:space="preserve">
     <value>Point 3</value>
   </data>
-  <data name="Punt4" xml:space="preserve">
+	<data name="Punt4" xml:space="preserve">
     <value>Point 4</value>
   </data>
-  <data name="Punt5" xml:space="preserve">
+	<data name="Punt5" xml:space="preserve">
     <value>Point 5</value>
   </data>
-  <data name="Thema" xml:space="preserve">
+	<data name="Thema" xml:space="preserve">
     <value>Theme</value>
   </data>
-  <data name="TotVers" xml:space="preserve">
+	<data name="TotVers" xml:space="preserve">
     <value>Till verse (value from old site)</value>
   </data>
-  <data name="VanVers" xml:space="preserve">
+	<data name="VanVers" xml:space="preserve">
     <value>From verse (value from old site)</value>
   </data>
-  <data name="Categorie" xml:space="preserve">
+	<data name="Categorie" xml:space="preserve">
     <value>Category</value>
   </data>
-  <data name="GeenResultaten" xml:space="preserve">
+	<data name="GeenResultaten" xml:space="preserve">
     <value>No results...</value>
   </data>
-  <data name="Resultaten" xml:space="preserve">
+	<data name="Resultaten" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="CaptchaOvertypen" xml:space="preserve">
+	<data name="CaptchaOvertypen" xml:space="preserve">
     <value>Type here the text as in the image above</value>
   </data>
-  <data name="WelkomstTekstTonen" xml:space="preserve">
+	<data name="WelkomstTekstTonen" xml:space="preserve">
     <value>Show welcome text</value>
   </data>
-  <data name="WelkomstTekstVerbergen" xml:space="preserve">
+	<data name="WelkomstTekstVerbergen" xml:space="preserve">
     <value>Hide this text</value>
   </data>
-  <data name="SorteerOp" xml:space="preserve">
+	<data name="SorteerOp" xml:space="preserve">
     <value>Sort by</value>
   </data>
-  <data name="TooltipZoekterm" xml:space="preserve">
+	<data name="TooltipZoekterm" xml:space="preserve">
     <value>Use this to search thru minister, theme, Bible book, a part of a bibletext. This searchterm can be combined with the other searchfields</value>
   </data>
-  <data name="VerderZoeken" xml:space="preserve">
+	<data name="VerderZoeken" xml:space="preserve">
     <value>Advanced search</value>
   </data>
-  <data name="Zoekterm" xml:space="preserve">
+	<data name="Zoekterm" xml:space="preserve">
     <value>Searchterm</value>
   </data>
-  <data name="Geavanceerd" xml:space="preserve">
+	<data name="Geavanceerd" xml:space="preserve">
     <value>Advanced</value>
   </data>
-  <data name="Simpel" xml:space="preserve">
+	<data name="Simpel" xml:space="preserve">
     <value>Simple</value>
   </data>
-  <data name="LezingOmschrijving" xml:space="preserve">
+	<data name="LezingOmschrijving" xml:space="preserve">
     <value>Lecture description</value>
   </data>
-  <data name="AantalKeerGedownload" xml:space="preserve">
+	<data name="AantalKeerGedownload" xml:space="preserve">
     <value>Times visited</value>
   </data>
-  <data name="Afbeeldingen" xml:space="preserve">
+	<data name="Afbeeldingen" xml:space="preserve">
     <value>Images</value>
   </data>
-  <data name="Gebruikers" xml:space="preserve">
+	<data name="Gebruikers" xml:space="preserve">
     <value>Users</value>
   </data>
-  <data name="Gelegenheden" xml:space="preserve">
+	<data name="Gelegenheden" xml:space="preserve">
     <value>Events</value>
   </data>
-  <data name="Gemeentes" xml:space="preserve">
+	<data name="Gemeentes" xml:space="preserve">
     <value>Congregations</value>
   </data>
-  <data name="NieuwsbriefAanmeldingen" xml:space="preserve">
+	<data name="NieuwsbriefAanmeldingen" xml:space="preserve">
     <value>Newsletter subscriptions</value>
   </data>
-  <data name="OngepubliceerdePreken" xml:space="preserve">
+	<data name="OngepubliceerdePreken" xml:space="preserve">
     <value>Unpublished sermons</value>
   </data>
-  <data name="Paginas" xml:space="preserve">
+	<data name="Paginas" xml:space="preserve">
     <value>Pages</value>
   </data>
-  <data name="PreekMaken" xml:space="preserve">
+	<data name="PreekMaken" xml:space="preserve">
     <value>Create sermon</value>
   </data>
-  <data name="SpotlightItems" xml:space="preserve">
+	<data name="SpotlightItems" xml:space="preserve">
     <value>Spotlight items</value>
   </data>
-  <data name="Aanmaken" xml:space="preserve">
+	<data name="Aanmaken" xml:space="preserve">
     <value>Create</value>
   </data>
-  <data name="Afgehandeld" xml:space="preserve">
+	<data name="Afgehandeld" xml:space="preserve">
     <value>Done</value>
   </data>
-  <data name="Afzender" xml:space="preserve">
+	<data name="Afzender" xml:space="preserve">
     <value>Sender</value>
   </data>
-  <data name="BewerkPreek" xml:space="preserve">
+	<data name="BewerkPreek" xml:space="preserve">
     <value>Edit sermon</value>
   </data>
-  <data name="Ja" xml:space="preserve">
+	<data name="Ja" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="MijnPrekenweb" xml:space="preserve">
+	<data name="MijnPrekenweb" xml:space="preserve">
     <value>My SermonWeb.org</value>
   </data>
-  <data name="Nee" xml:space="preserve">
+	<data name="Nee" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Opslaan" xml:space="preserve">
+	<data name="Opslaan" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Terug" xml:space="preserve">
+	<data name="Terug" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="UploadEenNieuwePreek" xml:space="preserve">
+	<data name="UploadEenNieuwePreek" xml:space="preserve">
     <value>Upload a new sermon</value>
   </data>
-  <data name="Bewerk" xml:space="preserve">
+	<data name="Bewerk" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Gepubliceerd" xml:space="preserve">
+	<data name="Gepubliceerd" xml:space="preserve">
     <value>Published</value>
   </data>
-  <data name="NieuweGebeurtenis" xml:space="preserve">
+	<data name="NieuweGebeurtenis" xml:space="preserve">
     <value>New event</value>
   </data>
-  <data name="NieuwePredikant" xml:space="preserve">
+	<data name="NieuwePredikant" xml:space="preserve">
     <value>New minister</value>
   </data>
-  <data name="Omschrijving" xml:space="preserve">
+	<data name="Omschrijving" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Sortering" xml:space="preserve">
+	<data name="Sortering" xml:space="preserve">
     <value>Order</value>
   </data>
-  <data name="Verwijder" xml:space="preserve">
+	<data name="Verwijder" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="VolledigeNaam" xml:space="preserve">
+	<data name="VolledigeNaam" xml:space="preserve">
     <value>Fullname</value>
   </data>
-  <data name="AantalRollen" xml:space="preserve">
+	<data name="AantalRollen" xml:space="preserve">
     <value>Roles</value>
   </data>
-  <data name="DatumTijd" xml:space="preserve">
+	<data name="DatumTijd" xml:space="preserve">
     <value>Date/time</value>
   </data>
-  <data name="LaatstIngelogd" xml:space="preserve">
+	<data name="LaatstIngelogd" xml:space="preserve">
     <value>Last signin</value>
   </data>
-  <data name="NieuweGebruiker" xml:space="preserve">
+	<data name="NieuweGebruiker" xml:space="preserve">
     <value>New user</value>
   </data>
-  <data name="NieuweSerie" xml:space="preserve">
+	<data name="NieuweSerie" xml:space="preserve">
     <value>New serie</value>
   </data>
-  <data name="NieuweSpotlight" xml:space="preserve">
+	<data name="NieuweSpotlight" xml:space="preserve">
     <value>New spotlight item</value>
   </data>
-  <data name="NieuwsbriefInschrijvingen" xml:space="preserve">
+	<data name="NieuwsbriefInschrijvingen" xml:space="preserve">
     <value>Newsletter subscriptions</value>
   </data>
-  <data name="Rollen" xml:space="preserve">
+	<data name="Rollen" xml:space="preserve">
     <value>Roles</value>
   </data>
-  <data name="Wachtwoord" xml:space="preserve">
+	<data name="Wachtwoord" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="VersOmschrijving" xml:space="preserve">
+	<data name="VersOmschrijving" xml:space="preserve">
     <value>Verse description</value>
   </data>
-  <data name="VersOmschrijvingTooltip" xml:space="preserve">
+	<data name="VersOmschrijvingTooltip" xml:space="preserve">
     <value>This is the textual value of the verses the sermon is about.  This value is displayed in searchresults and the sermon title. For example '1-4' or '3a - Jona 2 : 12'</value>
   </data>
-  <data name="TotVersId" xml:space="preserve">
+	<data name="TotVersId" xml:space="preserve">
     <value>Verse till</value>
   </data>
-  <data name="VanVersId" xml:space="preserve">
+	<data name="VanVersId" xml:space="preserve">
     <value>Verse (from)</value>
   </data>
-  <data name="VersTotIdTooltip" xml:space="preserve">
+	<data name="VersTotIdTooltip" xml:space="preserve">
     <value>If the subject of the sermon is about multiple verses, this is the last verse</value>
   </data>
-  <data name="VersVanIdTooltip" xml:space="preserve">
+	<data name="VersVanIdTooltip" xml:space="preserve">
     <value>Starting verse on which the sermon is about</value>
   </data>
-  <data name="Automatisch" xml:space="preserve">
+	<data name="Automatisch" xml:space="preserve">
     <value>Automatic</value>
   </data>
-  <data name="AutomatischeTeksten" xml:space="preserve">
+	<data name="AutomatischeTeksten" xml:space="preserve">
     <value>Bibletext generation</value>
   </data>
-  <data name="BewerkDezePreek" xml:space="preserve">
+	<data name="BewerkDezePreek" xml:space="preserve">
     <value>Edit this sermon</value>
   </data>
-  <data name="Handmatig" xml:space="preserve">
+	<data name="Handmatig" xml:space="preserve">
     <value>Manual</value>
   </data>
-  <data name="Kies" xml:space="preserve">
+	<data name="Kies" xml:space="preserve">
     <value>Choose</value>
   </data>
-  <data name="Wis" xml:space="preserve">
+	<data name="Wis" xml:space="preserve">
     <value>Erase</value>
   </data>
-  <data name="Algemeen" xml:space="preserve">
+	<data name="Algemeen" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="Bijbelgedeelte" xml:space="preserve">
+	<data name="Bijbelgedeelte" xml:space="preserve">
     <value>Bible part</value>
   </data>
-  <data name="Stamgegevens" xml:space="preserve">
+	<data name="Stamgegevens" xml:space="preserve">
     <value>Metadata</value>
   </data>
-  <data name="ThemaEnPunten" xml:space="preserve">
+	<data name="ThemaEnPunten" xml:space="preserve">
     <value>Theme &amp; points</value>
   </data>
-  <data name="Preek" xml:space="preserve">
+	<data name="Preek" xml:space="preserve">
     <value>Sermon</value>
   </data>
-  <data name="OnderwerpIsVerplicht" xml:space="preserve">
+	<data name="OnderwerpIsVerplicht" xml:space="preserve">
     <value>Subject is required</value>
   </data>
-  <data name="iOSDownloadBevestiging" xml:space="preserve">
+	<data name="iOSDownloadBevestiging" xml:space="preserve">
     <value>You are using a iOS device, it is not possible to download and save sermons on your device. Click OK to proceed listen/stream this sermon, a persistent internet connection is required.</value>
   </data>
-  <data name="PodcastMeerInfo" xml:space="preserve">
+	<data name="PodcastMeerInfo" xml:space="preserve">
     <value>We have an Apple iTunes Podcast which makes offline sermon listening a lot easier. If you like to read more about it click OK</value>
   </data>
-  <data name="PrekenInBoek" xml:space="preserve">
+	<data name="PrekenInBoek" xml:space="preserve">
     <value>Sermons from</value>
   </data>
-  <data name="Uitloggen" xml:space="preserve">
+	<data name="Uitloggen" xml:space="preserve">
     <value>Log off</value>
   </data>
-  <data name="AangemaaktDoor" xml:space="preserve">
+	<data name="AangemaaktDoor" xml:space="preserve">
     <value>Published by</value>
   </data>
-  <data name="AangepastDoor" xml:space="preserve">
+	<data name="AangepastDoor" xml:space="preserve">
     <value>Modified by</value>
   </data>
-  <data name="LeesPreek" xml:space="preserve">
+	<data name="LeesPreek" xml:space="preserve">
     <value>Reading</value>
   </data>
-  <data name="LeesPreekTekst" xml:space="preserve">
+	<data name="LeesPreekTekst" xml:space="preserve">
     <value>Reading text</value>
   </data>
-  <data name="LeesPreekTekstTooltip" xml:space="preserve">
+	<data name="LeesPreekTekstTooltip" xml:space="preserve">
     <value>Here you can paste the reading sermon text from Microsoft Word</value>
   </data>
-  <data name="AankondigingenBord" xml:space="preserve">
+	<data name="AankondigingenBord" xml:space="preserve">
     <value>Read/sing</value>
   </data>
-  <data name="AankondigingenBordTooltip" xml:space="preserve">
+	<data name="AankondigingenBordTooltip" xml:space="preserve">
     <value>To be translated</value>
   </data>
-  <data name="Lezen" xml:space="preserve">
+	<data name="Lezen" xml:space="preserve">
     <value>Read</value>
   </data>
-  <data name="Zingen" xml:space="preserve">
+	<data name="Zingen" xml:space="preserve">
     <value>Sing</value>
   </data>
-  <data name="DownloadPreekAlsPDF" xml:space="preserve">
+	<data name="DownloadPreekAlsPDF" xml:space="preserve">
     <value>Download sermon as PDF</value>
   </data>
-  <data name="DownloadPreekAlsWord" xml:space="preserve">
+	<data name="DownloadPreekAlsWord" xml:space="preserve">
     <value>Download sermon as MS Word</value>
   </data>
-  <data name="Afdrukweergave" xml:space="preserve">
+	<data name="Afdrukweergave" xml:space="preserve">
     <value>Print preview</value>
   </data>
-  <data name="Afdrukken" xml:space="preserve">
+	<data name="Afdrukken" xml:space="preserve">
     <value>Print</value>
   </data>
-  <data name="UploadenOpslaan" xml:space="preserve">
+	<data name="UploadenOpslaan" xml:space="preserve">
     <value>Uploading and saving in database... Do not close this page!</value>
   </data>
-  <data name="StandaardMetaDescription" xml:space="preserve">
+	<data name="StandaardMetaDescription" xml:space="preserve">
     <value>Search, listen and read audio and reading sermons from ministers of the 'Reformed Congregations'</value>
   </data>
-  <data name="DownloadPreekAlsEpub" xml:space="preserve">
+	<data name="DownloadPreekAlsEpub" xml:space="preserve">
     <value>Download as Epub</value>
   </data>
-  <data name="PrekenWeb" xml:space="preserve">
+	<data name="PrekenWeb" xml:space="preserve">
     <value>SermonWeb</value>
   </data>
-  <data name="Navigatie" xml:space="preserve">
+	<data name="Navigatie" xml:space="preserve">
     <value>Navigation</value>
   </data>
-  <data name="Engels" xml:space="preserve">
+	<data name="Engels" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="Nederlands" xml:space="preserve">
+	<data name="Nederlands" xml:space="preserve">
     <value>Dutch</value>
   </data>
-  <data name="PreekOpgeslagen" xml:space="preserve">
+	<data name="PreekOpgeslagen" xml:space="preserve">
     <value>Sermon saved succesfully, click here to continue editing this sermon</value>
   </data>
-  <data name="Afspelen" xml:space="preserve">
+	<data name="Afspelen" xml:space="preserve">
     <value>Play</value>
   </data>
-  <data name="Pauze" xml:space="preserve">
+	<data name="Pauze" xml:space="preserve">
     <value>Pause</value>
   </data>
-  <data name="AlleenBeheerders" xml:space="preserve">
+	<data name="AlleenBeheerders" xml:space="preserve">
     <value>Show only admins</value>
   </data>
-  <data name="RegistreerUwAccount" xml:space="preserve">
+	<data name="RegistreerUwAccount" xml:space="preserve">
     <value>Register your own account</value>
   </data>
-  <data name="RegistreerGebruikersnaamTooltip" xml:space="preserve">
+	<data name="RegistreerGebruikersnaamTooltip" xml:space="preserve">
     <value>You will login using this username</value>
   </data>
-  <data name="EmailNietBeschikbaar" xml:space="preserve">
+	<data name="EmailNietBeschikbaar" xml:space="preserve">
     <value>This email is already taken, try &lt;a href='{0}'&gt;forgot password&lt;/a&gt;</value>
   </data>
-  <data name="MijnGegevens" xml:space="preserve">
+	<data name="MijnGegevens" xml:space="preserve">
     <value>My account</value>
   </data>
-  <data name="RegistreerEmailTooltip" xml:space="preserve">
+	<data name="RegistreerEmailTooltip" xml:space="preserve">
     <value>Your email is required, we will not send you email unless you subscribe to our newsletter or when you forgot your password</value>
   </data>
-  <data name="DoorMijBeluisterd" xml:space="preserve">
+	<data name="DoorMijBeluisterd" xml:space="preserve">
     <value>Recent visited sermons</value>
   </data>
-  <data name="Inloggen" xml:space="preserve">
+	<data name="Inloggen" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="Registreren" xml:space="preserve">
+	<data name="Registreren" xml:space="preserve">
     <value>Register</value>
   </data>
-  <data name="LogIn" xml:space="preserve">
+	<data name="LogIn" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="Van" xml:space="preserve">
+	<data name="Van" xml:space="preserve">
     <value>Of</value>
   </data>
-  <data name="WachtwoordCheck" xml:space="preserve">
+	<data name="WachtwoordCheck" xml:space="preserve">
     <value>Retype your password</value>
   </data>
-  <data name="WachtwoordAanpassen" xml:space="preserve">
+	<data name="WachtwoordAanpassen" xml:space="preserve">
     <value>Change password</value>
   </data>
-  <data name="SelectedNieuwsbrieven" xml:space="preserve">
+	<data name="SelectedNieuwsbrieven" xml:space="preserve">
     <value>Newsletters</value>
   </data>
-  <data name="SelectedNieuwsbrievenTooltip" xml:space="preserve">
+	<data name="SelectedNieuwsbrievenTooltip" xml:space="preserve">
     <value>Select one or multiple newsletters to receive, you can select multiple by holding the ctrl button and click</value>
   </data>
-  <data name="WachtwoordVergeten" xml:space="preserve">
+	<data name="WachtwoordVergeten" xml:space="preserve">
     <value>Forgot password</value>
   </data>
-  <data name="NieuwWachtwoordOpvragen" xml:space="preserve">
+	<data name="NieuwWachtwoordOpvragen" xml:space="preserve">
     <value>Request new password</value>
   </data>
-  <data name="PrekenWebNL" xml:space="preserve">
+	<data name="PrekenWebNL" xml:space="preserve">
     <value>Sermonweb.org</value>
   </data>
-  <data name="Onthouden" xml:space="preserve">
+	<data name="Onthouden" xml:space="preserve">
     <value>Remember</value>
   </data>
-  <data name="AantalMailings" xml:space="preserve">
+	<data name="AantalMailings" xml:space="preserve">
     <value>Mailings</value>
   </data>
-  <data name="FacebookLink" xml:space="preserve">
+	<data name="FacebookLink" xml:space="preserve">
     <value>SermonWeb</value>
   </data>
-  <data name="TwitterLink" xml:space="preserve">
+	<data name="TwitterLink" xml:space="preserve">
     <value>SermonWeb</value>
   </data>
-  <data name="VeldVerplicht" xml:space="preserve">
+	<data name="VeldVerplicht" xml:space="preserve">
     <value>This field is required</value>
   </data>
-  <data name="Bestandsbeheer" xml:space="preserve">
+	<data name="Bestandsbeheer" xml:space="preserve">
     <value>Filemanager</value>
   </data>
-  <data name="Instructievideo" xml:space="preserve">
+	<data name="Instructievideo" xml:space="preserve">
     <value>Instructionvideo</value>
   </data>
-  <data name="Gebruikersnaam" xml:space="preserve">
+	<data name="Gebruikersnaam" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="TooltipGebruikersnaam" xml:space="preserve">
+	<data name="TooltipGebruikersnaam" xml:space="preserve">
     <value>This is your username or email</value>
   </data>
-  <data name="HuidigWachtwoord" xml:space="preserve">
+	<data name="HuidigWachtwoord" xml:space="preserve">
     <value>Current password</value>
   </data>
-  <data name="GebruikersnaamNietBeschikbaar" xml:space="preserve">
+	<data name="GebruikersnaamNietBeschikbaar" xml:space="preserve">
     <value>Username not available</value>
   </data>
-  <data name="WachtwoordOpnieuwInstellen" xml:space="preserve">
+	<data name="WachtwoordOpnieuwInstellen" xml:space="preserve">
     <value>Set your password</value>
   </data>
-  <data name="BladwijzerAlGelegd" xml:space="preserve">
+	<data name="BladwijzerAlGelegd" xml:space="preserve">
     <value>Bookmark placed at {0:dd-MM-yyyy hh:mm}, click here to remove bookbark</value>
   </data>
-  <data name="BladwijzerLeggen" xml:space="preserve">
+	<data name="BladwijzerLeggen" xml:space="preserve">
     <value>Bookmark this sermon</value>
   </data>
-  <data name="BladwijzerTooltip" xml:space="preserve">
+	<data name="BladwijzerTooltip" xml:space="preserve">
     <value>Click here to add this sermon to your personal list of bookmarked sermons</value>
   </data>
-  <data name="DatumPreekAangemaaktTooltip" xml:space="preserve">
+	<data name="DatumPreekAangemaaktTooltip" xml:space="preserve">
     <value>The creation date of this sermon: {0:yyyy/MM/dd}</value>
   </data>
-  <data name="MetBladwijzer" xml:space="preserve">
+	<data name="MetBladwijzer" xml:space="preserve">
     <value>Sermons with bookmark</value>
   </data>
-  <data name="BladwijzerGeplaatstOp" xml:space="preserve">
+	<data name="BladwijzerGeplaatstOp" xml:space="preserve">
     <value>Bookmarked at {0:g}, click here to remove bookmark</value>
   </data>
-  <data name="BladwijzerPlaatsen" xml:space="preserve">
+	<data name="BladwijzerPlaatsen" xml:space="preserve">
     <value>Click here to bookmark this sermon</value>
   </data>
-  <data name="NuInloggen" xml:space="preserve">
+	<data name="NuInloggen" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="SluitDezePopup" xml:space="preserve">
+	<data name="SluitDezePopup" xml:space="preserve">
     <value>Close this popup</value>
   </data>
-  <data name="UMoetInloggen" xml:space="preserve">
+	<data name="UMoetInloggen" xml:space="preserve">
     <value>Login required</value>
   </data>
-  <data name="UMoetInloggenToelichting" xml:space="preserve">
+	<data name="UMoetInloggenToelichting" xml:space="preserve">
     <value>You need to login to use this functionality.</value>
   </data>
-  <data name="WatIsMijnPW" xml:space="preserve">
+	<data name="WatIsMijnPW" xml:space="preserve">
     <value>Wat is My SermonWeb</value>
   </data>
-  <data name="InlogRedenAantekeningen" xml:space="preserve">
+	<data name="InlogRedenAantekeningen" xml:space="preserve">
     <value>It is possible to take personal notes on a sermon but you need to be logged in.</value>
   </data>
-  <data name="InlogRedenBladwijzer" xml:space="preserve">
+	<data name="InlogRedenBladwijzer" xml:space="preserve">
     <value>When logged in you can place a bookmark on a sermon. Because this functionality is personal you need to be logged in on SermonWeb.org</value>
   </data>
-  <data name="InlogRedenPreekVerderAfluisteren" xml:space="preserve">
+	<data name="InlogRedenPreekVerderAfluisteren" xml:space="preserve">
     <value>SermonWeb can resume a sermon from where you left it when you're logged in</value>
   </data>
-  <data name="ZoekOpdrachtBewaren" xml:space="preserve">
+	<data name="ZoekOpdrachtBewaren" xml:space="preserve">
     <value>Save this search</value>
   </data>
-  <data name="InlogRedenZoekOpdrachtBewaren" xml:space="preserve">
+	<data name="InlogRedenZoekOpdrachtBewaren" xml:space="preserve">
     <value>When you're logged in you can save you're search queries</value>
   </data>
-  <data name="OpgeslagenZoekOpdrachten" xml:space="preserve">
+	<data name="OpgeslagenZoekOpdrachten" xml:space="preserve">
     <value>Saved search queries</value>
   </data>
-  <data name="RssFeedZoekIndexLinkAlert" xml:space="preserve">
+	<data name="RssFeedZoekIndexLinkAlert" xml:space="preserve">
     <value>First save this search using the button 'Save this search' then go to 'My SermonWeb' page 'Saved search queries' and click on 'Rss feed'</value>
   </data>
-  <data name="InlogRedenRssFeed" xml:space="preserve">
+	<data name="InlogRedenRssFeed" xml:space="preserve">
     <value>You need to be logged in to create your own Rss feed based on a search query!</value>
   </data>
-  <data name="CaptchaOngeldig" xml:space="preserve">
+	<data name="CaptchaOngeldig" xml:space="preserve">
     <value>Captcha is not valid</value>
   </data>
-  <data name="GebruikersnaamVerplicht" xml:space="preserve">
+	<data name="GebruikersnaamVerplicht" xml:space="preserve">
     <value>Username is required</value>
   </data>
-  <data name="WachtwoordVerplicht" xml:space="preserve">
+	<data name="WachtwoordVerplicht" xml:space="preserve">
     <value>Password is required</value>
   </data>
-  <data name="ExterneLoginFout" xml:space="preserve">
+	<data name="ExterneLoginFout" xml:space="preserve">
     <value>Could not create a login, please try again</value>
   </data>
-  <data name="EmailOnbevestigd" xml:space="preserve">
+	<data name="EmailOnbevestigd" xml:space="preserve">
     <value>Email address not yet confirmed</value>
   </data>
-  <data name="GebruikerIsAlGeregistreerd" xml:space="preserve">
+	<data name="GebruikerIsAlGeregistreerd" xml:space="preserve">
     <value>Username already registred</value>
   </data>
-  <data name="GebruikersnaamEmailOnbekend" xml:space="preserve">
+	<data name="GebruikersnaamEmailOnbekend" xml:space="preserve">
     <value>Username or email unkown</value>
   </data>
-  <data name="LoginHeeftUGeenSocial" xml:space="preserve">
+	<data name="LoginHeeftUGeenSocial" xml:space="preserve">
     <value>I you don't have a social login, login using your SermonWeb.org account</value>
   </data>
-  <data name="LoginSocial" xml:space="preserve">
+	<data name="LoginSocial" xml:space="preserve">
     <value>Login using Facebook or Twitter so you dont need a SermonWeb.org account</value>
   </data>
-  <data name="LoginVia" xml:space="preserve">
+	<data name="LoginVia" xml:space="preserve">
     <value>Login using</value>
   </data>
-  <data name="TweeVerschillendeWachtwoord" xml:space="preserve">
+	<data name="TweeVerschillendeWachtwoord" xml:space="preserve">
     <value>Passwords are differnt</value>
   </data>
-  <data name="WachtwoordVergetenEmailOnderwerp" xml:space="preserve">
+	<data name="WachtwoordVergetenEmailOnderwerp" xml:space="preserve">
     <value>SermonWeb.org - Password recovery</value>
   </data>
-  <data name="AudioPreek" xml:space="preserve">
+	<data name="AudioPreek" xml:space="preserve">
     <value>Audio sermon</value>
   </data>
-  <data name="ReadingSermon" xml:space="preserve">
+	<data name="ReadingSermon" xml:space="preserve">
     <value>Reading sermon</value>
   </data>
-  <data name="Github" xml:space="preserve">
+	<data name="Github" xml:space="preserve">
     <value>Developers</value>
   </data>
-  <data name="ContinueWhereLeftOff" xml:space="preserve">
+	<data name="ContinueWhereLeftOff" xml:space="preserve">
     <value>Continue where you left off?</value>
   </data>
-  <data name="Inschrijven" xml:space="preserve">
+	<data name="Inschrijven" xml:space="preserve">
     <value>Subscribe</value>
   </data>
-  <data name="DatumPreekGepubliceerdTooltip" xml:space="preserve">
+	<data name="DatumPreekGepubliceerdTooltip" xml:space="preserve">
     <value>The date on which this sermon has been published: {0:dd-MM-yyyy}</value>
   </data>
-  <data name="GepubliceerdOp" xml:space="preserve">
+	<data name="GepubliceerdOp" xml:space="preserve">
     <value>Published on</value>
   </data>
-  <data name="EditEvent" xml:space="preserve">
+	<data name="EditEvent" xml:space="preserve">
     <value>Edit event</value>
   </data>
-  <data name="EventDescription" xml:space="preserve">
+	<data name="EventDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="EventSorting" xml:space="preserve">
+	<data name="EventSorting" xml:space="preserve">
     <value>Sorting</value>
   </data>
-  <data name="CreateEvent" xml:space="preserve">
+	<data name="CreateEvent" xml:space="preserve">
     <value>Create event</value>
   </data>
-  <data name="SourceFileName" xml:space="preserve">
+	<data name="SourceFileName" xml:space="preserve">
     <value>Source file</value>
+  </data>
+	<data name="AllLecturesHaveBeenPublished" xml:space="preserve">
+    <value>All sermons have been published</value>
+  </data>
+	<data name="KnownLectureCategories" xml:space="preserve">
+    <value>Within lectures the following categories are known:</value>
+  </data>
+	<data name="LogoutSuccessful" xml:space="preserve">
+    <value>You have successfully logged off!</value>
   </data>
 </root>

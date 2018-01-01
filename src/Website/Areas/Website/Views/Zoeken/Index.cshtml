@@ -139,7 +139,7 @@
     if (!Model.LeesPreken && !Model.AudioPreken && Model.Lezingen)
     {
         <p class="clear"></p>
-        <p>Binnen lezingen kennen wij de volgende categorieen:</p>
+        <p>@Resources.KnownLectureCategories</p>
         <ul class="LezingCategorieen">
             @foreach (var lezingCategorie in Model.LezingCatorieen)
             {
