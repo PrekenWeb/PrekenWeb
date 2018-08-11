@@ -139,7 +139,9 @@ namespace Data.Services
 
         private IQueryable<Preek> whereToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
         {
+            // todo: dit is een bug. als een beheerder een predikant opvoert met een trailing/leading-space dan werkt de predikant pagina niet meer (http://www.prekenweb.nl/nl/Mijn/Inbox/Tonen/5975)
             if (!string.IsNullOrEmpty(zoekOpdracht.Predikant)) query = query.Where(p => (((p.Predikant.Titels ?? "") + " " + (p.Predikant.Voorletters ?? "")).Trim() + " " + ((p.Predikant.Tussenvoegsels ?? "") + " " + (p.Predikant.Achternaam ?? "")).Trim()).Contains(zoekOpdracht.Predikant));
+            
             if (!string.IsNullOrEmpty(zoekOpdracht.BoekHoofdstuk)) query = query.Where(p => p.BoekHoofdstuk.Omschrijving.Contains(zoekOpdracht.BoekHoofdstuk));
             if (!string.IsNullOrEmpty(zoekOpdracht.Boek)) query = query.Where(p => p.BoekHoofdstuk.Boek.Boeknaam.Contains(zoekOpdracht.Boek));
             if (!string.IsNullOrEmpty(zoekOpdracht.Gebeurtenis)) query = query.Where(p => p.Gebeurtenis.Omschrijving.Contains(zoekOpdracht.Gebeurtenis));
