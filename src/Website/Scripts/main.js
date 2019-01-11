@@ -41,7 +41,7 @@ var Prekenweb;
                     success: function (preekCookies) {
                         for (var i = 0; i < preekCookies.length; i++) {
                             var preekCookie = preekCookies[i];
-                            if (preekCookie.DateTime != null) {
+                            if (preekCookie.DateTime != null) { // preek is bezocht
                                 // vinkje weergeven achter preek
                                 var bezochtCheckElement = $(".preek-bezocht-check-" + preekCookie.PreekId);
                                 bezochtCheckElement.show();
@@ -297,12 +297,12 @@ var Prekenweb;
             $(".LezingCategorieEditor").hide();
             $(".alleenBijLeespreek").hide();
             switch (preekTypeId) {
-                case "1"://preek
+                case "1": //preek
                     break;
-                case "2"://lezing
+                case "2": //lezing
                     $(".LezingCategorieEditor").show();
                     break;
-                case "3":// leespreek
+                case "3": // leespreek
                     $(".alleenBijLeespreek").show();
                     break;
             }

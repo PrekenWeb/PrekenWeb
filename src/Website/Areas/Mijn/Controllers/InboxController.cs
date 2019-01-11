@@ -77,6 +77,20 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Delete(int id)
+        {
+            var inboxItem = _context.Inboxes.Single(i => i.Id == id);
+
+            var followUps = _context.InboxOpvolgings.Where(x => x.InboxId == id);
+            foreach (var followUp in followUps)
+                _context.InboxOpvolgings.Remove(followUp);
+
+            _context.Inboxes.Remove(inboxItem);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public async Task<ActionResult> OpvolgingToevoegen(int inboxId)
         {
             var inboxItem = _context.Inboxes.Single(i => i.Id == inboxId);
