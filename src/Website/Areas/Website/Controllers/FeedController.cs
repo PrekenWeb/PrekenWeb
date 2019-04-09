@@ -9,12 +9,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Xml;
 using Data.Repositories;
 using Data.Services;
 using Prekenweb.Website.Lib.HtmlHelpers;
+using Newtonsoft.Json;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
@@ -56,9 +56,11 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 webClient.Headers.Add("Authorization", "Bearer " + accessToken);
 
                 const string url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=Prekenweb&count=4&exclude_replies=true&include_rts=false";
-                var jsonSerializer = new JavaScriptSerializer();
+                
+                //var jsonSerializer = new JavaScriptSerializer();
                 var data = await webClient.DownloadStringTaskAsync(url);
-                dynamic tweets = jsonSerializer.DeserializeObject(data);
+                //dynamic tweets = jsonSerializer.DeserializeObject();
+                var tweets = JsonConvert.DeserializeObject(data);
                 return Json(tweets, JsonRequestBehavior.AllowGet);
             }
         }
