@@ -24,7 +24,7 @@ namespace Data.Tables
         [DisplayName("Link Titel"), Required(ErrorMessage = "Linktitel is verplicht"), Tooltip("De tekst van de link waarop kan worden geklikt, bijvoorbeeld: 'Luister de preek'")]
         public string LinkTitel { get; set; }  
        
-        [DisplayName("Url"), DataType(DataType.Url), Required(ErrorMessage = "Url is verplicht"), Tooltip("Vul hier de gerelateerde URL in, dit kan een 'absolute' URL zijn, beginnend met 'http://www' of een relatieve beginnend met '~/' wat staat voor 'http://www.prekenweb.nl/'")]
+        [DisplayName("Url"), DataType(DataType.Url), Required(ErrorMessage = "Url is verplicht"), Tooltip("Vul hier de gerelateerde URL in, dit kan een 'absolute' URL zijn, beginnend met 'https://www' of een relatieve beginnend met '~/' wat staat voor 'https://www.prekenweb.nl/'")]
         public string Url { get; set; } 
         
         [DisplayName("Afbeelding"), Required(ErrorMessage = "Afbeelding is verplicht"), UIHint("Afbeelding")]

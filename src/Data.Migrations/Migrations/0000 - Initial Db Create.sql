@@ -556,7 +556,7 @@ INSERT [dbo].[PreekType] ([Id], [Omschrijving]) VALUES (3, N'LeesPreek')
 SET IDENTITY_INSERT [dbo].[PreekType] OFF
 
 SET IDENTITY_INSERT [dbo].[Spotlight] ON
-INSERT [dbo].[Spotlight] ([Id], [Titel], [Subtitel], [LinkTitel], [Url], [AfbeeldingId], [Sortering], [TaalId], [NieuwVenster]) VALUES (1, N'Titel', N'Subtitel', N'LinkTitel', N'http://www.prekenweb.nl', 1, 1, 1, 0)
+INSERT [dbo].[Spotlight] ([Id], [Titel], [Subtitel], [LinkTitel], [Url], [AfbeeldingId], [Sortering], [TaalId], [NieuwVenster]) VALUES (1, N'Titel', N'Subtitel', N'LinkTitel', N'https://www.prekenweb.nl', 1, 1, 1, 0)
 SET IDENTITY_INSERT [dbo].[Spotlight] OFF
 
 SET IDENTITY_INSERT [dbo].[Taal] ON

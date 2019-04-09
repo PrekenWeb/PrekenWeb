@@ -6,8 +6,8 @@
     <title>PrekenWeb DbMigrations</title>
     <authors>Websitecommissie PrekenWeb</authors>
     <owners>Websitecommissie PrekenWeb</owners>
-    <licenseUrl>http://www.prekenweb.nl</licenseUrl>
-    <projectUrl>http://www.prekenweb.nl</projectUrl>
+    <licenseUrl>https://www.prekenweb.nl</licenseUrl>
+    <projectUrl>https://www.prekenweb.nl</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>PrekenWeb Database Migrations</description>
   </metadata>

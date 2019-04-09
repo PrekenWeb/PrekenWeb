@@ -39,7 +39,7 @@ namespace Prekenweb.Website.Lib.MailTemplating
             StringBuilder sb = new StringBuilder();
             //
             sb.Append("<table width=500 style='width:500px;'><tr><td width=500 style='width:500px; text-align:center;'>");
-            sb.Append("<center><img src='http://www.prekenweb.nl/Content/Images/LogoKlein.png'/>");
+            sb.Append("<center><img src='https://www.prekenweb.nl/Content/Images/LogoKlein.png'/>");
             sb.AppendFormat("<h1 style='font-family:arial; font-size:16px; color:#1274BA;' color='#1274BA'>{0}</h1></center></td></tr><tr><td style=' font-family:arial; font-size:12px;'>", onderwerp);
 
             sb.Append("</td></tr></table>");

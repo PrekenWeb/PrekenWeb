@@ -15,7 +15,7 @@ namespace Data.Tables
         [Tooltip("Mag iedere (ook niet ingelogde) bezoeker deze pagina al zien?")]
         public bool Gepubliceerd { get; set; } 
      
-        [Required, Display(Name = "URL code"), Tooltip("Tekstuele (unieke) waarde waarmee de pagina wordt gekenmerkt in de URL.<br/>Dit wordt als volgt onderdeel van de URL: http://www.prekenweb.nl/nl/pagina/<u>paginanaam</u>")]
+        [Required, Display(Name = "URL code"), Tooltip("Tekstuele (unieke) waarde waarmee de pagina wordt gekenmerkt in de URL.<br/>Dit wordt als volgt onderdeel van de URL: https://www.prekenweb.nl/nl/pagina/<u>paginanaam</u>")]
         public string Identifier { get; set; }  
      
         [DisplayName("Aangemaakt op")]

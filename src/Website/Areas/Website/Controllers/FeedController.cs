@@ -69,7 +69,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         {
             var siteTitle = Resources.Resources.PrekenWebNL;
             var siteDescription = TaalInfoHelper.FromRouteData(RouteData).Id == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
-            const string siteUrl = "http://www.prekenweb.nl";
+            const string siteUrl = "https://www.prekenweb.nl";
             var authorName = Resources.Resources.PrekenWebNL;
             const string authorEmail = "info@prekenweb.nl";
 
@@ -112,14 +112,14 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 //// Image 1
                 writer.WriteStartElement("image", itunesUri);
-                writer.WriteElementString("href", "http://www.prekenweb.nl/content/images/logo1400.jpg");
+                writer.WriteElementString("href", "https://www.prekenweb.nl/content/images/logo1400.jpg");
                 writer.WriteEndElement();
 
                 //// Image 2
                 writer.WriteStartElement("image");
-                writer.WriteElementString("url", "http://www.prekenweb.nl/content/images/logo1400.jpg");
+                writer.WriteElementString("url", "https://www.prekenweb.nl/content/images/logo1400.jpg");
                 writer.WriteElementString("title", Resources.Resources.PrekenWebNL);
-                writer.WriteElementString("link", "http://www.prekenweb.nl/");
+                writer.WriteElementString("link", "https://www.prekenweb.nl/");
                 writer.WriteEndElement();
 
                 //<image>
@@ -215,7 +215,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                     // Start itunes:image
                     writer.WriteStartElement("image", itunesUri);
-                    writer.WriteElementString("href", "http://www.prekenweb.nl/content/images/logo1400.jpg");
+                    writer.WriteElementString("href", "https://www.prekenweb.nl/content/images/logo1400.jpg");
                     writer.WriteEndElement();
                     //// End itunes:image
 
@@ -246,7 +246,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             var siteTitle = Resources.Resources.PrekenWebNL;
             var siteDescription = TaalInfoHelper.FromRouteData(RouteData).Id == 1 ? "Preken uit de Gereformeerde Gemeenten" : "This website offers audio and reading sermons from ministers of the 'Reformed Congregations' - denomination ('Gereformeerde Gemeenten') from different countries: the Netherlands, Canada, United States, Nigeria and New Zealand.";
-            var siteUrl = "http://www.prekenweb.nl";
+            var siteUrl = "https://www.prekenweb.nl";
             var authorName = Resources.Resources.PrekenWebNL;
             var authorEmail = "info@prekenweb.nl";
 
@@ -274,9 +274,9 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
                 //// Image 2
                 writer.WriteStartElement("image");
-                writer.WriteElementString("url", "http://www.prekenweb.nl/content/images/logo1400.jpg");
+                writer.WriteElementString("url", "https://www.prekenweb.nl/content/images/logo1400.jpg");
                 writer.WriteElementString("title", Resources.Resources.PrekenWebNL);
-                writer.WriteElementString("link", "http://www.prekenweb.nl/");
+                writer.WriteElementString("link", "https://www.prekenweb.nl/");
                 writer.WriteEndElement();
 
                 var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);

@@ -38,7 +38,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         <p style='font-family:arial; font-size:12px; color:#070045'>Met vriendelijke groet namens PrekenWeb, </p>
 
         <p style='font-family:arial; font-size:12px; color:#070045'>{0}<br>
-        <a href='mailto:info@prekenweb.nl'><span>info@prekenweb.nl</span></a> <a href='http://www.prekenweb.nl/'><span>www.prekenweb.nl</span></a></p>
+        <a href='mailto:info@prekenweb.nl'><span>info@prekenweb.nl</span></a> <a href='https://www.prekenweb.nl/'><span>www.prekenweb.nl</span></a></p>
 
         <p style='font-family:arial; font-size:12px; color:#070045'></p>
 

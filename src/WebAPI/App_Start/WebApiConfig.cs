@@ -34,12 +34,12 @@ namespace WebAPI
 
             var trustedHostNames = new[]
             {
-                "http://prekenweb.nl",
-                "http://sermonweb.org",
-                "http://www.sermonweb.org",
-                "http://www.prekenweb.nl",
-                "http://test.prekenweb.nl",
-                "http://dev.prekenweb.nl"
+                "https://prekenweb.nl",
+                "https://sermonweb.org",
+                "https://www.sermonweb.org",
+                "https://www.prekenweb.nl",
+                "https://test.prekenweb.nl",
+                "https://dev.prekenweb.nl"
             };
 
             config.EnableCors(new EnableCorsAttribute(string.Join(",", trustedHostNames), "*", "GET, POST, OPTIONS, PUT, DELETE"));
