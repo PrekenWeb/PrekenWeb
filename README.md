@@ -10,7 +10,7 @@ We staan open voor bijdrages, voel vrij om code aan te bieden, een issue aan te 
 Voor vragen/ideeen, neem contact op met [info@prekenweb.nl](mailto:info@prekenweb.nl)
 
 # Installatie / database
-De website is gemaakt om te werken onder IIS (7.5) en werkt met .NET framework 4.5.1. 
+De website is gemaakt om te werken onder IIS (7.5) en werkt met .NET framework 4.7.2. 
 Als de connectiestring verwijst naar de juiste SQL Server en de application-pool user voldoende rechten heeft zal de database automatisch worden aangemaakt met daarin testdata. Op verzoek is een volledig gevulde kopie van de productiedatabase beschikbaar. In de testdatabase wordt automatisch een gebruiker aangemaakt: test1@prekenweb.nl met wachtwoord prekenweb.
 
 # Tooling & technieken
