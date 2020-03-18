@@ -22,3 +22,4 @@ Als de connectiestring verwijst naar de juiste SQL Server en de application-pool
 
 # Taal
 Deze codebase is ooit gestart voor prekenweb.nl, pas veel later is de engelstalige variant sermonweb.org toegevoegd. Vanwege deze Nederlanstalige start is de codebase en de voertaal in deze repository overwegend Nederlands.
+
