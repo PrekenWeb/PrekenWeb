@@ -21,5 +21,5 @@ Als de connectiestring verwijst naar de juiste SQL Server en de application-pool
 - IIS (met [URL Rewrite module](http://www.iis.net/downloads/microsoft/url-rewrite))
 
 # Taal
-Deze codebase is ooit gestart voor prekenweb.nl, pas veel later is de engelstalige variant sermonweb.org toegevoegd. Vanwege deze Nederlanstalige start is de codebase en de voertaal in deze repository overwegend Nederlands.
+Deze codebase is ooit gestart voor prekenweb.nl, pas later is de engelstalige variant sermonweb.org toegevoegd. Vanwege deze Nederlanstalige start is de codebase en de voertaal in deze repository overwegend Nederlands.
 
