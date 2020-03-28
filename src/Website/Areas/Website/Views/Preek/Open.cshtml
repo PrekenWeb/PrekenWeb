@@ -436,6 +436,12 @@
                 </a>
             </li>
             <li>
+                <a href="https://wa.me/?text=@Uri.EscapeDataString(Resources.DeelOpWhatsappTitel) @Url.Action("Open", null, new { Id = Model.Preek.Id }, Request.Url.Scheme)" class="" title="" id="deelOpWhatsappLink" target="_blank">
+                    <div class="fa fa-whatsapp"></div>
+                    @Resources.DeelOpWhatsapp
+                </a>
+            </li>
+            <li>
                 <a href="mailto:?subject=Preek op Prekenweb.nl&body=Bezoek de preek '@Model.Titel' op prekenweb via deze URL: @Url.Action("Open", null, new { Id = Model.Preek.Id }, Request.Url.Scheme)" class="" title="">
                     <div class="fa fa-envelope"></div>
                     @Resources.DeelViaMail
