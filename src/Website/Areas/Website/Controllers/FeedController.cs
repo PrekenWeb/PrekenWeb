@@ -49,20 +49,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             return Json(tweets, JsonRequestBehavior.AllowGet);
         }
 
-        [OutputCache(Duration = 3600)] // 1 uur
-        public ActionResult TwitterDebug()
-        {
-            var customerKey = ConfigurationManager.AppSettings["TwitterCustomerKey"];
-            var customerSecret = ConfigurationManager.AppSettings["TwitterCustomerSecret"];
-            var token = ConfigurationManager.AppSettings["TwitterToken"];
-            var tokenSecret = ConfigurationManager.AppSettings["TwitterTokenSecret"];
-
-            var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
-            var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
-
-            return Json(new { customerKey, customerSecret, token, tokenSecret, tweets }, JsonRequestBehavior.AllowGet);
-        }
-
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times"), OutputCache(Duration = 86400)] // 24 uur
         // ReSharper disable once InconsistentNaming
         public async Task<ActionResult> ITunesPodcast()
