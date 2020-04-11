@@ -15,6 +15,7 @@ using Data.Repositories;
 using Data.Services;
 using Prekenweb.Website.Lib.HtmlHelpers;
 using Newtonsoft.Json;
+using TweetSharp;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
@@ -35,34 +36,17 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         }
 
         [OutputCache(Duration = 3600)] // 1 uur
-        public async Task<ActionResult> Twitter()
+        public ActionResult Twitter()
         {
-            //TODO: Replace with TwitterService NuGet Package implementation
+            var customerKey = ConfigurationManager.AppSettings["TwitterCustomerKey"];
+            var customerSecret = ConfigurationManager.AppSettings["TwitterCustomerSecret"];
+            var token = ConfigurationManager.AppSettings["TwitterToken"];
+            var tokenSecret = ConfigurationManager.AppSettings["TwitterTokenSecret"];
 
-            var key = ConfigurationManager.AppSettings["TwitterCustomerKey"];
-            var secret = ConfigurationManager.AppSettings["TwitterCustomerSecret"];
+            var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
+            var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
 
-            var server = HttpContext.Server;
-            var bearerToken = server.UrlEncode(key) + ":" + server.UrlEncode(secret);
-            var b64Bearer = Convert.ToBase64String(Encoding.Default.GetBytes(bearerToken));
-            using (var webClient = new WebClient())
-            {
-                webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-                webClient.Headers.Add("Authorization", "Basic " + b64Bearer);
-                var tokenPayload = webClient.UploadString("https://api.twitter.com/oauth2/token", "grant_type=client_credentials");
-                var rgx = new Regex("\"access_token\"\\s*:\\s*\"([^\"]*)\"");
-                var accessToken = rgx.Match(tokenPayload).Groups[1].Value;
-                webClient.Headers.Clear();
-                webClient.Headers.Add("Authorization", "Bearer " + accessToken);
-
-                const string url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=Prekenweb&count=4&exclude_replies=true&include_rts=false";
-                
-                //var jsonSerializer = new JavaScriptSerializer();
-                var data = await webClient.DownloadStringTaskAsync(url);
-                //dynamic tweets = jsonSerializer.DeserializeObject();
-                var tweets = JsonConvert.DeserializeObject(data);
-                return Json(tweets, JsonRequestBehavior.AllowGet);
-            }
+            return Json(tweets, JsonRequestBehavior.AllowGet);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times"), OutputCache(Duration = 86400)] // 24 uur
