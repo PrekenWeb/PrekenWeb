@@ -48,7 +48,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
             var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
 
-            return Json(tweets.Select(x => x.TextAsHtml), JsonRequestBehavior.AllowGet);
+            return Json(tweets != null ? tweets.Select(x => x.TextAsHtml) : null, JsonRequestBehavior.AllowGet);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times"), OutputCache(Duration = 86400)] // 24 uur
