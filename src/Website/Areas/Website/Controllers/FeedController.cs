@@ -48,7 +48,17 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
             var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
 
-            return Json(tweets != null ? tweets.Select(x => x.TextAsHtml) : null, JsonRequestBehavior.AllowGet);
+            return Json(tweets != null ? tweets.Select(ReplaceShortUrls) : null, JsonRequestBehavior.AllowGet);
+        }
+
+        private string ReplaceShortUrls(TwitterStatus tweet)
+        {
+            var result = tweet.TextAsHtml;
+            foreach (var url in tweet.Entities.Urls)
+            {
+                result = result.Replace(url.Value, url.ExpandedValue);
+            }
+            return result;
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times"), OutputCache(Duration = 86400)] // 24 uur
