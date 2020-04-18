@@ -43,10 +43,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var token = ConfigurationManager.AppSettings["TwitterToken"];
             var tokenSecret = ConfigurationManager.AppSettings["TwitterTokenSecret"];
 
+            // Fix om de connectie met twitter via TLS1.1 of TLS1.2 te laten lopen, via SSL3 gaat het niet goed.
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
             var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
 
-            return Json(tweets, JsonRequestBehavior.AllowGet);
+            return Json(tweets.Select(x => x.TextAsHtml), JsonRequestBehavior.AllowGet);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times"), OutputCache(Duration = 86400)] // 24 uur
