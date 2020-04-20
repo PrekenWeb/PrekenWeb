@@ -247,7 +247,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 // Fix om de connectie met twitter via TLS1.1 of TLS1.2 te laten lopen, via SSL3 gaat het niet goed.
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
-                var url = Url.Action("Open", null, new { preekModel.Id }, Request.Url.Scheme);
+                var url = Url.Action("Open", null, new { preekModel.Id }, Request.Url.Scheme).Replace("/Mijn", string.Empty); ;
                 var preekType = (PreekTypeEnum)preekModel.PreekTypeId;
                 var statusUpdate = $"Een nieuwe {preekType.ToString().ToLower()} van {preekModel.Predikant.VolledigeNaam}: {url}";
                 service.SendTweet(new SendTweetOptions { Status = statusUpdate });
