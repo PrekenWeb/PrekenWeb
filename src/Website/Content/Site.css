@@ -1373,6 +1373,9 @@ ul.sliders-wrap-inner li img {
   float: left;
   width: 150px;
 }
+.Twitter {
+  width: 400px;
+}
 .Boek {
   background-color: #dbe1ed;
   width: 320px;
@@ -1395,9 +1398,10 @@ ul.sliders-wrap-inner li img {
   padding: 0px;
 }
 #Tweets {
-  height: 90px;
+  height: 75px;
+  margin-top: 15px;
   overflow: hidden;
-  width: 180px;
+  width: 380px;
 }
 #Tweets div {
   background-color: transparent !important;

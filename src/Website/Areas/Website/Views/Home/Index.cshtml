@@ -35,7 +35,7 @@
                     $("#LoadingTwitter").remove();
                     var str = '';
                     for (var i = 0; i < data.length; i++) {
-                        str += '<div>' + replaceURLWithHTMLLinks(data[i].text) + '</div>';
+                        str += '<div>' + data[i] + '</div>';
                     }
                     //console.log(str);
                     $("#Tweets").append(str);
@@ -48,11 +48,6 @@
                 error: function(XHR, textStatus, errorThrown) {
                 }
             });
-
-            function replaceURLWithHTMLLinks(text) {
-                var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@@#\/%?=~_|!:,.;]*[-A-Z0-9+&@@#\/%=~_|])/ig;
-                return text.replace(exp, "<a href='$1'>$1</a>");
-            } 
 
             prekenweb.preekBezochtChecksTonen([@string.Join(",", Model.NieuwePreken.Preken.Select(x => x.Preek.Id.ToString()))]);
         });
@@ -171,13 +166,13 @@
 </div>
 @if (Model.Taal == "nl")
 {
-    <div class="Nieuwsbrief">
+    <div class="Nieuwsbrief Twitter">
         <h2>Twitter</h2>
 
         <div id="Tweets">
             <p id="LoadingTwitter">@Resources.TweetsWordenGeladen</p>
         </div>
-        <a href="http://twitter.com/PrekenWeb" class="IconKnop">
+        <a href="http://twitter.com/PrekenWeb" class="IconKnop" target="_blank">
             <div class="fa fa-twitter"></div>
             @Resources.VolgOnsOpTwitter
         </a>
