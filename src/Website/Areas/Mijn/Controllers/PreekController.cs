@@ -1,21 +1,23 @@
-﻿using System.Configuration;
-using System.Threading.Tasks;
-using Hangfire;
-using PrekenWeb.Security;
-using Prekenweb.Website.Areas.Mijn.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Data;
 using Data.Identity;
 using Data.Tables;
 using Data.ViewModels;
+using Hangfire;
+using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Hangfire;
+using PrekenWeb.Security;
+using TweetSharp;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -55,11 +57,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (viewModel.Gepubliceerd)
             {
                 if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
+                {
                     ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
-                else if (!viewModel.DatumGepubliceerd.HasValue)
-                    viewModel.DatumGepubliceerd = DateTime.Now;
+                }
             }
-            else viewModel.DatumGepubliceerd = null;
 
             if (!ModelState.IsValid) return View(viewModel);
 
@@ -67,7 +68,13 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             LezenEnZingenBijwerken(viewModel);
             _context.SaveChanges();
 
-            var preek = _context.Preeks.Single(p => p.Id == viewModel.Id);
+            var preek = _context.Preeks.Include(x => x.Predikant).Single(p => p.Id == viewModel.Id);
+
+            if (viewModel.Gepubliceerd && !viewModel.DatumGepubliceerd.HasValue)
+            {
+                this.TweetNieuwePreek(preek);
+                viewModel.DatumGepubliceerd = DateTime.Now;
+            }
 
             try
             {
@@ -164,12 +171,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (viewModel.Gepubliceerd)
             {
                 if (!viewModel.DatumGepubliceerd.HasValue && !User.IsInRole("PreekFiatteren"))
+                {
                     ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
-                else if (!viewModel.DatumGepubliceerd.HasValue)
-                    viewModel.DatumGepubliceerd = DateTime.Now;
+                }
             }
-            else viewModel.DatumGepubliceerd = null;
-
 
             if (ModelState.IsValid)
             {
@@ -177,7 +182,13 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 LezenEnZingenBijwerken(viewModel);
                 _context.SaveChanges();
 
-                var preek = _context.Preeks.Single(p => p.Id == viewModel.Id);
+                var preek = _context.Preeks.Include(x => x.Predikant).Single(p => p.Id == viewModel.Id);
+
+                if (viewModel.Gepubliceerd && !viewModel.DatumGepubliceerd.HasValue)
+                {
+                    this.TweetNieuwePreek(preek);
+                    viewModel.DatumGepubliceerd = DateTime.Now;
+                }
 
                 try
                 {
@@ -217,6 +228,33 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (bestand != null) ModelState.AddModelError("", @"Let op, er waren fouten, corrigeer deze maar kies ook opnieuw het bestand want deze is nog niet opgeslagen en wordt ook niet onthouden");
 
             return View(viewModel);
+        }
+
+        private void TweetNieuwePreek(Preek preekModel)
+        {
+            try
+            {
+                if (TaalInfoHelper.FromRouteData(RouteData).Naam != "nl")
+                {
+                    return;
+                }
+
+                var customerKey = ConfigurationManager.AppSettings["TwitterCustomerKey"];
+                var customerSecret = ConfigurationManager.AppSettings["TwitterCustomerSecret"];
+                var token = ConfigurationManager.AppSettings["TwitterToken"];
+                var tokenSecret = ConfigurationManager.AppSettings["TwitterTokenSecret"];
+
+                // Fix om de connectie met twitter via TLS1.1 of TLS1.2 te laten lopen, via SSL3 gaat het niet goed.
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
+                var url = Url.Action("Open", null, new { preekModel.Id }, Request.Url.Scheme);
+                var preekType = (PreekTypeEnum)preekModel.PreekTypeId;
+                var statusUpdate = $"Een nieuwe {preekType.ToString().ToLower()} van {preekModel.Predikant.VolledigeNaam}: {url}";
+                service.SendTweet(new SendTweetOptions { Status = statusUpdate });
+            }
+            catch
+            {
+            }
         }
 
         private void LezenEnZingenBijwerken(Preek viewModel)

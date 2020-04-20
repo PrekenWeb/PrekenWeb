@@ -48,7 +48,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var service = new TwitterService(customerKey, customerSecret, token, tokenSecret);
             var tweets = service.ListTweetsOnUserTimeline(new ListTweetsOnUserTimelineOptions { Count = 4 });
 
-            return Json(tweets != null ? tweets.Select(ReplaceShortUrls) : null, JsonRequestBehavior.AllowGet);
+            return Json(tweets?.Select(ReplaceShortUrls), JsonRequestBehavior.AllowGet);
         }
 
         private string ReplaceShortUrls(TwitterStatus tweet)
