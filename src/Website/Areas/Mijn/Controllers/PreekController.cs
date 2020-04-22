@@ -61,6 +61,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                     ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
                 }
             }
+            else
+            {
+                viewModel.DatumGepubliceerd = null;
+            }
 
             if (!ModelState.IsValid) return View(viewModel);
 
@@ -174,6 +178,10 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 {
                     ModelState.AddModelError("Gepubliceerd", @"Onvoldoende rechten");
                 }
+            }
+            else
+            {
+                viewModel.DatumGepubliceerd = null;
             }
 
             if (ModelState.IsValid)
