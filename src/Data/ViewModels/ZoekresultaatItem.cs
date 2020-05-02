@@ -117,7 +117,7 @@ namespace Data.ViewModels
             {
                 switch (Preek.PreekTypeId)
                 {
-                    case (int)PreekTypeEnum.Peek:
+                    case (int)PreekTypeEnum.Preek:
                         return "fa fa-music";
                     case (int)PreekTypeEnum.Lezing:
                         return "fa fa-volume-up";
@@ -136,8 +136,6 @@ namespace Data.ViewModels
                 switch (Preek.PreekTypeId)
                 {
                     default:
-                    //case (int)PreekTypeEnum.Peek:
-                    //case (int)PreekTypeEnum.Lezing:
                         return Prekenweb.Resources.Resources.Luister;
                     case (int)PreekTypeEnum.LeesPreek:
                         return Prekenweb.Resources.Resources.Lees;
@@ -151,7 +149,7 @@ namespace Data.ViewModels
             {
                 switch (Preek.PreekTypeId)
                 { 
-                    case (int)PreekTypeEnum.Peek:
+                    case (int)PreekTypeEnum.Preek:
                         return Prekenweb.Resources.Resources.Preek;
                     case (int)PreekTypeEnum.Lezing:
                         return Prekenweb.Resources.Resources.Lezing;
@@ -168,7 +166,7 @@ namespace Data.ViewModels
             {
                 switch (Preek.PreekTypeId)
                 {
-                    case (int)PreekTypeEnum.Peek:
+                    case (int)PreekTypeEnum.Preek:
                         return "Open";
                     case (int)PreekTypeEnum.Lezing:
                         return "Open";

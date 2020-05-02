@@ -137,7 +137,6 @@ namespace Prekenweb.Website.Lib
             switch (preektypeid)
             {
                 default:
-                    //case (int)PreekTypeEnum.Peek:
                     return Resources.Resources.AudioPreek;
                 case (int)PreekTypeEnum.Lezing:
                     return Resources.Resources.Lezing;

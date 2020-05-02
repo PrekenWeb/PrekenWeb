@@ -65,7 +65,7 @@ namespace Data.Tables
                 {
                     var preekTypIds = new List<int>();
 
-                    if (AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Peek);
+                    if (AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Preek);
                     if (LeesPreken) preekTypIds.Add((int)PreekTypeEnum.LeesPreek);
                     if (Lezingen) preekTypIds.Add((int)PreekTypeEnum.Lezing);
                     return preekTypIds;

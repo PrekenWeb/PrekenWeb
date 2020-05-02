@@ -156,7 +156,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 DatumAangemaakt = DateTime.Now,
                 DatumBijgewerkt = DateTime.Now,
                 Gepubliceerd = User.IsInRole("PreekFiatteren"),
-                PreekTypeId = (int)PreekTypeEnum.Peek,
+                PreekTypeId = (int)PreekTypeEnum.Preek,
                 TaalId = TaalInfoHelper.FromRouteData(RouteData).Id,
                 PreekLezenEnZingens = new List<PreekLezenEnZingen>
                 {

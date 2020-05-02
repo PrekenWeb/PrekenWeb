@@ -69,7 +69,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         private async Task<NieuwePreken> GetNieuwPreken(NieuwePreken nieuwePreken)
         {
             var preekTypIds = new List<int>();
-            if (nieuwePreken.AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Peek);
+            if (nieuwePreken.AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Preek);
             if (nieuwePreken.LeesPreken) preekTypIds.Add((int)PreekTypeEnum.LeesPreek);
             if (nieuwePreken.Lezingen) preekTypIds.Add((int)PreekTypeEnum.Lezing);
 
