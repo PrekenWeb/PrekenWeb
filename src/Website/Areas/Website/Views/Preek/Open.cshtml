@@ -317,6 +317,15 @@
                 </div>
             }
         </div>
+        @if (!string.IsNullOrEmpty(Model.Preek.Youtube))
+        {
+            <div class="ColumnMax">
+                <div class="field">
+                    <div class="label">@Html.LabelFor(m => m.Preek.Youtube)</div>
+                    <div class="value"><a href="@Model.Preek.Youtube" target="_blank">@Model.Preek.Youtube</a></div>
+                </div>
+            </div>
+        }
         @if (!string.IsNullOrEmpty(Model.Preek.Informatie))
         {
             <div class="ColumnMax">
