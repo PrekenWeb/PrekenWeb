@@ -69,22 +69,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\0003 - Add Preek_DatumGepubliceerd.sql" />
+    <EmbeddedResource Include="Migrations\0000 - Initial Db Create.sql" />
     <EmbeddedResource Include="Migrations\0001 - Verwijder EF Migrations table.sql" />
+    <EmbeddedResource Include="Migrations\0002 - Add Predikant_HideFromIndexingRobots.sql" />
+    <EmbeddedResource Include="Migrations\0003 - Add Preek_DatumGepubliceerd.sql" />
+    <EmbeddedResource Include="Migrations\0004 - Add Preek_SourceFileName.sql" />
+    <EmbeddedResource Include="Migrations\0005 - Add Preek_Youtube.sql" />
+    <EmbeddedResource Include="Migrations\0006 - Rename Preek_Youtube_Video.sql" />
     <None Include="App.config" />
     <Content Include="Deploy.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <EmbeddedResource Include="Migrations\0004 - Add Preek_SourceFileName.sql" />
-    <EmbeddedResource Include="Migrations\0005 - Add Preek_Youtube.sql" />
     <Content Include="PrekenWeb.Data.Migrations.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\0002 - Add Predikant_HideFromIndexingRobots.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\0000 - Initial Db Create.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
