@@ -19,14 +19,13 @@ namespace Data.Repositories
         {
             return (await Context
                 .Preeks
-                //.Include(x => x.PreekCookies)
                 .Include(x => x.Predikant)
                 .Include(x => x.Gemeente)
                 .Include(x => x.BoekHoofdstuk)
                 .Include(x => x.BoekHoofdstuk.Boek)
                 .Include(x => x.PreekType)
                 .Where(p => p.TaalId == taalId)
-                .Where(p => preekTypIds.Contains(p.PreekTypeId))
+                .Where(p => preekTypIds.Contains(p.PreekTypeId) || (preekTypIds.Contains((int)PreekTypeEnum.VideoPreek) && p.Video != null))
                 .Where(p => p.Gepubliceerd)
                 .OrderByDescending(p => p.DatumGepubliceerd)
                 .Take(10)
@@ -35,7 +34,6 @@ namespace Data.Repositories
                 {
                     Preek = p,
                     ResultaatReden = ResultaatReden.Nieuw,
-                    //Cookie = p.PreekCookies.FirstOrDefault(pc => pc.GebruikerId == gebruikerId)
                 })
                 .ToList();
         }

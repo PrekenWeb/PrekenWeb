@@ -10,13 +10,16 @@
         <div class="SoortSelectie">
             <ul>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Preken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = !Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.AudioPreken))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Preken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = !Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.AudioPreken))
                 </li>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Leespreken, "NieuwePreken", new NieuwePreken() { LeesPreken = !Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.LeesPreken))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.VideoPreken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = !Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.VideoPreken))
                 </li>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Lezingen, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Lezingen))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Leespreken, "NieuwePreken", new NieuwePreken() { LeesPreken = !Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.LeesPreken))
+                </li>
+                <li>
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Lezingen, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Lezingen))
                 </li>
             </ul>
             <p class="clear"></p>
@@ -24,7 +27,7 @@
     </div>
 </div>
 <div class="NieuwePreken">
-    @{ string kop = NieuwePreken.GetKopLabel(Model.LeesPreken, Model.AudioPreken, Model.Lezingen);   }
+    @{ string kop = NieuwePreken.GetKopLabel(Model.LeesPreken, Model.AudioPreken, Model.Lezingen, Model.VideoPreken);   }
     <h2>@Html.ActionLink(kop, "Index", "Zoeken", new { Laatste = true }, new { })  </h2>
     <table>
 

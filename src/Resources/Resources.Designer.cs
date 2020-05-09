@@ -1546,11 +1546,38 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Reading Sermons.
+        ///   Looks up a localized string similar to New reading &amp; audio sermons.
+        /// </summary>
+        public static string NieuweLeesEnAudioPreken {
+            get {
+                return ResourceManager.GetString("NieuweLeesEnAudioPreken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New reading &amp; audio/video sermons.
+        /// </summary>
+        public static string NieuweLeesEnAudioVideoPreken {
+            get {
+                return ResourceManager.GetString("NieuweLeesEnAudioVideoPreken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New reading sermons.
         /// </summary>
         public static string NieuweLeespreken {
             get {
                 return ResourceManager.GetString("NieuweLeespreken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New lectures &amp; reading sermons.
+        /// </summary>
+        public static string NieuweLeesprekenEnLezingen {
+            get {
+                return ResourceManager.GetString("NieuweLeesprekenEnLezingen", resourceCulture);
             }
         }
         
@@ -1560,6 +1587,24 @@ namespace Prekenweb.Resources {
         public static string NieuweLezingen {
             get {
                 return ResourceManager.GetString("NieuweLezingen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New lectures &amp; audio sermons.
+        /// </summary>
+        public static string NieuweLezingenEnAudioPreken {
+            get {
+                return ResourceManager.GetString("NieuweLezingenEnAudioPreken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New lectures &amp; audio/video sermons.
+        /// </summary>
+        public static string NieuweLezingenEnAudioVideoPreken {
+            get {
+                return ResourceManager.GetString("NieuweLezingenEnAudioVideoPreken", resourceCulture);
             }
         }
         
@@ -1605,6 +1650,15 @@ namespace Prekenweb.Resources {
         public static string NieuweTestament {
             get {
                 return ResourceManager.GetString("NieuweTestament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New audio/video sermons.
+        /// </summary>
+        public static string NieuweVideoPreken {
+            get {
+                return ResourceManager.GetString("NieuweVideoPreken", resourceCulture);
             }
         }
         
@@ -2595,6 +2649,24 @@ namespace Prekenweb.Resources {
         public static string Verwijder {
             get {
                 return ResourceManager.GetString("Verwijder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Movie.
+        /// </summary>
+        public static string Video {
+            get {
+                return ResourceManager.GetString("Video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio/video sermons.
+        /// </summary>
+        public static string VideoPreken {
+            get {
+                return ResourceManager.GetString("VideoPreken", resourceCulture);
             }
         }
         

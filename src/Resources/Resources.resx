@@ -415,7 +415,7 @@
     <value>Audio Sermons and Lectures</value>
   </data>
   <data name="NieuweLeespreken" xml:space="preserve">
-    <value>New Reading Sermons</value>
+    <value>New reading sermons</value>
   </data>
   <data name="NieuweLezingen" xml:space="preserve">
     <value>New lectures</value>
@@ -1043,5 +1043,29 @@
   </data>
   <data name="DeelOpWhatsappTitel" xml:space="preserve">
     <value>Sermon on SermonWeb</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Movie</value>
+  </data>
+  <data name="NieuweVideoPreken" xml:space="preserve">
+    <value>New audio/video sermons</value>
+  </data>
+  <data name="VideoPreken" xml:space="preserve">
+    <value>Audio/video sermons</value>
+  </data>
+  <data name="NieuweLeesEnAudioPreken" xml:space="preserve">
+    <value>New reading &amp; audio sermons</value>
+  </data>
+  <data name="NieuweLeesEnAudioVideoPreken" xml:space="preserve">
+    <value>New reading &amp; audio/video sermons</value>
+  </data>
+  <data name="NieuweLeesprekenEnLezingen" xml:space="preserve">
+    <value>New lectures &amp; reading sermons</value>
+  </data>
+  <data name="NieuweLezingenEnAudioPreken" xml:space="preserve">
+    <value>New lectures &amp; audio sermons</value>
+  </data>
+  <data name="NieuweLezingenEnAudioVideoPreken" xml:space="preserve">
+    <value>New lectures &amp; audio/video sermons</value>
   </data>
 </root>

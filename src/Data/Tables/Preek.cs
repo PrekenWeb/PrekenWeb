@@ -140,7 +140,8 @@ namespace Data.Tables
         [Display(Name = "LeesPreekTekst", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Html), Tooltip("LeesPreekTekstTooltip", ResourceType = typeof(Prekenweb.Resources.Resources))]
         public string LeesPreekTekst { get; set; }
 
-        public string Youtube { get; set; }
+        [Display(Name = "Video", ResourceType = typeof(Prekenweb.Resources.Resources))]
+        public string Video { get; set; }
 
         public virtual ICollection<Inbox> Inboxes { get; set; }
         public virtual ICollection<PreekCookie> PreekCookies { get; set; }

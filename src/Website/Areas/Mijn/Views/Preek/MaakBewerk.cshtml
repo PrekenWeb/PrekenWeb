@@ -68,6 +68,12 @@
                 <div class="tooltip">@Html.ToolTipFor(m => m.Gepubliceerd)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.Gepubliceerd)</div>
             </div>
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.Video)</div>
+                <div class="value">@Html.EditorFor(m => m.Video)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.Video)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.Video)</div>
+            </div>
         </div>
         <div class="clear"></div>
         <div class="ColumnMax">
@@ -272,12 +278,6 @@
                 <div class="value">@Html.EditorFor(m => m.Punt5)</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.Punt5)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.Punt5)</div>
-            </div>
-            <div class="field">
-                <div class="label">@Html.LabelFor(m => m.Youtube)</div>
-                <div class="value">@Html.EditorFor(m => m.Youtube)</div>
-                <div class="tooltip">@Html.ToolTipFor(m => m.Youtube)</div>
-                <div class="validator">@Html.ValidationMessageFor(m => m.Youtube)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.Informatie)</div>

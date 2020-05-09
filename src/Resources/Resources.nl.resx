@@ -408,9 +408,6 @@
   <data name="Bladeren" xml:space="preserve">
     <value>Bladeren</value>
   </data>
-  <data name="LeesEnAudioPreken" xml:space="preserve">
-    <value>Lees- &amp; audiopreken</value>
-  </data>
   <data name="LeesprekenEnLezingen" xml:space="preserve">
     <value>Nieuwe leespreken &amp; lezingen</value>
   </data>
@@ -1043,5 +1040,32 @@
   </data>
   <data name="DeelOpWhatsappTitel" xml:space="preserve">
     <value>Preek op PrekenWeb</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="NieuweVideoPreken" xml:space="preserve">
+    <value>Nieuwe audio/videopreken</value>
+  </data>
+  <data name="VideoPreken" xml:space="preserve">
+    <value>Audio/videopreken</value>
+  </data>
+  <data name="NieuweLeesEnAudioPreken" xml:space="preserve">
+    <value>Nieuwe lees- &amp; audiopreken</value>
+  </data>
+  <data name="LeesEnAudioPreken" xml:space="preserve">
+    <value>Lees- &amp; audiopreken</value>
+  </data>
+  <data name="NieuweLeesEnAudioVideoPreken" xml:space="preserve">
+    <value>Nieuwe lees- &amp; audio/videopreken</value>
+  </data>
+  <data name="NieuweLeesprekenEnLezingen" xml:space="preserve">
+    <value>Nieuwe lezingen &amp; leespreken</value>
+  </data>
+  <data name="NieuweLezingenEnAudioPreken" xml:space="preserve">
+    <value>Nieuwe lezingen &amp; audiopreken</value>
+  </data>
+  <data name="NieuweLezingenEnAudioVideoPreken" xml:space="preserve">
+    <value>Nieuwe lezingen &amp; audio/videopreken</value>
   </data>
 </root>
