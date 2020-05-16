@@ -4,9 +4,9 @@ namespace Prekenweb.Website
 {
     public class BundleConfig
     { 
-        public static void RegisterBundles(BundleCollection bundles)
+        public static void RegisterBundles()
         {
-            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/Scripts/bootstrap*",
                 "~/Scripts/jquery.unobtrusive-ajax*",
                 "~/Scripts/jquery.validate*",
@@ -23,10 +23,10 @@ namespace Prekenweb.Website
                 "~/Scripts/css3-mediaqueries.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            BundleTable.Bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/normalize.css",
                 "~/Content/bootstrap*",
                 "~/Content/font-awesome*",
@@ -35,6 +35,8 @@ namespace Prekenweb.Website
                 "~/Content/jquery.qtip*",
                 "~/Content/site.css",
                 "~/Content/mediaQueries.css" ));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
