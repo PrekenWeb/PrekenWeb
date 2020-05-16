@@ -1753,11 +1753,11 @@ body .ui-widget textarea {
 }
 #oudePreekContainer .jp-volume-slider {
   width: 100px;
-  height: .4em;
+  height: 0.4em;
 }
 #oudePreekContainer .jp-volume-slider .ui-slider-handle {
-  height: .8em;
-  width: .8em;
+  height: 0.8em;
+  width: 0.8em;
   cursor: pointer;
 }
 #oudePreekContainer .jp-gui.jp-no-volume .jp-volume-slider {
