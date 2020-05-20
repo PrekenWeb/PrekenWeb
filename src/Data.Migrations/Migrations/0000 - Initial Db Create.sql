@@ -354,16 +354,6 @@ CREATE TABLE [dbo].[PreekType](
 )
 ) ON [PRIMARY]
 
-CREATE TABLE [dbo].[SchemaVersions](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ScriptName] [nvarchar](255) NOT NULL,
-	[Applied] [datetime] NOT NULL,
- CONSTRAINT [PK_SchemaVersions_Id] PRIMARY KEY CLUSTERED
-(
-	[Id] ASC
-)
-) ON [PRIMARY]
-
 CREATE TABLE [dbo].[Serie](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Omschrijving] [nvarchar](255) NOT NULL,
