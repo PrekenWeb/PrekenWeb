@@ -66,11 +66,11 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 CREATE TABLE [dbo].[Boek](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Boeknaam] [nvarchar](255) NOT NULL,
-	[Sortering] [int] NOT NULL,
+	[Sortering] [int] DEFAULT ((0)) NOT NULL,
 	[OudId] [int] NULL,
 	[Afkorting] [nvarchar](50) NULL,
-	[ToonHoofdstukNummer] [bit] NOT NULL,
-	[TaalId] [int] NOT NULL,
+	[ToonHoofdstukNummer] [bit] CONSTRAINT [DF_Boek_ToonHoofdstukNummer] DEFAULT ((1)) NOT NULL,
+	[TaalId] [int] CONSTRAINT [DF_Boek_TaalId] DEFAULT ((1)) NOT NULL,
  CONSTRAINT [PK_dbo.Boek] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -293,7 +293,7 @@ CREATE TABLE [dbo].[Preek](
 	[Punt4] [nvarchar](255) NULL,
 	[Punt5] [nvarchar](255) NULL,
 	[GemeenteId] [int] NULL,
-	[DatumPreek] [datetime] NULL,
+	[DatumPreek] [date] NULL,
 	[Informatie] [nvarchar](max) NULL,
 	[ThemaOmschrijving] [nvarchar](max) NULL,
 	[AfbeeldingId] [int] NULL,
