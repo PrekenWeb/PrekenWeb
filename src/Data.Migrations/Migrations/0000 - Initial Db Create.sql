@@ -22,7 +22,10 @@ CREATE TABLE [dbo].[AspNetRoles](
 	[Id] ASC
 )
 ) ON [PRIMARY]
-
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
+	ON [dbo].[AspNetRoles]([Name] ASC);
+GO
 
 CREATE TABLE [dbo].[AspNetUserClaims](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -35,6 +38,10 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 	[Id] ASC
 )
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
+	ON [dbo].[AspNetUserClaims]([Gebruiker_Id] ASC);
+GO
 
 
 CREATE TABLE [dbo].[AspNetUserLogins](
@@ -49,6 +56,10 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 	[UserId] ASC
 )
 ) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
+	ON [dbo].[AspNetUserLogins]([Gebruiker_Id] ASC);
+GO
 
 
 CREATE TABLE [dbo].[AspNetUserRoles](
@@ -61,6 +72,13 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 	[RoleId] ASC
 )
 ) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
+	ON [dbo].[AspNetUserRoles]([Gebruiker_Id] ASC);
+GO
+CREATE NONCLUSTERED INDEX [IX_RoleId]
+	ON [dbo].[AspNetUserRoles]([RoleId] ASC);
+GO
 
 
 CREATE TABLE [dbo].[Boek](
@@ -110,8 +128,8 @@ CREATE TABLE [dbo].[Gebeurtenis](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Omschrijving] [nvarchar](255) NOT NULL,
 	[OudId] [int] NULL,
-	[Sortering] [int] NOT NULL,
-	[TaalId] [int] NOT NULL,
+	[Sortering] [int] CONSTRAINT [DF_Gebeurtenis_Sortering] DEFAULT ((0)) NOT NULL,
+	[TaalId] [int] CONSTRAINT [DF_Gebeurtenis_TaalId] DEFAULT ((1)) NOT NULL,
  CONSTRAINT [PK_dbo.Gebeurtenis] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -121,8 +139,8 @@ CREATE TABLE [dbo].[Gebeurtenis](
 CREATE TABLE [dbo].[Gebruiker](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Naam] [nvarchar](255) NOT NULL,
-	[LaatstIngelogd] [datetime] NULL,
 	[Email] [nvarchar](max) NULL,
+	[LaatstIngelogd] [datetime] NULL,
 	[EmailConfirmed] [bit] NOT NULL DEFAULT ((0)),
 	[PasswordHash] [nvarchar](max) NULL,
 	[SecurityStamp] [nvarchar](max) NULL,
@@ -197,11 +215,8 @@ CREATE TABLE [dbo].[InboxOpvolging](
 
 CREATE TABLE [dbo].[InboxType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Omschrijving] [nvarchar](255) NOT NULL,
- CONSTRAINT [PK_dbo.InboxType] PRIMARY KEY CLUSTERED
-(
-	[Id] ASC
-)
+	[Omschrijving] [nvarchar](255) NOT NULL, 
+	PRIMARY KEY CLUSTERED ([Id] ASC)
 ) ON [PRIMARY]
 
 CREATE TABLE [dbo].[LezingCategorie](
@@ -244,8 +259,8 @@ CREATE TABLE [dbo].[Pagina](
 	[Identifier] [nvarchar](255) NOT NULL,
 	[Aangemaakt] [datetime] NOT NULL DEFAULT (getdate()),
 	[Bijgewerkt] [datetime] NOT NULL DEFAULT (getdate()),
-	[AangemaaktDoor] [int] NOT NULL,
-	[BijgewerktDoor] [int] NOT NULL,
+	[AangemaaktDoor] [int] NOT NULL DEFAULT ((1)),
+	[BijgewerktDoor] [int] NOT NULL DEFAULT ((1)),
 	[TonenOpHomepage] [bit] NOT NULL DEFAULT ((0)),
  CONSTRAINT [PK_dbo.Pagina] PRIMARY KEY CLUSTERED
 (
@@ -324,9 +339,9 @@ CREATE TABLE [dbo].[PreekCookie](
 	[PreekId] [int] NOT NULL,
 	[DateTime] [datetime] NULL,
 	[Opmerking] [nvarchar](max) NULL,
-	[BladwijzerGelegdOp] [datetime] NULL,
 	[AfgespeeldTot] [time](7) NULL,
 	[GebruikerId] [int] NOT NULL,
+	[BladwijzerGelegdOp] [datetime] NULL,
  CONSTRAINT [PK_dbo.PreekCookie] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -358,7 +373,7 @@ CREATE TABLE [dbo].[Serie](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Omschrijving] [nvarchar](255) NOT NULL,
 	[OudId] [int] NULL,
-	[TaalId] [int] NOT NULL,
+	[TaalId] [int] NOT NULL DEFAULT ((1)),
  CONSTRAINT [PK_dbo.Serie] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -373,8 +388,8 @@ CREATE TABLE [dbo].[Spotlight](
 	[Url] [nvarchar](max) NOT NULL,
 	[AfbeeldingId] [int] NOT NULL,
 	[Sortering] [int] NOT NULL,
-	[TaalId] [int] NOT NULL,
-	[NieuwVenster] [bit] NOT NULL,
+	[TaalId] [int] NOT NULL DEFAULT ((1)),
+	[NieuwVenster] [bit] NOT NULL DEFAULT ((0)),
  CONSTRAINT [PK_dbo.Spotlight] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -394,7 +409,7 @@ CREATE TABLE [dbo].[Taal](
 CREATE TABLE [dbo].[Tekst](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Kop] [nvarchar](255) NOT NULL,
-	[Tekst] [nvarchar](max) NOT NULL,
+	[Tekst] [nvarchar](max) NOT NULL DEFAULT ('1'),
 	[TaalId] [int] NOT NULL,
 	[PaginaId] [int] NULL,
  CONSTRAINT [PK_dbo.Tekst] PRIMARY KEY CLUSTERED
