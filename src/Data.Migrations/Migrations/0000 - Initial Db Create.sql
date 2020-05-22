@@ -22,10 +22,8 @@ CREATE TABLE [dbo].[AspNetRoles](
 	[Id] ASC
 )
 ) ON [PRIMARY]
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
 	ON [dbo].[AspNetRoles]([Name] ASC);
-GO
 
 CREATE TABLE [dbo].[AspNetUserClaims](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -38,10 +36,8 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 	[Id] ASC
 )
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
 CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
 	ON [dbo].[AspNetUserClaims]([Gebruiker_Id] ASC);
-GO
 
 
 CREATE TABLE [dbo].[AspNetUserLogins](
@@ -56,10 +52,8 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 	[UserId] ASC
 )
 ) ON [PRIMARY]
-GO
 CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
 	ON [dbo].[AspNetUserLogins]([Gebruiker_Id] ASC);
-GO
 
 
 CREATE TABLE [dbo].[AspNetUserRoles](
@@ -72,13 +66,10 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 	[RoleId] ASC
 )
 ) ON [PRIMARY]
-GO
 CREATE NONCLUSTERED INDEX [IX_Gebruiker_Id]
 	ON [dbo].[AspNetUserRoles]([Gebruiker_Id] ASC);
-GO
 CREATE NONCLUSTERED INDEX [IX_RoleId]
 	ON [dbo].[AspNetUserRoles]([RoleId] ASC);
-GO
 
 
 CREATE TABLE [dbo].[Boek](
