@@ -135,6 +135,8 @@
     <Compile Include="Mapping\Profiles\PreekDtoAutoMapperProfile.cs" />
     <Compile Include="Models\BookChapterData.cs" />
     <Compile Include="Models\BookData.cs" />
+    <Compile Include="Models\Dtos\Preek.cs" />
+    <Compile Include="Models\Dtos\Zoekopdracht.cs" />
     <Compile Include="Models\ImageData.cs" />
     <Compile Include="Models\LanguageData.cs" />
     <Compile Include="Models\LectureData.cs" />
@@ -220,10 +222,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{6794167A-6625-4BE8-90CF-2473B698ADEA}</Project>
       <Name>Resources</Name>

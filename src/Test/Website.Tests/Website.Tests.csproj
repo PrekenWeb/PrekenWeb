@@ -129,10 +129,6 @@
       <Project>{b5be9bae-f1eb-4f71-9048-297d61a21da6}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Models\Models.csproj">
-      <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Security\Security.csproj">
       <Project>{E725F7FD-732E-47AA-889E-DF9067790C9E}</Project>
       <Name>Security</Name>

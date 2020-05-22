@@ -147,10 +147,6 @@
       <Project>{B5BE9BAE-F1EB-4F71-9048-297D61A21DA6}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

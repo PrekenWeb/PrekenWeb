@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Prekenweb.Models.Dtos;
+using Data.Models.Dtos;
 
 namespace Data.Mapping.Profiles
 {

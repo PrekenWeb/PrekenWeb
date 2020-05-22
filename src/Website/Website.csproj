@@ -1084,10 +1084,6 @@
       <Project>{B5BE9BAE-F1EB-4F71-9048-297D61A21DA6}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{C7A64C3F-773B-44C2-9E1D-C04C411D0D84}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{6794167A-6625-4BE8-90CF-2473B698ADEA}</Project>
       <Name>Resources</Name>
