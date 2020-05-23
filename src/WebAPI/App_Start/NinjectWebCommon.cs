@@ -42,8 +42,6 @@ namespace WebAPI
             // API
             kernel.Bind<Profile>().To<SermonApiModelAutoMapperProfile>().InSingletonScope();
 
-            kernel.Bind<ISermonsRepository>().To<SermonsRepository>();
-
             kernel.Bind<IBooksRepository>().To<BooksRepository>();
             kernel.Bind<IImagesRepository>().To<ImagesRepository>();
             kernel.Bind<ILanguagesRepository>().To<LanguagesRepository>();

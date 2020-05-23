@@ -194,14 +194,12 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\GebruikerController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
-    <Compile Include="Controllers\SermonsController.cs" />
     <Compile Include="Controllers\SpeakersController.cs" />
     <Compile Include="Interfaces\IBooksRepository.cs" />
     <Compile Include="Interfaces\IImagesRepository.cs" />
     <Compile Include="Interfaces\ILanguagesRepository.cs" />
     <Compile Include="Interfaces\ILecturesRepository.cs" />
     <Compile Include="Interfaces\ILectureTypesRepository.cs" />
-    <Compile Include="Interfaces\ISermonsRepository.cs" />
     <Compile Include="Interfaces\ISpeakersRepository.cs" />
     <Compile Include="Mapping\Profiles\SermonApiModelAutoMapperProfile.cs" />
     <Compile Include="Models\BookViewModel.cs" />
@@ -219,7 +217,6 @@
     <Compile Include="Repositories\LanguagesRepository.cs" />
     <Compile Include="Repositories\LecturesRepository.cs" />
     <Compile Include="Repositories\LectureTypesRepository.cs" />
-    <Compile Include="Repositories\SermonsRepository.cs" />
     <Compile Include="Repositories\SpeakersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
