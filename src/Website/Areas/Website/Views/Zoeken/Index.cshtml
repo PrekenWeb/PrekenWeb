@@ -51,6 +51,8 @@
         @Html.LabelFor(m => m.LeesPreken)
         @Html.CheckBoxFor(m => m.Lezingen, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
         @Html.LabelFor(m => m.Lezingen)
+        @Html.CheckBoxFor(m => m.Meditaties, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
+        @Html.LabelFor(m => m.Meditaties)
     </div>
     <p class="clear"></p>
     <div class="field">

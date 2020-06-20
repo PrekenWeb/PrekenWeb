@@ -754,7 +754,7 @@
     <value>Leespreek tekst</value>
   </data>
   <data name="LeesPreekTekstTooltip" xml:space="preserve">
-    <value>Hierin komt alle tekst van en leespreek, plakken kan vanuit Microsoft Word</value>
+    <value>Hierin komt alle tekst van de leespreek, plakken kan vanuit Microsoft Word</value>
   </data>
   <data name="AankondigingenBord" xml:space="preserve">
     <value>Lezen en zingen</value>
@@ -769,10 +769,7 @@
     <value>Zingen</value>
   </data>
   <data name="DownloadPreekAlsPDF" xml:space="preserve">
-    <value>Download preek als PDF</value>
-  </data>
-  <data name="DownloadPreekAlsWord" xml:space="preserve">
-    <value>Download preek als MS Word</value>
+    <value>Download als PDF</value>
   </data>
   <data name="Afdrukweergave" xml:space="preserve">
     <value>Afdrukweergave</value>
@@ -1067,5 +1064,20 @@
   </data>
   <data name="NieuweLezingenEnAudioVideoPreken" xml:space="preserve">
     <value>Nieuwe lezingen &amp; audio/videopreken</value>
+  </data>
+  <data name="Meditatie" xml:space="preserve">
+    <value>Meditatie</value>
+  </data>
+  <data name="Meditaties" xml:space="preserve">
+    <value>Meditaties</value>
+  </data>
+  <data name="MeditatieTekst" xml:space="preserve">
+    <value>Meditatie tekst</value>
+  </data>
+  <data name="MeditatieTekstTooltip" xml:space="preserve">
+    <value>Hierin komt alle tekst van de meditatie, plakken kan vanuit Microsoft Word</value>
+  </data>
+  <data name="NieuweMeditaties" xml:space="preserve">
+    <value>Nieuwe meditaties</value>
   </data>
 </root>

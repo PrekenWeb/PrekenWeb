@@ -664,20 +664,11 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download sermon as PDF.
+        ///   Looks up a localized string similar to Download as PDF.
         /// </summary>
         public static string DownloadPreekAlsPDF {
             get {
                 return ResourceManager.GetString("DownloadPreekAlsPDF", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download sermon as MS Word.
-        /// </summary>
-        public static string DownloadPreekAlsWord {
-            get {
-                return ResourceManager.GetString("DownloadPreekAlsWord", resourceCulture);
             }
         }
         
@@ -1348,6 +1339,42 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meditation.
+        /// </summary>
+        public static string Meditatie {
+            get {
+                return ResourceManager.GetString("Meditatie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meditations.
+        /// </summary>
+        public static string Meditaties {
+            get {
+                return ResourceManager.GetString("Meditaties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meditation text.
+        /// </summary>
+        public static string MeditatieTekst {
+            get {
+                return ResourceManager.GetString("MeditatieTekst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can paste the meditation text from Microsoft Word.
+        /// </summary>
+        public static string MeditatieTekstTooltip {
+            get {
+                return ResourceManager.GetString("MeditatieTekstTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to More.
         /// </summary>
         public static string Meer {
@@ -1605,6 +1632,15 @@ namespace Prekenweb.Resources {
         public static string NieuweLezingenEnAudioVideoPreken {
             get {
                 return ResourceManager.GetString("NieuweLezingenEnAudioVideoPreken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Readings.
+        /// </summary>
+        public static string NieuweMeditaties {
+            get {
+                return ResourceManager.GetString("NieuweMeditaties", resourceCulture);
             }
         }
         

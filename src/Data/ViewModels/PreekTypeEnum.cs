@@ -5,6 +5,6 @@
         Preek = 1,
         Lezing = 2,
         LeesPreek = 3,
-        VideoPreek = 4
+        Meditatie = 4
     }
 }

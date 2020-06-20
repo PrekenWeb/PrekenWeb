@@ -67,7 +67,7 @@
 }
 @section ogMetaTags{
 
-    @if (Model.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+    @if (Model.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek && Model.Preek.PreekTypeId != (int)PreekTypeEnum.Meditatie)
     {
         <meta property="og:type" content="music.song" />
         <meta property="og:audio" content="@Url.ContentAbsolute(Url.Action("Download", new {Id = Model.Preek.Id, inline = false}))" />
@@ -124,7 +124,7 @@
             </a>
         </section>
     }
-    @if (Model.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+    @if (Model.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek && Model.Preek.PreekTypeId != (int)PreekTypeEnum.Meditatie)
     {
         <section id="afspelen">
             <h2>@Resources.Afspelen</h2>
@@ -170,9 +170,9 @@
     <section id="onderwerp">
         <h2>
             @if (string.IsNullOrEmpty(Model.Preek.ThemaOmschrijving) || Model.Preek.ThemaOmschrijving.Length > 50)
-            { @Resources.Onderwerp }
-            else
-            { @Model.Preek.ThemaOmschrijving }
+            {@Resources.Onderwerp }
+        else
+        { @Model.Preek.ThemaOmschrijving}
         </h2>
         <div class="ColumnL">
             <div class="field">
@@ -355,7 +355,7 @@
     }
     <section id="delen">
         <h2>@Resources.Delen &amp; Download</h2>
-        @if (string.IsNullOrEmpty(Model.Preek.Bestandsnaam) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
+        @if (string.IsNullOrEmpty(Model.Preek.Bestandsnaam) && (Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek || Model.Preek.PreekTypeId == (int)PreekTypeEnum.Meditatie))
         {
             <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString, format = "PDF" })" class="GroteDownloadKnop" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
                 <div class="fa fa-save"></div>
@@ -371,7 +371,8 @@
         }
 
         <ul id="DownloadLinks">
-            @if (!string.IsNullOrWhiteSpace(Model.Preek.LeesPreekTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
+            @if ((!string.IsNullOrWhiteSpace(Model.Preek.LeesPreekTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek) ||
+                 (!string.IsNullOrWhiteSpace(Model.Preek.MeditatieTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.Meditatie))
             {
                 <li>
                     <a href="@Url.Action("Download", new { id = Model.Preek.Id, inline = false, version = sermonChangeDateTimeString, format = "EPUB" })" class="" onclick="return checkiOS('@Model.Preek.Bestandsnaam');">
@@ -483,8 +484,20 @@
             {
                 <iframe src="@Url.Action("Download", new { Id = Model.Preek.Id, inline = true, version = sermonChangeDateTimeString })" class="PreekLezenIframe"></iframe>
             }
-            @*<iframe src="@Url.Content(string.Format("~/Content/preken/{0}", Model.Preek.Bestandsnaam))" class="PreekLezenIframe"></iframe>*@
 
+            <p class="clear"></p>
+        </section>
+    }
+    @if (Model.Preek.PreekTypeId == (int)PreekTypeEnum.Meditatie)
+    {
+        <section id="meditatieTekst">
+            <h2>@Resources.Meditatie</h2>
+            @if (!string.IsNullOrWhiteSpace(Model.Preek.MeditatieTekst) && Model.Preek.PreekTypeId == (int)PreekTypeEnum.Meditatie)
+            {
+                <div class="HeleLeespreek">
+                    @Html.Raw(Model.Preek.MeditatieTekst)
+                </div>
+            }
             <p class="clear"></p>
         </section>
     }

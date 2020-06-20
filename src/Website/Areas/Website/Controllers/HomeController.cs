@@ -72,7 +72,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             if (nieuwePreken.AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Preek);
             if (nieuwePreken.LeesPreken) preekTypIds.Add((int)PreekTypeEnum.LeesPreek);
             if (nieuwePreken.Lezingen) preekTypIds.Add((int)PreekTypeEnum.Lezing);
-            if (nieuwePreken.VideoPreken) preekTypIds.Add((int)PreekTypeEnum.VideoPreek);
+            if (nieuwePreken.Meditaties) preekTypIds.Add((int)PreekTypeEnum.Meditatie);
 
             var cacheKey = string.Format("{0}.{1}", string.Join(".", preekTypIds), "NieuwePreken");
 

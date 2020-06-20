@@ -296,6 +296,7 @@ var Prekenweb;
         Prekenweb.prototype.changePreekType = function (preekTypeId) {
             $(".LezingCategorieEditor").hide();
             $(".alleenBijLeespreek").hide();
+            $(".alleenBijMeditatie").hide();
             switch (preekTypeId) {
                 case "1": //preek
                     break;
@@ -305,9 +306,13 @@ var Prekenweb;
                 case "3": // leespreek
                     $(".alleenBijLeespreek").show();
                     break;
+                case "4": // meditatie
+                    $(".alleenBijMeditatie").show();
+                    break;
             }
             $(".tabs").tabs();
             $("#leespreekTab").hide();
+            $("#meditatieTab").hide();
         };
         Prekenweb.prototype.automatischeTekstenChanged = function () {
             var value = $("input[name=AutomatischeTeksten]:checked").val();

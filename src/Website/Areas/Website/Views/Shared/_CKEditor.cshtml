@@ -15,7 +15,7 @@ else
 }
  
 <script type="text/javascript">
-    var fieldNames = ['LeesPreekTekst', 'InboxItem.Inhoud', 'InboxOpvolging.Tekst', 'Teksten[0].Tekst_', 'Teksten[1].Tekst_'];
+    var fieldNames = ['LeesPreekTekst', 'MeditatieTekst','InboxItem.Inhoud', 'InboxOpvolging.Tekst', 'Teksten[0].Tekst_', 'Teksten[1].Tekst_'];
     for (i = 0; i < fieldNames.length; i++) {
         if (document.getElementsByName(fieldNames[i]).length > 0) {
             window["CKEDITOR"].replace(fieldNames[i], @Html.Raw(string.Format(@"{{ language: '{0}' {1} }}", Request.RequestContext.RouteData.Values["culture"], addConfigForCdn)));

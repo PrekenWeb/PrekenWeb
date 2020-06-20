@@ -25,7 +25,7 @@ namespace Data.Repositories
                 .Include(x => x.BoekHoofdstuk.Boek)
                 .Include(x => x.PreekType)
                 .Where(p => p.TaalId == taalId)
-                .Where(p => preekTypIds.Contains(p.PreekTypeId) || (preekTypIds.Contains((int)PreekTypeEnum.VideoPreek) && p.Video != null))
+                .Where(p => preekTypIds.Contains(p.PreekTypeId))
                 .Where(p => p.Gepubliceerd)
                 .OrderByDescending(p => p.DatumGepubliceerd)
                 .Take(10)

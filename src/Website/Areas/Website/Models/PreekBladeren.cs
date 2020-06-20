@@ -43,6 +43,9 @@ namespace Prekenweb.Website.Areas.Website.Models
         [Display(Name = "Lezingen", ResourceType = typeof(Resources.Resources))]
         public bool Lezingen { get; set; }
 
+        [Display(Name = "Meditaties", ResourceType = typeof(Resources.Resources))]
+        public bool Meditaties { get; set; }
+
         public bool Geavanceerd { get; set; }
 
         public int? GebeurtenisId { get; set; }

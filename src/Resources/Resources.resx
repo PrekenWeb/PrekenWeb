@@ -766,10 +766,7 @@
     <value>Sing</value>
   </data>
   <data name="DownloadPreekAlsPDF" xml:space="preserve">
-    <value>Download sermon as PDF</value>
-  </data>
-  <data name="DownloadPreekAlsWord" xml:space="preserve">
-    <value>Download sermon as MS Word</value>
+    <value>Download as PDF</value>
   </data>
   <data name="Afdrukweergave" xml:space="preserve">
     <value>Print preview</value>
@@ -1067,5 +1064,20 @@
   </data>
   <data name="NieuweLezingenEnAudioVideoPreken" xml:space="preserve">
     <value>New lectures &amp; audio/video sermons</value>
+  </data>
+  <data name="Meditatie" xml:space="preserve">
+    <value>Meditation</value>
+  </data>
+  <data name="Meditaties" xml:space="preserve">
+    <value>Meditations</value>
+  </data>
+  <data name="MeditatieTekst" xml:space="preserve">
+    <value>Meditation text</value>
+  </data>
+  <data name="MeditatieTekstTooltip" xml:space="preserve">
+    <value>Here you can paste the meditation text from Microsoft Word</value>
+  </data>
+  <data name="NieuweMeditaties" xml:space="preserve">
+    <value>New Readings</value>
   </data>
 </root>

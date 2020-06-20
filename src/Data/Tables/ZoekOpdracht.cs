@@ -16,6 +16,7 @@ namespace Data.Tables
         public bool LeesPreken { get; set; }
         public bool AudioPreken { get; set; }
         public bool Lezingen { get; set; }
+        public bool Meditaties { get; set; }
 
         public int? PredikantId { get; set; }
         public string Predikant { get; set; }
@@ -68,6 +69,7 @@ namespace Data.Tables
                     if (AudioPreken) preekTypIds.Add((int)PreekTypeEnum.Preek);
                     if (LeesPreken) preekTypIds.Add((int)PreekTypeEnum.LeesPreek);
                     if (Lezingen) preekTypIds.Add((int)PreekTypeEnum.Lezing);
+                    if (Meditaties) preekTypIds.Add((int)PreekTypeEnum.Meditatie);
                     return preekTypIds;
                 }
             }
@@ -80,7 +82,7 @@ namespace Data.Tables
             {
                 {
                     var parts = new List<string>();
-                    if (!AudioPreken || !LeesPreken || !Lezingen)
+                    if (!AudioPreken || !LeesPreken || !Lezingen || !Meditaties)
                     {
                         if (AudioPreken && LeesPreken) { parts.Add(Prekenweb.Resources.Resources.LeesEnAudioPreken); }
                         else if (AudioPreken && Lezingen) { parts.Add(Prekenweb.Resources.Resources.LezingenEnAudioPreken); }
@@ -88,7 +90,8 @@ namespace Data.Tables
                         else if (LeesPreken) { parts.Add(Prekenweb.Resources.Resources.NieuweLeespreken); }
                         else if (Lezingen) { parts.Add(Prekenweb.Resources.Resources.NieuweLezingen); }
                         else if (AudioPreken) { parts.Add(Prekenweb.Resources.Resources.NieuweAudioPreken); }
-                    }
+                        else if (Meditaties) { parts.Add(Prekenweb.Resources.Resources.Meditaties); }
+                        }
                     if (!string.IsNullOrWhiteSpace(Zoekterm)) parts.Add(string.Format("{0}: {1}", Prekenweb.Resources.Resources.Zoekterm, Zoekterm));
                     if (!string.IsNullOrWhiteSpace(Predikant)) parts.Add(string.Format("{0}: {1}", Prekenweb.Resources.Resources.Predikant, Predikant));
                     if (!string.IsNullOrWhiteSpace(Gemeente)) parts.Add(string.Format("{0}: {1}", Prekenweb.Resources.Resources.Gemeente, Gemeente));
@@ -107,6 +110,7 @@ namespace Data.Tables
                 return false;
 
             return LeesPreken.Equals(other.LeesPreken)
+                && Meditaties.Equals(other.Meditaties)
                 && AudioPreken.Equals(other.AudioPreken)
                 && Lezingen.Equals(other.Lezingen)
                 && PredikantId.Equals(other.PredikantId)

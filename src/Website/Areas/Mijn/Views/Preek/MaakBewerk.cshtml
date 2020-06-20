@@ -6,16 +6,36 @@
 
 <div class="tabs">
     <ul>
-        <li><a href="#algemeen">
-            <div class="fa fa-info-circle"></div>@Resources.Algemeen</a></li>
-        <li><a href="#stamgegevens">
-            <div class="fa fa-table"></div>@Resources.Stamgegevens</a></li>
-        <li><a href="#gedeelte">
-            <div class="fa fa-book"></div>@Resources.Bijbelgedeelte</a></li>
-        <li><a href="#punten">
-            <div class="fa fa-list-ol"></div>@Resources.ThemaEnPunten</a></li>
-        <li class="alleenBijLeespreek"><a href="#leespreekTab">
-            <div class="fa fa-font"></div>@Resources.LeesPreek</a></li>
+        <li>
+            <a href="#algemeen">
+                <div class="fa fa-info-circle"></div>@Resources.Algemeen
+            </a>
+        </li>
+        <li>
+            <a href="#stamgegevens">
+                <div class="fa fa-table"></div>@Resources.Stamgegevens
+            </a>
+        </li>
+        <li>
+            <a href="#gedeelte">
+                <div class="fa fa-book"></div>@Resources.Bijbelgedeelte
+            </a>
+        </li>
+        <li>
+            <a href="#punten">
+                <div class="fa fa-list-ol"></div>@Resources.ThemaEnPunten
+            </a>
+        </li>
+        <li class="alleenBijLeespreek">
+            <a href="#leespreekTab">
+                <div class="fa fa-font"></div>@Resources.LeesPreek
+            </a>
+        </li>
+        <li class="alleenBijMeditatie">
+            <a href="#meditatieTab">
+                <div class="fa fa-font"></div>@Resources.Meditatie
+            </a>
+        </li>
     </ul>
     <div id="algemeen">
         <div class="ColumnL">
@@ -118,25 +138,25 @@
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.GemeenteId)</div>
-                <div class="value">@Html.EditorFor(m => m.GemeenteId, new {Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.GemeenteId, new { Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.GemeenteId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.GemeenteId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.PredikantId)</div>
-                <div class="value">@Html.EditorFor(m => m.PredikantId, new {Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.PredikantId, new { Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.PredikantId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.PredikantId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.SerieId)</div>
-                <div class="value">@Html.EditorFor(m => m.SerieId, new {Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.SerieId, new { Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.SerieId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.SerieId)</div>
             </div>
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.GebeurtenisId)</div>
-                <div class="value">@Html.EditorFor(m => m.GebeurtenisId, new {Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.GebeurtenisId, new { Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.GebeurtenisId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.GebeurtenisId)</div>
             </div>
@@ -148,7 +168,7 @@
 
             <div class="field">
                 <div class="label">@Html.LabelFor(m => m.BoekhoofdstukId)</div>
-                <div class="value">@Html.EditorFor(m => m.BoekhoofdstukId, new {Model.TaalId })</div>
+                <div class="value">@Html.EditorFor(m => m.BoekhoofdstukId, new { Model.TaalId })</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.BoekhoofdstukId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.BoekhoofdstukId)</div>
             </div>
@@ -162,7 +182,7 @@
         <div class="clear"></div>
         <div class="ColumnMax">
             @if (!string.IsNullOrEmpty(Model.VanVers))
-            { 
+            {
                 <div class="field">
                     <div class="label">@Html.LabelFor(m => m.VanVers)</div>
                     <div class="value">@Html.DisplayFor(m => m.VanVers)</div>
@@ -171,7 +191,7 @@
                 </div>
             }
             @if (!string.IsNullOrEmpty(Model.TotVers))
-            { 
+            {
                 <div class="field">
                     <div class="label">@Html.LabelFor(m => m.TotVers)</div>
                     <div class="value">@Html.DisplayFor(m => m.TotVers)</div>
@@ -191,18 +211,6 @@
                 <div class="tooltip">@Html.ToolTipFor(m => m.VersTotId)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.VersTotId)</div>
             </div>
-            @*<div class="field">
-                <div class="label">@Html.LabelFor(m => m.GedeelteVanVersId)</div>
-                <div class="value">@Html.EditorFor(m => m.GedeelteVanVersId)</div>
-                <div class="tooltip">@Html.ToolTipFor(m => m.GedeelteVanVersId)</div>
-                <div class="validator">@Html.ValidationMessageFor(m => m.GedeelteVanVersId)</div>
-            </div>
-            <div class="field">
-                <div class="label">@Html.LabelFor(m => m.GedeelteTotVersId)</div>
-                <div class="value">@Html.EditorFor(m => m.GedeelteTotVersId)</div>
-                <div class="tooltip">@Html.ToolTipFor(m => m.GedeelteTotVersId)</div>
-                <div class="validator">@Html.ValidationMessageFor(m => m.GedeelteTotVersId)</div>
-            </div>*@
         </div>
         <div class="clear"></div>
         <div class="ColumnMax">
@@ -344,6 +352,17 @@
                 <div class="value">@Html.EditorFor(m => m.LeesPreekTekst)</div>
                 <div class="tooltip">@Html.ToolTipFor(m => m.LeesPreekTekst)</div>
                 <div class="validator">@Html.ValidationMessageFor(m => m.LeesPreekTekst)</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="meditatieTab" class="alleenBijMeditatie">
+        <div class="ColumnMax">
+            <div class="field">
+                <div class="label">@Html.LabelFor(m => m.MeditatieTekst)</div>
+                <div class="value">@Html.EditorFor(m => m.MeditatieTekst)</div>
+                <div class="tooltip">@Html.ToolTipFor(m => m.MeditatieTekst)</div>
+                <div class="validator">@Html.ValidationMessageFor(m => m.MeditatieTekst)</div>
             </div>
         </div>
         <div class="clear"></div>

@@ -10,16 +10,16 @@
         <div class="SoortSelectie">
             <ul>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Preken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = !Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.AudioPreken))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Preken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = !Model.AudioPreken, Meditaties = Model.Meditaties }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.AudioPreken))
                 </li>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.VideoPreken, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = !Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.VideoPreken))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Leespreken, "NieuwePreken", new NieuwePreken() { LeesPreken = !Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken, Meditaties = Model.Meditaties }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.LeesPreken))
                 </li>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Leespreken, "NieuwePreken", new NieuwePreken() { LeesPreken = !Model.LeesPreken, Lezingen = Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.LeesPreken))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Lezingen, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken, Meditaties = Model.Meditaties }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Lezingen))
                 </li>
                 <li>
-                    @Html.Raw(Ajax.CheckedActionLink(Resources.Lezingen, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken, VideoPreken = Model.VideoPreken }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Lezingen))
+                    @Html.Raw(Ajax.CheckedActionLink(Resources.Meditaties, "NieuwePreken", new NieuwePreken() { LeesPreken = Model.LeesPreken, Lezingen = !Model.Lezingen, AudioPreken = Model.AudioPreken, Meditaties = !Model.Meditaties }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "NieuwePrekenWrapper" }, Model.Meditaties))
                 </li>
             </ul>
             <p class="clear"></p>
@@ -27,16 +27,16 @@
     </div>
 </div>
 <div class="NieuwePreken">
-    @{ string kop = NieuwePreken.GetKopLabel(Model.LeesPreken, Model.AudioPreken, Model.Lezingen, Model.VideoPreken);   }
+    @{ string kop = NieuwePreken.GetKopLabel(Model.LeesPreken, Model.AudioPreken, Model.Lezingen, Model.Meditaties);   }
     <h2>@Html.ActionLink(kop, "Index", "Zoeken", new { Laatste = true }, new { })  </h2>
     <table>
 
         <tbody>
             @foreach (ZoekresultaatItem regel in Model.Preken.OrderByDescending(p => p.Preek.DatumGepubliceerd))
             {
-                <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>       }>
+                <tr @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek && regel.Preek.PreekTypeId != (int)PreekTypeEnum.Meditatie) { <text> itemscope itemtype="http://schema.org/MusicRecording" </text>       }>
                     <td class="VerbergMobiel IconColumn">
-                        @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek)
+                        @if (regel.Preek.PreekTypeId != (int)PreekTypeEnum.LeesPreek && regel.Preek.PreekTypeId != (int)PreekTypeEnum.Meditatie)
                         {
                             <meta itemprop="inAlbum" content="@regel.Predikant" />
                             <meta itemprop="url" content="@Url.ContentAbsolute(Url.Action("Open", "Preek", new { Id = regel.Preek.Id }))" />

@@ -163,7 +163,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             //_context.Database.Connection.Close();
             _context.Dispose();
 
-            if (preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek && (string.IsNullOrEmpty(preek.Bestandsnaam) || format == "EPUB"))
+            if ((preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek || preek.PreekTypeId == (int)PreekTypeEnum.Meditatie) && (string.IsNullOrEmpty(preek.Bestandsnaam) || format == "EPUB"))
             {
                 var filename = preek.GetPreekTitel();
                 foreach (var c in Path.GetInvalidFileNameChars())
@@ -179,7 +179,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                             return File(getGeneratedLeespreek(preek, "PDF"), "application/pdf");
                         }
                     case "Word": return File(getGeneratedLeespreek(preek, "Word"), "application/msword", filename + ".doc");
-                    case "HTML": return Content(preek.LeesPreekTekst);
+                    case "HTML": return Content(preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek ? preek.LeesPreekTekst : preek.MeditatieTekst);
                     case "EPUB": return GenerateEpub(preek, filename);
 
                     default: throw new Exception("Huh?");
@@ -192,7 +192,6 @@ namespace Prekenweb.Website.Areas.Website.Controllers
 
             Response.AppendHeader("Content-Disposition", new ContentDisposition { FileName = preek.Bestandsnaam, Inline = false }.ToString());
             return File(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam), preek.GetContentType());
-
         }
 
         public async Task<ActionResult> LegBladwijzer(int preekId)
@@ -270,20 +269,23 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                     .HeleLeespreek h1, .HeleLeespreek h2, .HeleLeespreek h3 { font-size: 22px; margin: 10px 0px 0px 0px; padding: 0px; }
                                     .HeleLeespreek p { margin-top: 0px; margin-bottom: 0px; font-size: 12.5pt; font-family: Calibri, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif; text-align: justify; }
                         ");
-            var lezenEnZingen = string.Empty;
-            foreach (var plz in preek.PreekLezenEnZingens.OrderBy(x => x.Sortering))
+
+            if (preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek)
             {
-                lezenEnZingen += @"
+                var lezenEnZingen = string.Empty;
+                foreach (var plz in preek.PreekLezenEnZingens.OrderBy(x => x.Sortering))
+                {
+                    lezenEnZingen += @"
                             <tr>
                                 <td></td>
                                 <td class='ColSoort'>" + WebUtility.HtmlEncode(plz.Soort) + @" :</td>
                                 <td class='ColOmschrijving'>" + WebUtility.HtmlEncode(plz.Omschrijving) + @"</td>
                             </tr>";
-            }
+                }
 
-            epub.AddContent("leespreektekst.html", @"
+                epub.AddContent("leespreektekst.html", @"
                              <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>
-                                <html lang='"+ preek.Taal.Code + @"' xmlns='http://www.w3.org/1999/xhtml'>
+                                <html lang='" + preek.Taal.Code + @"' xmlns='http://www.w3.org/1999/xhtml'>
                                 <head>
                                     <meta http-equiv='content-type' content='text/html; charset=iso-8859-15'></meta>
                                     <link rel='stylesheet' type='text/css' href='Css/style.css'></link>
@@ -301,6 +303,30 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                                     </div>
                                 </body>
                                 </html>");
+            }
+
+            if (preek.PreekTypeId == (int)PreekTypeEnum.Meditatie)
+            {
+                epub.AddContent("meditatie.html", @"
+                             <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'>
+                                <html lang='" + preek.Taal.Code + @"' xmlns='http://www.w3.org/1999/xhtml'>
+                                <head>
+                                    <meta http-equiv='content-type' content='text/html; charset=iso-8859-15'></meta>
+                                    <link rel='stylesheet' type='text/css' href='Css/style.css'></link>
+                                    <title>" + WebUtility.HtmlEncode(preek.GetPreekTitel()) + @"</title>
+                                </head>
+                                <body>
+                                    <div class='LeespreekAfdruk'>
+                                        <div class='HeleLeespreek'>
+                                            <div class='Thema'>" + WebUtility.HtmlEncode(preek.ThemaOmschrijving) + @"</div>
+                                            <div class='Titel'>" + WebUtility.HtmlEncode(preek.GetPreekTitel()) + @"</div>
+                                            <div class='Subtitel'>" + string.Format("{0}", preek.GebeurtenisId.HasValue ? '(' + WebUtility.HtmlEncode(preek.Gebeurtenis.Omschrijving) + ')' : string.Empty) + @"</div>
+                                            " + preek.MeditatieTekst + @"
+                                        </div>
+                                    </div>
+                                </body>
+                                </html>");
+            }
 
             return File(epub.BuildToBytes(), "application/epub+zip ", filename + ".epub");
         }

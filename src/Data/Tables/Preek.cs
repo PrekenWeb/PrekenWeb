@@ -140,6 +140,9 @@ namespace Data.Tables
         [Display(Name = "LeesPreekTekst", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Html), Tooltip("LeesPreekTekstTooltip", ResourceType = typeof(Prekenweb.Resources.Resources))]
         public string LeesPreekTekst { get; set; }
 
+        [Display(Name = "MeditatieTekst", ResourceType = typeof(Prekenweb.Resources.Resources)), DataType(DataType.Html), Tooltip("MeditatieTekstTooltip", ResourceType = typeof(Prekenweb.Resources.Resources))]
+        public string MeditatieTekst { get; set; }
+
         [Display(Name = "Video", ResourceType = typeof(Prekenweb.Resources.Resources))]
         public string Video { get; set; }
 

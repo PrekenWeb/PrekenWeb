@@ -141,7 +141,9 @@ namespace Prekenweb.Website.Lib
                 case (int)PreekTypeEnum.Lezing:
                     return Resources.Resources.Lezing;
                 case (int)PreekTypeEnum.LeesPreek:
-                    return Resources.Resources.ReadingSermon;
+                    return Resources.Resources.Leespreken;
+                case (int)PreekTypeEnum.Meditatie:
+                    return Resources.Resources.Meditatie;
             }
         }
 

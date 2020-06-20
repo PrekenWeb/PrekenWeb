@@ -122,6 +122,7 @@ namespace Data.ViewModels
                     case (int)PreekTypeEnum.Lezing:
                         return "fa fa-volume-up";
                     case (int)PreekTypeEnum.LeesPreek:
+                    case (int)PreekTypeEnum.Meditatie:
                         return "fa fa-font";
                     default:
                         return "fa fa-arrow-right";
@@ -135,10 +136,11 @@ namespace Data.ViewModels
             {
                 switch (Preek.PreekTypeId)
                 {
+                    case (int)PreekTypeEnum.LeesPreek:
+                    case (int)PreekTypeEnum.Meditatie:
+                        return Prekenweb.Resources.Resources.Lees;
                     default:
                         return Prekenweb.Resources.Resources.Luister;
-                    case (int)PreekTypeEnum.LeesPreek:
-                        return Prekenweb.Resources.Resources.Lees;
                 }
             } 
         }
@@ -155,6 +157,8 @@ namespace Data.ViewModels
                         return Prekenweb.Resources.Resources.Lezing;
                     case (int)PreekTypeEnum.LeesPreek:
                         return Prekenweb.Resources.Resources.LeesPreek;
+                    case (int)PreekTypeEnum.Meditatie:
+                        return Prekenweb.Resources.Resources.Meditatie;
                 } 
                 return Preek.PreekType.Omschrijving;
             } 

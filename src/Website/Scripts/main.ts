@@ -271,6 +271,7 @@ module Prekenweb {
         public changePreekType(preekTypeId) {
             $(".LezingCategorieEditor").hide();
             $(".alleenBijLeespreek").hide();
+            $(".alleenBijMeditatie").hide();
             switch (preekTypeId) {
                 case "1": //preek
                     break;
@@ -280,9 +281,13 @@ module Prekenweb {
                 case "3": // leespreek
                     $(".alleenBijLeespreek").show();
                     break;
+                case "4": // meditatie
+                    $(".alleenBijMeditatie").show();
+                    break;
             }
             $(".tabs").tabs();
             $("#leespreekTab").hide();
+            $("#meditatieTab").hide();
         }
 
         public automatischeTekstenChanged() {

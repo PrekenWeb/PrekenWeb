@@ -10,9 +10,10 @@
             <option value="@Url.Action("Index", "Zoeken", new { Laatste = true, Area = "Website", AudioPreken = true, LeesPreken = true, Lezingen = true })">@Resources.NieuwePreken</option>
         </optgroup>
         <optgroup label="@Resources.PreekType">
-            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Area = "Website" })">@Resources.Preken</option>
-            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Area = "Website" })">@Resources.Leespreken</option>
-            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Area = "Website" })">@Resources.Lezingen</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Meditaties = false, Area = "Website" })">@Resources.Preken</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Meditaties = false, Area = "Website" })">@Resources.Leespreken</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Meditaties = false, Area = "Website" })">@Resources.Lezingen</option>
+            <option value="@Url.Action("Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = false, Meditaties = true, Area = "Website" })">@Resources.Meditaties</option>
         </optgroup>
         <optgroup label="@Resources.Bladeren">
             <option value="@Url.Action("Boek", "Zoeken", new { Area = "Website" })">@Resources.BijbelBoeken</option>
@@ -90,9 +91,10 @@
         <li>@Html.ActionLink(Resources.NieuwePreken, "Index", "Zoeken", new { Laatste = true, Area = "Website", AudioPreken = true, LeesPreken = true, Lezingen = true }, new { })</li>
     </ul>
     <ul class="hoofdmenuCol VerbergTelefoon DefaultMenu">
-        <li>@Html.IconActionLink(Resources.Preken, "Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Area = "Website" }, new { }, "music") </li>
-        <li>@Html.IconActionLink(Resources.Leespreken, "Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Area = "Website" }, new { }, "font") </li>
-        <li>@Html.IconActionLink(Resources.Lezingen, "Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Area = "Website" }, new { }, "volume-up") </li>
+        <li>@Html.IconActionLink(Resources.Preken, "Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = true, Meditaties = false, Area = "Website" }, new { }, "music") </li>
+        <li>@Html.IconActionLink(Resources.Leespreken, "Index", "Zoeken", new { LeesPreken = true, Lezingen = false, AudioPreken = false, Meditaties = false, Area = "Website" }, new { }, "font") </li>
+        <li>@Html.IconActionLink(Resources.Lezingen, "Index", "Zoeken", new { LeesPreken = false, Lezingen = true, AudioPreken = false, Meditaties = false, Area = "Website" }, new { }, "volume-up") </li>
+        <li>@Html.IconActionLink(Resources.Meditaties, "Index", "Zoeken", new { LeesPreken = false, Lezingen = false, AudioPreken = false, Meditaties = true, Area = "Website" }, new { }, "font") </li>
     </ul>
     <ul class="hoofdmenuCol hoofdmenuColSmall VerbergTelefoon DefaultMenu">
         <li>@Html.ActionLink(Resources.BijbelBoeken, "Boek", "Zoeken", new { Area = "Website" }, new { }) </li>

@@ -83,12 +83,13 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             viewModel.TaalId = TaalInfoHelper.FromRouteData(RouteData).Id;
             if (viewModel.Pagina == null) viewModel.Pagina = 1;
 
-            if (!viewModel.LeesPreken && !viewModel.AudioPreken && !viewModel.Lezingen)
+            if (!viewModel.LeesPreken && !viewModel.AudioPreken && !viewModel.Lezingen && !viewModel.Meditaties)
             {
                 // geen een preektype kiezen is allemaal krijgen! 
                 viewModel.LeesPreken = true;
                 viewModel.AudioPreken = true;
                 viewModel.Lezingen = true;
+                viewModel.Meditaties = true;
             }
 
             // Tekst velden vullen als er een ID mee komt

@@ -51,6 +51,7 @@ namespace Data.Tables
             Property(x => x.AangemaaktDoor).HasColumnName("AangemaaktDoor").IsOptional();
             Property(x => x.AangepastDoor).HasColumnName("AangepastDoor").IsOptional();
             Property(x => x.LeesPreekTekst).HasColumnName("LeesPreekTekst").IsOptional();
+            Property(x => x.MeditatieTekst).HasColumnName("MeditatieTekst").IsOptional();
 
             
             HasOptional(a => a.BoekHoofdstuk).WithMany(b => b.Preeks).HasForeignKey(c => c.BoekhoofdstukId); // FK_Preek_To_Boekhoofdstuk

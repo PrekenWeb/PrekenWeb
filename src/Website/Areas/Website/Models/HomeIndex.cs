@@ -19,36 +19,36 @@ namespace Prekenweb.Website.Areas.Website.Models
     {
         public bool LeesPreken { get; set; }
         public bool AudioPreken { get; set; }
-        public bool VideoPreken { get; set; }
         public bool Lezingen { get; set; }
+        public bool Meditaties { get; set; }
         public IList<ZoekresultaatItem> Preken { get; set; }
         
         public NieuwePreken()
         {
             LeesPreken = true;
             AudioPreken = true;
-            VideoPreken = true;
             Lezingen = true;
+            Meditaties = true;
         }
 
-        public static string GetKopLabel(bool leesPreken, bool audioPreken, bool lezingen, bool videoPreken)
+        public static string GetKopLabel(bool leesPreken, bool audioPreken, bool lezingen, bool meditaties)
         {
-            if (leesPreken && audioPreken && lezingen && videoPreken)
+            if (leesPreken && audioPreken && lezingen)
                 return Resources.Resources.NieuwePreken;
-            else if ((audioPreken || videoPreken) && leesPreken)
-                return videoPreken ? Resources.Resources.NieuweLeesEnAudioVideoPreken : Resources.Resources.NieuweLeesEnAudioPreken;
-            else if ((audioPreken || videoPreken) && lezingen)
-                return videoPreken? Resources.Resources.NieuweLezingenEnAudioVideoPreken : Resources.Resources.NieuweLezingenEnAudioPreken;
+            else if (audioPreken && leesPreken)
+                return Resources.Resources.NieuweLeesEnAudioPreken;
+            else if (audioPreken && lezingen)
+                return Resources.Resources.NieuweLezingenEnAudioPreken;
             else if (lezingen && leesPreken)
                 return Resources.Resources.NieuweLeesprekenEnLezingen;
             else if (leesPreken)
                 return Resources.Resources.NieuweLeespreken;
             else if (lezingen)
                 return Resources.Resources.NieuweLezingen;
-            else if (audioPreken && !videoPreken)
+            else if (audioPreken)
                 return Resources.Resources.NieuweAudioPreken;
-            else if (videoPreken)
-                return Resources.Resources.NieuweVideoPreken;
+            else if (meditaties)
+                return Resources.Resources.NieuweMeditaties;
             else
                 return Resources.Resources.NieuwePreken;
         }
