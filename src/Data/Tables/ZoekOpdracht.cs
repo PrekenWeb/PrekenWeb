@@ -15,6 +15,7 @@ namespace Data.Tables
 
         public bool LeesPreken { get; set; }
         public bool AudioPreken { get; set; }
+        public bool VideoPreken { get; set; }
         public bool Lezingen { get; set; }
         public bool Meditaties { get; set; }
 

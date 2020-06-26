@@ -265,6 +265,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\OwinStartup.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Website\Models\PreekZoeken.cs" />
     <Compile Include="Lib\HtmlHelpers\HtmlHelpers.DisplayWithLineBreaksFor.cs" />
     <Compile Include="Lib\TaalInfoHelper.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -328,7 +329,6 @@
     <Compile Include="Areas\Website\Models\TooltipBase.cs" />
     <Compile Include="Areas\Website\Models\UMoetInloggen.cs" />
     <Compile Include="Areas\Website\Models\HomeIndex.cs" />
-    <Compile Include="Areas\Website\Models\PreekBladeren.cs" />
     <Compile Include="Areas\Website\Models\VerbeteringDoorgeven.cs" />
     <Compile Include="Lib\Cache\IPrekenwebCache.cs" />
     <Compile Include="Lib\Cache\TestPrekenwebCache.cs" />

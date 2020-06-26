@@ -1080,4 +1080,7 @@
   <data name="NieuweMeditaties" xml:space="preserve">
     <value>New Readings</value>
   </data>
+  <data name="PreekMetVideo" xml:space="preserve">
+    <value>Sermon with video</value>
+  </data>
 </root>

@@ -40,6 +40,9 @@ namespace Prekenweb.Website.Areas.Website.Models
         [Display(Name = "Preken", ResourceType = typeof(Resources.Resources))]
         public bool AudioPreken { get; set; }
 
+        [Display(Name = "VideoPreken", ResourceType = typeof(Resources.Resources))]
+        public bool VideoPreken { get; set; }
+
         [Display(Name = "Lezingen", ResourceType = typeof(Resources.Resources))]
         public bool Lezingen { get; set; }
 

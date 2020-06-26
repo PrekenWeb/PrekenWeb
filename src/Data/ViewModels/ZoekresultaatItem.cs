@@ -118,12 +118,13 @@ namespace Data.ViewModels
                 switch (Preek.PreekTypeId)
                 {
                     case (int)PreekTypeEnum.Preek:
-                        return "fa fa-music";
+                        return string.IsNullOrWhiteSpace(this.Preek.Video) ? "fa fa-music" : "fa fa-video-camera";
                     case (int)PreekTypeEnum.Lezing:
                         return "fa fa-volume-up";
                     case (int)PreekTypeEnum.LeesPreek:
-                    case (int)PreekTypeEnum.Meditatie:
                         return "fa fa-font";
+                    case (int)PreekTypeEnum.Meditatie:
+                        return "fa fa-book";
                     default:
                         return "fa fa-arrow-right";
                 }
@@ -152,7 +153,7 @@ namespace Data.ViewModels
                 switch (Preek.PreekTypeId)
                 { 
                     case (int)PreekTypeEnum.Preek:
-                        return Prekenweb.Resources.Resources.Preek;
+                        return string.IsNullOrWhiteSpace(this.Preek.Video) ? Prekenweb.Resources.Resources.Preek : Prekenweb.Resources.Resources.PreekMetVideo;
                     case (int)PreekTypeEnum.Lezing:
                         return Prekenweb.Resources.Resources.Lezing;
                     case (int)PreekTypeEnum.LeesPreek:

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Data.Identity;
 using Data.Tables;
+using Data.ViewModels;
 
 namespace Data.Repositories
 {
@@ -15,7 +15,7 @@ namespace Data.Repositories
         {
         }
 
-        public IQueryable<Preek> GetPrekenQueryable(int taalId, IList<int> preekTypeIds)
+        public IQueryable<Preek> GetPrekenQueryable(int taalId, bool audioPreken, bool videoPreken, bool leesPreken, bool lezingen, bool meditaties)
         {
             return Context
                 .Preeks
@@ -29,7 +29,11 @@ namespace Data.Repositories
                 .Include(x => x.Serie)
                 .Where(p => p.TaalId == taalId
                             && p.Gepubliceerd
-                            && preekTypeIds.Contains(p.PreekTypeId));
+                            && ((audioPreken && p.PreekTypeId == (int)PreekTypeEnum.Preek && p.Video == null) ||
+                                (videoPreken && p.PreekTypeId == (int)PreekTypeEnum.Preek && p.Video != null) ||
+                                (leesPreken && p.PreekTypeId == (int)PreekTypeEnum.LeesPreek) ||
+                                (lezingen && p.PreekTypeId == (int)PreekTypeEnum.Lezing) ||
+                                (meditaties && p.PreekTypeId == (int)PreekTypeEnum.Meditatie)));
         }
 
         public async Task<Predikant> GetPredikantById(int predikantId, int taalId)

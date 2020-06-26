@@ -1080,4 +1080,7 @@
   <data name="NieuweMeditaties" xml:space="preserve">
     <value>Nieuwe meditaties</value>
   </data>
+  <data name="PreekMetVideo" xml:space="preserve">
+    <value>Preek met video</value>
+  </data>
 </root>

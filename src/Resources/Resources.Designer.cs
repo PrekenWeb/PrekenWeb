@@ -1951,6 +1951,15 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sermon with video.
+        /// </summary>
+        public static string PreekMetVideo {
+            get {
+                return ResourceManager.GetString("PreekMetVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sermon saved succesfully, click here to continue editing this sermon.
         /// </summary>
         public static string PreekOpgeslagen {

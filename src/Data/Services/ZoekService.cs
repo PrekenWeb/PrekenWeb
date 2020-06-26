@@ -31,7 +31,7 @@ namespace Data.Services
             if (tekstVeldenVullen)
                 zoekOpdracht = await TekstVeldenVullen(zoekOpdracht);
 
-            var query = _zoekenRepository.GetPrekenQueryable(zoekOpdracht.TaalId, zoekOpdracht.PreekTypeIds);
+            var query = _zoekenRepository.GetPrekenQueryable(zoekOpdracht.TaalId, zoekOpdracht.AudioPreken, zoekOpdracht.VideoPreken, zoekOpdracht.LeesPreken, zoekOpdracht.Lezingen, zoekOpdracht.Meditaties);
 
             query = whereToepassen(zoekOpdracht, query);
             query = zoektermToepassen(zoekOpdracht, query);

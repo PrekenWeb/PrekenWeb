@@ -43,10 +43,12 @@
     @Html.HiddenFor(m => m.SorteerVolgorde)
     @Html.HiddenFor(m => m.Pagina)
     @Html.HiddenFor(m => m.Geavanceerd)
-
+    
     <div class="PreekSoort">
         @Html.CheckBoxFor(m => m.AudioPreken, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
         @Html.LabelFor(m => m.AudioPreken)
+        @Html.CheckBoxFor(m => m.VideoPreken, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
+        @Html.LabelFor(m => m.VideoPreken)
         @Html.CheckBoxFor(m => m.LeesPreken, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
         @Html.LabelFor(m => m.LeesPreken)
         @Html.CheckBoxFor(m => m.Lezingen, new { onclick = "beforeSubmit(); document.FormZoeken.submit(); return false;" })
