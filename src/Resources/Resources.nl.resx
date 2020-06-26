@@ -1003,7 +1003,7 @@
     <value>Verder gaan waar u was gebleven?</value>
   </data>
   <data name="DatumPreekGepubliceerdTooltip" xml:space="preserve">
-    <value>De datum waarop deze preek is gepubliceerd: {0:dd-MM-yyyy}</value>
+    <value>Gepubliceerd op: {0:dd-MM-yyyy}</value>
   </data>
   <data name="GepubliceerdOp" xml:space="preserve">
     <value>Gepubliceerd op</value>

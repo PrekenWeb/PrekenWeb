@@ -538,7 +538,7 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The date on which this sermon has been published: {0:dd-MM-yyyy}.
+        ///   Looks up a localized string similar to Published on: {0:dd-MM-yyyy}.
         /// </summary>
         public static string DatumPreekGepubliceerdTooltip {
             get {

@@ -1006,7 +1006,7 @@
     <value>Subscribe</value>
   </data>
   <data name="DatumPreekGepubliceerdTooltip" xml:space="preserve">
-    <value>The date on which this sermon has been published: {0:dd-MM-yyyy}</value>
+    <value>Published on: {0:dd-MM-yyyy}</value>
   </data>
   <data name="GepubliceerdOp" xml:space="preserve">
     <value>Published on</value>
