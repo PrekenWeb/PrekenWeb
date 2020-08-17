@@ -2698,7 +2698,7 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Movie.
+        ///   Looks up a localized string similar to Video.
         /// </summary>
         public static string Video {
             get {
