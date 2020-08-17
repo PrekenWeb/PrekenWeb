@@ -1,21 +1,23 @@
-﻿using System.Diagnostics.CodeAnalysis;
-//using CaptchaMvc.Attributes;
-using Prekenweb.Website.Lib.ActionResults;
-using System;
-using System.Data.Entity;
-using System.Linq;
-using System.ServiceModel.Syndication;
-using System.Web.Mvc;
-using Data;
-using Data.Identity;
-using Data.Repositories;
-using Data.Tables;
-using Prekenweb.Website.Areas.Website.Models;
-using Prekenweb.Website.Lib;
-
-namespace Prekenweb.Website.Areas.Website.Controllers
+﻿namespace Prekenweb.Website.Areas.Website.Controllers
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.ServiceModel.Syndication;
+    using System.Web.Mvc;
+
     using BotDetect.Web.Mvc;
+
+    using Data;
+    using Data.Identity;
+    using Data.Repositories;
+    using Data.Tables;
+
+    using Prekenweb.Website.Areas.Website.Models;
+    using Prekenweb.Website.Lib;
+    using Prekenweb.Website.Lib.ActionResults;
+
+    using reCAPTCHA.MVC;
 
     public class PrekenwebController : Controller
     {
@@ -91,7 +93,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
+        [HttpPost]
+        [CaptchaValidator]
         public ActionResult Contact(Contact viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Contact", TaalInfoHelper.FromRouteData(RouteData).Id);
