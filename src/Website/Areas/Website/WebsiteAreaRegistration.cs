@@ -19,9 +19,6 @@ namespace Prekenweb.Website.Areas.Website
             context.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             context.Routes.IgnoreRoute("Gebruikers/*");
 
-            // BotDetect requests must not be routed
-            context.Routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
-
             context.MapRoute(
                 name: "iTunesRouting",
                 url: "{culture}/iTunes.xml",

@@ -6,8 +6,6 @@
     using System.ServiceModel.Syndication;
     using System.Web.Mvc;
 
-    using BotDetect.Web.Mvc;
-
     using Data;
     using Data.Identity;
     using Data.Repositories;
@@ -127,7 +125,8 @@
             });
         }
 
-        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
+        [HttpPost]
+        [CaptchaValidator]
         public ActionResult PreekToevoegen(PreekToevoegen viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("preek-toevoegen", TaalInfoHelper.FromRouteData(RouteData).Id);

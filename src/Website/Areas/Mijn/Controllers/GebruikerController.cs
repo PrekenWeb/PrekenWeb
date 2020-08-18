@@ -1,33 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Web.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using PrekenWeb.Security;
-using Prekenweb.Website.Areas.Mijn.Models;
-using Prekenweb.Website.Areas.Website.Controllers;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Data;
-using Data.Identity;
-using Data.Repositories;
-using Prekenweb.Website.Lib;
-using Prekenweb.Website.Lib.Identity;
-using Prekenweb.Website.Lib.MailTemplating;
-using TweetSharp;
-
-namespace Prekenweb.Website.Areas.Mijn.Controllers
+﻿namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
-    using BotDetect.Web.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data.Entity;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Http;
+    using System.Web.Mvc;
+
+    using Data;
+    using Data.Identity;
+    using Data.Repositories;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+
+    using Prekenweb.Website.Areas.Mijn.Models;
+    using Prekenweb.Website.Areas.Website.Controllers;
+    using Prekenweb.Website.Lib;
+    using Prekenweb.Website.Lib.Identity;
+    using Prekenweb.Website.Lib.MailTemplating;
+
+    using PrekenWeb.Security;
+    using reCAPTCHA.MVC;
+    using TweetSharp;
 
     public class GebruikerController : Controller
     {
@@ -115,7 +118,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             });
         }
 
-        [System.Web.Mvc.AllowAnonymous, System.Web.Mvc.HttpPost, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
+        [System.Web.Mvc.AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [CaptchaValidator]
         public async Task<ActionResult> Registreer(RegistreerViewModel viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id);

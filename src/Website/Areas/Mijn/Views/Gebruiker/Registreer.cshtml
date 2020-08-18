@@ -1,5 +1,5 @@
 ﻿@using Prekenweb.Website.Lib.HtmlHelpers
-@using BotDetect.Web.Mvc;
+@using reCAPTCHA.MVC
 
 @model RegistreerViewModel
 @{
@@ -40,12 +40,10 @@
     <div class="ColumnMax">
         <div class="field">
             <div class="label">&nbsp;</div>
-            @{ MvcCaptcha captcha = new MvcCaptcha("Captcha"); }
             <div class="value">
-                @Html.Captcha(captcha)<br/>
-                @Html.TextBox("CaptchaCode")
+                @Html.Recaptcha()
             </div>
-            <div class="validator">@Html.ValidationMessage("CaptchaCode")</div>
+            <div class="validator">@Html.ValidationMessage("ReCaptcha")</div>
         </div>
     </div>
     <p class="clear"></p>

@@ -1,32 +1,36 @@
-﻿using System.Globalization;
-using System.IO;
-//using CaptchaMvc.Attributes;
-using Microsoft.Reporting.WebForms;
-using PrekenWeb.Security;
-using Prekenweb.Website.Lib.Cache;
-using SharpEpub;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Prekenweb.Website.Areas.Website.Models;
-using Prekenweb.Website.Lib;
-using VikingErik.Mvc.ResumingActionResults;
-using ContentDisposition = System.Net.Mime.ContentDisposition;
-using System.Configuration;
-using Data;
-using Data.Identity;
-using Data.Repositories;
-using Data.Tables;
-using Data.ViewModels;
-
-namespace Prekenweb.Website.Areas.Website.Controllers
+﻿namespace Prekenweb.Website.Areas.Website.Controllers
 {
-    using BotDetect.Web.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data.Entity;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using Data;
+    using Data.Identity;
+    using Data.Repositories;
+    using Data.Tables;
+    using Data.ViewModels;
+
+    using Microsoft.Reporting.WebForms;
+
+    using Prekenweb.Website.Areas.Website.Models;
+    using Prekenweb.Website.Lib;
+    using Prekenweb.Website.Lib.Cache;
+
+    using PrekenWeb.Security;
+    using reCAPTCHA.MVC;
+    using SharpEpub;
+
+    using VikingErik.Mvc.ResumingActionResults;
+
+    using ContentDisposition = System.Net.Mime.ContentDisposition;
 
     public class PreekController : Controller
     {
@@ -371,7 +375,8 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             });
         }
 
-        [HttpPost/*, CaptchaVerify("Captcha is not valid")*/, CaptchaValidation("CaptchaCode", "Captcha", "Incorrecte CAPTCHA code.")]
+        [HttpPost]
+        [CaptchaValidator]
         public ActionResult GegevensAanvullen(GegevensAanvullen viewModel)
         {
             viewModel.TekstPagina = _tekstRepository.GetTekstPagina("gegevens-aanvullen", TaalInfoHelper.FromRouteData(RouteData).Id);
