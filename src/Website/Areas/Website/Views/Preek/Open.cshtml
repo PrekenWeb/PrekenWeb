@@ -331,7 +331,7 @@
             <div class="ColumnMax">
                 <div class="field">
                     <div class="label">@Html.LabelFor(m => m.Preek.Informatie)</div>
-                    <div class="value">@Html.DisplayWithLineBreaksFor(m => m.Preek.Informatie)</div>
+                    <div class="value">@Html.Raw(Model.Preek.Informatie)</div>
                 </div>
             </div>
         }

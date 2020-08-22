@@ -42,3 +42,19 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 };
+
+CKEDITOR.on('dialogDefinition', function (ev) {
+	try {
+		var dialogName = ev.data.name;
+		var dialogDefinition = ev.data.definition;
+
+		if (dialogName == 'link') {
+			var informationTab = dialogDefinition.getContents('target');
+			var targetField = informationTab.get('linkTargetType');
+
+			targetField['default'] = '_blank';
+		}
+	} catch (exception) {
+		console.log('Error ' + ev.message);
+	}
+});
