@@ -55,8 +55,9 @@ else
             <div class="tooltip">@Html.ToolTipFor(m => m.Aanvulling)</div>
             <div class="validator">@Html.ValidationMessageFor(m => m.Aanvulling)</div>
         </div>
-         <div class="field">
-             <div class="label">&nbsp;</div>
+        <div class="field">
+            <div class="label">&nbsp;</div>
+            <div class="value">
                 @Html.Recaptcha()
             </div>
             <div class="validator">@Html.ValidationMessage("ReCaptcha")</div>
