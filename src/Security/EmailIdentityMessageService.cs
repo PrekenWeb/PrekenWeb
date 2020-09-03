@@ -1,12 +1,13 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Business.Helpers;
-using Microsoft.AspNet.Identity;
+﻿namespace PrekenWeb.Security
+{
+    using System.Diagnostics;
+    using System.Net.Mail;
+    using System.Threading.Tasks;
 
-namespace PrekenWeb.Security
-{ 
+    using Business.Helpers;
+
+    using Microsoft.AspNet.Identity;
+
     public class EmailIdentityMessageService : IIdentityMessageService
     {
         public async Task SendAsync(IdentityMessage message)
