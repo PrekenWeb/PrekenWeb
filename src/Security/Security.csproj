@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ProjectGuid>{E725F7FD-732E-47AA-889E-DF9067790C9E}</ProjectGuid>
     <RootNamespace>PrekenWeb.Security</RootNamespace>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <UserSecretsId>b99b4b8b-c054-47ea-9b67-23e399b58aaa</UserSecretsId>
   </PropertyGroup>
   

@@ -3,7 +3,7 @@
     <ProjectGuid>{6794167A-6625-4BE8-90CF-2473B698ADEA}</ProjectGuid>
     <RootNamespace>Prekenweb.Resources</RootNamespace>
     <AssemblyName>Prekenweb.Resources</AssemblyName>
-    <TargetFramework>net472</TargetFramework>    
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
