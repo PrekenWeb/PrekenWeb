@@ -1947,19 +1947,19 @@ body .ui-widget textarea {
   margin-bottom: 50px;
   background-color: white;
   padding: 10px 10px 10px 15px;
-  border-top: 1px dotted #1274ba;
+  border: 1px dotted #1274ba;
   clear: left;
   overflow: auto;
 }
 .Preek section h2 {
   position: absolute;
   margin-top: -41px;
-  margin-left: -15px;
+  margin-left: -16px;
   padding: 5px 25px 5px 15px;
   background-color: white;
   font-size: 16px;
   border-radius: 0px 5px 0px 0px;
-  border-top: 1px dotted #1274ba;
+  border: 1px dotted #1274ba;
 }
 .Preek #zoekresultaten a {
   text-decoration: none;
