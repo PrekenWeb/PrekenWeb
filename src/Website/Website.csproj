@@ -439,7 +439,6 @@
     <Content Include="Content\Images\apple-touch-startup-image-768x1004.png" />
     <Content Include="Content\Images\background-2 - Copy.png" />
     <Content Include="Content\Images\background-2.png" />
-    <Content Include="Content\Images\background.png" />
     <Content Include="Content\Images\banner1.png" />
     <Content Include="Content\Images\banner2.png" />
     <Content Include="Content\Images\bg_trans.png" />
