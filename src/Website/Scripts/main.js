@@ -30,13 +30,13 @@ var Prekenweb;
             this.preekBezochtChecksTonen = function (preekIds) {
                 if (!$.cookie('Token'))
                     return;
-                var apiRootUrl = prekenweb.apiRootUrl.replace(/\/$/, '');
+                var pw = _this;
                 $.ajax({
                     type: 'GET',
-                    url: apiRootUrl + '/api/Gebruiker/GeopendePreken',
+                    url: pw.rootUrl + pw.taal + '/mijn/Gebruiker/GeopendePreken',
                     data: { preekIds: preekIds },
+                    traditional: true,
                     headers: { "Authorization": "Bearer " + $.cookie('Token') },
-                    //dataType: 'json',
                     contentType: 'application/json',
                     success: function (preekCookies) {
                         for (var i = 0; i < preekCookies.length; i++) {

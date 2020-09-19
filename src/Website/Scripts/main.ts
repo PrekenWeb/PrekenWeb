@@ -525,17 +525,17 @@ module Prekenweb {
             });
         }
 
-        public preekBezochtChecksTonen = (preekIds: string) => {
+        public preekBezochtChecksTonen = (preekIds: number[]) => {
             if (!$.cookie('Token')) return;
+            var pw = this;
 
-            let apiRootUrl = prekenweb.apiRootUrl.replace(/\/$/, '');
 
             $.ajax({
                 type: 'GET',
-                url: apiRootUrl + '/api/Gebruiker/GeopendePreken',
+                url: pw.rootUrl + pw.taal + '/mijn/Gebruiker/GeopendePreken',
                 data: { preekIds: preekIds },
+                traditional: true,
                 headers: { "Authorization": "Bearer " + $.cookie('Token') },
-                //dataType: 'json',
                 contentType: 'application/json',
                 success: preekCookies => {
                     for (var i = 0; i < preekCookies.length; i++) {

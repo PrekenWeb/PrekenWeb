@@ -17,11 +17,11 @@
     using Data;
     using Data.Identity;
     using Data.Repositories;
-
+    using Data.Tables;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-
+    using Newtonsoft.Json;
     using Prekenweb.Website.Areas.Mijn.Models;
     using Prekenweb.Website.Areas.Website.Controllers;
     using Prekenweb.Website.Lib;
@@ -116,6 +116,18 @@
             {
                 TekstPagina = _tekstRepository.GetTekstPagina("Registreer", TaalInfoHelper.FromRouteData(RouteData).Id)
             });
+        }
+
+        [System.Web.Mvc.Authorize]
+        [System.Web.Mvc.HttpGet]
+        public async Task<ActionResult> GeopendePreken(int[] preekIds)
+        {
+            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
+            var data = await _gebruikerRepository.GetPreekCookies(gebruikerId, preekIds);
+
+            JsonSerializerSettings jss = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+            var jsonResult = JsonConvert.SerializeObject(data, jss);
+            return Content(jsonResult, "application/json");
         }
 
         [System.Web.Mvc.AllowAnonymous]
