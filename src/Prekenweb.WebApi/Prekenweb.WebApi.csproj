@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Prekenweb.WebApi</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Prekenweb</Authors>
+    <Company>Prekenweb</Company>
   </PropertyGroup>
 
   <ItemGroup>
