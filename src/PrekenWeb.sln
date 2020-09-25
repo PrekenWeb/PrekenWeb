@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrekenWeb.Data.Migrations",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Shared", "0. Shared", "{D69F1E63-165F-49D0-BF42-36787AB3CB8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prekenweb.WebApi", "Prekenweb.WebApi\Prekenweb.WebApi.csproj", "{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrekenWeb.WebApi", "Prekenweb.WebApi\PrekenWeb.WebApi.csproj", "{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
