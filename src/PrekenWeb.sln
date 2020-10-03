@@ -36,8 +36,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrekenWeb.Data.Migrations",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Shared", "0. Shared", "{D69F1E63-165F-49D0-BF42-36787AB3CB8E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrekenWeb.WebApi", "Prekenweb.WebApi\PrekenWeb.WebApi.csproj", "{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,10 +75,6 @@ Global
 		{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E01941FF-1E11-4567-A079-FDA6D1F3CD0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,7 +88,6 @@ Global
 		{B8047269-0DAA-4480-91DC-AE368A78BED2} = {23D6B314-E038-409F-A379-3B2921201676}
 		{D84A4224-7219-4A66-9EF0-DFB39EDD99B9} = {23D6B314-E038-409F-A379-3B2921201676}
 		{E01941FF-1E11-4567-A079-FDA6D1F3CD0C} = {EB360433-4585-4F45-A251-CF3D433BEBF7}
-		{E2B8DE96-E8DF-4833-B7B4-AB8792DB42E1} = {06022A00-A71A-484A-B922-AA2ED9F4FA32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A7CE37A-ABCD-445E-A048-3C05663FDB2D}
