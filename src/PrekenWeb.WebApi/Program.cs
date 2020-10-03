@@ -1,4 +1,4 @@
-namespace Prekenweb.WebApi
+namespace PrekenWeb.WebApi
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

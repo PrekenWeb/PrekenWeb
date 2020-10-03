@@ -1,6 +1,6 @@
 using System;
 
-namespace Prekenweb.WebApi
+namespace PrekenWeb.WebApi
 {
     public class WeatherForecast
     {
