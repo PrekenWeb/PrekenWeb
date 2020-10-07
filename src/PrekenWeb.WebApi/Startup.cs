@@ -6,11 +6,13 @@ namespace PrekenWeb.WebApi
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
 
     using PrekenWeb.WebApi.Helpers;
+    using PrekenWeb.WebApi.Models;
 
     public class Startup
     {
@@ -21,8 +23,10 @@ namespace PrekenWeb.WebApi
             this.configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PrekenWebContext dbContext)
         {
+            dbContext.Database.Migrate();
+
             app.UseRouting();
 
             // global cors policy
@@ -41,6 +45,8 @@ namespace PrekenWeb.WebApi
         {
             services.AddCors();
             services.AddControllers();
+            services.AddDbContext<PrekenWebContext>(options =>
+                options.UseSqlServer(this.configuration.GetConnectionString("PrekenWebConnection")));
 
             // configure strongly typed settings objects
             var appSettingsSection = this.configuration.GetSection(nameof(AppSettings));
