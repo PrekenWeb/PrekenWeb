@@ -1,8 +1,6 @@
 # PrekenWeb / SermonWeb
 Deze repository bevat de broncode van prekenweb.nl en sermonweb.nl.
 
-[![Build Status](https://dev.azure.com/prekenweb/Website/_apis/build/status/PrekenWeb.Website?branchName=master)](https://dev.azure.com/prekenweb/Website/_build/latest?definitionId=4&branchName=master)
-
 # Bijdrage leveren
 We staan open voor bijdrages, voel vrij om code aan te bieden, een issue aan te maken of in contact met ons te komen over een goed idee! Het is verstandig om, voordat je ergens aan begint, even met ons af te stemmen of we open staan voor het specifieke idee. Daarnaast rekenen we er wel op dat mensen die een bijdrage willen leveren voldoende kennis hebben van de hieronder genoemde technieken.
 
