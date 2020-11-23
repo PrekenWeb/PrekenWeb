@@ -108,23 +108,14 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         {
             using (var image = GetImage(geuploadeAfbeeldingLocatie))
             {
-                if (image.Height < 340 || image.Width < 1024)
-                {
-                    //image.Dispose();
-                    if (System.IO.File.Exists(Server.MapPath(geuploadeAfbeeldingLocatie))) System.IO.File.Delete(Server.MapPath(geuploadeAfbeeldingLocatie));
-                    if (isNieuw)
-                    {
-                        _context.Afbeeldings.Remove(_context.Afbeeldings.Single(a => a.Id == afbeeldingId));
-                        _context.SaveChanges();
-                    }
-                    ModelState.AddModelError("Bestand", "Afbeelding heeft een te lage resolutie!");
-                    return;
-                }
-
                 try
                 {
+                    if (image.Height >= 340 && image.Width >= 1024)
+                    {
+                        MaakHomepageImage(image, afbeeldingId);
+                    }
+
                     MaakThumbnailImage(image, afbeeldingId);
-                    MaakHomepageImage(image, afbeeldingId);
                 }
                 catch (Exception ex)
                 {
