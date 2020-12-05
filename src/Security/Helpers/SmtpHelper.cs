@@ -1,9 +1,8 @@
-﻿using System.Configuration;
-using System.Net;
-using System.Net.Mail;
-
-namespace Business.Helpers
+﻿namespace PrekenWeb.Security.Helpers
 {
+    using System.Configuration;
+    using System.Net;
+    using System.Net.Mail;
 
     public static class SmtpHelper
     {
@@ -17,7 +16,7 @@ namespace Business.Helpers
 
             var smtpClient = new SmtpClient(host, port)
             {
-                EnableSsl = port != 25 
+                EnableSsl = port != 25
             };
 
             if (string.IsNullOrEmpty(userName))

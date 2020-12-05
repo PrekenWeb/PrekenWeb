@@ -1,22 +1,27 @@
-using System.Configuration;
-using System.Web;
-using System.Web.Mvc;
-using Data;
-using Data.Identity;
-using Data.Repositories;
-using Ninject;
-using Ninject.Web.Common;
-using Ninject.Web.Mvc.FilterBindingSyntax;
-using PrekenWeb.Security;
-using Microsoft.AspNet.Identity.Owin;
-using Prekenweb.Website.Lib.Cache;
-using Prekenweb.Website.Lib.Identity;
-using Prekenweb.Website.Mapping.Profiles;
-using AutoMapper;
-using Business.Mapping;
-
 namespace Prekenweb.Website
 {
+    using System.Configuration;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using AutoMapper;
+
+    using Data;
+    using Data.Identity;
+    using Data.Repositories;
+
+    using Microsoft.AspNet.Identity.Owin;
+
+    using Ninject;
+    using Ninject.Web.Common;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
+
+    using Prekenweb.Website.Lib.Cache;
+    using Prekenweb.Website.Lib.Identity;
+    using Prekenweb.Website.Mapping.Profiles;
+
+    using PrekenWeb.Security;
+
     public static class NinjectWebCommon
     {
         public static IKernel CreateKernel()
@@ -39,12 +44,6 @@ namespace Prekenweb.Website
             kernel.Bind<IPrekenwebContext<Gebruiker>>().To<PrekenwebContext>();//.InRequestScope();
             kernel.Bind<IHuidigeGebruiker>().To<HuidigeGebruiker>().InRequestScope();
 
-            //kernel
-            //    .BindFilter<AddTokenCookieFilter>(FilterScope.Controller, 0)
-            //    .WhenControllerHas<AddTokenCookieAttribute>()
-            //    .WithConstructorArgument("audienceId", ConfigurationManager.AppSettings["AudienceId"])
-            //    .WithConstructorArgument("audienceSecret", ConfigurationManager.AppSettings["AudienceSecret"]);
-
             kernel
                 .BindFilter<AddTokenCookieFilter>(FilterScope.Action, 0)
                 .WhenActionMethodHas<AddTokenCookieAttribute>()
@@ -61,11 +60,16 @@ namespace Prekenweb.Website
             kernel.Bind<IPrekenWebUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<PrekenWebUserManager>()).InRequestScope();
 
             // AutoMapper mapping profiles
-            kernel.Bind<Profile>().To<WebsiteAutoMapperProfile>().InSingletonScope();
-
-            // Register AutoMapper (needs Profile registrations, hence registered last)
-            kernel.Bind<MapperConfiguration>().To<IocInjectedMapperConfiguration>().InSingletonScope();
-            kernel.Bind<IMapper>().ToMethod(context => context.Kernel.Get<MapperConfiguration>().CreateMapper()).InSingletonScope();
+            kernel.Bind<IMapper>().ToMethod(context =>
+            {
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.AddProfile<WebsiteAutoMapperProfile>();
+                    // tell automapper to use ninject when creating value converters and resolvers
+                    cfg.ConstructServicesUsing(t => kernel.Get(t));
+                });
+                return config.CreateMapper();
+            }).InSingletonScope();
         }
     }
 }

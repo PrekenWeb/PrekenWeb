@@ -21,21 +21,18 @@ namespace Prekenweb.Website.Areas.Website.Controllers
     {
         private readonly IPrekenwebContext<Gebruiker> _context;
         private readonly IZoekenRepository _zoekenRepository;
-        private readonly IGebruikerRepository _gebruikerRepository;
         private readonly IHuidigeGebruiker _huidigeGebruiker;
         private readonly IPrekenWebUserManager _prekenWebUserManager;
         private readonly IMapper _mapper;
 
         public ZoekenController(IPrekenwebContext<Gebruiker> context,
                                  IZoekenRepository zoekenRepository,
-                                 IGebruikerRepository gebruikerRepository,
                                  IHuidigeGebruiker huidigeGebruiker,
                                  IPrekenWebUserManager prekenWebUserManager,
                                  IMapper mapper)
         {
             _context = context;
             _zoekenRepository = zoekenRepository;
-            _gebruikerRepository = gebruikerRepository;
             _huidigeGebruiker = huidigeGebruiker;
             _prekenWebUserManager = prekenWebUserManager;
             _mapper = mapper;
@@ -102,7 +99,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
             var zoekOpdracht = _mapper.Map<PreekZoeken, ZoekOpdracht>(viewModel);
             zoekOpdracht.GebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
 
-            var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);
+            var zoekService = new ZoekService(_zoekenRepository);
             viewModel.Zoekresultaat = await zoekService.ZoekOpdrachtUitvoeren(zoekOpdracht, (viewModel.Pagina.Value * pagesize) - pagesize, pagesize, true);
 
             // Waardes uit de uitgevoerde zoekopdracht weer terugkopieren naar het viewmodel

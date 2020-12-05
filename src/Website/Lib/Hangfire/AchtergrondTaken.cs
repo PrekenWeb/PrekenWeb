@@ -1,21 +1,24 @@
-﻿using System;
-using System.Configuration;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Web.Hosting;
-using Business.Helpers;
-using Data;
-using Hangfire;
-using log4net;
-using NAudio.FileFormats.Mp3;
-using NAudio.Wave;
-
-namespace Prekenweb.Website.Lib.Hangfire
+﻿namespace Prekenweb.Website.Lib.Hangfire
 {
+    using System;
+    using System.Configuration;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Net.Mail;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Web.Hosting;
+
+    using Data;
+    using global::Hangfire;
+    using log4net;
+
+    using NAudio.FileFormats.Mp3;
+    using NAudio.Wave;
+
+    using PrekenWeb.Security.Helpers;
+
     public class AchtergrondTaken
     {
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

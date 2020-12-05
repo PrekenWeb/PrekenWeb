@@ -10,12 +10,10 @@ namespace Data.Services
     public class ZoekService
     {
         private readonly IZoekenRepository _zoekenRepository;
-        private readonly IGebruikerRepository _gebruikerRepository;
 
-        public ZoekService(IZoekenRepository zoekenRepository, IGebruikerRepository gebruikerRepository)
+        public ZoekService(IZoekenRepository zoekenRepository)
         {
             _zoekenRepository = zoekenRepository;
-            _gebruikerRepository = gebruikerRepository;
         }
 
         /// <summary>

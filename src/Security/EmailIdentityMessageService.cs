@@ -4,9 +4,9 @@
     using System.Net.Mail;
     using System.Threading.Tasks;
 
-    using Business.Helpers;
-
     using Microsoft.AspNet.Identity;
+
+    using PrekenWeb.Security.Helpers;
 
     public class EmailIdentityMessageService : IIdentityMessageService
     {

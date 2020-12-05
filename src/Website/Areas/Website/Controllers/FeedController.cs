@@ -23,15 +23,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
     {
         private readonly IPrekenRepository _prekenRepository;
         private readonly IZoekenRepository _zoekenRepository;
-        private readonly IGebruikerRepository _gebruikerRepository;
 
         public FeedController(IPrekenRepository prekenRepository,
-                              IZoekenRepository zoekenRepository,
-                              IGebruikerRepository gebruikerRepository)
+                              IZoekenRepository zoekenRepository)
         {
             _prekenRepository = prekenRepository;
             _zoekenRepository = zoekenRepository;
-            _gebruikerRepository = gebruikerRepository;
 
         }
 
@@ -277,7 +274,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                 writer.WriteElementString("link", "https://www.prekenweb.nl/");
                 writer.WriteEndElement();
 
-                var zoekService = new ZoekService(_zoekenRepository, _gebruikerRepository);
+                var zoekService = new ZoekService(_zoekenRepository);
                 var zoekResultaat = await zoekService.ZoekOpdrachtUitvoeren(zoekOpdracht);
 
                 foreach (var zoekResultaatItem in zoekResultaat.Items.Where(x => x.Preek.Bestandsnaam != null))
