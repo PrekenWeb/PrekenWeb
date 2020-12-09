@@ -31,9 +31,9 @@ namespace Data.Services
 
             var query = _zoekenRepository.GetPrekenQueryable(zoekOpdracht.TaalId, zoekOpdracht.AudioPreken, zoekOpdracht.VideoPreken, zoekOpdracht.LeesPreken, zoekOpdracht.Lezingen, zoekOpdracht.Meditaties);
 
-            query = whereToepassen(zoekOpdracht, query);
-            query = zoektermToepassen(zoekOpdracht, query);
-            query = sorteringToepassen(zoekOpdracht, query);
+            query = WhereToepassen(zoekOpdracht, query);
+            query = ZoektermToepassen(zoekOpdracht, query);
+            query = SorteringToepassen(zoekOpdracht, query);
 
             var zoekResultaat = new Zoekresultaat
             {
@@ -56,7 +56,7 @@ namespace Data.Services
             return zoekResultaat;
         }
 
-        private IQueryable<Preek> sorteringToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
+        private IQueryable<Preek> SorteringToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
         {
             switch (zoekOpdracht.SorteerOp)
             {
@@ -114,38 +114,39 @@ namespace Data.Services
             return query;
         }
 
-        private IQueryable<Preek> zoektermToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
+        private IQueryable<Preek> ZoektermToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
         {
-            if (!string.IsNullOrEmpty(zoekOpdracht.Zoekterm)) query = query.Where(p =>
-                        p.ThemaOmschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.Punt1.Contains(zoekOpdracht.Zoekterm)
-                        || p.Punt2.Contains(zoekOpdracht.Zoekterm)
-                        || p.Punt3.Contains(zoekOpdracht.Zoekterm)
-                        || p.Punt4.Contains(zoekOpdracht.Zoekterm)
-                        || p.Punt5.Contains(zoekOpdracht.Zoekterm)
-                        || p.BijbeltekstOmschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.Predikant.Achternaam.Contains(zoekOpdracht.Zoekterm)
-                        || p.BoekHoofdstuk.Omschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.BoekHoofdstuk.Boek.Boeknaam.Contains(zoekOpdracht.Zoekterm)
-                        || p.Gebeurtenis.Omschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.Serie.Omschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.LezingOmschrijving.Contains(zoekOpdracht.Zoekterm)
-                        || p.Informatie.Contains(zoekOpdracht.Zoekterm)
+            var zoekterm = zoekOpdracht.Zoekterm?.Trim();
+            if (!string.IsNullOrEmpty(zoekterm)) query = query.Where(p =>
+                        p.ThemaOmschrijving.Contains(zoekterm)
+                        || p.Punt1.Contains(zoekterm)
+                        || p.Punt2.Contains(zoekterm)
+                        || p.Punt3.Contains(zoekterm)
+                        || p.Punt4.Contains(zoekterm)
+                        || p.Punt5.Contains(zoekterm)
+                        || p.BijbeltekstOmschrijving.Contains(zoekterm)
+                        || p.Predikant.Achternaam.Contains(zoekterm)
+                        || p.BoekHoofdstuk.Omschrijving.Contains(zoekterm)
+                        || p.BoekHoofdstuk.Boek.Boeknaam.Contains(zoekterm)
+                        || p.Gebeurtenis.Omschrijving.Contains(zoekterm)
+                        || p.Serie.Omschrijving.Contains(zoekterm)
+                        || p.LezingOmschrijving.Contains(zoekterm)
+                        || p.Informatie.Contains(zoekterm)
                         );
             return query;
         }
 
-        private IQueryable<Preek> whereToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
+        private IQueryable<Preek> WhereToepassen(ZoekOpdracht zoekOpdracht, IQueryable<Preek> query)
         {
             // todo: dit is een bug. als een beheerder een predikant opvoert met een trailing/leading-space dan werkt de predikant pagina niet meer (https://www.prekenweb.nl/nl/Mijn/Inbox/Tonen/5975)
-            if (!string.IsNullOrEmpty(zoekOpdracht.Predikant)) query = query.Where(p => (((p.Predikant.Titels ?? "") + " " + (p.Predikant.Voorletters ?? "")).Trim() + " " + ((p.Predikant.Tussenvoegsels ?? "") + " " + (p.Predikant.Achternaam ?? "")).Trim()).Contains(zoekOpdracht.Predikant));
+            if (!string.IsNullOrEmpty(zoekOpdracht.Predikant)) query = query.Where(p => (((p.Predikant.Titels ?? "") + " " + (p.Predikant.Voorletters ?? "")).Trim() + " " + ((p.Predikant.Tussenvoegsels ?? "") + " " + (p.Predikant.Achternaam ?? "")).Trim()).Contains(zoekOpdracht.Predikant.Trim()));
             
-            if (!string.IsNullOrEmpty(zoekOpdracht.BoekHoofdstuk)) query = query.Where(p => p.BoekHoofdstuk.Omschrijving.Contains(zoekOpdracht.BoekHoofdstuk));
-            if (!string.IsNullOrEmpty(zoekOpdracht.Boek)) query = query.Where(p => p.BoekHoofdstuk.Boek.Boeknaam.Contains(zoekOpdracht.Boek));
-            if (!string.IsNullOrEmpty(zoekOpdracht.Gebeurtenis)) query = query.Where(p => p.Gebeurtenis.Omschrijving.Contains(zoekOpdracht.Gebeurtenis));
-            if (!string.IsNullOrEmpty(zoekOpdracht.Gemeente)) query = query.Where(p => p.Gemeente.Omschrijving.Contains(zoekOpdracht.Gemeente));
-            if (!string.IsNullOrEmpty(zoekOpdracht.LezingCategorie)) query = query.Where(p => p.LezingCategorie.Omschrijving.Contains(zoekOpdracht.LezingCategorie));
-            if (!string.IsNullOrEmpty(zoekOpdracht.Serie)) query = query.Where(p => p.Serie.Omschrijving.Contains(zoekOpdracht.Serie));
+            if (!string.IsNullOrEmpty(zoekOpdracht.BoekHoofdstuk)) query = query.Where(p => p.BoekHoofdstuk.Omschrijving.Contains(zoekOpdracht.BoekHoofdstuk.Trim()));
+            if (!string.IsNullOrEmpty(zoekOpdracht.Boek)) query = query.Where(p => p.BoekHoofdstuk.Boek.Boeknaam.Contains(zoekOpdracht.Boek.Trim()));
+            if (!string.IsNullOrEmpty(zoekOpdracht.Gebeurtenis)) query = query.Where(p => p.Gebeurtenis.Omschrijving.Contains(zoekOpdracht.Gebeurtenis.Trim()));
+            if (!string.IsNullOrEmpty(zoekOpdracht.Gemeente)) query = query.Where(p => p.Gemeente.Omschrijving.Contains(zoekOpdracht.Gemeente.Trim()));
+            if (!string.IsNullOrEmpty(zoekOpdracht.LezingCategorie)) query = query.Where(p => p.LezingCategorie.Omschrijving.Contains(zoekOpdracht.LezingCategorie.Trim()));
+            if (!string.IsNullOrEmpty(zoekOpdracht.Serie)) query = query.Where(p => p.Serie.Omschrijving.Contains(zoekOpdracht.Serie.Trim()));
             if (zoekOpdracht.Hoofdstuk.HasValue) query = query.Where(p => zoekOpdracht.Hoofdstuk.HasValue && p.Hoofdstuk == zoekOpdracht.Hoofdstuk);
             return query;
         }
