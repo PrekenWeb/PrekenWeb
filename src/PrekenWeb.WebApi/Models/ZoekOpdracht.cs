@@ -9,7 +9,9 @@ namespace PrekenWeb.WebApi.Models
         public Guid PubliekeSleutel { get; set; }
         public bool LeesPreken { get; set; }
         public bool AudioPreken { get; set; }
+        public bool VideoPreken { get; set; }
         public bool Lezingen { get; set; }
+        public bool Meditaties { get; set; }
         public int? PredikantId { get; set; }
         public string Predikant { get; set; }
         public int? BoekHoofdstukId { get; set; }
