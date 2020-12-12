@@ -13,7 +13,6 @@ namespace Data
         IDbSet<Boek> Boeks { get; set; }
         IDbSet<BoekHoofdstuk> BoekHoofdstuks { get; set; }
         IDbSet<BoekHoofdstukTekst> BoekHoofdstukTeksts { get; set; }
-        IDbSet<ElmahError> ElmahErrors { get; set; }
         IDbSet<Gebeurtenis> Gebeurtenis { get; set; }
         IDbSet<Gemeente> Gemeentes { get; set; }
         IDbSet<Inbox> Inboxes { get; set; }

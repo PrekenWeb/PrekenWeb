@@ -16,7 +16,6 @@ namespace Data
         public IDbSet<Boek> Boeks { get; set; }
         public IDbSet<BoekHoofdstuk> BoekHoofdstuks { get; set; }
         public IDbSet<BoekHoofdstukTekst> BoekHoofdstukTeksts { get; set; }
-        public IDbSet<ElmahError> ElmahErrors { get; set; }
         public IDbSet<Gebeurtenis> Gebeurtenis { get; set; }
         public IDbSet<Gemeente> Gemeentes { get; set; }
         public IDbSet<Inbox> Inboxes { get; set; }
@@ -81,7 +80,6 @@ namespace Data
             modelBuilder.Configurations.Add(new BoekConfiguration());
             modelBuilder.Configurations.Add(new BoekHoofdstukConfiguration());
             modelBuilder.Configurations.Add(new BoekHoofdstukTekstConfiguration());
-            modelBuilder.Configurations.Add(new ElmahErrorConfiguration());
             modelBuilder.Configurations.Add(new GebeurtenisConfiguration());
             modelBuilder.Configurations.Add(new GebruikerConfiguration());
             modelBuilder.Configurations.Add(new GemeenteConfiguration());
@@ -110,7 +108,6 @@ namespace Data
             modelBuilder.Configurations.Add(new BoekConfiguration(schema));
             modelBuilder.Configurations.Add(new BoekHoofdstukConfiguration(schema));
             modelBuilder.Configurations.Add(new BoekHoofdstukTekstConfiguration(schema));
-            modelBuilder.Configurations.Add(new ElmahErrorConfiguration(schema));
             modelBuilder.Configurations.Add(new GebeurtenisConfiguration(schema));
             modelBuilder.Configurations.Add(new GebruikerConfiguration(schema));
             modelBuilder.Configurations.Add(new GemeenteConfiguration(schema));

@@ -19,7 +19,6 @@ namespace Website.Tests
             Boeks = new InMemoryDbSet<Boek>();
             BoekHoofdstuks = new InMemoryDbSet<BoekHoofdstuk>();
             BoekHoofdstukTeksts = new InMemoryDbSet<BoekHoofdstukTekst>();
-            ElmahErrors = new InMemoryDbSet<ElmahError>();
             Gebeurtenis = new InMemoryDbSet<Gebeurtenis>();
             Gemeentes = new InMemoryDbSet<Gemeente>();
             Inboxes = new InMemoryDbSet<Inbox>();
@@ -47,7 +46,6 @@ namespace Website.Tests
         public IDbSet<Boek> Boeks { get; set; }
         public IDbSet<BoekHoofdstuk> BoekHoofdstuks { get; set; }
         public IDbSet<BoekHoofdstukTekst> BoekHoofdstukTeksts { get; set; }
-        public IDbSet<ElmahError> ElmahErrors { get; set; }
         public IDbSet<Gebeurtenis> Gebeurtenis { get; set; }
         public IDbSet<Gemeente> Gemeentes { get; set; }
         public IDbSet<Inbox> Inboxes { get; set; }

@@ -1,33 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
-using System.Web.Http;
-using Elmah;
-using System.Web.Mvc;
-using Prekenweb.Website.Lib;
-using System.Linq;
-
-namespace Prekenweb.Website
+﻿namespace Prekenweb.Website
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading;
+    using System.Web.Mvc;
+
+    using Prekenweb.Website.Lib;
+
     public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
             filters.Add(new CultureFilter());
-        }
-
-        public class HandleErrorAttribute : System.Web.Mvc.HandleErrorAttribute
-        {
-            public override void OnException(ExceptionContext context)
-            {
-                base.OnException(context);
-                if (!context.ExceptionHandled)
-                    return;
-                var httpContext = context.HttpContext.ApplicationInstance.Context;
-                var signal = ErrorSignal.FromContext(httpContext);
-                signal.Raise(context.Exception, httpContext);
-            }
         }
 
         public class CultureFilter : IAuthorizationFilter
@@ -44,6 +29,4 @@ namespace Prekenweb.Website
             }
         }
     }
-
-
 }

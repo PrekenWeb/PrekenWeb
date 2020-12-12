@@ -176,13 +176,6 @@
                 }
                 switch (format)
                 {
-                    case "PDF":
-                        {
-                            Response.AppendHeader("Content-Disposition", new ContentDisposition { FileName = filename + ".pdf", Inline = inline.Value }.ToString());
-
-                            return File(getGeneratedLeespreek(preek, "PDF"), "application/pdf");
-                        }
-                    case "Word": return File(getGeneratedLeespreek(preek, "Word"), "application/msword", filename + ".doc");
                     case "HTML": return Content(preek.PreekTypeId == (int)PreekTypeEnum.LeesPreek ? preek.LeesPreekTekst : preek.MeditatieTekst);
                     case "EPUB": return GenerateEpub(preek, filename);
 
@@ -333,32 +326,6 @@
             }
 
             return File(epub.BuildToBytes(), "application/epub+zip ", filename + ".epub");
-        }
-
-        // Wordt vooralsnog niet meer gebruikt
-        private byte[] getGeneratedLeespreek(Preek preek, string format)
-        {
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType;
-            string encoding;
-            string extension;
-
-            var viewer = new ReportViewer();
-            viewer.ProcessingMode = ProcessingMode.Local;
-            viewer.LocalReport.ReportPath = "Content/Leespreek.rdlc";
-            viewer.LocalReport.SetParameters(new List<ReportParameter>
-            {
-                new ReportParameter("Thema",preek.ThemaOmschrijving),
-                new ReportParameter("Subtitel", preek.GebeurtenisId.HasValue ? string.Format("({0})", preek.Gebeurtenis.Omschrijving) : string.Empty),
-                new ReportParameter("PreekId",preek.Id.ToString(CultureInfo.InvariantCulture)),
-                new ReportParameter("Titel",preek.GetPreekTitel())
-            });
-
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("Preek", new List<Preek> { preek }));
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("LezenEnZingen", preek.PreekLezenEnZingens));
-
-            return viewer.LocalReport.Render(format, null, out mimeType, out encoding, out extension, out streamIds, out warnings);
         }
 
         public async Task<ActionResult> GegevensAanvullen(int preekId)
