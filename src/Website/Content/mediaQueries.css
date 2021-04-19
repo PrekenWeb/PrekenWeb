@@ -333,13 +333,6 @@
 }
 /*  extra groot ----------- */
 @media only screen and (min-width : 1290px) {
-    body {
-        background-image: url(images/background-2.png);
-        background-repeat: repeat;
-        background-position: center center;
-        background-attachment: fixed;
-    }
-
         body #container {
             width: 70%;
             max-width: 1400px;
