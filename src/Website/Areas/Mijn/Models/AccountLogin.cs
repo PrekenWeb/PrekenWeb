@@ -20,7 +20,5 @@ namespace Prekenweb.Website.Areas.Mijn.Models
         public bool Onthouden { get; set; }
 
         public TekstPagina TekstPagina { get; set; }
-
-        public bool SocialLogin { get; set; }
     }
 }

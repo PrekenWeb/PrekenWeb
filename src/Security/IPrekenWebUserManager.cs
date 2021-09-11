@@ -30,10 +30,6 @@ namespace PrekenWeb.Security
         Task<IdentityResult> UpdateSecurityStampAsync(int userId);
         Task<string> GeneratePasswordResetTokenAsync(int userId);
         Task<IdentityResult> ResetPasswordAsync(int userId, string token, string newPassword);
-        Task<Gebruiker> FindAsync(UserLoginInfo login);
-        Task<IdentityResult> RemoveLoginAsync(int userId, UserLoginInfo login);
-        Task<IdentityResult> AddLoginAsync(int userId, UserLoginInfo login);
-        Task<IList<UserLoginInfo>> GetLoginsAsync(int userId);
         Task<IdentityResult> AddClaimAsync(int userId, Claim claim);
         Task<IdentityResult> RemoveClaimAsync(int userId, Claim claim);
         Task<IList<Claim>> GetClaimsAsync(int userId);

@@ -73,8 +73,7 @@
             {
                 ReturnUrl = returnUrl,
                 Onthouden = true,
-                TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id),
-                SocialLogin = TaalInfoHelper.FromRouteData(RouteData).Naam == "nl" // nl
+                TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id)
             });
         }
 
@@ -282,8 +281,7 @@
                 Gebruiker = gebruiker,
                 Wachtwoord = string.Empty,
                 WachtwoordCheck = string.Empty,
-                SelectedRoles = (await _prekenWebUserManager.GetRolesAsync(gebruiker.Id)).ToArray(),
-                Logins = await _prekenWebUserManager.GetLoginsAsync(gebruiker.Id)
+                SelectedRoles = (await _prekenWebUserManager.GetRolesAsync(gebruiker.Id)).ToArray()
             });
         }
 
@@ -292,8 +290,6 @@
         {
             // jezelf aanpassen of de rol hebben om anderen aan te passen
             if (viewModel.Gebruiker.Id != await _huidigeGebruiker.GetId(_prekenWebUserManager, User) && !User.IsInRole("Gebruikers")) throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Unauthorized));
-
-            viewModel.Logins = await _prekenWebUserManager.GetLoginsAsync(viewModel.Gebruiker.Id);
 
             if (!viewModel.WachtwoordAanpassen)
             {
@@ -393,8 +389,7 @@
                 Gebruiker = new Gebruiker(),
                 Wachtwoord = string.Empty,
                 WachtwoordCheck = string.Empty,
-                SelectedRoles = new string[0],
-                Logins = new List<UserLoginInfo>()
+                SelectedRoles = new string[0]
             });
         }
 
@@ -404,8 +399,6 @@
             if (viewModel.WachtwoordCheck != viewModel.Wachtwoord) ModelState.AddModelError("WachtwoordCheck", Resources.Resources.TweeVerschillendeWachtwoord);
             if (await _prekenWebUserManager.FindByEmailAsync(viewModel.Gebruiker.Email) != null) ModelState.AddModelError("Gebruiker.Email", Resources.Resources.EmailNietBeschikbaar);
             if (await _prekenWebUserManager.FindByNameAsync(viewModel.Gebruiker.UserName) != null) ModelState.AddModelError("Gebruiker.UserName", Resources.Resources.GebruikersnaamNietBeschikbaar);
-
-            viewModel.Logins = new List<UserLoginInfo>();
 
             if (!ModelState.IsValid) return View(viewModel);
 
@@ -531,180 +524,6 @@
             return View(_tekstRepository.GetTekstPagina("ResetWachtwoordBevestiging", TaalInfoHelper.FromRouteData(RouteData).Id));
         }
 
-        #endregion
-
-        #region External Logins
-        public async Task<ActionResult> ExterneLoginVerwijderen(string loginProvider, string providerKey)
-        {
-            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
-            IdentityResult result = await _prekenWebUserManager.RemoveLoginAsync(gebruikerId, new UserLoginInfo(loginProvider, providerKey));
-
-            // hook, is vooralsnog niet anders :(
-            await _prekenwebContext.Database.ExecuteSqlCommandAsync("delete from AspNetUserLogins where UserId = {0} or Gebruiker_Id = {0}", gebruikerId);
-
-            if (!result.Succeeded)
-            {
-                throw new Exception(result.Errors.First());
-            }
-            return RedirectToAction("Bewerk", new { Id = gebruikerId });
-        }
-
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExterneLogin(string provider, string returnUrl)
-        {
-            return new ChallengeResult(provider, Url.Action("ExterneLoginCallback", "Gebruiker", new { ReturnUrl = returnUrl }));
-        }
-
-        [System.Web.Mvc.AllowAnonymous]
-        public async Task<ActionResult> ExterneLoginCallback(string returnUrl)
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null) return RedirectToAction("Inloggen");
-
-            // Bestaande gebruiker
-            var user = await _prekenWebUserManager.FindAsync(loginInfo.Login);
-            if (user != null)
-            {
-                await SignInAsync(user, true);
-                return RedirectAfterLogin(returnUrl, true);
-            }
-
-            // Nieuwe (externe) login of nog niet bestaande gebruiker
-            try
-            {
-                var externalIdentity = await AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
-
-                var emailClaim = externalIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
-                if (emailClaim == null || string.IsNullOrWhiteSpace(emailClaim.Value)) emailClaim = externalIdentity.Claims.FirstOrDefault(x => x.Type.Contains("email"));
-
-                var nameClaim = externalIdentity.Claims.FirstOrDefault(c => c.Type == "urn:facebook:name");
-
-                #region Ongebruikte velden
-                //var email = ext.Claims.First(x => x.Type.Contains("emailaddress")).Value;
-                //var firstName = ext.Claims.FirstOrDefault(c => c.Type == "urn:facebook:first_name").Value;
-                //var lastName = ext.Claims.FirstOrDefault(c => c.Type == "urn:facebook:last_name").Value;
-                //var gender = ext.Claims.FirstOrDefault(c => c.Type == "urn:facebook:gender").Value;
-                //var link = ext.Claims.FirstOrDefault(c => c.Type == "urn:facebook:link").Value;
-                //var locale = ext.Claims.FirstOrDefault(c => c.Type == "urn:facebook:locale").Value;
-                #endregion
-
-                if (emailClaim != null && nameClaim != null)
-                {
-                    return await CreateExternalLogin(loginInfo, nameClaim.Value, emailClaim.Value, returnUrl);
-                }
-
-                // Get Fullname from Twitter (email never available via Twitter API's)
-                var accessTokenClaim = externalIdentity.Claims.FirstOrDefault(x => x.Type == "urn:tokens:twitter:accesstoken");
-                var accessTokenSecretClaim = externalIdentity.Claims.FirstOrDefault(x => x.Type == "urn:tokens:twitter:accesstokensecret");
-
-                if (accessTokenClaim != null && accessTokenSecretClaim != null)
-                {
-                    var service = new TwitterService(ConfigurationManager.AppSettings["TwitterCustomerKey"], ConfigurationManager.AppSettings["TwitterCustomerSecret"]);
-                    service.AuthenticateWith(accessTokenClaim.Value, accessTokenSecretClaim.Value);
-                    var twitterUserProfile = service.GetUserProfile(new GetUserProfileOptions());
-                    return View("ExterneLoginBevestiging", new ExterneLoginBevestigingViewModel { /*Email = twitterUserProfile.ScreenName,*/ Naam = twitterUserProfile.Name, ReturnUrl = returnUrl });
-                }
-
-                var email = emailClaim != null ? emailClaim.Value : string.Empty;
-                var naam = nameClaim != null ? nameClaim.Value : string.Empty;
-
-                // Laat gebruiker zijn naam/email aanvullen
-                return View("ExterneLoginBevestiging", new ExterneLoginBevestigingViewModel { Email = email, Naam = naam, ReturnUrl = returnUrl });
-            }
-            catch
-            {
-                throw new Exception(Resources.Resources.ExterneLoginFout);
-            }
-        }
-
-        private async Task<ActionResult> CreateExternalLogin(ExternalLoginInfo loginInfo, string name, string email, string returnUrl)
-        {
-            var user = await _prekenWebUserManager.FindByNameAsync(email) ?? await _prekenWebUserManager.FindByEmailAsync(email);
-
-            if (user != null)
-            {
-                // Bestaande gebruiker zonder ExterneLogin
-                await _prekenWebUserManager.AddLoginAsync(user.Id, loginInfo.Login);
-                await SignInAsync(user, true);
-                return RedirectAfterLogin(returnUrl, user.Roles.Any());
-            }
-
-            user = new Gebruiker
-            {
-                UserName = email,
-                Email = email,
-                Naam = name,
-                LaatstIngelogd = DateTime.Now,
-                EmailConfirmed = true
-            };
-            var idenityCreateUserResult = await _prekenWebUserManager.CreateAsync(user);
-
-            if (idenityCreateUserResult.Succeeded)
-            {
-                var idenityAddLoginResult = await _prekenWebUserManager.AddLoginAsync(user.Id, loginInfo.Login);
-                if (idenityAddLoginResult.Succeeded)
-                {
-                    await SignInAsync(user, true);
-
-                    // Nieuwe gebruiker, direct abonneren op nieuwsbrief
-                    try
-                    {
-                        var standaaardNieuwsbrief = (await _mailingRepository.GetAlleMailings()).First(x => x.TaalId == TaalInfoHelper.FromRouteData(RouteData).Id);
-                        await _mailingRepository.NieuwsbriefToevoegenAanGebruiker(user.Id, standaaardNieuwsbrief.Id);
-                        MailChimpController.Subscribe(user.Email, user.Naam, standaaardNieuwsbrief.MailChimpId);
-                    }
-                    catch
-                    {
-                        Debug.Write("MailChimpController doet request naar MailChimp, laat Registreer actie hier niet op falen");
-                    }
-
-                    return RedirectAfterLogin(returnUrl, user.Roles.Any());
-                }
-                AddIdentityResultErrorsToModelState(idenityAddLoginResult);
-            }
-            AddIdentityResultErrorsToModelState(idenityCreateUserResult);
-
-            return View("Inloggen", new AccountInloggen { Gebruikersnaam = email, ReturnUrl = returnUrl, TekstPagina = _tekstRepository.GetTekstPagina("Inloggen", TaalInfoHelper.FromRouteData(RouteData).Id) });
-        }
-
-        [System.Web.Mvc.HttpPost]
-        [System.Web.Mvc.AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExterneLoginBevestiging(ExterneLoginBevestigingViewModel model)
-        {
-            if (User.Identity.IsAuthenticated) return RedirectToAction("Bewerk", new { Id = await _huidigeGebruiker.GetId(_prekenWebUserManager, User) });
-            if (await _prekenWebUserManager.FindByEmailAsync(model.Email) != null) ModelState.AddModelError("Email", string.Format(Resources.Resources.EmailNietBeschikbaar, Url.Action("WachtwoordVergeten", new { gebruikersnaam = model.Email })));
-            if (await _prekenWebUserManager.FindByNameAsync(model.Naam) != null) ModelState.AddModelError("Naam", Resources.Resources.GebruikersnaamNietBeschikbaar);
-
-            if (!ModelState.IsValid) return View(model);
-
-            var externLoginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (externLoginInfo == null) throw new InvalidOperationException();
-
-            return await CreateExternalLogin(externLoginInfo, model.Naam, model.Email, model.ReturnUrl);
-        }
-
-        public async Task<ActionResult> ExterneLoginToevoegen(string provider)
-        {
-            return new ChallengeResult(provider, Url.Action("ExterneLoginToevoegenCallBack", "Gebruiker"), await _huidigeGebruiker.GetId(_prekenWebUserManager, User));
-        }
-
-        public async Task<ActionResult> ExterneLoginToevoegenCallBack()
-        {
-            var gebruikerId = await _huidigeGebruiker.GetId(_prekenWebUserManager, User);
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync("XsrfId", string.Format("{0}", gebruikerId));
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Bewerk", new { Id = gebruikerId });
-            }
-            var identityAddLoginResult = await _prekenWebUserManager.AddLoginAsync(gebruikerId, loginInfo.Login);
-
-            if (!identityAddLoginResult.Succeeded) throw new Exception(identityAddLoginResult.Errors.First());
-
-            return RedirectToAction("Bewerk", new { Id = gebruikerId });
-        }
         #endregion
     }
 }

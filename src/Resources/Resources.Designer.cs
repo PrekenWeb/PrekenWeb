@@ -745,15 +745,6 @@ namespace Prekenweb.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not create a login, please try again.
-        /// </summary>
-        public static string ExterneLoginFout {
-            get {
-                return ResourceManager.GetString("ExterneLoginFout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to SermonWeb.
         /// </summary>
         public static string FacebookLink {
@@ -1290,33 +1281,6 @@ namespace Prekenweb.Resources {
         public static string LogIn {
             get {
                 return ResourceManager.GetString("LogIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to I you don&apos;t have a social login, login using your SermonWeb.org account.
-        /// </summary>
-        public static string LoginHeeftUGeenSocial {
-            get {
-                return ResourceManager.GetString("LoginHeeftUGeenSocial", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Login using Facebook or Twitter so you dont need a SermonWeb.org account.
-        /// </summary>
-        public static string LoginSocial {
-            get {
-                return ResourceManager.GetString("LoginSocial", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Login using.
-        /// </summary>
-        public static string LoginVia {
-            get {
-                return ResourceManager.GetString("LoginVia", resourceCulture);
             }
         }
         

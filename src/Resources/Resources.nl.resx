@@ -963,9 +963,6 @@
   <data name="WachtwoordVerplicht" xml:space="preserve">
     <value>Wachtwoord is verplicht</value>
   </data>
-  <data name="ExterneLoginFout" xml:space="preserve">
-    <value>Kon u niet inloggen, probeer het opnieuw!</value>
-  </data>
   <data name="EmailOnbevestigd" xml:space="preserve">
     <value>Emailadres is (nog) niet bevestigd</value>
   </data>
@@ -974,15 +971,6 @@
   </data>
   <data name="GebruikersnaamEmailOnbekend" xml:space="preserve">
     <value>Onbekende gebruikersnaam of emailadres</value>
-  </data>
-  <data name="LoginHeeftUGeenSocial" xml:space="preserve">
-    <value>Heeft u geen login bij Facebook of Twitter log in dan in met uw PrekenWeb account.</value>
-  </data>
-  <data name="LoginSocial" xml:space="preserve">
-    <value>U kunt inloggen via Facebook of Twitter zodat u niet een eigen account hoeft aan te maken bij PrekenWeb.</value>
-  </data>
-  <data name="LoginVia" xml:space="preserve">
-    <value>Inloggen via</value>
   </data>
   <data name="TweeVerschillendeWachtwoord" xml:space="preserve">
     <value>Twee verschillende wachtwoorden</value>

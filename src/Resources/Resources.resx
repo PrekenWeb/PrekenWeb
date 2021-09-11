@@ -963,9 +963,6 @@
   <data name="WachtwoordVerplicht" xml:space="preserve">
     <value>Password is required</value>
   </data>
-  <data name="ExterneLoginFout" xml:space="preserve">
-    <value>Could not create a login, please try again</value>
-  </data>
   <data name="EmailOnbevestigd" xml:space="preserve">
     <value>Email address not yet confirmed</value>
   </data>
@@ -974,15 +971,6 @@
   </data>
   <data name="GebruikersnaamEmailOnbekend" xml:space="preserve">
     <value>Username or email unkown</value>
-  </data>
-  <data name="LoginHeeftUGeenSocial" xml:space="preserve">
-    <value>I you don't have a social login, login using your SermonWeb.org account</value>
-  </data>
-  <data name="LoginSocial" xml:space="preserve">
-    <value>Login using Facebook or Twitter so you dont need a SermonWeb.org account</value>
-  </data>
-  <data name="LoginVia" xml:space="preserve">
-    <value>Login using</value>
   </data>
   <data name="TweeVerschillendeWachtwoord" xml:space="preserve">
     <value>Passwords are differnt</value>

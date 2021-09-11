@@ -11,24 +11,6 @@
 {
     <b>Voor de opgevraagde pagina moet u inloggen, dat kunt u hieronder doen.</b><br />
 }
-@if (Model.SocialLogin)
-{
-    <p>@Resources.LoginSocial</p>
-
-    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-
-    using (Html.BeginForm("ExterneLogin", "Gebruiker", new { Model.ReturnUrl }))
-    {
-        @Html.AntiForgeryToken()
-        foreach (AuthenticationDescription p in loginProviders)
-        {
-            <button type="submit" class="IconKnop" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"><span class="fa fa-@p.AuthenticationType.ToLower()"></span> @Resources.LoginVia @p.AuthenticationType</button>
-        }
-    }
-
-    <p class="clear" style="height:3px;"> </p>
-    <p>@Resources.LoginHeeftUGeenSocial</p>
-}
 @using (Html.BeginForm("Inloggen", "Gebruiker", FormMethod.Post, new { name = "InloggenForm" }))
 {
     @Html.HiddenFor(m => m.ReturnUrl);

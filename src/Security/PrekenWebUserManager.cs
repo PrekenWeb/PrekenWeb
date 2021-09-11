@@ -1,12 +1,13 @@
-﻿using Data;
-using Data.Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
+﻿namespace PrekenWeb.Security
+{
+    using Data;
+    using Data.Identity;
 
-namespace PrekenWeb.Security
-{ 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+
     public class PrekenWebUserManager : UserManager<Gebruiker, int>, IPrekenWebUserManager
     {
         public PrekenWebUserManager(IUserStore<Gebruiker, int> store)

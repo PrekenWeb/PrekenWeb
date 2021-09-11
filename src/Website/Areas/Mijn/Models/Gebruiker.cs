@@ -63,7 +63,5 @@ namespace Prekenweb.Website.Areas.Mijn.Models
 
             return returnValues;
         }
-
-        public IList<UserLoginInfo> Logins { get; set; }
     }
 }

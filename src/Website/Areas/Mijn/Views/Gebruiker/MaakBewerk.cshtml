@@ -79,23 +79,5 @@
         <div class="tooltip">@Html.ToolTipFor(m => m.SelectedNieuwsbrieven)</div>
         <div class="validator">@Html.ValidationMessageFor(m => m.SelectedNieuwsbrieven)</div>
     </div>
-    @foreach (var account in Model.Logins)
-    {
-        <div class="field">
-            <div class="label"><label>@account.LoginProvider</label></div>
-            <div class="value">@Html.ActionLink("Verbreek verbinding", "ExterneLoginVerwijderen", new { loginProvider = account.LoginProvider, providerKey = account.ProviderKey }) </div>
-        </div>
-    }
-    @{
-        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-
-        foreach (AuthenticationDescription p in loginProviders.Where(x => !Model.Logins.Any(y => y.LoginProvider == x.AuthenticationType)))
-        {
-            <div class="field">
-                <div class="label"><label>@p.Caption</label></div>
-                <div class="value">@Html.ActionLink("Verbinding maken", "ExterneLoginToevoegen", new { provider = p.AuthenticationType }) </div>
-            </div>
-        }
-    }
 </div>
 

@@ -278,7 +278,6 @@
     <Compile Include="Areas\Mijn\Controllers\GebruikerController.cs" />
     <Compile Include="Areas\Mijn\Controllers\HomeController.cs" />
     <Compile Include="Areas\Mijn\Models\Afbeelding.cs" />
-    <Compile Include="Areas\Mijn\Models\ExterneLoginBevestiging.cs" />
     <Compile Include="Areas\Mijn\Models\Gebeurtenis.cs" />
     <Compile Include="Areas\Mijn\Models\Gebruiker.cs" />
     <Compile Include="Areas\Mijn\Models\Gemeente.cs" />
@@ -858,7 +857,6 @@
     <Content Include="Areas\Mijn\Views\Bladwijzer\MetBladwijzer.cshtml" />
     <Content Include="Areas\Website\Views\Prekenweb\UMoetInloggen.cshtml" />
     <Content Include="Areas\Mijn\Views\ZoekOpdracht\OpgeslagenZoekOpdrachten.cshtml" />
-    <Content Include="Areas\Mijn\Views\Gebruiker\ExterneLoginBevestiging.cshtml" />
     <Content Include="App_Data\IZ.WebFileManager.dll" />
     <Content Include="Website.nuspec" />
     <Content Include="Scripts\jquery-2.2.2.min.map" />
