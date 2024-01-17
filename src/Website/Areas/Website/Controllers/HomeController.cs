@@ -13,6 +13,7 @@ using Prekenweb.Website.Areas.Website.Models;
 using Prekenweb.Website.Lib;
 using Prekenweb.Website.Lib.Cache;
 using Prekenweb.Website.Lib.Identity;
+using System.IO;
 
 namespace Prekenweb.Website.Areas.Website.Controllers
 {
@@ -85,12 +86,12 @@ namespace Prekenweb.Website.Areas.Website.Controllers
         [OutputCache(Duration = 1209600, VaryByParam = "Id", Location = OutputCacheLocation.ServerAndClient)] // 14 dagen
         public ActionResult HomepageImage(int id)
         {
-            var afbeelding = _spotlightRepository.GetAfbeelding(id);
-            var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
-            var filename = Server.MapPath(string.Format(@"{0}\Homepage_{1}.jpg", rootFolder, afbeelding.Id));
             try
             {
-                return File(System.IO.File.ReadAllBytes(filename), "image/jpeg", afbeelding.Bestandsnaam);
+                var afbeelding = _spotlightRepository.GetAfbeelding(id);
+                var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
+                var bytes = BlobStorageHelper.Content(Path.Combine(rootFolder, $"Homepage_{afbeelding.Id}.jpg"));
+                return File(bytes, "image/jpeg", afbeelding.Bestandsnaam);
             }
             catch //(FileNotFoundException ex)
             {

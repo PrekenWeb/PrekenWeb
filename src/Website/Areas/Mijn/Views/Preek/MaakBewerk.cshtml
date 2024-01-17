@@ -101,7 +101,7 @@
                 <div class="label">@Html.LabelFor(x => x.Bestandsnaam)</div>
                 <div class="value">
                     <span style="overflow: hidden; display: block;">
-                        <a href="@Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], Model.Bestandsnaam))">@Model.Bestandsnaam</a>
+                        <a href="@Url.ContentAbsolute(string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ConfigurationManager.AppSettings["PrekenFolder"], Model.Bestandsnaam))">@Model.Bestandsnaam</a>
                     </span>
                     <input name="Bestand" id="Bestand" type="file" style="border: 0; background-color: transparent;" />
                 </div>
@@ -113,7 +113,7 @@
                 <div class="label">@Html.LabelFor(x => x.SourceFileName)</div>
                 <div class="value">
                     <span style="overflow: hidden; display: block;">
-                        <a href="@Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["LectureSourcesFolder"], Model.SourceFileName))">@Model.SourceFileName</a>
+                        <a href="@Url.ContentAbsolute(string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ConfigurationManager.AppSettings["LectureSourcesFolder"], Model.SourceFileName))">@Model.SourceFileName</a>
                     </span>
                     <input name="Source" id="Source" type="file" style="border: 0; background-color: transparent;" />
                 </div>

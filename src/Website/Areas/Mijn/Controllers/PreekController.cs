@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Azure.Storage.Blobs;
 using Data;
 using Data.Identity;
 using Data.Tables;
@@ -82,7 +83,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             try
             {
-                viewModel.Bestandsnaam = HandleUpload(bestand, viewModel.Id, ConfigurationManager.AppSettings["PrekenFolder"], viewModel.Bestandsnaam);
+                viewModel.Bestandsnaam = BlobStorageHelper.HandleSermonUpload(bestand, viewModel.Id, ConfigurationManager.AppSettings["PrekenFolder"], viewModel.Bestandsnaam);
             }
             catch (Exception ex)
             {
@@ -93,7 +94,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             try
             {
                 if (source != null)
-                    viewModel.SourceFileName = HandleUpload(source, viewModel.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
+                    viewModel.SourceFileName = BlobStorageHelper.HandleSermonUpload(source, viewModel.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
             }
             catch (Exception ex)
             {
@@ -112,37 +113,6 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             if (ModelState.IsValid) return RedirectToAction("NogTePubliceren", new { fromPreekId = preek.Id });
 
             return View(preek);
-        }
-
-        private string HandleUpload(HttpPostedFileBase uploadedPreek, int preekId, string rootFolder, string oudeBestandsnaam)
-        {
-            var nieuweBestandsnaam = oudeBestandsnaam;
-            if (uploadedPreek == null || uploadedPreek.ContentLength <= 0) return nieuweBestandsnaam;
-
-            nieuweBestandsnaam = $"{Path.GetFileNameWithoutExtension(uploadedPreek.FileName)}_{preekId}{Path.GetExtension(uploadedPreek.FileName)}";
-
-            if (nieuweBestandsnaam == oudeBestandsnaam || System.IO.File.Exists($"{rootFolder}{nieuweBestandsnaam}"))
-                nieuweBestandsnaam = $"{Path.GetFileNameWithoutExtension(uploadedPreek.FileName)}_{preekId}_{DateTime.Now:yyyy-MM-dd_hh-mm-ss}{Path.GetExtension(uploadedPreek.FileName)}";
-
-            try
-            {
-                uploadedPreek.SaveAs(Server.MapPath($"{rootFolder}{nieuweBestandsnaam}"));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Could not save sermon: {ex.Message}");
-            }
-
-            try
-            {
-                if (!string.IsNullOrEmpty(oudeBestandsnaam))
-                    System.IO.File.Delete(Server.MapPath($"{rootFolder}{oudeBestandsnaam}"));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error deleting existing file, it was probably already deleted. New file uploaded successfully: {ex.Message}");
-            }
-            return nieuweBestandsnaam;
         }
 
         #endregion
@@ -201,7 +171,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 try
                 {
                     if (bestand != null)
-                        viewModel.Bestandsnaam = HandleUpload(bestand, preek.Id, ConfigurationManager.AppSettings["PrekenFolder"], bestand.FileName);
+                        viewModel.Bestandsnaam = BlobStorageHelper.HandleSermonUpload(bestand, preek.Id, ConfigurationManager.AppSettings["PrekenFolder"], bestand.FileName);
                 }
                 catch (Exception ex)
                 {
@@ -212,7 +182,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 try
                 {
                     if (source != null)
-                        viewModel.SourceFileName = HandleUpload(source, preek.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
+                        viewModel.SourceFileName = BlobStorageHelper.HandleSermonUpload(source, preek.Id, ConfigurationManager.AppSettings["LectureSourcesFolder"], source.FileName);
                 }
                 catch (Exception ex)
                 {
@@ -343,9 +313,11 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             var preek = _context.Preeks.Single(p => p.Id == id);
             try
             {
-                var lectureFilename = Server.MapPath($"{ConfigurationManager.AppSettings["PrekenFolder"]}{preek.Bestandsnaam}");
-                if (!string.IsNullOrEmpty(preek.Bestandsnaam) && System.IO.File.Exists(lectureFilename))
-                    System.IO.File.Delete(lectureFilename);
+                var lectureFilename = Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam);
+                if (!string.IsNullOrEmpty(preek.Bestandsnaam) && BlobStorageHelper.Exists(lectureFilename))
+                {
+                    BlobStorageHelper.DeleteIfExists(lectureFilename);
+                }
             }
             catch
             {
@@ -354,9 +326,11 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             try
             {
-                var lectureSourceFilename = Server.MapPath($"{ConfigurationManager.AppSettings["LectureSourcesFolder"]}{preek.SourceFileName}");
-                if (!string.IsNullOrEmpty(preek.SourceFileName) && System.IO.File.Exists(lectureSourceFilename))
-                    System.IO.File.Delete(lectureSourceFilename);
+                var lectureSourceFilename = Path.Combine(ConfigurationManager.AppSettings["LectureSourcesFolder"], preek.SourceFileName);
+                if (!string.IsNullOrEmpty(preek.SourceFileName) && BlobStorageHelper.Exists(lectureSourceFilename))
+                {
+                    BlobStorageHelper.DeleteIfExists(lectureSourceFilename);
+                }
             }
             catch
             {

@@ -1,4 +1,6 @@
-﻿@model AfbeeldingEditViewModel
+﻿@using System.Configuration
+@using Prekenweb.Website.Lib.HtmlHelpers
+@model AfbeeldingEditViewModel
 @Html.ValidationSummary(true)
 <div class="ColumnM">
     <div class="field">
@@ -10,9 +12,10 @@
         <div class="label">@Html.LabelFor(m => m.Bestand)</div>
         <div class="value">
             @*            <span style="overflow: hidden; width: 140px; display: block;">
-                @Model.Afbeelding.Bestandsnaam 
-            </span>*@
-            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">Kies @{ if (!string.IsNullOrEmpty(Model.Afbeelding.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
+                    @Model.Afbeelding.Bestandsnaam
+                </span>*@
+            <a href="#" class="Knop" onclick="document.getElementById('Bestand').click()">
+                Kies @{ if (!string.IsNullOrEmpty(Model.Afbeelding.Bestandsnaam)) { ViewContext.Writer.Write("nieuw "); }}bestand
             </a>
             <div style='height: 0px; width: 0px; overflow: hidden;'>
                 <input name="Bestand" id="Bestand" type="file" />
@@ -23,13 +26,14 @@
 
 </div>
 @if (!string.IsNullOrEmpty(Model.Afbeelding.Bestandsnaam))
-{ 
+{
     <div class="ColumnM">
         <div class="field">
             <div class="label">Voorbeeld</div>
             <div class="value">
-                <a href="@Url.Content(string.Format("{0}{1}", ViewBag.AfbeeldingenFolder, Model.Afbeelding.Bestandsnaam))">
-                    <img src="@Url.Content(string.Format("{0}Thumbnail_{1}.jpg", ViewBag.AfbeeldingenFolder, Model.Afbeelding.Id))" /></a>
+                <a href="@HtmlHelpers.ContentAbsolute(Url, string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ViewBag.AfbeeldingenFolder, Model.Afbeelding.Bestandsnaam))">
+                    <img src="@HtmlHelpers.ContentAbsolute(Url, string.Format("{0}/{1}/Thumbnail_{2}.jpg", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ViewBag.AfbeeldingenFolder, Model.Afbeelding.Id))" />
+                </a>
 
             </div>
 

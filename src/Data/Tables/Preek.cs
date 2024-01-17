@@ -237,7 +237,6 @@ namespace Data.Tables
 
         public string GetContentType()
         {
-            //if (!File.Exists(this.Bestandsnaam)) throw new Exception("Geen bestand = geen type! :)");
             switch (Path.GetExtension(Bestandsnaam)?.ToLower())
             {
                 case "???":

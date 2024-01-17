@@ -1,5 +1,17 @@
 ﻿namespace Prekenweb.Website.Areas.Website.Controllers
 {
+    using Azure.Storage.Blobs.Models;
+    using Data;
+    using Data.Identity;
+    using Data.Repositories;
+    using Data.Tables;
+    using Data.ViewModels;
+    using Prekenweb.Website.Areas.Website.Models;
+    using Prekenweb.Website.Lib;
+    using Prekenweb.Website.Lib.Cache;
+    using PrekenWeb.Security;
+    using reCAPTCHA.MVC;
+    using SharpEpub;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -11,26 +23,6 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
-
-    using Data;
-    using Data.Identity;
-    using Data.Repositories;
-    using Data.Tables;
-    using Data.ViewModels;
-
-    using Microsoft.Reporting.WebForms;
-
-    using Prekenweb.Website.Areas.Website.Models;
-    using Prekenweb.Website.Lib;
-    using Prekenweb.Website.Lib.Cache;
-
-    using PrekenWeb.Security;
-    using reCAPTCHA.MVC;
-    using SharpEpub;
-
-    using VikingErik.Mvc.ResumingActionResults;
-
-    using ContentDisposition = System.Net.Mime.ContentDisposition;
 
     public class PreekController : Controller
     {
@@ -182,13 +174,59 @@
                     default: throw new Exception("Huh?");
                 }
             }
+
+            var fileName = Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam);
             if (inline.Value)
             {
-                return new ResumingFilePathResult(Server.MapPath(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam)), preek.GetContentType());
+                var blobClient = BlobStorageHelper.GetBlobClient(fileName);
+                var blobOpenReadOptions = new BlobOpenReadOptions(false)
+                {
+                    BufferSize = 4 * 1024 * 1024, // 4 MB buffer size, adjust based on your needs
+                };
+
+                var blobStream = blobClient.OpenRead(blobOpenReadOptions);
+
+                // Set the response headers for resuming downloads
+                Response.AddHeader("Accept-Ranges", "bytes");
+
+                var fileLength = blobStream.Length;
+                Response.AddHeader("Content-Length", fileLength.ToString());
+
+                var startBytes = 0L;
+
+                // Check if this is a partial content request
+                var rangeHeader = Request.Headers["Range"];
+                if (!string.IsNullOrEmpty(rangeHeader))
+                {
+                    var range = rangeHeader.Replace("bytes=", "").Split('-');
+                    if (range.Length == 2 && long.TryParse(range[0], out var start))
+                    {
+                        startBytes = start;
+                    }
+                }
+
+                if (startBytes > 0)
+                {
+                    // If it's a partial content request, send the appropriate status code and set the Content-Range header
+                    Response.StatusCode = 206;
+                    Response.AddHeader("Content-Range", $"bytes {startBytes}-{fileLength - 1}/{fileLength}");
+                }
+
+                // Set the response content type based on your file type
+                Response.ContentType = "application/octet-stream";
+
+                // Seek to the starting position for partial content requests
+                blobStream.Seek(startBytes, SeekOrigin.Begin);
+
+                // Use StreamOutput to avoid buffering the entire content in memory
+                return new FileStreamResult(blobStream, "application/octet-stream")
+                {
+                    FileDownloadName = preek.Bestandsnaam,
+                };
             }
 
-            Response.AppendHeader("Content-Disposition", new ContentDisposition { FileName = preek.Bestandsnaam, Inline = false }.ToString());
-            return File(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam), preek.GetContentType());
+            var fileContent = BlobStorageHelper.Content(fileName);
+            return File(fileContent, preek.GetContentType(), preek.Bestandsnaam);
         }
 
         public async Task<ActionResult> LegBladwijzer(int preekId)

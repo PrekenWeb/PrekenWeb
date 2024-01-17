@@ -186,7 +186,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     // Start enclosure 
                     writer.WriteStartElement("enclosure");
 
-                    writer.WriteAttributeString("url", Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam)));
+                    writer.WriteAttributeString("url", Url.ContentAbsolute(string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam)));
                     writer.WriteAttributeString("length", preek.Bestandsgrootte.ToString());
 
                     writer.WriteAttributeString("type", preek.GetContentType());
@@ -296,7 +296,7 @@ namespace Prekenweb.Website.Areas.Website.Controllers
                     writer.WriteElementString("description", showDescription);
 
                     writer.WriteStartElement("enclosure");// Start enclosure 
-                    writer.WriteAttributeString("url", Url.ContentAbsolute(string.Format("{0}{1}", ConfigurationManager.AppSettings["PrekenFolder"], zoekResultaatItem.Preek.Bestandsnaam)));
+                    writer.WriteAttributeString("url", Url.ContentAbsolute(string.Format("{0}/{1}/{2}", ConfigurationManager.AppSettings["AzureBlobStorageBaseUrl"], ConfigurationManager.AppSettings["PrekenFolder"], zoekResultaatItem.Preek.Bestandsnaam)));
                     writer.WriteAttributeString("length", zoekResultaatItem.Preek.Bestandsgrootte.ToString());
                     writer.WriteAttributeString("type", zoekResultaatItem.Preek.GetContentType());
                     writer.WriteEndElement(); // End enclosure

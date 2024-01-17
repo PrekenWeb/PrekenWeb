@@ -62,19 +62,23 @@
             {
                 var preek = context.Preeks.Single(x => x.Id == id);
 
-                var filename = HostingEnvironment.MapPath(Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam));
-                if (!File.Exists(filename) || Path.GetExtension(filename) != ".mp3")
+                var filename = Path.Combine(ConfigurationManager.AppSettings["PrekenFolder"], preek.Bestandsnaam);
+                if (!BlobStorageHelper.Exists(filename) || Path.GetExtension(filename) != ".mp3")
                 {
                     _logger.Warn("Verwerking preek overgeslagen: geen (MP3) bestand gevonden");
                     return;
                 }
                 try
                 {
-                    using (var fr = new Mp3FileReader(filename, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
+                    using (var stream = new MemoryStream())
                     {
-                        preek.Duur = fr.TotalTime;
-                        preek.Bestandsgrootte = (int)new FileInfo(filename).Length;
-                        context.SaveChanges();
+                        BlobStorageHelper.Stream(filename, stream);
+                        using (var fr = new Mp3FileReader(stream, mp3Format => new DmoMp3FrameDecompressor(mp3Format)))
+                        {
+                            preek.Duur = fr.TotalTime;
+                            preek.Bestandsgrootte = Convert.ToInt32(BlobStorageHelper.GetProperties(filename).ContentLength);
+                            context.SaveChanges();
+                        }
                     }
                 }
                 catch (COMException ex)

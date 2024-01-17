@@ -13,6 +13,7 @@ using Data;
 using Data.Identity;
 using Data.Tables;
 using Prekenweb.Website.Lib;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -39,12 +40,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             Afbeelding afbeelding = _context.Afbeeldings.Single(a => a.Id == id);
             var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
 
-            var origineleLocatie = Server.MapPath(string.Format("{0}{1}", rootFolder, afbeelding.Bestandsnaam));
-            var thumbnailLocatie = Server.MapPath(string.Format("{0}Thumbnail_{1}.jpg", rootFolder, afbeelding.Id));
-            var homepageLocatie = Server.MapPath(string.Format("{0}Homepage_{1}.jpg", rootFolder, afbeelding.Id));
-            if (System.IO.File.Exists(origineleLocatie)) System.IO.File.Delete(origineleLocatie);
-            if (System.IO.File.Exists(thumbnailLocatie)) System.IO.File.Delete(thumbnailLocatie);
-            if (System.IO.File.Exists(homepageLocatie)) System.IO.File.Delete(homepageLocatie);
+            BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, afbeelding.Bestandsnaam));
+            BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, $"Thumbnail_{afbeelding.Id}.jpg"));
+            BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, $"Homepage_{afbeelding.Id}.jpg"));
 
             OutputCacheHelpers.ClearOutputCaches(Response, Url);
 
@@ -181,13 +179,17 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
         public Image GetImage(string geuploadeAfbeeldingLocatie)
         {
-            return Image.FromFile(Server.MapPath(geuploadeAfbeeldingLocatie));
+            using (var memorystream = new MemoryStream())
+            {
+                BlobStorageHelper.Stream(geuploadeAfbeeldingLocatie, memorystream);
+                return Image.FromStream(memorystream);
+            }
         }
 
         public void MaakThumbnailImage(Image origineel, int afbeeldingId)
         {
             var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
-            var thumbnailBestandsnaam = Server.MapPath(string.Format(@"{0}\Thumbnail_{1}.jpg", rootFolder, afbeeldingId));
+            var thumbnailBestandsnaam = Path.Combine(rootFolder, $"Thumbnail_{afbeeldingId}.jpg");
 
             using (var newImage = new Bitmap(100, 100))
             using (var graphics = Graphics.FromImage(newImage))
@@ -196,18 +198,24 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighSpeed;
                 graphics.DrawImage(origineel, new Rectangle(0, 0, 100, 100));
-                if (System.IO.File.Exists(thumbnailBestandsnaam))
+                if (BlobStorageHelper.Exists(thumbnailBestandsnaam))
                 {
-                    System.IO.File.Delete(thumbnailBestandsnaam);
+                    BlobStorageHelper.DeleteIfExists(thumbnailBestandsnaam);
                 }
-                newImage.Save(thumbnailBestandsnaam, ImageFormat.Jpeg);
+                using (var memorystream = new MemoryStream())
+                {
+                    newImage.Save(memorystream, ImageFormat.Jpeg);
+                    // Reset the stream position to the beginning
+                    memorystream.Seek(0, SeekOrigin.Begin);
+                    BlobStorageHelper.Upload(memorystream, thumbnailBestandsnaam);
+                }
             }
         }
 
         public void MaakHomepageImage(Image origineel, int afbeeldingId)
         {
             var rootFolder = ConfigurationManager.AppSettings["AfbeeldingenFolder"];
-            var thumbnailBestandsnaam = Server.MapPath(string.Format(@"{0}\Homepage_{1}.jpg", rootFolder, afbeeldingId));
+            var thumbnailBestandsnaam = Path.Combine(rootFolder, $"Homepage_{afbeeldingId}.jpg");
             double height = 340.0;
             double width = origineel.Width;
 
@@ -226,11 +234,17 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 graphics.DrawImage(origineel, new Rectangle(0, 0, Convert.ToInt32(width), Convert.ToInt32(height)));
-                if (System.IO.File.Exists(thumbnailBestandsnaam))
+                if (BlobStorageHelper.Exists(thumbnailBestandsnaam))
                 {
-                    System.IO.File.Delete(thumbnailBestandsnaam);
+                    BlobStorageHelper.DeleteIfExists(thumbnailBestandsnaam);
                 }
-                newImage.Save(thumbnailBestandsnaam, ImageFormat.Jpeg);
+                using (var memorystream = new MemoryStream())
+                {
+                    newImage.Save(memorystream, ImageFormat.Jpeg);
+                    // Reset the stream position to the beginning
+                    memorystream.Seek(0, SeekOrigin.Begin);
+                    BlobStorageHelper.Upload(memorystream, thumbnailBestandsnaam);
+                }
             }
         }
 
@@ -251,7 +265,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             var oudeBestandsnaam = afbeelding.Bestandsnaam;
 
-            if (nieuweBestandsnaam == oudeBestandsnaam || System.IO.File.Exists(string.Format("{0}{1}", rootFolder, nieuweBestandsnaam)))
+            if (nieuweBestandsnaam == oudeBestandsnaam || BlobStorageHelper.Exists(Path.Combine(rootFolder, nieuweBestandsnaam)))
                 nieuweBestandsnaam = string.Format(
                     "{0}_{1}_{2:yyyy-MM-dd_hh-mm-ss}{3}",
                     Path.GetFileNameWithoutExtension(uploadedAfbeelding.FileName),
@@ -262,7 +276,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
 
             try
             {
-                uploadedAfbeelding.SaveAs(Server.MapPath(string.Format("{0}{1}", rootFolder, nieuweBestandsnaam)));
+                BlobStorageHelper.Upload(uploadedAfbeelding, Path.Combine(rootFolder, nieuweBestandsnaam));
             }
             catch (Exception ex)
             {
@@ -278,12 +292,9 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
             {
                 if (!string.IsNullOrEmpty(oudeBestandsnaam))
                 {
-                    string origineleLocatie = Server.MapPath(string.Format("{0}{1}", rootFolder, oudeBestandsnaam));
-                    string thumbnailLocatie = Server.MapPath(string.Format("{0}Thumbnail_{1}.jpg", rootFolder, afbeelding.Id));
-                    string homepageLocatie = Server.MapPath(string.Format("{0}Homepage_{1}.jpg", rootFolder, afbeelding.Id));
-                    if (System.IO.File.Exists(origineleLocatie)) System.IO.File.Delete(origineleLocatie);
-                    if (System.IO.File.Exists(thumbnailLocatie)) System.IO.File.Delete(thumbnailLocatie);
-                    if (System.IO.File.Exists(homepageLocatie)) System.IO.File.Delete(homepageLocatie);
+                    BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, oudeBestandsnaam));
+                    BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, $"Thumbnail_{afbeelding.Id}.jpg"));
+                    BlobStorageHelper.DeleteIfExists(Path.Combine(rootFolder, $"Homepage_{afbeelding.Id}.jpg"));
                 }
             }
             catch (Exception ex)
@@ -291,7 +302,7 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
                 throw new Exception(string.Format("Could not remove the old image, probably because it did not exist, new image uploaded successfully {0}", ex.Message));
             }
 
-            return string.Format("{0}{1}", rootFolder, nieuweBestandsnaam);
+            return Path.Combine(rootFolder, nieuweBestandsnaam);
         }
     }
 }

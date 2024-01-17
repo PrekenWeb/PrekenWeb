@@ -1,17 +1,18 @@
-﻿using System.Configuration;
-using System.Threading.Tasks;
-using PrekenWeb.Security;
-using Prekenweb.Website.Areas.Mijn.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Data;
+﻿using Data;
 using Data.Identity;
 using Data.Tables;
+using Prekenweb.Website.Areas.Mijn.Models;
 using Prekenweb.Website.Lib;
+using PrekenWeb.Security;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Prekenweb.Website.Areas.Mijn.Controllers
 {
@@ -158,9 +159,8 @@ namespace Prekenweb.Website.Areas.Mijn.Controllers
         [HttpPost]
         public ActionResult UploadImage(HttpPostedFileBase upload, string ckEditorFuncNum, string ckEditor, string langCode)
         {
-            var relativePath = string.Format(@"{0}\UserUpload_{1}", ConfigurationManager.AppSettings["AfbeeldingenFolder"], upload.FileName);
-            var savedFileLocation = Server.MapPath(relativePath);
-            upload.SaveAs(savedFileLocation);
+            var relativePath = Path.Combine(ConfigurationManager.AppSettings["AfbeeldingenFolder"], $"UserUpload_{upload.FileName}");
+            BlobStorageHelper.Upload(upload, relativePath);
 
             var url = Url.Content(relativePath);
              
